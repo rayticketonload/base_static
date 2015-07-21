@@ -1,0 +1,32 @@
+{
+  "name": "frontman",
+  "version": "1.0.0",
+  "description": "a tools for Front-End development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "paywefrontside",
+  "license": "Apache License",
+  "dependencies": {
+    "del": "^1.2.0",
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-watch": "^3.0.0",
+    "gulp.spritesmith": "^3.8.2",
+    "imagemin-pngquant": "^4.1.0",
+    "merge-stream": "^0.1.7",
+    "nunjucks": "^1.1.0",
+    "through2": "^0.6.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.7.9",
+    "gulp-less": "^3.0.3",
+    "gulp-minify-css": "^1.1.6",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0"
+  }
+}

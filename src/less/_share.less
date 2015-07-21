@@ -1,0 +1,2437 @@
+@import "_normalize";       //项目引用样式初始化
+@import "_config";          //项目样式设定项
+@import "_mix";             //项目样式工具
+@import "_font";            //项目字体
+@import "_fonticon";        //项目字体图标
+@import "_sprite";          //项目雪碧图
+@import "_animate.less";    //项目引用CSS3动画库
+
+/*
+--- share ---
+*/
+
+@charset "UTF-8";
+
+html {
+    font-size: 62.5%;
+}
+
+html,
+body {
+    .font-hei();
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-size: @smaller-FontSize;
+    color: @default-FontColor;
+    background-color: @bgColor-default;
+    line-height: @line-height-base;
+
+    * {
+        .border-box();
+    }
+}
+
+h1,h2,h3,h4,h5,h6,p {
+    font-weight: 500;
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: @heading-FontColor;
+}
+
+h1,.h1 {
+    font-size: @h1-FontSize !important;
+}
+
+h2,.h2 {
+    font-size: @h2-FontSize !important;
+}
+
+h3,.h3 {
+    font-size: @h3-FontSize !important;
+}
+
+h4,.h4 {
+    font-size: @h4-FontSize !important;
+}
+
+h5,.h5 {
+    font-size: @h5-FontSize !important;
+}
+
+h6,.h6 {
+    font-size: @h6-FontSize !important;
+}
+
+.heading-FontColor {
+    color: @heading-FontColor !important;
+}
+
+.default-FontColor {
+    color: @default-FontColor !important;
+}
+
+.viceText-FontColor {
+    color: @viceText-FontColor !important;
+}
+
+.warning-FontColor {
+    color: @warning-FontColor !important;
+}
+
+.success-FontColor1 {
+    color: @success-FontColor1 !important;
+}
+
+.success-FontColor2 {
+    color: @success-FontColor2 !important;
+}
+
+.error-FontColor1 {
+    color: @error-FontColor1 !important;
+}
+
+.error-FontColor2 {
+    color: @error-FontColor2 !important;
+}
+
+.info-FontColor {
+    color: @info-FontColor !important;
+}
+
+.link-FontColor {
+    color: @link-FontColor !important;
+}
+
+.linkHover-FontColor {
+    color: @link-FontColor !important;
+}
+
+//排版工具类，尽量能在元素样式里面申明就不要用到这种附加类，否则会增加兼容性样式编写的难度，此类工具多用在对版面布局没影响的元素中
+.text-align-right {
+    text-align: right !important;
+
+    &.plural-btns > .btn {
+        margin-left: 10px;
+        margin-right: 0;
+    }
+}
+
+.text-align-left {
+    text-align: left !important;
+
+    &.plural-btns > .btn {
+        margin-right: 10px;
+        margin-left: 0;
+    }
+}
+
+.text-align-center {
+    text-align: center !important;
+
+    &.plural-btns > .btn {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.text-align-justify {
+    text-align: justify !important;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.text-nowrap {
+    .text-hide();
+}
+
+.word-wrap {
+    .word-wrap();
+}
+
+.inline-block {
+    .inline-block();
+}
+
+.margin-top-20px {
+    margin-top: 20px !important;
+}
+
+.margin-top-40px {
+    margin-top: 40px !important;
+}
+
+//辅助类工具
+.caret-down {
+    .arrow-up-or-down( border-top,4px,4px,@default-FontColor );
+}
+
+.caret-up {
+    .arrow-up-or-down( border-bottom,4px,4px,@default-FontColor );
+}
+
+.caret-left {
+    .arrow-left-or-right( border-right,4px,4px,@default-FontColor );
+}
+
+.caret-right {
+    .arrow-left-or-right( border-left,4px,4px,@default-FontColor );
+}
+
+.link-standard {
+    .link-standard();
+}
+
+//主导航
+.main-nav-wrap {
+    
+}
+
+.main-nav {
+    .reset-list( left,block,@smaller-FontSize,@main-nav-height );
+    .clearfix();
+
+    > li {
+        width: 25%;
+
+        > a {
+            .link-custom( @default-FontColor,#fff,none );
+            display: block;
+            text-align: center;
+            height: @main-nav-height + 2px;
+            border-top: 2px solid @primary-BorderColor * 0.9;
+            border-left: 1px solid @primary-BorderColor * 0.9;
+            border-right: 1px solid #fff;
+            background-color: @main-nav-bgColor1;
+
+            &:hover {
+                background-color: @main-nav-bgColor2;
+                border-top-color: @main-nav-bgColor2 * 0.8;
+                border-left-color: @main-nav-bgColor2 * 0.8;
+            }
+        }
+
+        &.current {
+
+            > a {
+                background-color: @main-nav-bgColor2;
+                border-top-color: @main-nav-bgColor2 * 0.8;
+                border-left-color: @main-nav-bgColor2 * 0.8;
+                color: #fff;
+            }
+        }
+
+        &:last-child > a {
+            border-right: none;
+        }
+    }
+}
+
+//表格类
+.tables-title {
+    position: relative;
+    height: 46px;
+    line-height: 44px;
+    font-size: @small-FontSize;
+    padding: 0 50% 0 12px;
+    background-color: @table-bgColor-1;
+    border-bottom: 2px solid @table-BorderColor1;
+
+    > .table-title-btns {
+        position: absolute;
+        top: 16px;
+        right: 6px;
+        .clearfix();
+
+        > a {
+            .link-standard();
+            .float-item( left,block );
+            padding: 0 6px;
+            border-left: 1px solid @primary-BorderColor * 0.9;
+            font-size: @smallest-FontSize;
+            line-height: @smallest-FontSize;
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+    }
+}
+
+.table-wrap {
+    background-color: @bgColor-default;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    font-size: @smallest-FontSize;
+    table-layout: fixed;
+
+    .table-checked-all {
+        position: relative;
+        display: block;
+        padding-left: 20px;
+        text-align: left;
+        cursor: pointer;
+
+        > input[type="checkbox"] {
+            position: absolute;
+            top: 1px;
+            left: 0;
+        }
+    }
+
+    .table-ctrls {
+        position: relative;
+        color: @link-FontColor;
+        cursor: pointer;
+
+        .caret-down {
+            border-top-color: @link-FontColor;
+            margin-left: 5px;
+        }
+
+        > .ctrls {
+            display: none;
+            position: absolute;
+            top: -5px;
+            left: -13px;
+            background-color: #fff;
+            border: 1px solid @primary-BorderColor;
+            width: 100%;
+
+            > a {
+                display: block;
+                height: 24px;
+                line-height: 24px;
+                .link-custom( @link-FontColor,#fff,none );
+                text-align: center;
+
+                &:hover {
+                    background-color: @primary-BtnColor;
+                }
+            }
+        }
+
+        &:hover > .ctrls {
+            display: block;
+        }
+    }
+
+    th {
+        padding: 12px 10px 11px 10px;
+        border-bottom: 1px solid @table-BorderColor1;
+        background-color: @bgColor-default;
+
+        .th-cut {
+            color: @viceText-FontColor + #222;
+            margin: 0 5px;
+        }
+    }
+
+    td {
+        text-align: center;
+        padding: 12px 10px 11px 10px;
+        border-bottom: 1px solid @table-BorderColor2;
+        .word-wrap();
+
+        > input[type="checkbox"] {
+            vertical-align: middle;
+        }
+    }
+
+    tr {
+        background-color: @table-bgColor-2;
+
+        &:nth-child(2n) {
+            background-color: @bgColor-default;
+        }
+    }
+
+    &.inverse {
+
+        th {
+            background-color: @table-bgColor-1;
+            border-bottom: 2px solid @table-BorderColor1;
+        }
+
+        tr {
+            background-color: @bgColor-default;
+
+            &:nth-child(2n) {
+                background-color: @table-bgColor-2;
+            }
+        }
+    }
+}
+
+//按钮类
+.plural-btns {
+    font-size: 0;
+    line-height: 0;
+    .clearfix();
+
+    > .btn {
+        margin-right: 10px;
+    }
+}
+
+.btn-with-viceLink {
+    position: relative;
+    .inline-block();
+
+    > .btn-vicelink {
+        position: absolute;
+        top: 12px;
+        right: -20px;
+        .link-standard();
+        display: block;
+        width: 0;
+        text-align: left;
+        white-space: nowrap;
+        font-size: @smaller-FontSize;
+        line-height: @line-height-base;
+    }
+}
+
+.btn {
+    .inline-block();
+    .rounded( 5px );
+    width: @base-BtnWidth;
+    height: @base-BtnHeight;
+    outline: none;
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    text-align: center;
+    font-size: @small-FontSize;
+    line-height: @base-BtnHeight;
+    .link-custom( #fff,#fff,none );
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+
+    &.default {
+        background-color: @default-BtnColor;
+        border: 1px solid @default-BtnColor * 0.7;
+        border-bottom-width: 2px;
+        color: @default-FontColor;
+
+        &:hover,
+        &:active,
+        &.current {
+            border-color: @default-BtnColor * 0.6;
+        }
+    }
+
+    &.primary {
+        background-color: @primary-BtnColor;
+        border-color: @primary-BtnColor * 0.8;
+
+        &:hover,
+        &:active,
+        &.current {
+            background-color: @primary-BtnColor * 0.95;
+            border-color: @primary-BtnColor * 0.7;
+        }
+    }
+
+    &.secondary {
+        background-color: @secondary-BtnColor;
+        border-color: @secondary-BtnColor * 0.8;
+
+        &:hover,
+        &:active,
+        &.current {
+            background-color: @secondary-BtnColor * 0.95;
+            border-color: @secondary-BtnColor * 0.7;
+        }
+    }
+
+    &.thirdly {
+        background-color: @thirdly-BtnColor;
+        border-color: @thirdly-BtnColor * 0.8;
+
+        &:hover,
+        &:active,
+        &.current {
+            background-color: @thirdly-BtnColor * 0.95;
+            border-bottom-color: @thirdly-BtnColor * 0.7;
+        }
+    }
+
+    &.disabled {
+        background-color: @disabled-BtnColor;
+        border-color: @disabled-BtnColor * 0.9;
+        color: @viceText-FontColor;
+        cursor: default;
+    }
+
+    &.links {
+        width: auto;
+        padding: 0 10px;
+        .link-standard();
+        border: none;
+        font-size: @smaller-FontSize;
+
+        &.small-btn {
+            border-color: transparent;
+            padding: 0;
+        }
+    }
+}
+
+.small-btn {
+    width: @smallsize-BtnWidth;
+    height: @smallsize-BtnHeight;
+    border-style: solid !important;
+    border-width: 1px !important;
+    line-height: @smallsize-BtnHeight - 2px;
+    font-size: @smallest-FontSize !important;
+    .rounded( 3px );
+}
+
+//表单类
+.form-frame {
+    border: 1px solid @primary-BorderColor;
+    border-bottom: 2px solid @primary-BorderColor;
+    padding-bottom: 30px;
+
+    .form-title {
+        background-color: @form-bgColor-1;
+        font-size: @small-FontSize;
+        color: @heading-FontColor;
+        padding: 12px 15px;
+        border-bottom: 2px solid @primary-BorderColor;
+    }
+
+    .form-layer1 {
+        width: 40%;
+        min-width: 320px;
+        margin: 0 auto;
+        padding-top: 30px;
+    }
+
+    .form-layer2 {
+        margin-left: -@form-control-label-width;
+    }
+
+    .form-layer-gray-box {
+        background-color: ( @form-bgColor-1 + #111 ) * 0.955;
+        border-bottom: 1px solid @primary-BorderColor;
+        padding-bottom: 15px;
+    }
+}
+
+.form-group {
+    padding-left: @form-control-label-width + 10px;
+    position: relative;
+
+    .form-control-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: @form-control-label-width;
+        height: @form-control-height;
+        text-align: right;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        .clearfix();
+
+        > em, span {
+            font-size: @forms-FontSize;
+            color: @default-FontColor;
+        }
+
+        > em {
+            .inline-block();
+            height: 100%;
+            line-height: @form-control-height;
+            vertical-align: middle;
+            font-style: normal;
+        }
+
+        > span {
+            .inline-block();
+            line-height: @line-height-base;
+            vertical-align: middle;
+            max-width: 76%;
+        }
+
+        > b {
+            .inline-block();
+            height: 100%;
+            vertical-align: middle;
+            color: @error-FontColor1;
+            line-height: @form-control-height + 9px;
+            font-size: ceil( ( @forms-FontSize * 1.7 ) );
+            padding-right: 5px;
+        }
+    }
+
+    .form-control-wrap {
+        min-height: @form-control-height;
+        padding-bottom: 15px;
+        position: relative;
+    }
+
+    &.has-correct,
+    &.has-error {
+
+        .form-control {
+            border-width: 2px;
+            padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+
+            &:focus {
+                border-color: @form-focus-BorderColor;
+                color: @formValue-FontColor;
+            }
+        }
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            border-width: 2px;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            top: 2px;
+            right: 2px;
+            width: @form-control-height - 4px;
+            height: @form-control-height - 4px;
+        }
+
+        .form-control-dropdown,
+        .form-control-modal,
+        .form-control-date {
+
+            &.active {
+
+                .form-control-dropdown-value {
+                    color: @formValue-FontColor;
+                }
+            }
+
+            &:active {
+
+                .form-control-modal-value,
+                .form-control-date-value {
+                    color: @formValue-FontColor;
+                }
+            }
+        }
+    }
+
+    &.has-correct {
+
+        .form-notice {
+            color: @success-FontColor1;
+
+            > i:before {
+                content: "\e281";
+            }
+        }
+
+        .form-control {
+            border-color: @form-correct-BorderColor;
+            color: @success-FontColor1;
+        }
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            border-color: @form-correct-BorderColor;
+            color: @success-FontColor1;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            color: @viceText-FontColor / 0.1;
+            background-color: @form-correct-BorderColor;
+        }
+    }
+
+    &.has-error {
+
+        .form-notice {
+            color: @error-FontColor2;
+
+            > i:before {
+                content: "\e205";
+            }
+        }
+
+        .form-control {
+            border-color: @form-error-BorderColor;
+            color: @error-FontColor2;
+        }
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            border-color: @form-error-BorderColor;
+            color: @error-FontColor2;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            color: @viceText-FontColor / 0.1;
+            background-color: @form-error-BorderColor;
+        }
+
+        .form-control-check {
+
+            > label {
+                color: @error-FontColor2;
+            }
+        }
+    }
+
+    &.has-info {
+
+        .form-notice {
+            color: @info-FontColor;
+
+            > i:before {
+                content: "\e605";
+            }
+        }
+    }
+}
+
+.form-notice {
+    line-height: @forms-FontSize + 4px;
+    padding: 11px 0 0 34px;
+    position: relative;
+    font-size: @forms-FontSize;
+
+    > i {
+        position: absolute;
+        top: 7px;
+        left: 0;
+        font-size: @larger-FontSize;
+        .form-notice-icon-font-family(); //报错了，但起效
+    }
+}
+
+.form-control {
+    display: block;
+    padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 1px 15px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 15px;
+    width: 100%;
+    height: @form-control-height;
+    outline: none;
+    border-top: 1px solid @form-default-BorderColor;
+    border-left: 1px solid @form-default-BorderColor;
+    border-right: 1px solid @form-default-BorderColor;
+    border-bottom: 2px solid @form-default-BorderColor;
+    line-height: @forms-FontSize + 4px;
+    font-size: @forms-FontSize;
+    color: @formValue-FontColor;
+    background-color: @bgColor-default;
+
+    &:focus,
+    &.focus {
+        border-color: @form-focus-BorderColor;
+        border-width: 2px;
+        padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+    }
+
+    &[disabled] {
+        background-color: @bgColor-type1;
+        color: @viceText-FontColor + #222;
+        cursor: default;
+        cursor: not-allowed;
+    }
+
+    &[readonly] {
+        background-color: @bgColor-type1;
+        color: @viceText-FontColor + #222;
+        cursor: default;
+    }
+
+    &.smallsize {
+        padding: ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 1px 10px ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 10px;
+        height: ( @form-control-height - 10px );
+
+        &:focus,
+        &.focus {
+            padding: ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 9px ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 9px;
+        }
+    }
+}
+
+.form-control-data {
+    line-height: @form-control-height;
+    height: @form-control-height;
+    font-size: @forms-FontSize;
+    color: @formValue-FontColor;
+    .clearfix();
+    position: relative;
+
+    .form-control-banks {
+        left: 0;
+    }
+
+    .form-control-bank-card {
+        left: 145px;
+    }
+}
+
+.form-control-tools-link {
+    position: absolute;
+    top: 0;
+    right: -( @form-control-label-width + 15px );
+    width: @form-control-label-width;
+    padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 0 ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 0;
+    text-align: left;
+    line-height:  @forms-FontSize + 4px;
+    font-size: @smaller-FontSize;
+    .link-standard();
+}
+
+.form-control-dropdown,
+.form-control-modal,
+.form-control-date {
+    position: relative;
+    cursor: pointer;
+
+    &.smallsize { // @form-control-height 减10像素
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            padding: 0 ( @form-control-height - 10px - 3px ) + 10px 0 10px;
+            height: ( @form-control-height - 10px );
+            line-height: @form-control-height - 10px - 3px;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            width: @form-control-height - 10px - 3px;
+            height: @form-control-height - 10px - 3px;
+            line-height: @form-control-height - 10px;
+            color: @viceText-FontColor * 0.7;
+            font-size: ceil( ( @forms-FontSize * 1.14 ) );
+        }
+
+        .form-control-dropdown-menu {
+            top: @form-control-height - 10px;
+            max-height: ( @form-control-height - 10px ) * 5 + 2px;
+
+            > li {
+                height: @form-control-height - 10px;
+                line-height: @form-control-height - 10px;
+                padding: 0 10px;
+            }
+        }
+    }
+
+    &:hover {
+
+        .form-control-dropdown-btn > i {
+            .animated();
+            .slideInDown();
+        }
+
+        .form-control-modal-btn > i,
+        .form-control-date-btn > i {
+            .animated();
+            .jello();
+        }
+    }
+
+    &.active {
+
+        .form-control-dropdown-value,
+        .form-control-date-value {
+            border-color: @form-focus-BorderColor;
+            border-width: 2px;
+        }
+
+        .form-control-dropdown-menu {
+            display: block;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-date-btn {
+            color: #fff;
+            background-color: @form-focus-BorderColor;
+        }
+    }
+
+    &:active {
+
+        .form-control-modal-value {
+            border-color: @form-focus-BorderColor;
+            border-width: 2px;
+        }
+
+        .form-control-modal-btn {
+            color: #fff;
+            background-color: @form-focus-BorderColor;
+        }
+    }
+}
+
+.form-control-dropdown-value,
+.form-control-modal-value,
+.form-control-date-value {
+    padding: 0 ( @form-control-height - 3px ) + 15px 0 15px;
+    height: @form-control-height;
+    border-top: 1px solid @form-default-BorderColor;
+    border-left: 1px solid @form-default-BorderColor;
+    border-right: 1px solid @form-default-BorderColor;
+    border-bottom: 2px solid @form-default-BorderColor;
+    line-height: @form-control-height - 3px;
+    font-size: @forms-FontSize;
+    color: @formValue-FontColor;
+    background-color: @bgColor-default;
+    .text-hide();
+    position: relative;
+}
+
+.form-control-dropdown-menu {
+    .reset-list( none,block,@forms-FontSize,@forms-FontSize + 4px );
+    display: none;
+    position: absolute;
+    top: @form-control-height;
+    left: 0;
+    width: 100%;
+    border: 2px solid @form-focus-BorderColor;
+    border-top: none;
+    overflow: auto;
+    max-height: @form-control-height * 5 + 2px;
+    background-color: @bgColor-default;
+    z-index: 2;
+
+    > li {
+        height: @form-control-height;
+        line-height: @form-control-height;
+        background-color: @bgColor-default;
+        .text-hide();
+        padding: 0 15px;
+        position: relative;
+
+        &:hover {
+            background-color: @bgColor-type1;
+        }
+    }
+}
+
+.form-control-dropdown-btn,
+.form-control-modal-btn,
+.form-control-date-btn {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: @form-control-height - 3px;
+    height: @form-control-height - 3px;
+    line-height: @form-control-height;
+    text-align: center;
+    color: @viceText-FontColor * 0.7;
+    font-size: ceil( ( @forms-FontSize * 1.14 ) );
+    background-color: @form-default-BorderColor / 0.97;
+    overflow: hidden;
+    z-index: 1;
+
+    > i {
+        .inline-block();
+        .form-notice-icon-font-family(); //报错了，但起效
+    }
+}
+
+    .form-control-dropdown-btn > i:before {
+        content: "\e600";
+    }
+
+    .form-control-modal-btn > i:before {
+        content: "\e607";
+    }
+
+    .form-control-date-btn > i:before {
+        content: "\e608";
+    }
+
+.form-control-check {
+    .clearfix();
+
+    > label {
+        line-height: @forms-FontSize + 4px;
+        .float-item( left,block );
+        cursor: pointer;
+        position: relative;
+        color: @formValue-FontColor;
+        padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 25px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 20px;
+
+        &.agreement-check {
+            padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 5px 0 ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 5px 20px;
+        }
+
+        > input[type="checkbox"], input[type="radio"] {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -6px;
+        }
+    }
+}
+
+.form-control-verify {
+    position: relative;
+    padding-right: @form-control-verify-btn-width;
+}
+
+.form-control-verify-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    .rounded( 0 );
+    width: @form-control-verify-btn-width;
+    height: @form-control-height;
+    background-color: @secondary-BtnColor;
+    border-bottom-color: @secondary-BtnColor * 0.8;
+    text-align: center;
+    line-height: @form-control-height;
+    font-size: @forms-FontSize;
+
+    &:hover,
+    &:active,
+    &.current {
+        background-color: @secondary-BtnColor * 0.95;
+        border-bottom-color: @secondary-BtnColor * 0.7;
+    }
+
+    &.disabled {
+        background-color: @disabled-BtnColor;
+        border-bottom-color: @disabled-BtnColor * 0.9;
+        cursor: default;
+        cursor: not-allowed;
+        color: @viceText-FontColor + #222;
+    }
+}
+
+.form-control-withdrawFull {
+    position: relative;
+}
+
+.form-control-withdrawFull-btn {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    .rounded( 0 );
+    width: @form-control-withdrawFull-btn-width;
+    height: @form-control-height - 4px;
+    background-color: #ebf4ff;
+    border-bottom: none;
+    text-align: center;
+    line-height: @form-control-height - 4px;
+    font-size: @forms-FontSize;
+    .link-standard();
+
+    &:hover,
+    &:active,
+    &.current {
+        background-color: #ebf4ff * 0.95;
+    }
+}
+
+.form-control-banks {
+    height: 38px;
+    width: 160px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin-top: -19px;
+    background: url("@{images-url}bank.png") no-repeat;
+}
+
+//招商银行
+.bank-cmb {
+    background-position: 0 0px;
+}
+
+//工商银行
+.bank-icbc {
+    background-position: 0 -880px;
+}
+
+//建设银行
+.bank-ccb {
+    background-position: 0 -40px;
+}
+
+//农业银行
+.bank-abc {
+    background-position: 0 -80px;
+}
+
+//中国银行
+.bank-boc {
+    background-position: 0 -120px;
+}
+
+//交通银行
+.bank-comm {
+    background-position: 0 -160px;
+}
+
+//平安银行
+.bank-pingan {
+    background-position: 0 -200px;
+}
+
+//邮政银行
+.bank-psbc {
+    background-position: 0 -240px;
+}
+
+//上海银行
+.bank-shbc {
+    background-position: 0 -280px;
+}
+
+//温州银行
+.bank-wzbc {
+    background-position: 0 -320px;
+}
+
+//浦发银行
+.bank-spdb {
+    background-position: 0 -360px;
+}
+
+//中信银行
+.bank-ecitic {
+    background-position: 0 -400px;
+}
+
+//广发银行
+.bank-cgbchina {
+    background-position: 0 -440px;
+}
+
+//民生银行
+.bank-cmbc {
+    background-position: 0 -520px;
+}
+
+//兴业银行
+.bank-cib {
+    background-position: 0 -560px;
+}
+
+//光大银行
+.bank-cebbank {
+    background-position: 0 -600px;
+}
+
+//上海农商银行
+.bank-srcb {
+    background-position: 0 -640px;
+}
+
+//北京银行
+.bank-bankofbeijing {
+    background-position: 0 -680px;
+}
+
+//北京农商银行
+.bank-bjrcb {
+    background-position: 0 -720px;
+}
+
+//深圳发展银行
+.bank-szfz {
+    background-position: 0 -760px;
+}
+
+//宁波银行
+.bank-nbcb {
+    background-position: 0 -800px;
+}
+
+//杭州银行
+.bank-hzbank {
+    background-position: 0 -840px;
+}
+
+//东莞银行
+.bank-dongguanbank {
+    background-position: 0 -1200px;
+}
+
+//汇丰银行
+.bank-hsbc {
+    background-position: 0 -960px;
+}
+
+//东亚银行
+.bank-hkbea {
+    background-position: 0 -1040px;
+}
+
+//广州农商银行
+.bank-961111 {
+    background-position: 0 -1160px;
+}
+
+//华夏银行
+.bank-hxb {
+    background-position: 0 -480px;
+}
+
+//华润银行
+.bank-crbank {
+    background-position: 0 -920px;
+}
+
+//兰州银行
+.bank-lanzhou {
+    background-position: 0 -1320px;
+}
+
+//河北银行
+.bank-hebbank {
+    background-position: 0 -1120px;
+}
+
+//微商银行
+.bank-hsbank {
+    background-position: 0 -1360px;
+}
+
+//青岛银行
+.bank-qdccb {
+    background-position: 0 -1280px;
+}
+
+//尧都农商
+.bank-ydnsh {
+    background-position: 0 -1240px;
+}
+
+//浙商银行
+.bank-zheshang {
+    background-position: 0 -1400px;
+}
+
+//南昌银行
+.bank-nccbank {
+    background-position: 0 -1444px;
+}
+
+//渤海银行
+.bank-cbhb {
+    background-position: 0 -1078px;
+}
+
+//恒丰银行
+.bank-egbank {
+    background-position: 0 -998px;
+}
+
+//颍淮农村商业
+.bank-yhrcbank {
+    background-position: 0 -1490px;
+}
+
+.form-control-bank-card {
+    line-height: 38px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    margin-top: -19px;
+    color: @formValue-FontColor;
+    font-size: @small-FontSize;
+}
+
+//银行icon
+.bank-icon {
+    .inline-block();
+    height: 20px;
+    width: 20px;
+    background: url("@{images-url}bank-icon.png") no-repeat;
+}
+
+//中国建设银行
+.icon-ccb {
+    background-position: 0 -24px;
+}
+//中国农业银行
+.icon-abc {
+    background-position: 0 -50px;
+}
+//工商银行
+.icon-icbc {
+    background-position: 0 -79px;
+}
+//中国银行
+.icon-boc {
+    background-position: 0 -1009px;
+}
+//交通银行
+.icon-bcm {
+    background-position: 0 -106px;
+}
+//平安银行
+.icon-pingan {
+    background-position: 0 -139px;
+    width: 35px;
+}
+//邮政银行
+.icon-psbc {
+    background-position: 0 -165px;
+}
+//上海银行
+.icon-shbc {
+    background-position: 0 -196px;
+}
+//温州银行
+.icon-wzbc {
+    background-position: 0 -220px;
+    width: 23px;
+}
+//浦发银行
+.icon-spdb {
+    background-position: 0 -247px;
+    width: 23px;
+}
+//中信银行
+.icon-ecitic {
+    background-position: 0 -274px;
+}
+//广发银行
+.icon-cgbchina {
+    background-position: 0 -299px;
+    width: 23px;
+}
+//民生银行
+.icon-cmbc {
+    background-position: 0 -353px;
+    width: 25px;
+}
+//兴业银行
+.icon-cib {
+    background-position: 0 -382px;
+    width: 31px;
+}
+//光大银行
+.icon-cebbank {
+    background-position: 0 -412px;
+    width: 36px;
+}
+//上海农商银行
+.icon-srcb {
+    background-position: 0 -443px;
+}
+//北京银行
+.icon-bankofbeijing {
+    background-position: 0 -468px;
+}
+//北京农商银行
+.icon-bjrcb {
+    background-position: 0 -495px;
+    width: 21px;
+}
+//深圳发展银行
+.icon-szfz {
+    background-position: 0 -519px;
+}
+//宁波银行
+.icon-nbcb {
+    background-position: 0 -547px;
+    width: 22px;
+}
+//东莞银行
+.icon-dongguanbank {
+    background-position: 0 -844px;
+}
+//广州农商银行
+.icon-961111 {
+    background-position: 0 -813px;
+}
+//华夏银行
+.icon-hxb {
+    background-position: 0 -324px;
+}
+//华润银行
+.icon-crbank {
+    background-position: 0 -617px;
+}
+//兰州银行
+.icon-lanzhou {
+    background-position: 0 -930px;
+}
+//微商银行
+.icon-hsbank {
+    background-position: 0 -958px;
+}
+//青岛银行
+.icon-qdccb {
+    background-position: 0 -904px;
+}
+//浙商银行
+.icon-zheshang {
+    background-position: 0 -987px;
+}
+//恒丰银行
+.icon-egbank {
+    background-position: 0 -676px;
+}
+//杭州银行
+.icon-szyh {
+    background-position: 0 -581px;
+    width: 24px;
+}
+//渤海银行
+.icon-bhyh {
+    background-position: 0 -758px;
+    width: 30px;
+}
+//天津银行
+.icon-tjyh {
+    background-position: 0 -1030px;
+}
+
+//图表
+.chart-title {
+    position: relative;
+    line-height: @small-FontSize + 6px;
+    font-size: @small-FontSize;
+    padding: 14px 50% 14px 12px;
+    background-color: @chart-bgColor-1;
+    border: 1px solid @chart-BorderColor1;
+
+    > small {
+        font-size: @smallest-FontSize;
+        padding-left: 10px;
+    }
+
+    > .chart-title-btns {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        .clearfix();
+
+        > .btn {
+            .float-item( left,block );
+            margin-left: 10px;
+
+            &.current {
+                background-color: @secondary-BtnColor;
+                border-color: @secondary-BtnColor * 0.8;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.chart-wrap {
+    margin: 20px;
+}
+
+.chart-legends {
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+
+    .chart-legend {
+        position: relative;
+        font-size: @smaller-FontSize;
+        color: @heading-FontColor;
+        line-height: 24px;
+        padding: 0 24px 0 18px;
+        .inline-block();
+
+        > b {
+            .square( 10px );
+            .rounded( 50% );
+            display: block;
+            position: absolute;
+            top: 50%;
+            margin-top: -5px;
+            left: 0;
+
+            &.legendone {
+                background-color: @viceText-FontColor;
+            }
+
+            &.legendtwo {
+                background-color: @info-FontColor;
+            }
+        }
+    }
+}
+
+//标签页
+.tabs-wrap {
+    .clearfix();
+    position: relative;
+
+    .tabs {
+        .reset-list( none,inline-block,0,0 );
+        text-align: center;
+
+        > li {
+
+            > .tabs-btn {
+                display: block;
+            }
+        }
+    }
+
+    .tab-search-wrap {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        .clearfix();
+
+        .tab-search-control-width {
+            width: 232px;
+            float: left;
+        }
+
+        > .btn {
+            float: left;
+            margin-left: 10px;
+        }
+    }
+
+    &.type1 {
+        background-color: @tabs-bgColor-1;
+        border: 1px solid @tabs-BorderColor1;
+        border-bottom-width: 2px;
+
+        .tabs {
+            padding: 0 10px;
+            text-align: left;
+            margin-top: -1px;
+
+            > li {
+                .float-item( left,block );
+                margin-bottom: -2px;
+
+                > .tabs-btn {
+                    .link-custom( @default-FontColor,@link-FontColor,none );
+                    height: 46px;
+                    line-height: 40px;
+                    padding: 0 20px;
+                    background-color: transparent;
+                    font-size: @small-FontSize;
+                    border-top: 3px solid transparent;
+                }
+
+                &.active {
+
+                    > .tabs-btn {
+                        color: @heading-FontColor;
+                        background-color: @bgColor-default;
+                        border-top-color: @tabs-BorderColor2;
+                    }
+                }
+            }
+        }
+    }
+
+    &.type2 {
+        background-color: @tabs-bgColor-2;
+        border: 1px solid @tabs-BorderColor1;
+        border-bottom: none;
+
+        .tabs {
+
+            > li {
+                width: 33.33%;
+
+                > .tabs-btn {
+                    border-left: 1px solid @tabs-BorderColor1;
+                    border-bottom: 1px solid @tabs-BorderColor1;
+                    .link-custom( @default-FontColor,@link-FontColor,none );
+                    padding: 14px 20px 0 20px;
+
+                    > h5, h2 {
+                        color: @default-FontColor;
+                        line-height: @line-height-base;
+                    }
+
+                    > h5 {
+                        text-align: left;
+                    }
+
+                    > h2 {
+                        text-align: right;
+                    }
+                }
+
+                &:first-child {
+
+                    > .tabs-btn {
+                        border-left: none;
+                    }
+                }
+
+                &.active {
+
+                    > .tabs-btn {
+                        border-bottom: 1px solid transparent;
+
+                        > h2 {
+                            color: @warning-FontColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tabs-content {
+    display: block;
+}
+
+.tabs-panel {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+//分页
+.pagination-wrap {
+    .clearfix();
+    font-size: 0;
+    line-height: 0;
+    display: block;
+}
+
+.pagination {
+    .reset-list( left,block,@smallest-FontSize,@pagination-height );
+    .clearfix();
+    .inline-block();
+
+    > li {
+
+        > a {
+            display: block;
+            .link-custom( @viceText-FontColor,@viceText-FontColor,none );
+            border: 1px solid transparent;
+            text-align: center;
+            .rounded( 3px );
+            padding: 0 8px;
+
+            &:hover {
+                border-color: @primary-BorderColor;
+            }
+
+            &:active {
+                color: #fff;
+                border-color: @pagination-bgColor-1;
+                background-color: @pagination-bgColor-1;
+            }
+        }
+
+        > span {
+            color: @default-FontColor;
+            display: block;
+            padding: 0 8px;
+        }
+
+        &.active {
+
+            > a {
+                color: #fff;
+                border-color: @pagination-bgColor-1;
+                background-color: @pagination-bgColor-1;
+                cursor: default;
+            }
+        }
+    }
+}
+
+//业务流程提示
+.notice-box {
+    position: relative;
+    .inline-block();
+    padding-left: 108px;
+    text-align: left;
+
+    > .notice-img {
+        .square( 77px );
+        display: block;
+        outline: none;
+        border: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    > h3 {
+        font-size: @h3-FontSize;
+        font-weight: bold;
+        padding: 6px 0;
+    }
+
+    > p {
+        padding-bottom: 6px;
+    }
+
+    .link-border {
+        border-left: 1px solid @primary-BorderColor;
+        padding-left: 10px;
+        margin-left: 6px;
+    }
+}
+
+.notice-wrap {
+    padding: 48px 0;
+    border: 1px solid @primary-BorderColor;
+    border-bottom-width: 2px;
+    text-align: center;
+
+    &.success {
+
+        .notice-box {
+
+            > .notice-img {
+                background: url("@{images-url}success.png") no-repeat;
+            }
+
+            > h3 {
+                color: @success-FontColor1;
+            }
+        }
+    }
+
+    &.waiting {
+
+        .notice-box {
+
+            > .notice-img {
+                background: url("@{images-url}waiting.gif") no-repeat;
+            }
+
+            > h3 {
+                color: @info-FontColor;
+            }
+        }
+    }
+
+    &.error {
+
+        .notice-box {
+
+            > .notice-img {
+                background: url("@{images-url}error.png") no-repeat;
+            }
+
+            > h3 {
+                color: @error-FontColor1;
+            }
+        }
+    }
+
+    &.info {
+
+        .notice-box {
+
+            > .notice-img {
+                background: url("@{images-url}info.png") no-repeat;
+            }
+
+            > h3 {
+                color: @info-FontColor;
+            }
+        }
+    }
+
+    &.in-modal {
+        border: none !important;
+        padding: 0;
+
+        .notice-box {
+            padding-left: 88px;
+
+            > .notice-img {
+                background: url("@{images-url}success.png") no-repeat;
+                .square( 62px );
+                background-size: cover;
+            }
+
+            > h3 {
+                color: @heading-FontColor !important;
+                font-size: @small-FontSize !important;
+                font-weight: 500;
+                padding-bottom: 10px;
+            }
+        }
+    }
+}
+
+//警示
+.alert {
+    border-width: 1px;
+    border-style: solid;
+    padding: 15px 15px 15px 50px;
+    position: relative;
+    line-height: @line-height-base;
+    font-size: @smaller-FontSize;
+    .word-wrap();
+    .transition( all,0.3s,ease,0 );
+
+    > i, em {
+        .form-notice-icon-font-family();
+        font-size: @larger-FontSize;
+        position: absolute;
+        top: 13px;
+    }
+
+    > i {
+        left: 15px;
+    }
+
+    > em {
+        right: 15px;
+        cursor: pointer;
+        color: @viceText-FontColor;
+        display: none;
+
+        &:before {
+            content: "\e070";
+        }
+
+        &:hover {
+            color: @default-FontColor;
+        }
+    }
+
+    &.alert-warning {
+        border-color: @alert-BorderColor-warning;
+        background-color: @alert-bgColor-warning;
+
+        > i:before {
+            content: "\e000";
+            color: @warning-FontColor;
+        }
+
+        &:hover {
+            border-color: @alert-BorderColor-warning * 0.9;
+        }
+    }
+
+    &.with-close {
+        padding: 15px 50px;
+
+        > em {
+            .inline-block;
+
+            &:hover {
+                .animation-s( close-btn,0.4s,linaer,0,1,normal,none,forwards );
+            }
+        }
+    }
+}
+
+//数据统计部件
+.data-count-wrap {
+    padding: 30px 0;
+    border: 1px solid @primary-BorderColor;
+    border-top: none;
+    border-bottom-width: 2px;
+}
+
+.date-count-ul {
+    .reset-list( left,block,@smaller-FontSize,@line-height-base );
+    .clearfix();
+    display: block;
+
+    > li {
+        height: 60px;
+        border-right: 1px solid @primary-BorderColor;
+        padding: 0 30px;
+        overflow: hidden;
+        width: 35%;
+
+        > h5 {
+            padding-left: 80px;
+            position: relative;
+            font-size: @smallest-FontSize !important;
+            color: @viceText-FontColor;
+            text-align: right;
+
+            > span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: @heading-FontColor;
+                font-size: @smaller-FontSize !important;
+                line-height: 1;
+            }
+        }
+
+        > h2 {
+            color: @warning-FontColor;
+            text-align: right;
+            padding-top: 12px;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &.count-title {
+            position: relative;
+            line-height: 60px;
+            overflow: visible;
+            width: auto;
+
+            .arrows {
+                .arrow-left-or-right( border-left,8px,8px,#fff );
+                position: absolute;
+                top: 50%;
+                margin-top: -8px;
+                right: -8px;
+            }
+
+            .arrows-shadow {
+                .arrow-left-or-right( border-left,10px,10px,@primary-BorderColor );
+                position: absolute;
+                top: 50%;
+                margin-top: -10px;
+                right: -10px;
+            }
+        }
+    }
+}
+
+//步骤
+.steps-box {
+    height: 64px;
+    position: relative;
+    margin-top: 21px;
+}
+
+.step {
+    position: absolute;
+    top: -21px;
+    .squareFontBox( @steps-bgColor1 + #333,@larger-FontSize,@steps-bgColor1,@step-height,50%,none,block );
+    font-weight: bold;
+    z-index: 1;
+
+    &.step1 {
+        left: 0;
+    }
+
+    &.step2 {
+        left: 50%;
+        margin-left: -27px;
+    }
+
+    &.step3 {
+        right: 0;
+    }
+}
+
+.step-bars {
+    font-size: 0;
+    line-height: 0;
+    background-color: @steps-bgColor1;
+    margin: 0 20px;
+    
+
+    > div {
+        height: 12px;
+        .inline-block();
+        .rounded( 30px );
+        width: 25%;
+    }
+}
+
+.step-title {
+    font-size: @smaller-FontSize;
+    color: @steps-bgColor1;
+    position: absolute;
+    top: 44px;
+    width: 134px;
+
+    &.title1 {
+        left: 0;
+    }
+
+    &.title2 {
+        left: 50%;
+        text-align:center;
+        margin-left: -67px;
+    }
+
+    &.title3 {
+        right: 0;
+        text-align: right;
+    }
+}
+
+.steps-wrap {
+    background-color: @bgColor-type1;
+    padding: 20px 40px;
+    border-bottom: 2px solid @primary-BorderColor * 0.95;
+
+    &.pass1 {
+
+        .step {
+
+            &.step1 {
+                background-color: @steps-bgColor2;
+                color: #fff;
+            }
+        }
+
+        .step-bars {
+
+            > div.bar1 {
+                background-color: @steps-bgColor2;
+            }
+        }
+
+        .step-title {
+
+            &.title1 {
+                color: @steps-bgColor2;
+            }
+        }
+    }
+
+    &.pass2 {
+
+        .step {
+
+            &.step1,
+            &.step2 {
+                background-color: @steps-bgColor2;
+                color: #fff;
+            }
+        }
+
+        .step-bars {
+
+            > div.bar1,
+            > div.bar2 {
+                .rounded( 0 );
+            }
+
+            > div.bar1,
+            > div.bar2,
+            > div.bar3 {
+                background-color: @steps-bgColor2;
+            }
+        }
+
+        .step-title {
+
+            &.title1,
+            &.title2 {
+                color: @steps-bgColor2;
+            }
+        }
+    }
+
+    &.pass3 {
+
+        .step {
+            background-color: @steps-bgColor2;
+            color: #fff;
+        }
+
+        .step-bars > div {
+            background-color: @steps-bgColor2;
+            .rounded( 0 );
+        }
+
+        .step-title {
+            color: @steps-bgColor2;
+        }
+    }
+}
+
+//密码状态标示
+.password-status-wrap {
+    
+}
+
+.password-status-table {
+    width: 100%;
+    max-width: 100%;
+    font-size: @smaller-FontSize;
+    table-layout: fixed;
+
+    .password-status-label {
+        display: block;
+        position: relative;
+        padding-left: 28px;
+
+        > b {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            display: block;
+        }
+
+        &.done {
+
+            > b {
+                .icon-password-radio1();
+            }
+        }
+
+        &.notdone {
+            color: @warning-FontColor;
+
+            > b {
+                .icon-password-radio2();
+            }
+        }
+    }
+
+    td {
+        padding: 10px 10px;
+    }
+}
+
+//表单中插入表格
+.form-table-wrap {
+    background-color: @bgColor-default;
+    width: 536px;
+    margin: 0 auto 15px auto;
+}
+
+.form-table {
+    width: 100%;
+    max-width: 100%;
+    font-size: @smallest-FontSize;
+    table-layout: fixed;
+    text-align: center;
+
+    th, td {
+        padding: 6px 10px 4px 10px;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: @table-bgColor-1;
+        border-bottom: 1px solid @table-BorderColor1;
+        font-weight: bold;
+    }
+
+    td {
+        border-bottom: 1px solid @table-BorderColor1;
+    }
+}
+
+//银行卡列表
+.bankcard-list-wrap {
+    
+}
+
+.bankcard-list {
+    .reset-list( left,block,@smaller-FontSize,@line-height-base );
+    .clearfix();
+
+    .bank-box {
+        .clearfix();
+        padding-left: 30px;
+        position: relative;
+        margin: 10px 20px 0 20px;
+
+        > .bank-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    h3 {
+        margin: 10px 20px 0 20px;
+        .text-hide();
+    }
+
+    .bank-card-btn {
+        background-color: @primary-BtnColor;
+        border-bottom: 2px solid @primary-BtnColor * 0.8;
+        .rounded( 3px );
+        height: 24px;
+        padding: 0 10px;
+        .float-item( right,block );
+        .link-custom( #fff,#fff,none );
+        line-height: 22px;
+        margin-top: 3px;
+        font-size: @smallest-FontSize;
+    }
+
+    .work-tag {
+        font-size: @smallest-FontSize;
+        color: #b7aa7e;
+        .text-white-shadow( 0,1 );
+        position: absolute;
+        right: 20px;
+        bottom: 5px;
+        text-align: right;
+    }
+
+    .notwork-tag,
+    .waiting-tag {
+        color: #fff;
+        position: absolute;
+        left: -1px;
+        bottom: -1px;
+        height: 30px;
+        width: 210px;
+        background: url("@{images-url}black30.png");
+        .clearfix();
+        line-height: 30px;
+        .border-radius( 0,0,3px,3px );
+        padding: 0 20px;
+    }
+
+    .waiting-tag {
+        text-align: right;
+    }
+
+    > li {
+        position: relative;
+        border-style: solid;
+        border-width: 1px;
+        .rounded( 3px );
+        margin-left: 17px;
+        margin-bottom: 17px;
+
+        &.work {
+            .icon-card-bg1();
+            border-color: #f3e8c6;
+
+            .notwork-tag {
+                display: none;
+            }
+
+            .waiting-tag {
+                display: none;
+            }
+        }
+
+        &.notwork,
+        &.waiting {
+            .icon-card-bg2();
+            border-color: #e8e8e8;
+
+            .bank-box {
+                color: @viceText-FontColor + #222;
+            }
+
+            h3 {
+                color: @viceText-FontColor + #222;
+            }
+
+            .work-tag {
+                display: none;
+            }
+        }
+
+        &.notwork {
+
+            .waiting-tag {
+                display: none;
+            }
+        }
+
+        &.waiting {
+
+            .notwork-tag {
+                display: none;
+            }
+        }
+
+        &.add-card {
+            height: 110px;
+            width: 210px;
+            border: 1px dashed @primary-BorderColor * 0.9;
+            .rounded( 3px );
+            line-height: 110px;
+            text-align: center;
+        }
+    }
+}
+
+//过滤器行内结构
+.fliter-inline-wrap {
+    border: 1px solid @primary-BorderColor;
+    background-color: @bgColor-type1;
+    .clearfix();
+    padding: 12px 0 12px 76px;
+    position: relative;
+
+    > .lt {
+        line-height: @form-control-height - 10px;
+        font-size: @smaller-FontSize;
+        position: absolute;
+        top: 12px;
+        left: 15px;
+    }
+
+    .fliter-inline-width1 {
+        width: 140px;
+        float: left;
+        margin-left: 10px;
+    }
+
+    .fliter-inline-bar {
+        height: @form-control-height - 10px;
+        width: 10px;
+        text-align: center;
+        line-height: @form-control-height - 10px;
+        .float-item( left,block );
+        margin-left: 10px;
+    }
+
+    > .btn {
+        margin-left: 10px;
+    }
+}
+
+//模态窗口
+.modal-background {
+    background: url("@{images-url}black70.png");
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px 0;
+}
+
+.modal-layer {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-position {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.modal-wrap {
+    width: 40%;
+    min-width: 650px;
+    margin: 0 auto;
+}
+
+.modal-head {
+    background-color: @bgColor-type1;
+    border-bottom: 1px solid @primary-BorderColor;
+    line-height: 48px;
+    padding-left: 20px;
+    font-size: @small-FontSize;
+    .clearfix();
+
+    > .modal-close {
+        .squareFontBox( @viceText-FontColor,@largest-FontSize,@bgColor-type1,48px,0,right,block );
+        cursor: pointer;
+        line-height: 52px;
+        border: none;
+        outline: none;
+
+        > i {
+            .form-notice-icon-font-family();
+
+            &:before {
+                content: "\e070";
+            }
+        }
+
+        &:hover {
+            background-color: @bgColor-type1 * 0.95;
+            color: @default-FontColor * 0.95;
+
+            > i {
+                .animation-s( close-btn,0.4s,linaer,0,1,normal,none,forwards );
+            }
+        }
+    }
+}
+
+.modal-body {
+    border-bottom: 3px solid @primary-BorderColor;
+    padding: 38px;
+    background-color: @bgColor-default;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+//tooltips-icon
+.tooltips-icon {
+    position: relative;
+    .squareFontBox( @heading-FontColor,@smallest-FontSize,@bgColor-default,16px,4px,none,block );
+    border: 1px solid #adc3d6;
+    .inline-block();
+    margin: 0 5px;
+    cursor: default;
+    vertical-align: text-top;
+
+    > .tooltips {
+        background-color: @tooltips-bgColor1;
+        border: 1px solid @tooltips-BorderColor1;
+        height: 32px;
+        line-height: 30px;
+        padding: 0 10px;
+        position: absolute;
+        top: -46px;
+        left: -20px;
+        white-space: nowrap;
+        display: none;
+
+        .tips-arrow {
+            .arrow-up-or-down( border-top,8px,8px,@tooltips-bgColor1 );
+            position: absolute;
+            bottom: -8px;
+            left: 18px;
+        }
+
+        .tips-arrow-border {
+            .arrow-up-or-down( border-top,9px,9px,@tooltips-BorderColor1 );
+            position: absolute;
+            bottom: -9px;
+            left: 17px;
+        }
+    }
+
+    &:hover {
+
+        > .tooltips {
+            display: block;
+        }
+    }
+}
