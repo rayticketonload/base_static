@@ -68,7 +68,7 @@ var openURL = function (url) {
 /* 启动服务 */
 gulp.task('server', function () {
     connect.server({
-        root: '../',
+        root: './output/',
         port: PORT
     });
 
