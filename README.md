@@ -6,3 +6,8 @@
 * `npm install`
 * `gulp`
 * 预览生成的`html`下的文件`index.html`
+
+
+## 修改日志
+
+* 2015-07-22 增加依赖模块 `gulp-html-replace`, `gulp-concat`, `gulp-strip-debug`,请执行`npm install` 安装。增加发布任务`gulp publish`

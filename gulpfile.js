@@ -38,6 +38,12 @@ var rename = require('gulp-rename');
 var del = require('del')
 //var liveReload = require('gulp-livereload')
 //var browserSync = require('browser-sync')
+//
+
+var htmlreplace = require('gulp-html-replace')
+var concat = require('gulp-concat')
+// 去掉console,alert语句
+var stripDebug = require('gulp-strip-debug');
 
 //模板路径
 var tplPath = path.join(__dirname, 'template');
@@ -83,7 +89,7 @@ var filePaths = {
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
-	js: staticPath+'/js/**/**.js',
+	js: [staticPath+'/js/**/**.js', '!'+staticPath+'/js/**/**.min.js'],
 	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html']
 };
 
@@ -179,11 +185,22 @@ gulp.task('less', function(){
 /* js */
 gulp.task('js', function(){
     return gulp.src(filePaths.js)
-                .pipe(sourcemaps.init())
-                .pipe(uglify())
-                .pipe(sourcemaps.write(distPath+'/js/maps'))
+                //.pipe(sourcemaps.init())
+                //.pipe(uglify())
+               // .pipe(sourcemaps.write(distPath+'/js/maps'))
                 .pipe(gulp.dest(distPath+'/js'))
-                .pipe(connect.reload())
+               // .pipe(connect.reload())
+})
+
+gulp.task('ui', function(){
+    return gulp.src(staticPath+'/js/ui/**/**')
+                //.pipe(sourcemaps.init())
+                .pipe(concat('ui.js'))
+                .pipe(stripDebug())
+                .pipe(uglify())
+               // .pipe(sourcemaps.write(distPath+'/js/maps'))
+                .pipe(gulp.dest(distPath+'/js'))
+               // .pipe(connect.reload())
 })
 
 /* 编译模板 */
@@ -193,6 +210,14 @@ gulp.task('template', function(){
         .pipe(gulp.dest(outPath))
         .pipe(connect.reload())
 });
+
+gulp.task('replace', function(){
+	gulp.src(outPath+'/**/**.html')
+		.pipe(htmlreplace({
+        	'ui': '../src/js/ui.js'
+        }))
+        .pipe(gulp.dest(outPath));
+})
 
 ///* 启动服务 */
 //gulp.task('server', ['template'], function(){
@@ -218,3 +243,6 @@ gulp.task('default', ['clean'], function(){
     gulp.start(['sprite','iconfont', 'images', 'less', 'js', 'template', 'watch', 'server']);
 });
 
+gulp.task('publish', function(){
+	gulp.start(['ui', 'replace'])
+})
