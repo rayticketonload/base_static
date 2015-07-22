@@ -1,9 +1,3 @@
-/*
---- fonticon ---
-*/
-
-@charset "UTF-8";
-
 @font-face {
 	font-family: 'fonticon';
 	src:url('@{iconfont-url}fonticon.eot?-3y4r3t');
@@ -15,15 +9,16 @@
 	font-style: normal;
 }
 
-.form-notice-icon-font-family,
 [class^="icon-"], [class*=" icon-"] {
-	font-family: 'fonticon'!important;
+	font-family: 'fonticon';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
 	line-height: 1;
+
+	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -100,5 +95,3 @@
 .icon-chevron-thin-up:before {
 	content: "\e603";
 }
-
-

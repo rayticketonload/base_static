@@ -10,6 +10,10 @@ output/
 
 tags
 
+.idea
+.idea/
+.idea/*
+
 *.exe
 
 .c9*

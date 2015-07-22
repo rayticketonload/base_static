@@ -44,6 +44,11 @@ var htmlreplace = require('gulp-html-replace')
 var concat = require('gulp-concat')
 // 去掉console,alert语句
 var stripDebug = require('gulp-strip-debug');
+var replace = require('gulp-replace');
+
+// 错误处理
+var gutil = require( 'gulp-util' )
+var plumber = require( 'gulp-plumber' );
 
 //模板路径
 var tplPath = path.join(__dirname, 'template');
@@ -71,10 +76,17 @@ var openURL = function (url) {
     }
 }
 
+// 错误处理
+function errrHandler( e ){
+    // 控制台发声,错误时beep一下
+    gutil.beep();
+    gutil.log( e );
+}
+
 /* 启动服务 */
 gulp.task('server', function () {
     connect.server({
-        root: './output/',
+        root: __dirname,
         port: PORT
     });
 
@@ -85,11 +97,12 @@ gulp.task('server', function () {
 
 /* 路径 */
 var filePaths = {
+	iconfontIE7: staticPath+'/iconfont-ie7/**/**',
 	iconfont: staticPath+'/iconfont/**/**',
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
-	js: [staticPath+'/js/**/**.js', '!'+staticPath+'/js/**/**.min.js'],
+	js: [staticPath+'/js/**/**.js'],
 	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html']
 };
 
@@ -126,11 +139,18 @@ gulp.task('clean', function(cb) {
 })
 
 /* 字体目录拷贝 */
-gulp.task('iconfont', function(){
+gulp.task('iconfont', ['iconfontIE7'], function(){
    return gulp.src(filePaths.iconfont)
                 .pipe(gulp.dest(distPath+'/iconfont'))
-                .pipe(connect.reload()) 
+                //.pipe(connect.reload())
 });
+
+gulp.task('iconfontIE7', function(){
+    return gulp.src(filePaths.iconfontIE7)
+        .pipe(gulp.dest(distPath+'/iconfont-ie7'))
+        //.pipe(connect.reload())
+});
+
 
 /* sprite 图片 */
 gulp.task('sprite', function(cb){
@@ -156,6 +176,7 @@ gulp.task('sprite', function(cb){
 /* 图片拷贝压缩 */
 gulp.task('images', function(){
     return gulp.src(filePaths.images)
+                .pipe( plumber( { errorHandler: errrHandler } ) )
                 .pipe(imagemin({
                     optimizationLevel: 5,
                     progressive: true,
@@ -169,6 +190,7 @@ gulp.task('images', function(){
 /* less文件编译 */
 gulp.task('less', function(){
     return gulp.src(filePaths.less)
+                .pipe( plumber( { errorHandler: errrHandler } ) )
                 // 初始化sourcemap
                 .pipe(sourcemaps.init())
                 // 编译less
@@ -194,6 +216,7 @@ gulp.task('js', function(){
 
 gulp.task('ui', function(){
     return gulp.src(staticPath+'/js/ui/**/**')
+            .pipe( plumber( { errorHandler: errrHandler } ) )
                 //.pipe(sourcemaps.init())
                 .pipe(concat('ui.js'))
                 .pipe(stripDebug())
@@ -206,6 +229,7 @@ gulp.task('ui', function(){
 /* 编译模板 */
 gulp.task('template', function(){
     gulp.src(filePaths.html)
+        .pipe( plumber( { errorHandler: errrHandler } ) )
         .pipe(tpl())
         .pipe(gulp.dest(outPath))
         .pipe(connect.reload())
@@ -238,6 +262,28 @@ gulp.task('watch', function(){
 	gulp.watch(distPath+'/images/sprite/**/**', ['less']);
 });
 
+// 更新字体任务
+// ==========
+var iconfontPath = './assist/fonticon/';
+gulp.task('iconfont-file', function(){
+    return gulp.src(iconfontPath+'fonts/**/**')
+        .pipe(gulp.dest('./src/iconfont/'))
+})
+
+gulp.task('iconfont-ie7', function(){
+    return gulp.src(iconfontPath+'ie7/**/**')
+        .pipe(gulp.dest('./src/iconfont-ie7/'))
+})
+
+gulp.task('iconfont-style', function(){
+    return gulp.src(iconfontPath+'style.css')
+        .pipe(rename('_fonticon.less'))
+        // 替换iconfont路径
+        .pipe(replace(/fonts\//g, '@{iconfont-url}'))
+        .pipe(gulp.dest('./src/less/'))
+})
+
+
 /*------ 默认启动任务 ------ */
 gulp.task('default', ['clean'], function(){
     gulp.start(['sprite','iconfont', 'images', 'less', 'js', 'template', 'watch', 'server']);
@@ -245,4 +291,9 @@ gulp.task('default', ['clean'], function(){
 
 gulp.task('publish', function(){
 	gulp.start(['ui', 'replace'])
+})
+
+/* 更新字体 */
+gulp.task('fonticon-update', function(){
+    gulp.start(['iconfont-style', 'iconfont-file', 'iconfont-ie7']);
 })
