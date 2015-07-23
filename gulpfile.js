@@ -24,6 +24,7 @@ var connect = require('gulp-connect')
 var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCSS = require('gulp-minify-css');
+var autoprefixer = require('gulp-autoprefixer');
 
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
@@ -195,10 +196,12 @@ gulp.task('less', function(){
                 .pipe(sourcemaps.init())
                 // 编译less
                 .pipe(less())
+                // 自动添加前缀
+                .pipe(autoprefixer(pkg.browser))
                 // 压缩css
                 .pipe(minifyCSS({compatibility: 'ie7'}))
                 // 生成sourcemap
-                .pipe(sourcemaps.write(distPath+'/css/maps'))
+                .pipe(sourcemaps.write('../css/maps'))
                 // 输出css文件
                 .pipe(gulp.dest(distPath+'/css'))
                 .pipe(connect.reload())
