@@ -261,6 +261,11 @@
                                         过滤器行内结构
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#ebank" class="sidebar-btn">
+                                        网上银行选择
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li>
@@ -1578,7 +1583,6 @@
                                 模拟<code>&lt;select&gt;</code>表单由块化标签组成，并且组件结构不可变更，详情请参考代码演示
                             </p>
                             <form>
-
                                 <div class="form-group">
                                     <label class="form-control-label">                                           
                                         <b>
@@ -1620,42 +1624,59 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
 
+                            <p class="description">
+                                带表单内容自动匹配功能(可输入，可下拉)
+                            </p>
+                            <form>
                                 <div class="form-group">
-                                    <label class="form-control-label">                                           
+                                    <label class="form-control-label" for="form-control-example8">                                           
                                         <b>
                                             *
                                         </b>
                                         <span>
-                                            dropdown
+                                            dropdown & keyin
                                         </span>
                                         <em>
                                             ：
                                         </em>
                                     </label>
                                     <div class="form-control-wrap">
-                                        <div class="form-control-dropdown active">
+                                        <div class="form-control-dropdown with-keyin">
                                             <span class="form-control-dropdown-btn">
                                                 <i></i>
                                             </span>
-                                            <div class="form-control-dropdown-value" title="请选择一个选项">
-                                                请选择一个选项
-                                            </div>
+                                            <input type="text" class="form-control" id="form-control-example8" placeholder="请出入文字" value=""/>
                                             <ul class="form-control-dropdown-menu">
                                                 <li title="option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
                                                     option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                </li>
+                                                <li title="option one">
+                                                    option one
+                                                </li>
+                                                <li title="option two">
+                                                    option two
+                                                </li>
+                                                <li title="option three">
+                                                    option three
+                                                </li>
+                                                <li title="option four">
+                                                    option four
+                                                </li>
+                                                <li title="option five">
+                                                    option five
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
+
                             <p class="description">
                                 用于银行选择
                             </p>
                             <form>
-
                                 <div class="form-group">
                                     <label class="form-control-label">                                           
                                         <b>
@@ -1669,7 +1690,7 @@
                                         </em>
                                     </label>
                                     <div class="form-control-wrap">
-                                        <div class="form-control-dropdown active">
+                                        <div class="form-control-dropdown">
                                             <span class="form-control-dropdown-btn">
                                                 <i></i>
                                             </span>
@@ -1827,14 +1848,13 @@
                                                     <span class="form-control-bank-card">735*********532</span>
                                                 </li>
                                                 <li title="option">
-                                                    <span class="form-control-banks bank-yhrcbank" title="颍淮农村商业"></span>
+                                                    <span class="form-control-banks bank-tianjinbank" title="天津银行"></span>
                                                     <span class="form-control-bank-card">735*********532</span>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                         <div class="ui-code">
@@ -4660,6 +4680,355 @@
                                     <br />&nbsp;&nbsp;&nbsp;<span>&lt;button class="btn primary small-btn" type="submit"&gt;</span>
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
                                     <br />&nbsp;&nbsp;&nbsp;<span>&lt;/button&gt;</span>
+                                    <br /><span>&lt;/div&gt;</span>
+                                </code>                       
+                            </pre>
+                        </div>
+                    </div>
+
+                    <!-- 网上银行选择 -->
+                    <div class="section-content" id="ebank">
+                        <h3>
+                            <strong>网上银行选择</strong>
+                        </h3>
+                        <div class="ui-example">
+                            <span class="section-tip">这里的实例结构对于不同项目的UI的兼容性较差，在不同项目上，可能需要进行二次定义，或者直接重构</span>
+                            <p class="description">
+                                notice it
+                            </p>
+                            <div class="ebank-wrap">
+                                <ul class="ebanks">
+                                    <li class="active" title="招商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cmb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="工商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-icbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="建设银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-ccb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="农业银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-abc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="中国银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-boc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="交通银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-comm"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="平安银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-pingan"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="中国邮政储蓄银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-psbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="上海银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-shbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="温州银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-wzbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="浦发银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-spdb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="中信银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-ecitic"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="广发银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cgbchina"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="民生银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cmbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="兴业银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cib"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="光大银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cebbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="上海农商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-srcb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="北京银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-bankofbeijing"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="北京农商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-bjrcb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="深圳发展银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-szfz"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="宁波银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-nbcb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="杭州银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hzbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="东莞银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-dongguanbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="汇丰银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hsbc"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="东亚银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hkbea"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="广州农商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-961111"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="华夏银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hxb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="华润银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-crbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="兰州银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-lanzhou"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="河北银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hebbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="微商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-hsbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="青岛银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-qdccb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="尧都农商">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-ydnsh"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="浙商银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-zheshang"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="南昌银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-nccbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="渤海银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-cbhb"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="恒丰银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-egbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li title="天津银行">
+                                        <label class="ebank-label">
+                                            <i></i>
+                                            <span class="etag">企业</span>
+                                            <span class="ebank-logo bank-tianjinbank"></span>
+                                            <input type="radio" style="display: none;" name="ebank"/>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="more-ebank">
+                                            查看更多
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ui-code">
+                            <pre>
+                                <code>
+                                    <span>&lt;div class="ebank-wrap"&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;<span>&lt;ul class="ebanks"&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li class="active"&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="ebank-label"&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i&gt;&lt;/i&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="etag"&gt; 企业（个人） &lt;/span&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="ebank-logo （bank-...）"&gt;&lt;/span&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;input type="radio" style="display: none;" name="ebank/&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="more-ebank"&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看更多
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />&nbsp;&nbsp;&nbsp;<span>&lt;/ul&gt;</span>
                                     <br /><span>&lt;/div&gt;</span>
                                 </code>                       
                             </pre>
