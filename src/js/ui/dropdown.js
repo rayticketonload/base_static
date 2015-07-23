@@ -22,9 +22,9 @@
         $(el).on('click.ui.dropdown', this.toggle);
 
         if(/input/i.test(el.tagName)) {
-            // input
             $(el).on('keyup.ui.dropFilter', this.filter)
-                .on('focusin.ui.dropFilter', this.focusIn)
+
+                //.on('focusin.ui.dropFilter', this.focusIn)
         }
 
 
