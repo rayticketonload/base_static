@@ -813,7 +813,6 @@ h6,.h6 {
     cursor: pointer;
 
     &.smallsize { // @form-control-height 减10像素
-
         .form-control-dropdown-value,
         .form-control-modal-value,
         .form-control-date-value {
@@ -888,6 +887,18 @@ h6,.h6 {
         .form-control-modal-btn {
             color: #fff;
             background-color: @form-focus-BorderColor;
+        }
+    }
+
+    &.with-keyin {
+
+        &.active {
+
+            .form-control {
+                border-color: @form-focus-BorderColor;
+                border-width: 2px;
+                padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+            }
         }
     }
 }
