@@ -1600,9 +1600,7 @@
                                             <span class="form-control-dropdown-btn">
                                                 <i></i>
                                             </span>
-                                            <div class="form-control-dropdown-value" title="请选择一个选项">
-                                                请选择一个选项
-                                            </div>
+                                            <input class="form-control-dropdown-value" placeholder="请选择一个选项" />
                                             <ul class="form-control-dropdown-menu">
                                                 <li title="option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
                                                     option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -4079,11 +4077,19 @@
                                 <em></em>
                                 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                             </div>
+                            <p class="description">
+                                添加<code>fade in</code>使用css3动画
+                            </p>
+                            <div class="alert alert-warning with-close fade in">
+                                <i></i>
+                                <em></em>
+                                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                            </div>
                         </div>
                         <div class="ui-code">
                             <pre>
                                 <code>
-                                    &lt;div <span>class="alert ( alert-danger,alert-warning,alert-success,alert-info,with-close )"</span>&gt;
+                                    &lt;div <span>class="alert ( alert-danger,alert-warning,alert-success,alert-info,with-close,fade in)"</span>&gt;
                                     <br />&nbsp;&nbsp;&nbsp;<span>&lt;i&gt;&lt;/i&gt;</span>
                                     <br />&nbsp;&nbsp;&nbsp;<span>&lt;em&gt;&lt;/em&gt;</span>
                                     <br />&nbsp;&nbsp;&nbsp;...
@@ -5136,9 +5142,26 @@
         </script>
 
         <!-- build:ui -->
+        <script src="../src/js/ui/transition.js"></script>
         <script src="../src/js/ui/tab.js"></script>
-        <script src="../src/js/ui/dropMenu.js"></script>
+        <script src="../src/js/ui/alert.js"></script>
+        <script src="../src/js/ui/dropdown.js"></script>
         <script src="../src/js/ui/modal.js"></script>
         <!-- endbuild -->
 
+        <script>
+            (function($) {
+                $(function(){
+                    // 下拉select选择
+                    $('.form-control-dropdown-value').on('selected.ui.dropdown', function(e, obj){
+                        console.log('dropdown-selected')
+                    });
+
+                    // 警告框架关闭
+                    $('.alert').on('closed.ui.alert', function(e, obj){
+                        console.log('alert-closed')
+                    })
+                })
+            })(jQuery)
+        </script>
 {% endblock %}

@@ -2,6 +2,8 @@
  * 菜单下拉|select
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference bootstrap.dropdown.js
+ * API:
+ *      $(element).on('selected.ui.dropdown', function(e, obj){});
  */
 
 +(function($) {
@@ -10,7 +12,8 @@
     // 默认高亮类
     var active = 'active';
     // 绑定默认选择器
-    var toggle = '[data-toggle="dropdown"],.form-control-dropdown-value,.form-control-dropdown-btn';
+    var toggle = '[data-toggle="dropdown"],.form-control-dropdown-value';
+    var toggleBtn = '.form-control-dropdown-btn, [data-toggle="dropdown-btn"]';
     var list = '.form-control-dropdown-menu li, [role="list"] li';
 
     // 构造函数
@@ -18,8 +21,15 @@
     var Dropdown = function(el) {
         $(el).on('click.ui.dropdown', this.toggle);
 
+        if(/input/i.test(el.tagName)) {
+            // input
+            $(el).on('keyup.ui.dropFilter', this.filter)
+                .on('focusin.ui.dropFilter', this.focusIn)
+        }
+
+
         var $target = getParent(el);
-        $target.on('click.ui.dropSelect', list, this.select($target))
+        $target.on('click.ui.dropSelect', list, this.selected($target))
     };
 
     // 版本
@@ -32,17 +42,7 @@
 
         if($this.is('.disabled,:disabled')) return;
 
-        var $target = getParent($this);
-        active = $this.data('active') || active;
-
-        var isActive = $target.hasClass(active);
-
-        clearMenus();
-
-        if(!isActive) {
-            $target.addClass(active);
-            $this.attr('aria-expanded', true).trigger('show.ui.dropdown', this)
-        }
+        dropMenus($this);
 
         return false
     };
@@ -84,18 +84,65 @@
 
     // 下拉菜单选中
     // ==================
-    Dropdown.prototype.select = function(el){
+    Dropdown.prototype.selected = function(el){
         var $target = el.find(toggle);
         return function(e){
             e.preventDefault();
-            console.log($(this))
-            var option = $(this).attr('title') || $(this).text();
-            $target.html(option);
+            var isInput = /input/i.test($target[0].tagName);
+            var option = $.trim($(this)[isInput ? 'text' : 'html']());
+            $target[isInput ? 'val' : 'html'](option).trigger('selected.ui.dropdown', this);
             clearMenus();
         }
     };
 
-    // 清除页面所有drondown
+    // input输入过滤
+    // ===========
+    Dropdown.prototype.filter = function(e) {
+      if(!/input/i.test(e.target.tagName)) return;
+
+        var $this = $(this);
+        var inputText = $.trim($this.val());
+        var $list = getList($this);
+        if(inputText === '') {
+            $list.show();
+            return;
+        }
+
+        if($list.length) {
+            $list.map(function(){
+                var text = $(this).text();
+                if(text.indexOf(inputText) > -1) {
+                    return $(this).show();
+                } else {
+                    return $(this).hide();
+                }
+            })
+        }
+    };
+
+    Dropdown.prototype.focusIn = function(e){
+        var $this = $(this);
+        dropMenus($this, true)
+        //Dropdown.prototype.filter.call(this, e);
+    };
+
+    // 显示当前展开dropdown
+    // ==================
+    function dropMenus($this, always) {
+        var $target = getParent($this);
+        active = $this.data('active') || active;
+
+        var isActive = $target.hasClass(active);
+
+        always === undefined && clearMenus();
+
+        if(!isActive) {
+            $target.addClass(active);
+            $this.attr('aria-expanded', true).trigger('show.ui.dropdown', this)
+        }
+    }
+
+    // 清除页面所有dropdown
     // ==================
     function clearMenus(e) {
         $(toggle).each(function () {
@@ -106,7 +153,7 @@
             if(!$target.hasClass(active)) return;
             if(e && e.isDefaultPrevented()) return;
 
-            $target.removeClass(active);
+            $target.removeClass(active).find(list).show();
             $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this)
         })
     }
@@ -116,6 +163,13 @@
     function getParent(el) {
         var $parent = $(el).data('target') || $(el).parent();
         return $parent;
+    }
+
+    // 获取列表项
+    // =============
+    function getList(el) {
+        var $parent = getParent(el);
+        return $parent.find(list);
     }
 
     // 插件定义
@@ -136,10 +190,17 @@
 
     // 元素插件绑定
     // ====================
+    $(toggle).dropdown();
     $(document)
+        // 点击页面其他地方收起
         .on('click.ui.dropdown', clearMenus)
+        // 按钮触发
+        .on('click.ui.dropdown-btn', toggleBtn, function(e){
+            var $target = $(this).siblings(toggle);
+            $target.length && $target.trigger('click.ui.dropdown');
+            return false;
+        })
+        // focus
         //.on('click.ui.dropdown', toggle, Dropdown.prototype.toggle)
         .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
-
-    $(toggle).dropdown();
 })(jQuery);
