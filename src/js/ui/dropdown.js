@@ -49,12 +49,19 @@
 
     // 键盘按键 focus
     // ==============
+    //Dropdown.prototype.CURRENT_ITEM = -1;
     Dropdown.prototype.keydown = function (e) {
-        if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return;
+        //console.log(e.which)
+        if(e.which === 27){ // esc
+            clearMenus(e);
+            return;
+        }
+        if (!/(38|40|27|32|13|46|8)/.test(e.which)) return;
 
         var $this = $(this);
+        var currentItem = $this.data('currentItem') === undefined ? -1 : $this.data('currentItem');
 
-        e.preventDefault();
+        //e.preventDefault();
         e.stopPropagation();
 
         if($this.is('.disabled, :disabled')) return;
@@ -64,7 +71,9 @@
 
         var isActive = $target.hasClass(active);
 
+        //console.log(e.which)
         if ((!isActive && e.which != 27) || (isActive && e.which == 27)) {
+            //console.log(e.which);
             if (e.which == 27) $target.find(toggle).trigger('focus');
             return $this.trigger('click');
         }
@@ -73,13 +82,27 @@
 
         if(!$items.length) return;
 
-        var index = $items.index(e.target);
+        if(e.which == 13 && $items.filter('.hover').length) { // enter
+            $items.filter('.hover').trigger('click.ui.dropSelect');
+            return;
+        }
 
-        if (e.which == 38 && index > 0)  index--;  // up
-        if (e.which == 40 && index < $items.length - 1) index++; // down
-        if (!~index) index = 0;
+        var index = $items.index(e.target) > -1 ? $items.index(e.target) : currentItem;
 
-        $items.eq(index).trigger('focus')
+
+
+        if (e.which == 38 && index >= 0)  index--;  // up
+        if (e.which == 40 && index < $items.length) index++; // down
+        //if (!~index) index = 0;
+        //console.log(index);
+        if (index < 0) index = $items.length - 1;
+        if (index >= $items.length) index = 0;
+
+        scrollTop($items, index);
+
+        $this.data('currentItem', index);
+
+        $items.removeClass('hover').eq(index).addClass('hover').trigger('focus')
     };
 
     // 下拉菜单选中
@@ -153,8 +176,8 @@
             if(!$target.hasClass(active)) return;
             if(e && e.isDefaultPrevented()) return;
 
-            $target.removeClass(active).find(list).show();
-            $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this)
+            $target.removeClass(active).find(list).removeClass('hover').show();
+            $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this).data('currentItem', -1)
         })
     }
 
@@ -170,6 +193,14 @@
     function getList(el) {
         var $parent = getParent(el);
         return $parent.find(list);
+    }
+
+    // 滚动条自动跳到某位置
+    // ================
+    function scrollTop(el, i) {
+        var $parent = el.parent();
+        var top = el.eq(i).position().top;
+        $parent.scrollTop(top);
     }
 
     // 插件定义
