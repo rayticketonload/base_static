@@ -732,6 +732,16 @@ h6,.h6 {
     }
 }
 
+// 下拉框的input
+.form-control-focus() {
+    border-color: @form-focus-BorderColor;
+    border-width: 2px;
+    padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+}
+.active .form-control[data-toggle] {
+    .form-control-focus();
+}
+
 .form-control {
     display: block;
     padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 1px 15px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 15px;
@@ -749,9 +759,7 @@ h6,.h6 {
 
     &:focus,
     &.focus {
-        border-color: @form-focus-BorderColor;
-        border-width: 2px;
-        padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+        .form-control-focus();
     }
 
     &[disabled] {
@@ -943,7 +951,7 @@ h6,.h6 {
         padding: 0 15px;
         position: relative;
 
-        &:hover {
+        &:hover,&.hover {
             background-color: @bgColor-type1;
         }
     }
