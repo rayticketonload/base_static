@@ -1,0 +1,266 @@
+@import "_normalize";       //项目引用样式初始化
+@import "_config";          //项目样式设定项
+@import "_mix";             //项目样式工具
+@import "_font";            //项目字体
+@import "_fonticon";        //项目字体图标
+@import "_sprite";          //项目雪碧图
+@import "_animate.less";    //项目引用CSS3动画库
+@import "_animation.less";    //交互CSS3动画
+
+/*
+--- share ---
+*/
+
+h1,h2,h3,h4,h5,h6,p {
+    font-weight: 500;
+    margin: 0;
+}
+
+/*
+--- UI ---
+*/
+
+.uiShow-body {
+    *width: auto;
+}
+
+//表单类
+.form-group {
+
+    .form-control-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: @form-control-label-width;
+        height: @form-control-height;
+        text-align: right;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        .clearfix();
+
+        > em, span {
+            font-size: @forms-FontSize;
+            color: @default-FontColor;
+        }
+
+        > em {
+            .inline-block();
+            height: 100%;
+            line-height: @form-control-height;
+            vertical-align: middle;
+            font-style: normal;
+        }
+
+        > span {
+            .inline-block();
+            line-height: @line-height-base;
+            vertical-align: middle;
+            max-width: 76%;
+        }
+
+        > b {
+            .inline-block();
+            height: 100%;
+            vertical-align: middle;
+            color: @error-FontColor1;
+            line-height: @form-control-height + 9px;
+            font-size: ceil( ( @forms-FontSize * 1.7 ) );
+            padding-right: 5px;
+        }
+    }
+
+    .form-control-wrap {
+        
+    }
+
+    &.has-correct,
+    &.has-error {
+
+        .form-control {
+            *padding: 0;
+            *text-indent: 14px;
+        }
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            border-width: 2px;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            top: 2px;
+            right: 2px;
+            width: @form-control-height - 4px;
+            height: @form-control-height - 4px;
+        }
+
+        .form-control-dropdown,
+        .form-control-modal,
+        .form-control-date {
+
+            &.active {
+
+                .form-control-dropdown-value {
+                    color: @formValue-FontColor;
+                }
+            }
+
+            &:active {
+
+                .form-control-modal-value,
+                .form-control-date-value {
+                    color: @formValue-FontColor;
+                }
+            }
+        }
+    }
+}
+
+.form-control {
+    *padding: 0;
+    *text-indent: 15px;
+    *height: ( @form-control-height - 3px );
+    *line-height: ( @form-control-height - 3px );
+
+    &.smallsize {
+        *padding: 0;
+        *text-indent: 10px;
+        *height: ( @form-control-height - 13px );
+        *line-height: ( @form-control-height - 13px );
+    }
+}
+
+.form-control-dropdown,
+.form-control-modal,
+.form-control-date {
+
+    &.smallsize { // @form-control-height 减10像素
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            padding: 0 ( @form-control-height - 10px - 3px ) + 10px 0 10px;
+            height: ( @form-control-height - 10px );
+            line-height: @form-control-height - 10px - 3px;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-modal-btn,
+        .form-control-date-btn {
+            width: @form-control-height - 10px - 3px;
+            height: @form-control-height - 10px - 3px;
+            line-height: @form-control-height - 10px;
+            color: @viceText-FontColor * 0.7;
+            font-size: ceil( ( @forms-FontSize * 1.14 ) );
+        }
+
+        .form-control-dropdown-menu {
+            top: @form-control-height - 10px;
+            max-height: ( @form-control-height - 10px ) * 5 + 2px;
+
+            > li {
+                height: @form-control-height - 10px;
+                line-height: @form-control-height - 10px;
+                padding: 0 10px;
+            }
+        }
+    }
+
+    &.active {
+
+        .form-control-dropdown-value,
+        .form-control-date-value {
+            *height: ( @form-control-height - 4px );
+            *line-height: ( @form-control-height - 4px );
+        }
+
+        .form-control-dropdown-menu {
+            display: block;
+        }
+
+        .form-control-dropdown-btn,
+        .form-control-date-btn {
+            color: #fff;
+            background-color: @form-focus-BorderColor;
+        }
+    }
+
+    &:active {
+
+        .form-control-modal-value {
+            border-color: @form-focus-BorderColor;
+            border-width: 2px;
+        }
+
+        .form-control-modal-btn {
+            color: #fff;
+            background-color: @form-focus-BorderColor;
+        }
+    }
+
+    &.with-keyin {
+
+        &.active {
+
+            .form-control {
+                padding: 0;
+                text-indent: 14px;
+            }
+        }
+    }
+}
+
+.form-control-dropdown-value,
+.form-control-modal-value,
+.form-control-date-value {
+    *height: @form-control-height - 3px;
+}
+
+.form-control-dropdown-menu {
+    *width: 276px;
+
+    > li {
+        height: @form-control-height;
+        line-height: @form-control-height;
+        background-color: @bgColor-default;
+        .text-hide();
+        padding: 0 15px;
+        position: relative;
+    }
+}
+
+.form-control-dropdown-btn,
+.form-control-modal-btn,
+.form-control-date-btn {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: @form-control-height - 3px;
+    height: @form-control-height - 3px;
+    line-height: @form-control-height;
+    text-align: center;
+    color: @viceText-FontColor * 0.7;
+    font-size: ceil( ( @forms-FontSize * 1.14 ) );
+    background-color: @form-default-BorderColor / 0.97;
+    overflow: hidden;
+    z-index: 1;
+
+    > i {
+        .inline-block();
+        .form-notice-icon-font-family(); //报错了，但起效
+    }
+}
+
+    .form-control-dropdown-btn > i:before {
+        content: "\e600";
+    }
+
+    .form-control-modal-btn > i:before {
+        content: "\e607";
+    }
+
+    .form-control-date-btn > i:before {
+        content: "\e608";
+    }
