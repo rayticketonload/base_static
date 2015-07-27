@@ -27,65 +27,23 @@ h1,h2,h3,h4,h5,h6,p {
 //表单类
 .form-group {
 
-    .form-control-label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: @form-control-label-width;
-        height: @form-control-height;
-        text-align: right;
-        font-size: 0;
-        line-height: 0;
-        overflow: hidden;
-        .clearfix();
-
-        > em, span {
-            font-size: @forms-FontSize;
-            color: @default-FontColor;
-        }
-
-        > em {
-            .inline-block();
-            height: 100%;
-            line-height: @form-control-height;
-            vertical-align: middle;
-            font-style: normal;
-        }
-
-        > span {
-            .inline-block();
-            line-height: @line-height-base;
-            vertical-align: middle;
-            max-width: 76%;
-        }
-
-        > b {
-            .inline-block();
-            height: 100%;
-            vertical-align: middle;
-            color: @error-FontColor1;
-            line-height: @form-control-height + 9px;
-            font-size: ceil( ( @forms-FontSize * 1.7 ) );
-            padding-right: 5px;
-        }
-    }
-
     .form-control-wrap {
-        
+        *float: left;
     }
 
     &.has-correct,
     &.has-error {
 
         .form-control {
-            *padding: 0;
-            *text-indent: 14px;
+            *padding: 0 14px;
         }
 
         .form-control-dropdown-value,
         .form-control-modal-value,
         .form-control-date-value {
-            border-width: 2px;
+            *width: 239px;
+            *height: @form-control-height - 4px;
+            *line-height: @form-control-height - 4px;
         }
 
         .form-control-dropdown-btn,
@@ -119,15 +77,19 @@ h1,h2,h3,h4,h5,h6,p {
     }
 }
 
+input.form-control {
+    *margin-top: -1px;
+}
+
 .form-control {
-    *padding: 0;
-    *text-indent: 15px;
+    *width: 278px;
+    *padding: 0 15px;
     *height: ( @form-control-height - 3px );
     *line-height: ( @form-control-height - 3px );
 
     &.smallsize {
-        *padding: 0;
-        *text-indent: 10px;
+        *width: 288px;
+        *padding: 0 10px;
         *height: ( @form-control-height - 13px );
         *line-height: ( @form-control-height - 13px );
     }
@@ -171,6 +133,12 @@ h1,h2,h3,h4,h5,h6,p {
     &.active {
 
         .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            *width: 239px;
+        }
+
+        .form-control-dropdown-value,
         .form-control-date-value {
             *height: ( @form-control-height - 4px );
             *line-height: ( @form-control-height - 4px );
@@ -202,11 +170,31 @@ h1,h2,h3,h4,h5,h6,p {
 
     &.with-keyin {
 
+        .form-control {
+            *padding: 0 ( @form-control-height - 3px ) + 15px 0 15px;
+            *width: 278px - ( @form-control-height - 3px );
+        }
+
+        .form-control-dropdown-btn {
+            *top: 2px;
+        }
+
         &.active {
 
             .form-control {
-                padding: 0;
-                text-indent: 14px;
+                *padding: 0 ( @form-control-height - 3px ) + 14px 0 14px;                
+            }
+
+            input.form-control {
+                *margin-top: -2px;
+            }
+
+            .form-control-dropdown-btn {
+                *top: 3px;
+            }
+
+            .form-control-dropdown-menu {
+                *top: 42px;
             }
         }
     }
@@ -216,10 +204,11 @@ h1,h2,h3,h4,h5,h6,p {
 .form-control-modal-value,
 .form-control-date-value {
     *height: @form-control-height - 3px;
+    *width: 241px;
 }
 
 .form-control-dropdown-menu {
-    *width: 276px;
+    *width: 306px;
 
     > li {
         height: @form-control-height;
@@ -247,20 +236,46 @@ h1,h2,h3,h4,h5,h6,p {
     overflow: hidden;
     z-index: 1;
 
-    > i {
-        .inline-block();
-        .form-notice-icon-font-family(); //报错了，但起效
+    > i {        
+        *position: absolute;
+        *top: 50%;
+        *left: 50%;
+        *display: block;       
     }
 }
 
+    .form-control-dropdown-btn > i {
+        .icon-chevron-thin-down();
+        *margin-top: -10px;
+        *margin-left: -10px;
+    }
     .form-control-dropdown-btn > i:before {
-        content: "\e600";
+        *content: "";
     }
 
+    .form-control-modal-btn > i {
+        .icon-browser();
+        *margin-top: -8px;
+        *margin-left: -8px;
+    }
     .form-control-modal-btn > i:before {
-        content: "\e607";
+        *content: "";
     }
 
-    .form-control-date-btn > i:before {
-        content: "\e608";
+    .form-control-date-btn > i {
+        .icon-calendar();
+        *margin-top: -8px;
+        *margin-left: -8px;
     }
+    .form-control-date-btn > i:before {
+        *content: "";
+    }
+
+.form-control-verify {
+    position: relative;
+    padding-right: @form-control-verify-btn-width;
+
+    > .form-control {
+        *width: 160px;
+    }
+}

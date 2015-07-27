@@ -539,6 +539,7 @@ h6,.h6 {
 .form-group {
     padding-left: @form-control-label-width + 10px;
     position: relative;
+    .clearfix();
 
     .form-control-label {
         position: absolute;
@@ -586,7 +587,7 @@ h6,.h6 {
     .form-control-wrap {
         min-height: @form-control-height;
         padding-bottom: 15px;
-        //好像没必要，隐藏掉先 position: relative;
+        position: relative;
     }
 
     &.has-correct,
@@ -756,6 +757,7 @@ h6,.h6 {
     font-size: @forms-FontSize;
     color: @formValue-FontColor;
     background-color: @bgColor-default;
+    .text-hide();
 
     &:focus,
     &.focus {
