@@ -25,6 +25,13 @@ h1,h2,h3,h4,h5,h6,p {
 }
 
 //±íµ¥Àà
+.form-frame {
+
+    .form-layer1 {
+        *width: 340px;
+    }
+}
+
 .form-group {
 
     .form-control-wrap {
@@ -36,6 +43,10 @@ h1,h2,h3,h4,h5,h6,p {
 
         .form-control {
             *padding: 0 14px;
+
+            &.smallsize {
+                *width: 147px;
+            }
         }
 
         .form-control-dropdown-value,
@@ -46,34 +57,73 @@ h1,h2,h3,h4,h5,h6,p {
             *line-height: @form-control-height - 4px;
         }
 
-        .form-control-dropdown-btn,
-        .form-control-modal-btn,
-        .form-control-date-btn {
-            top: 2px;
-            right: 2px;
-            width: @form-control-height - 4px;
-            height: @form-control-height - 4px;
-        }
-
         .form-control-dropdown,
         .form-control-modal,
         .form-control-date {
 
-            &.active {
+            &.smallsize { // @form-control-height ¼õ10ÏñËØ
 
-                .form-control-dropdown-value {
-                    color: @formValue-FontColor;
-                }
-            }
-
-            &:active {
-
+                .form-control-dropdown-value,
                 .form-control-modal-value,
                 .form-control-date-value {
-                    color: @formValue-FontColor;
+                    *line-height: @form-control-height - 10px - 3px;
+                    *width: 128px;
                 }
             }
         }
+    }
+
+    &.has-correct {
+
+        .form-notice {
+
+            > i {
+                .icon-check_circle();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+
+    &.has-error {
+
+        .form-notice {
+
+            > i {
+                .icon-cancel();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+
+    &.has-info {
+
+        .form-notice {
+
+            > i {
+                .icon-info();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+}
+
+.form-notice {
+    *position: static;
+    *padding: 11px 0 0 0;
+
+    > i {
+        *vertical-align: middle;
+        *position: static;
+        *margin-right: 8px;
     }
 }
 
@@ -88,7 +138,7 @@ input.form-control {
     *line-height: ( @form-control-height - 3px );
 
     &.smallsize {
-        *width: 288px;
+        *width: 157px;
         *padding: 0 10px;
         *height: ( @form-control-height - 13px );
         *line-height: ( @form-control-height - 13px );
@@ -98,34 +148,33 @@ input.form-control {
 .form-control-dropdown,
 .form-control-modal,
 .form-control-date {
+    *zoom: 1;
+    *display: inline;
 
     &.smallsize { // @form-control-height ¼õ10ÏñËØ
         .form-control-dropdown-value,
         .form-control-modal-value,
         .form-control-date-value {
-            padding: 0 ( @form-control-height - 10px - 3px ) + 10px 0 10px;
-            height: ( @form-control-height - 10px );
-            line-height: @form-control-height - 10px - 3px;
-        }
-
-        .form-control-dropdown-btn,
-        .form-control-modal-btn,
-        .form-control-date-btn {
-            width: @form-control-height - 10px - 3px;
-            height: @form-control-height - 10px - 3px;
-            line-height: @form-control-height - 10px;
-            color: @viceText-FontColor * 0.7;
-            font-size: ceil( ( @forms-FontSize * 1.14 ) );
+            *height: ( @form-control-height - 10px ) - 3px;
+            *width: 130px;
         }
 
         .form-control-dropdown-menu {
-            top: @form-control-height - 10px;
-            max-height: ( @form-control-height - 10px ) * 5 + 2px;
+            *width: 175px;
+        }
 
-            > li {
-                height: @form-control-height - 10px;
-                line-height: @form-control-height - 10px;
-                padding: 0 10px;
+        &.active {
+
+            .form-control-dropdown-value,
+            .form-control-modal-value,
+            .form-control-date-value {
+                *width: 128px;
+            }
+
+            .form-control-dropdown-value,
+            .form-control-date-value {
+                *height: ( @form-control-height - 10px ) - 4px;
+                *line-height: ( @form-control-height - 10px ) - 4px;
             }
         }
     }
@@ -143,29 +192,6 @@ input.form-control {
             *height: ( @form-control-height - 4px );
             *line-height: ( @form-control-height - 4px );
         }
-
-        .form-control-dropdown-menu {
-            display: block;
-        }
-
-        .form-control-dropdown-btn,
-        .form-control-date-btn {
-            color: #fff;
-            background-color: @form-focus-BorderColor;
-        }
-    }
-
-    &:active {
-
-        .form-control-modal-value {
-            border-color: @form-focus-BorderColor;
-            border-width: 2px;
-        }
-
-        .form-control-modal-btn {
-            color: #fff;
-            background-color: @form-focus-BorderColor;
-        }
     }
 
     &.with-keyin {
@@ -182,7 +208,7 @@ input.form-control {
         &.active {
 
             .form-control {
-                *padding: 0 ( @form-control-height - 3px ) + 14px 0 14px;                
+                *padding: 0 ( @form-control-height - 3px ) + 14px 0 14px;
             }
 
             input.form-control {
@@ -209,32 +235,11 @@ input.form-control {
 
 .form-control-dropdown-menu {
     *width: 306px;
-
-    > li {
-        height: @form-control-height;
-        line-height: @form-control-height;
-        background-color: @bgColor-default;
-        .text-hide();
-        padding: 0 15px;
-        position: relative;
-    }
 }
 
 .form-control-dropdown-btn,
 .form-control-modal-btn,
 .form-control-date-btn {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    width: @form-control-height - 3px;
-    height: @form-control-height - 3px;
-    line-height: @form-control-height;
-    text-align: center;
-    color: @viceText-FontColor * 0.7;
-    font-size: ceil( ( @forms-FontSize * 1.14 ) );
-    background-color: @form-default-BorderColor / 0.97;
-    overflow: hidden;
-    z-index: 1;
 
     > i {        
         *position: absolute;
@@ -272,10 +277,39 @@ input.form-control {
     }
 
 .form-control-verify {
-    position: relative;
-    padding-right: @form-control-verify-btn-width;
 
     > .form-control {
         *width: 160px;
+    }
+}
+
+.form-control-check {
+
+    > label {
+        *padding-left: 25px;
+
+        &.agreement-check {
+            *padding-left: 25px;
+        }
+
+        > input[type="checkbox"], input[type="radio"] {
+            *margin-top: -10px;
+        }
+    }
+}
+
+.form-control-verify-btn {
+    *top: 1px;
+    *line-height: @form-control-height - 2px;
+    *border: 1px solid @secondary-BtnColor * 0.8;
+
+    &:hover,
+    &:active,
+    &.current {
+        *border-color: @secondary-BtnColor;
+    }
+
+    &.disabled {
+        *border-color: @disabled-BtnColor * 0.9;
     }
 }
