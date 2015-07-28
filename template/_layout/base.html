@@ -15,8 +15,12 @@
         {% block globalCss %}{% endblock %}
         {% block css %}{% endblock %}
         
-        <!--[if lt IE 9]>
-		    <link rel="stylesheet" type="text/css" href="../src/css/ie-876.css?v={{ version }}">
+        <!--[if IE 8]>
+		    <link rel="stylesheet" type="text/css" href="../src/css/ie-8.css?v={{ version }}">
+        <![endif]-->
+
+        <!--[if lt IE 8]>
+		    <link rel="stylesheet" type="text/css" href="../src/css/ie-76.css?v={{ version }}">
         <![endif]-->
         
         <!-- 字体图标兼容 IE 76 样式 （因为 fonticon 的兼容样式在 less 编译中出错，所以直接用 css，不编译）-->   

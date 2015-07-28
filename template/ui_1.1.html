@@ -1581,9 +1581,12 @@
                             <span class="section-tip">表单样式中，有专门的变量&nbsp;@form-control-label-width&nbsp;控制表单标题的宽度，@form-control-height&nbsp;控制表单的高度，@forms-FontSize&nbsp;控制表单的字体尺寸</span>
                             <p class="description">
                                 模拟<code>&lt;select&gt;</code>表单由块化标签组成，并且组件结构不可变更，详情请参考代码演示
+                                <br />
+                                <br />
+                                <span class="warning-FontColor">注意 IE7 及以下版本IE浏览器的兼容，这里的解决方法是分别给出现在页面的模拟下拉和日期下拉的<code>.form-group</code>层元素添加内联的<code>z-index</code>，先出现的结构层级最大，依次累减</span>
                             </p>
                             <form>
-                                <div class="form-group">
+                                <div class="form-group" style="*z-index: 1;">
                                     <label class="form-control-label">                                           
                                         <b>
                                             *
@@ -1600,7 +1603,48 @@
                                             <span class="form-control-dropdown-btn">
                                                 <i></i>
                                             </span>
-                                            <div class="form-control-dropdown-value">请选择一个选项</div>
+                                            <div class="form-control-dropdown-value" title="请选择一个选项">请选择一个选项</div>
+                                            <ul class="form-control-dropdown-menu">
+                                                <li title="option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                                                    option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                </li>
+                                                <li title="option one">
+                                                    option one
+                                                </li>
+                                                <li title="option two">
+                                                    option two
+                                                </li>
+                                                <li title="option three">
+                                                    option three
+                                                </li>
+                                                <li title="option four">
+                                                    option four
+                                                </li>
+                                                <li title="option five">
+                                                    option five
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="*z-index: 0;">
+                                    <label class="form-control-label">                                           
+                                        <b>
+                                            *
+                                        </b>
+                                        <span>
+                                            dropdown
+                                        </span>
+                                        <em>
+                                            ：
+                                        </em>
+                                    </label>
+                                    <div class="form-control-wrap">
+                                        <div class="form-control-dropdown">
+                                            <span class="form-control-dropdown-btn">
+                                                <i></i>
+                                            </span>
+                                            <div class="form-control-dropdown-value" title="请选择一个选项">请选择一个选项</div>
                                             <ul class="form-control-dropdown-menu">
                                                 <li title="option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
                                                     option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -1625,7 +1669,6 @@
                                     </div>
                                 </div>
                             </form>
-
                             <p class="description">
                                 带表单内容自动匹配功能(可输入，可下拉)
                             </p>
@@ -1672,7 +1715,6 @@
                                     </div>
                                 </div>
                             </form>
-
                             <p class="description">
                                 用于银行选择
                             </p>
@@ -2735,7 +2777,7 @@
                                             </ul>
                                         </div>
                                         <div class="form-notice">
-                                            <i class="icon-check_circle"></i>
+                                            <i></i>
                                             表单填写正确
                                         </div>
                                     </div>
@@ -2768,7 +2810,7 @@
                                             </ul>
                                         </div>
                                         <div class="form-notice">
-                                            <i class="icon-cancel"></i>
+                                            <i></i>
                                             表单填写错误
                                         </div>
                                     </div>
@@ -2801,7 +2843,7 @@
                                             </ul>
                                         </div>
                                         <div class="form-notice">
-                                            <i class="icon-cancel"></i>
+                                            <i></i>
                                             表单附加信息
                                         </div>
                                     </div>
@@ -3091,7 +3133,7 @@
                             </p>
                             <form>
 
-                                <div class="form-control-date smallsize">
+                                <div class="form-control-date smallsize active">
                                     <span class="form-control-date-btn">
                                         <i></i>
                                     </span>
@@ -3121,7 +3163,7 @@
                             </p>
                             <form>
 
-                                <div class="form-control-dropdown smallsize">
+                                <div class="form-control-dropdown smallsize active">
                                     <span class="form-control-dropdown-btn">
                                         <i></i>
                                     </span>
@@ -3129,8 +3171,23 @@
                                         请选择一个选项
                                     </div>
                                     <ul class="form-control-dropdown-menu">
-                                        <li title="option">
-                                            option
+                                        <li title="option one">
+                                            option one
+                                        </li>
+                                        <li title="option two">
+                                            option two
+                                        </li>
+                                        <li title="option three">
+                                            option three
+                                        </li>
+                                        <li title="option four">
+                                            option four
+                                        </li>
+                                        <li title="option five">
+                                            option five
+                                        </li>
+                                        <li title="option six">
+                                            option six
                                         </li>
                                     </ul>
                                 </div>

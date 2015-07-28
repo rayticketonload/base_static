@@ -539,6 +539,7 @@ h6,.h6 {
 .form-group {
     padding-left: @form-control-label-width + 10px;
     position: relative;
+    .clearfix();
 
     .form-control-label {
         position: absolute;
@@ -729,6 +730,7 @@ h6,.h6 {
         left: 0;
         font-size: @larger-FontSize;
         .form-notice-icon-font-family(); //报错了，但起效
+        .inline-block() ;
     }
 }
 
@@ -756,6 +758,7 @@ h6,.h6 {
     font-size: @forms-FontSize;
     color: @formValue-FontColor;
     background-color: @bgColor-default;
+    .text-hide();
 
     &:focus,
     &.focus {

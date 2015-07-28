@@ -1,0 +1,364 @@
+@import "_normalize";       //项目引用样式初始化
+@import "_config";          //项目样式设定项
+@import "_mix";             //项目样式工具
+@import "_font";            //项目字体
+@import "_fonticon";        //项目字体图标
+@import "_sprite";          //项目雪碧图
+@import "_animate.less";    //项目引用CSS3动画库
+@import "_animation.less";    //交互CSS3动画
+
+/*
+--- share ---
+*/
+
+h1,h2,h3,h4,h5,h6,p {
+    font-weight: 500;
+    margin: 0;
+}
+
+/*
+--- UI ---
+*/
+
+.uiShow-body {
+    *width: auto;
+}
+
+//按钮类
+.btn {
+    *line-height: @base-BtnHeight - 8px;
+
+    &.primary {
+        *border-top: 1px solid @primary-BtnColor;
+        *border-left: 1px solid @primary-BtnColor;
+        *border-right: 1px solid @primary-BtnColor;
+    }
+
+    &.secondary {
+        *border-top: 1px solid @secondary-BtnColor;
+        *border-left: 1px solid @secondary-BtnColor;
+        *border-right: 1px solid @secondary-BtnColor;
+    }
+
+    &.thirdly {
+        *border-top: 1px solid @thirdly-BtnColor;
+        *border-left: 1px solid @thirdly-BtnColor;
+        *border-right: 1px solid @thirdly-BtnColor;
+
+        &:hover,
+        &:active,
+        &.current {
+            *border-color: @thirdly-BtnColor * 0.8;        
+        }
+    }
+
+    &.disabled {
+        *border-top: 1px solid @disabled-BtnColor;
+        *border-left: 1px solid @disabled-BtnColor;
+        *border-right: 1px solid @disabled-BtnColor;
+    }
+}
+
+.small-btn {
+    *line-height: @smallsize-BtnHeight - 2px;
+}
+
+a.btn {
+    *height: @base-BtnHeight - 3px;
+    *line-height: @base-BtnHeight - 3px;
+
+    &.small-btn {
+        *height: @smallsize-BtnHeight - 2px;
+        *line-height: @smallsize-BtnHeight + 2px;
+    }
+}
+
+//表单类
+.form-frame {
+
+    .form-layer1 {
+        *width: 340px;
+    }
+}
+
+.form-group {
+
+    .form-control-wrap {
+        *float: left;
+    }
+
+    &.has-correct,
+    &.has-error {
+
+        .form-control {
+            *padding: 0 14px;
+
+            &.smallsize {
+                *width: 147px;
+            }
+        }
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            *width: 239px;
+            *height: @form-control-height - 4px;
+            *line-height: @form-control-height - 4px;
+        }
+
+        .form-control-dropdown,
+        .form-control-modal,
+        .form-control-date {
+
+            &.smallsize { // @form-control-height 减10像素
+
+                .form-control-dropdown-value,
+                .form-control-modal-value,
+                .form-control-date-value {
+                    *line-height: @form-control-height - 10px - 3px;
+                    *width: 128px;
+                }
+            }
+        }
+    }
+
+    &.has-correct {
+
+        .form-notice {
+
+            > i {
+                .icon-check_circle();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+
+    &.has-error {
+
+        .form-notice {
+
+            > i {
+                .icon-cancel();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+
+    &.has-info {
+
+        .form-notice {
+
+            > i {
+                .icon-info();
+
+                &:before {
+                    *content: "";
+                }
+            }
+        }
+    }
+}
+
+.form-notice {
+    *position: static;
+    *padding: 11px 0 0 0;
+
+    > i {
+        *vertical-align: middle;
+        *position: static;
+        *margin-right: 8px;
+    }
+}
+
+input.form-control {
+    *margin-top: -1px;
+}
+
+.form-control {
+    *width: 278px;
+    *padding: 0 15px;
+    *height: ( @form-control-height - 3px );
+    *line-height: ( @form-control-height - 3px );
+
+    &.smallsize {
+        *width: 157px;
+        *padding: 0 10px;
+        *height: ( @form-control-height - 13px );
+        *line-height: ( @form-control-height - 13px );
+    }
+}
+
+.form-control-dropdown,
+.form-control-modal,
+.form-control-date {
+    *zoom: 1;
+    *display: inline;
+
+    &.smallsize { // @form-control-height 减10像素
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            *height: ( @form-control-height - 10px ) - 3px;
+            *width: 130px;
+        }
+
+        .form-control-dropdown-menu {
+            *width: 175px;
+        }
+
+        &.active {
+
+            .form-control-dropdown-value,
+            .form-control-modal-value,
+            .form-control-date-value {
+                *width: 128px;
+            }
+
+            .form-control-dropdown-value,
+            .form-control-date-value {
+                *height: ( @form-control-height - 10px ) - 4px;
+                *line-height: ( @form-control-height - 10px ) - 4px;
+            }
+        }
+    }
+
+    &.active {
+
+        .form-control-dropdown-value,
+        .form-control-modal-value,
+        .form-control-date-value {
+            *width: 239px;
+        }
+
+        .form-control-dropdown-value,
+        .form-control-date-value {
+            *height: ( @form-control-height - 4px );
+            *line-height: ( @form-control-height - 4px );
+        }
+    }
+
+    &.with-keyin {
+
+        .form-control {
+            *padding: 0 ( @form-control-height - 3px ) + 15px 0 15px;
+            *width: 278px - ( @form-control-height - 3px );
+        }
+
+        .form-control-dropdown-btn {
+            *top: 2px;
+        }
+
+        &.active {
+
+            .form-control {
+                *padding: 0 ( @form-control-height - 3px ) + 14px 0 14px;
+            }
+
+            input.form-control {
+                *margin-top: -2px;
+            }
+
+            .form-control-dropdown-btn {
+                *top: 3px;
+            }
+
+            .form-control-dropdown-menu {
+                *top: 42px;
+            }
+        }
+    }
+}
+
+.form-control-dropdown-value,
+.form-control-modal-value,
+.form-control-date-value {
+    *height: @form-control-height - 3px;
+    *width: 241px;
+}
+
+.form-control-dropdown-menu {
+    *width: 306px;
+}
+
+.form-control-dropdown-btn,
+.form-control-modal-btn,
+.form-control-date-btn {
+
+    > i {        
+        *position: absolute;
+        *top: 50%;
+        *left: 50%;
+        *display: block;       
+    }
+}
+
+    .form-control-dropdown-btn > i {
+        .icon-chevron-thin-down();
+        *margin-top: -10px;
+        *margin-left: -10px;
+    }
+    .form-control-dropdown-btn > i:before {
+        *content: "";
+    }
+
+    .form-control-modal-btn > i {
+        .icon-browser();
+        *margin-top: -8px;
+        *margin-left: -8px;
+    }
+    .form-control-modal-btn > i:before {
+        *content: "";
+    }
+
+    .form-control-date-btn > i {
+        .icon-calendar();
+        *margin-top: -8px;
+        *margin-left: -8px;
+    }
+    .form-control-date-btn > i:before {
+        *content: "";
+    }
+
+.form-control-verify {
+
+    > .form-control {
+        *width: 160px;
+    }
+}
+
+.form-control-check {
+
+    > label {
+        *padding-left: 25px;
+
+        &.agreement-check {
+            *padding-left: 25px;
+        }
+
+        > input[type="checkbox"], input[type="radio"] {
+            *margin-top: -10px;
+        }
+    }
+}
+
+.form-control-verify-btn {
+    *top: 1px;
+    *line-height: @form-control-height - 2px;
+    *border: 1px solid @secondary-BtnColor * 0.8;
+
+    &:hover,
+    &:active,
+    &.current {
+        *border-color: @secondary-BtnColor;
+    }
+
+    &.disabled {
+        *border-color: @disabled-BtnColor * 0.9;
+    }
+}
