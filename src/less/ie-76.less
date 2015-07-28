@@ -24,6 +24,55 @@ h1,h2,h3,h4,h5,h6,p {
     *width: auto;
 }
 
+//按钮类
+.btn {
+    *line-height: @base-BtnHeight - 8px;
+
+    &.primary {
+        *border-top: 1px solid @primary-BtnColor;
+        *border-left: 1px solid @primary-BtnColor;
+        *border-right: 1px solid @primary-BtnColor;
+    }
+
+    &.secondary {
+        *border-top: 1px solid @secondary-BtnColor;
+        *border-left: 1px solid @secondary-BtnColor;
+        *border-right: 1px solid @secondary-BtnColor;
+    }
+
+    &.thirdly {
+        *border-top: 1px solid @thirdly-BtnColor;
+        *border-left: 1px solid @thirdly-BtnColor;
+        *border-right: 1px solid @thirdly-BtnColor;
+
+        &:hover,
+        &:active,
+        &.current {
+            *border-color: @thirdly-BtnColor * 0.8;        
+        }
+    }
+
+    &.disabled {
+        *border-top: 1px solid @disabled-BtnColor;
+        *border-left: 1px solid @disabled-BtnColor;
+        *border-right: 1px solid @disabled-BtnColor;
+    }
+}
+
+.small-btn {
+    *line-height: @smallsize-BtnHeight - 2px;
+}
+
+a.btn {
+    *height: @base-BtnHeight - 3px;
+    *line-height: @base-BtnHeight - 3px;
+
+    &.small-btn {
+        *height: @smallsize-BtnHeight - 2px;
+        *line-height: @smallsize-BtnHeight + 2px;
+    }
+}
+
 //表单类
 .form-frame {
 
