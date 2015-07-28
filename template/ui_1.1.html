@@ -911,7 +911,7 @@
                                         <tr>
                                             <th>
                                                 <label class="table-checked-all">
-                                                    <input type="checkbox"/>
+                                                    <input type="checkbox" data-toggle="checkAll" data-target="#j-checkall-demo :checkbox" />
                                                     全选
                                                 </label>
                                             </th>
@@ -938,7 +938,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="j-checkall-demo">
                                         <tr>
                                             <td class="text-align-left">
                                                 <input type="checkbox"/>
@@ -2102,7 +2102,7 @@
                                         </em>
                                     </label>
                                     <div class="form-control-wrap">
-                                        <div class="form-control-modal">
+                                        <div class="form-control-modal" data-toggle="modal" data-target="#myModal">
                                             <span class="form-control-modal-btn">
                                                 <i></i>
                                             </span>
@@ -2169,7 +2169,7 @@
                                         </em>
                                     </label>
                                     <div class="form-control-wrap">
-                                        <div class="form-control-date">
+                                        <div class="form-control-date" data-provide="datetimepicker">
                                             <span class="form-control-date-btn">
                                                 <i></i>
                                             </span>
@@ -4697,7 +4697,7 @@
                                 notice it
                             </p>
                             <div class="ebank-wrap">
-                                <ul class="ebanks">
+                                <ul class="ebanks" data-toggle="switcher">
                                     <li class="active" title="招商银行">
                                         <label class="ebank-label">
                                             <i></i>
@@ -5059,7 +5059,7 @@
                             </p>
                             <div class="put-modal-in-it">
 
-                                <div class="modal-background">
+                                <div class="modal-background" role="dialog">
                                     <div class="modal-layer">
                                         <div class="modal-position">
                                             <div class="modal-wrap">
@@ -5088,7 +5088,7 @@
                                 模态窗口测试
                             </p>
                             <div class="text-align-left">
-                                <button type="button" class="btn primary">modal test</button>
+                                <button type="button" data-toggle="modal" data-target="#myModal" class="btn primary">modal test</button>
                             </div>
                         </div>
                         <div class="ui-code">
@@ -5121,6 +5121,31 @@
 
         </div>
 
+        <!-- 模拟弹框 -->
+        <div class="modal-background fade display-none" id="myModal" role="dialog">
+            <div class="modal-layer">
+                <div class="modal-position">
+                    <div class="modal-wrap">
+                        <div class="modal-head">
+                            modal
+                            <button class="modal-close">
+                                <i></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-align-center margin-top-40px">
+                                <div class="btn-with-viceLink text-align-center plural-btns">
+                                    <button type="button" class="btn primary">primary</button>
+                                    <button type="button" class="btn secondary">secondary</button>
+                                    <a href="###" class="btn-vicelink">btn-vicelink</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 {% endblock %}
 
 {% block js %}{% endblock %}
@@ -5146,7 +5171,11 @@
         <script src="../src/js/ui/tab.js"></script>
         <script src="../src/js/ui/alert.js"></script>
         <script src="../src/js/ui/dropdown.js"></script>
+        <script src="../src/js/ui/pagination.js"></script>
         <script src="../src/js/ui/modal.js"></script>
+        <script src="../src/js/ui/checkAll.js"></script>
+        <script src="../src/js/ui/switcher.js"></script>
+        <!--<script src="../src/js/ui/datetimepicker.js"></script>-->
         <!-- endbuild -->
 
         <script>
@@ -5160,6 +5189,40 @@
                     // 警告框架关闭
                     $('.alert').on('closed.ui.alert', function(e, obj){
                         console.log('alert-closed')
+                    })
+
+                    // 分页
+                    /*$('.pagination').pagination({ onSelectPage: function(index, instance){
+                        console.log(index)
+                    }});*/
+
+                    $('.pagination').on('ui.select.pagination', function(e, index, instance){
+                        //console.log(index)
+                    })
+
+                    $('.pagination').eq(0).pagination('selectPage', 8);
+
+                    // 弹框
+                    $('#myModal').on('shown.ui.modal', function(){
+                        console.log('#myModal shown')
+                    })
+
+                   $('#myModal').on('hide.ui.modal', function(){
+                        console.log('#myModal hide')
+                    });
+
+                    // 自定义弹框
+                    /*$('#testModal').modal({title: '提示', content: 'aaaa'});
+                    $('#testModal').modal('setContent', 'abc');*/
+
+                    // 全选
+                    $('[data-toggle="checkAll"]').on('checked.ui.checkAll', function(e){
+                        console.log(e.relatedTarget)
+                    })
+
+                    // 切换非tab
+                    $('[data-toggle="switcher"]').on('select.ui.switcher', function(e){
+                        console.log(e.relatedTarget)
                     })
                 })
             })(jQuery)

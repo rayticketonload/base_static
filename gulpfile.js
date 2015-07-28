@@ -103,7 +103,7 @@ var filePaths = {
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
-	js: [staticPath+'/js/**/**.js'],
+	js: [staticPath+'/js/**/**'],
 	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html']
 };
 
@@ -258,7 +258,7 @@ gulp.task('replace', function(){
 gulp.task('watch', function(){
 	gulp.watch(filePaths.iconfont, ['iconfont']);
 	gulp.watch(filePaths.images, ['images']);
-	gulp.watch(filePaths.less, ['less']);
+	gulp.watch(filePaths.less[0], ['less']);
 	gulp.watch(filePaths.js, ['js']);
     gulp.watch(filePaths.html, ['template']);
     gulp.watch(filePaths.sprite, ['sprite']);

@@ -78,7 +78,7 @@
             return $this.trigger('click');
         }
 
-        var $items = $target.find(list);
+        var $items = $target.find(list).filter(':visible');
 
         if(!$items.length) return;
 
