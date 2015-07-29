@@ -1528,16 +1528,17 @@ h6,.h6 {
         position: absolute;
         top: 7px;
         right: 10px;
-        .clearfix();
 
         .tab-search-control-width {
             width: 232px;
-            float: left;
+            position: relative;
+            .inline-block();
+            vertical-align: top;
         }
 
         > .btn {
-            float: left;
             margin-left: 10px;
+             vertical-align: top;
         }
     }
 
@@ -1867,7 +1868,7 @@ h6,.h6 {
         padding: 15px 50px;
 
         > em {
-            .inline-block;
+            .inline-block();
 
             &:hover {
                 .animation-s( close-btn,0.4s,linear,0,1,normal,running,forwards );
@@ -2323,6 +2324,7 @@ h6,.h6 {
         width: 140px;
         float: left;
         margin-left: 10px;
+        position: relative;
     }
 
     .fliter-inline-bar {

@@ -417,3 +417,149 @@ input.form-control {
         }
     }
 }
+
+//标签页
+.tabs-wrap {
+
+    .tab-search-wrap {
+        *width: 254px;
+
+        .tab-search-control-width {
+            *width: auto;
+        }
+    }
+
+    &.type2 {
+
+        .tabs {
+
+            > li {
+                *display: inline;
+                *zoom: 1;
+            }
+        }
+    }
+}
+
+//业务流程提示
+.notice-wrap {
+
+    &.in-modal {
+
+        .notice-box {
+
+            > .notice-img {
+                *background: url("@{images-url}success_62x62.png") no-repeat;
+            }
+        }
+    }
+}
+
+//步骤
+.steps-box {
+    *height: 85px;
+    *margin-top: 0;
+}
+
+.step {
+    *top: 0;
+    .icon-step_normal();
+    *background-color: transparent;
+}
+
+.step-bars {
+    *margin: 21px 20px 0 21px;
+
+    > div {
+        *width: 24.99%;
+    }
+}
+
+.step-title {
+    *top: 65px;
+}
+
+.steps-wrap {
+
+    &.pass1 {
+
+        .step {
+
+            &.step1 {
+                .icon-step_active();
+                *background-color: transparent;
+            }
+        }
+    }
+
+    &.pass2 {
+
+        .step {
+
+            &.step1,
+            &.step2 {
+                *background-color: transparent;
+                .icon-step_active();
+            }
+        }
+    }
+
+    &.pass3 {
+
+        .step {
+            .icon-step_active();
+            *background-color: transparent;
+        }
+    }
+}
+
+//数据统计部件
+.date-count-ul {
+
+    > li {
+        *width: 30%;
+
+        &.last-li {
+            *border-right: none;
+        }
+    }
+}
+
+//警示
+.alert {
+
+    > em {
+        .icon-clear();
+
+        &:before {
+            *content: "";
+        }
+    }
+
+    &.alert-warning {
+
+        > i {
+            .icon-error();
+
+            &:before {
+                *content: "";
+            }
+        }
+    }
+}
+
+//主导航
+.main-nav {
+
+    > li {
+        *width: 24.99%;
+    }
+}
+
+//过滤器行内结构
+.fliter-inline-wrap {
+
+    .fliter-inline-width1 {
+        *width: auto;
+    }
+}
