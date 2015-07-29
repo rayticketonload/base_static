@@ -362,3 +362,58 @@ input.form-control {
         *border-color: @disabled-BtnColor * 0.9;
     }
 }
+
+//表格类
+.tables-title {
+
+    > .table-title-btns {
+
+        > a {
+            *line-height: @smallest-FontSize + 2px;
+        }
+    }
+}
+
+.table {
+
+    .table-checked-all {
+        *padding-left: 25px;
+
+        > input[type="checkbox"] {
+            *top: -2px;
+        }
+    }
+}
+
+//模态窗口
+.modal-layer {
+    *position: absolute;
+    *top: 50%;
+    *height: auto;
+    *display: block;
+}
+
+.modal-position {
+    *position: relative;
+    *top: -50%;
+    *display: block;
+}
+
+.modal-head {
+    *position: relative;
+
+    > .modal-close {
+        *position: absolute;
+        *right: 0;
+        *top: 0;
+        *font-size: 0;
+
+        > i {
+            .icon-clear();
+
+            &:before {
+                *content: "";
+            }
+        }
+    }
+}
