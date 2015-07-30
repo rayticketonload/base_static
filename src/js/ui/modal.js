@@ -48,7 +48,7 @@
     Modal.VERSION = '1.0.0';
 
     // 动画过渡时间
-    Modal.TRANSITION_DURATION = 300;
+    Modal.TRANSITION_DURATION = 150;
     //Modal.BACKDROP_TRANSITION_DURATION = 150;
 
     Modal.DEFAULTS = {
@@ -110,7 +110,7 @@
         this.isShown = true;
         this.checkScrollbar();
         this.setScrollbar();
-        this.$container.addClass('modal-open');
+        this.$body.addClass('modal-open');
 
         this.escape();
         this.resize();
@@ -128,17 +128,22 @@
         }
 
         //alert('aaaa')
-        that.$el.addClass('in').attr('aria-hidden', false);
+        //that.$el.addClass('in').attr('aria-hidden', false);
 
         that.enforceFocus();
 
         var e = $.Event('shown.ui.modal', {relatedTarget: _relatedTarget});
 
-        transition ?
+        if(transition) {
+            that.$el.addClass('in').attr('aria-hidden', false);
             that.$dialog.one('uiTransitionEnd', function(){
                 that.$el.trigger('focus').trigger(e)
             }).emulateTransitionEnd(Modal.TRANSITION_DURATION)
-            : that.$el.trigger('focus').trigger(e);
+        } else{
+            that.$el.hide().addClass('in').attr('aria-hidden', false).fadeIn(Modal.TRANSITION_DURATION, function(){
+                $(this).trigger('focus').trigger(e);
+            }).attr('aria-hidden', false);
+        }
     };
 
     // 隐藏
@@ -191,7 +196,7 @@
     Modal.prototype.hideModal = function() {
         var that = this;
         that.$el.hide();
-        that.$container.removeClass('modal-open');
+        that.$body.removeClass('modal-open');
         that.resetAdjustments();
         that.resetScrollbar();
         that.$el.trigger('hidden.ui.modal');
@@ -203,6 +208,7 @@
         this.adjustDialog();
     };
     Modal.prototype.adjustDialog = function(){
+        return;
         var modalIsOverflowing = this.$el[0].scrollHeight > document.documentElement.clientHeight;
 
         this.$el.css({
@@ -272,7 +278,7 @@
         if(!$(this).length && option && /^#(\w*)/gi.test($(this).selector)) { // js创建
             var data, fnName; //option = typeof option === 'string' ? {title: '\u6807\u9898', content: ''} : option;  //, uid = Math.random().toString(36).substring(2);
             //option.id = 'modal-'+uid;
-            if(typeof option) {
+            if(typeof option === 'string') {
                 fnName = option;
                 option = {title: '\u6807\u9898', content: ''};
             }
@@ -282,11 +288,13 @@
             var options = $.extend({}, Modal.DEFAULTS, typeof option== 'object' && option);
             $this.data('ui.modal', (data = new Modal($this, options)));
 
-            if(fnName) {
+            if(fnName && typeof data[fnName] === 'function') {
                 data[fnName](_relatedTarget);
             }
 
-            return data.show(_relatedTarget);
+            //return data.show(_relatedTarget);
+            data.show(_relatedTarget);
+            return $(this);
         } else { // 模板
             return $(this).each(function () {
                 var $this = $(this);
@@ -320,7 +328,7 @@
         });
 
         // 全局绑定，默认不显示
-        $('.modal-background:not(".display-none")').modal();
+        //$('.modal-background:not(".display-none")').modal();
     };
 
     $(document).ready(initModal);
