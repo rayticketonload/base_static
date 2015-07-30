@@ -22,6 +22,8 @@ body {
     .font-hei();
     //height: 100%;
     //width: 100%;
+    /*height: 100%;
+    width: 100%;*/
 }
 
 body {
@@ -1528,16 +1530,17 @@ h6,.h6 {
         position: absolute;
         top: 7px;
         right: 10px;
-        .clearfix();
 
         .tab-search-control-width {
             width: 232px;
-            float: left;
+            position: relative;
+            .inline-block();
+            vertical-align: top;
         }
 
         > .btn {
-            float: left;
             margin-left: 10px;
+             vertical-align: top;
         }
     }
 
@@ -1797,7 +1800,6 @@ h6,.h6 {
             padding-left: 88px;
 
             > .notice-img {
-                background: url("@{images-url}success.png") no-repeat;
                 .square( 62px );
                 background-size: cover;
             }
@@ -1867,7 +1869,7 @@ h6,.h6 {
         padding: 15px 50px;
 
         > em {
-            .inline-block;
+            .inline-block();
 
             &:hover {
                 .animation-s( close-btn,0.4s,linear,0,1,normal,running,forwards );
@@ -2323,6 +2325,7 @@ h6,.h6 {
         width: 140px;
         float: left;
         margin-left: 10px;
+        position: relative;
     }
 
     .fliter-inline-bar {
@@ -2388,14 +2391,11 @@ h6,.h6 {
     vertical-align: middle;
 }
 
-
 .modal-wrap {
     width: 40%;
     min-width: 650px;
     margin: 0 auto;
 }
-
-
 
 .modal-head {
     background-color: @bgColor-type1;
@@ -2542,6 +2542,7 @@ h6,.h6 {
             font-size: @smallest-FontSize;
             padding-top: 7px;
             .word-wrap();
+
         }
 
         &:hover {

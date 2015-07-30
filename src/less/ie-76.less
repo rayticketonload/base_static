@@ -251,7 +251,7 @@ input.form-control {
         }
 
         .form-control-dropdown-btn {
-            *top: 2px;
+            *top: 1px;
         }
 
         &.active {
@@ -265,11 +265,11 @@ input.form-control {
             }
 
             .form-control-dropdown-btn {
-                *top: 3px;
+                *top: 1px;
             }
 
             .form-control-dropdown-menu {
-                *top: 42px;
+                *top: 40px;
             }
         }
     }
@@ -360,5 +360,284 @@ input.form-control {
 
     &.disabled {
         *border-color: @disabled-BtnColor * 0.9;
+    }
+}
+
+//表格类
+.tables-title {
+
+    > .table-title-btns {
+
+        > a {
+            *line-height: @smallest-FontSize + 2px;
+        }
+    }
+}
+
+.table {
+
+    .table-checked-all {
+        *padding-left: 25px;
+
+        > input[type="checkbox"] {
+            *top: -2px;
+        }
+    }
+}
+
+//模态窗口
+.modal-layer {
+    *position: absolute;
+    *top: 50%;
+    *height: auto;
+    *display: block;
+}
+
+.modal-position {
+    *position: relative;
+    *top: -50%;
+    *display: block;
+}
+
+.modal-head {
+    *position: relative;
+
+    > .modal-close {
+        *position: absolute;
+        *right: 0;
+        *top: 0;
+        *font-size: 0;
+
+        > i {
+            .icon-clear();
+
+            &:before {
+                *content: "";
+            }
+        }
+    }
+}
+
+//标签页
+.tabs-wrap {
+
+    .tab-search-wrap {
+        *width: 254px;
+
+        .tab-search-control-width {
+            *width: auto;
+        }
+    }
+
+    &.type2 {
+
+        .tabs {
+
+            > li {
+                *display: inline;
+                *zoom: 1;
+            }
+        }
+    }
+}
+
+//业务流程提示
+.notice-wrap {
+
+    &.in-modal {
+
+        &.success {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}success_62x62.png") no-repeat;
+                }
+            }
+        }
+
+        &.waiting {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}waiting_62x62.gif") no-repeat;
+                }
+            }
+        }
+
+        &.info {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}info_62x62.png") no-repeat;
+                }
+            }
+        }
+
+        &.error {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}error_62x62.png") no-repeat;
+                }
+            }
+        }
+    }
+}
+
+//步骤
+.steps-box {
+    *height: 85px;
+    *margin-top: 0;
+}
+
+.step {
+    *top: 0;
+    .icon-step_normal();
+    *background-color: transparent;
+}
+
+.step-bars {
+    *margin: 21px 20px 0 21px;
+
+    > div {
+        *width: 24.99%;
+    }
+}
+
+.step-title {
+    *top: 65px;
+}
+
+.steps-wrap {
+
+    &.pass1 {
+
+        .step {
+
+            &.step1 {
+                .icon-step_active();
+                *background-color: transparent;
+            }
+        }
+    }
+
+    &.pass2 {
+
+        .step {
+
+            &.step1,
+            &.step2 {
+                *background-color: transparent;
+                .icon-step_active();
+            }
+        }
+    }
+
+    &.pass3 {
+
+        .step {
+            .icon-step_active();
+            *background-color: transparent;
+        }
+    }
+}
+
+//数据统计部件
+.date-count-ul {
+
+    > li {
+        *width: 30%;
+
+        &.last-li {
+            *border-right: none;
+        }
+    }
+}
+
+//警示
+.alert {
+
+    > em {
+        .icon-clear();
+
+        &:before {
+            *content: "";
+        }
+    }
+
+    &.alert-warning {
+
+        > i {
+            .icon-error();
+
+            &:before {
+                *content: "";
+            }
+        }
+    }
+}
+
+//主导航
+.main-nav {
+
+    > li {
+        *width: 24.99%;
+    }
+}
+
+//过滤器行内结构
+.fliter-inline-wrap {
+
+    .fliter-inline-width1 {
+        *width: auto;
+    }
+}
+
+//银行卡列表
+.bankcard-list {
+
+    .bank-card-btn {
+        *height: 22px;
+        *line-height: 24px;
+        *position: absolute;
+        *right: 20px;
+        *bottom: 3px;
+    }
+
+    .notwork-tag,
+    .waiting-tag {
+        *width: 172px;
+    }
+}
+
+//网上银行选择
+.ebanks {
+
+    .ebank-label {
+
+        > .etag {
+            *height: 43px;
+        }
+
+        &:hover {
+            *width: 178px;
+            *height: 46px;
+        }
+    }
+
+    > li.active {
+
+        .ebank-label {
+            *width: 178px;
+            *height: 46px;
+
+            > i {
+                .icon-ebank-active();
+            }
+        }
     }
 }
