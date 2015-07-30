@@ -24,9 +24,9 @@
     Placeholder.VERSION = '1.0.0';
 
     Placeholder.prototype.init = function(){
+        if(isSupport) return;
         var $this = this;
         this.$placeholder = $this.$el.data('placeholder');
-        //alert(this.$placeholder);
         if(!isSupport && !this.$placeholder) {
             var text = $this.$el.attr('placeholder');
             $this.$placeholder = $('<label />').html(text);
