@@ -826,7 +826,27 @@ h6,.h6 {
     position: relative;
     cursor: pointer;
 
+    .form-control {
+
+        &[readonly] {
+            background-color: @bgColor-default;
+            color: @formValue-FontColor;
+            cursor: pointer;
+        }
+    }
+
     &.smallsize { // @form-control-height 减10像素
+
+        .form-control {
+            padding: ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 1px ( @form-control-height - 10px - 3px ) + 10px ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 10px;
+            height: ( @form-control-height - 10px );
+
+            &:focus,
+            &.focus {
+                padding: ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 9px ( ( @form-control-height - 10px ) - ( @forms-FontSize + 4px ) ) / 2 - 2px 9px;
+            }
+        }
+
         .form-control-dropdown-value,
         .form-control-modal-value,
         .form-control-date-value {
