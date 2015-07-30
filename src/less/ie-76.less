@@ -251,7 +251,7 @@ input.form-control {
         }
 
         .form-control-dropdown-btn {
-            *top: 2px;
+            *top: 1px;
         }
 
         &.active {
@@ -265,11 +265,11 @@ input.form-control {
             }
 
             .form-control-dropdown-btn {
-                *top: 3px;
+                *top: 1px;
             }
 
             .form-control-dropdown-menu {
-                *top: 42px;
+                *top: 40px;
             }
         }
     }
@@ -446,10 +446,43 @@ input.form-control {
 
     &.in-modal {
 
-        .notice-box {
+        &.success {
 
-            > .notice-img {
-                *background: url("@{images-url}success_62x62.png") no-repeat;
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}success_62x62.png") no-repeat;
+                }
+            }
+        }
+
+        &.waiting {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}waiting_62x62.gif") no-repeat;
+                }
+            }
+        }
+
+        &.info {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}info_62x62.png") no-repeat;
+                }
+            }
+        }
+
+        &.error {
+
+            .notice-box {
+
+                > .notice-img {
+                    *background: url("@{images-url}error_62x62.png") no-repeat;
+                }
             }
         }
     }
@@ -561,5 +594,50 @@ input.form-control {
 
     .fliter-inline-width1 {
         *width: auto;
+    }
+}
+
+//银行卡列表
+.bankcard-list {
+
+    .bank-card-btn {
+        *height: 22px;
+        *line-height: 24px;
+        *position: absolute;
+        *right: 20px;
+        *bottom: 3px;
+    }
+
+    .notwork-tag,
+    .waiting-tag {
+        *width: 172px;
+    }
+}
+
+//网上银行选择
+.ebanks {
+
+    .ebank-label {
+
+        > .etag {
+            *height: 43px;
+        }
+
+        &:hover {
+            *width: 178px;
+            *height: 46px;
+        }
+    }
+
+    > li.active {
+
+        .ebank-label {
+            *width: 178px;
+            *height: 46px;
+
+            > i {
+                .icon-ebank-active();
+            }
+        }
     }
 }

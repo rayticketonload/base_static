@@ -3133,7 +3133,7 @@
                             </p>
                             <form>
 
-                                <div class="form-control-date smallsize active">
+                                <div class="form-control-date smallsize">
                                     <span class="form-control-date-btn">
                                         <i></i>
                                     </span>
@@ -4093,6 +4093,42 @@
                                     <span class="notice-img"></span>
                                     <h3>
                                         ...成功！
+                                    </h3>
+                                    <p>
+                                        账户正在验证中，预计24小时内完成验证，请耐心等待。
+                                    </p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="notice-wrap info in-modal">
+                                <div class="notice-box">
+                                    <span class="notice-img"></span>
+                                    <h3>
+                                        ...信息！
+                                    </h3>
+                                    <p>
+                                        账户正在验证中，预计24小时内完成验证，请耐心等待。
+                                    </p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="notice-wrap error in-modal">
+                                <div class="notice-box">
+                                    <span class="notice-img"></span>
+                                    <h3>
+                                        ...错误！
+                                    </h3>
+                                    <p>
+                                        账户正在验证中，预计24小时内完成验证，请耐心等待。
+                                    </p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="notice-wrap waiting in-modal">
+                                <div class="notice-box">
+                                    <span class="notice-img"></span>
+                                    <h3>
+                                        ...等待！
                                     </h3>
                                     <p>
                                         账户正在验证中，预计24小时内完成验证，请耐心等待。
@@ -5286,7 +5322,7 @@
                         console.log('#myModal shown')
                     })
 
-                   $('#myModal').on('hide.ui.modal', function(){
+                    $('#myModal').on('hide.ui.modal', function(){
                         console.log('#myModal hide')
                     });
 
