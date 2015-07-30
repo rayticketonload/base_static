@@ -4,6 +4,8 @@
 
 {% block css %}
         <link rel="stylesheet" type="text/css" href="../src/css/ui.css?v={{ version }}">
+        <!-- 日期选择器样式，独立引入 -->
+        <link rel="stylesheet" href="../src/css/datetimepicker.css?v={{ version }}"/>
 {% endblock %}
 
 {% block stylePage %}
@@ -2211,13 +2213,11 @@
                                         </em>
                                     </label>
                                     <div class="form-control-wrap">
-                                        <div class="form-control-date" data-provide="datetimepicker">
+                                        <div class="form-control-date">
                                             <span class="form-control-date-btn">
                                                 <i></i>
                                             </span>
-                                            <div class="form-control-date-value">
-                                                2015-05-17
-                                            </div>
+                                            <input class="form-control-date-value" value="2015-05-17"  data-toggle="datetimepicker">
                                         </div>
                                     </div>
                                 </div>
@@ -5146,6 +5146,7 @@
                             </p>
                             <div class="text-align-left">
                                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn primary">modal test</button>
+                                <button type="button" id="j-test-modal" class="btn secondary">自定义弹框</button>
                             </div>
                         </div>
                         <div class="ui-code">
@@ -5229,26 +5230,29 @@
         <script src="../src/js/ui/alert.js"></script>
         <script src="../src/js/ui/dropdown.js"></script>
         <script src="../src/js/ui/pagination.js"></script>
-        <script src="../src/js/ui/modal.js"></script>
         <script src="../src/js/ui/checkAll.js"></script>
         <script src="../src/js/ui/switcher.js"></script>
-        <!--<script src="../src/js/ui/datetimepicker.js"></script>-->
+        <script src="../src/js/ui/datetimepicker.js"></script>
+        <script src="../src/js/ui/modal.js"></script>
         <!-- endbuild -->
 
         <script>
             (function($) {
                 $(function(){
                     // 下拉select选择
+                    // ===============
                     $('.form-control-dropdown-value').on('selected.ui.dropdown', function(e, obj){
                         console.log('dropdown-selected')
                     });
 
                     // 警告框架关闭
+                    // =============
                     $('.alert').on('closed.ui.alert', function(e, obj){
                         console.log('alert-closed')
                     })
 
                     // 分页
+                    // =============
                     /*$('.pagination').pagination({ onSelectPage: function(index, instance){
                         console.log(index)
                     }});*/
@@ -5260,6 +5264,7 @@
                     $('.pagination').eq(0).pagination('selectPage', 8);
 
                     // 弹框
+                    // ==============
                     $('#myModal').on('shown.ui.modal', function(){
                         console.log('#myModal shown')
                     })
@@ -5269,18 +5274,35 @@
                     });
 
                     // 自定义弹框
-                    /*$('#testModal').modal({title: '提示', content: 'aaaa'});
-                    $('#testModal').modal('setContent', 'abc');*/
+                    $('#j-test-modal').on('click', function(){
+                        $('#testModal').modal({title: '提示', content: 'aaaa'});
+                        $('#testModal').modal('setContent', 'abc');
+                    })
+
 
                     // 全选
+                    // ===========
                     $('[data-toggle="checkAll"]').on('checked.ui.checkAll', function(e){
+                        console.log('全选:');
                         console.log(e.relatedTarget)
                     })
 
                     // 切换非tab
+                    // ===============
                     $('[data-toggle="switcher"]').on('select.ui.switcher', function(e){
-                        console.log(e.relatedTarget)
+                        console.log('切换非tab:');
+                        console.log(e.target)
                     })
+
+                    // 日期选择
+                    // ======
+                    $('[data-toggle="datetimepicker"]').on('choose.ui.datetimepicker', function(e, date){
+                        console.log('日期选择:');
+                        console.log($(this));
+                        console.log(date)
+                    });
+
+                    $('.form-control-date-value').datetimepicker();
                 })
             })(jQuery)
         </script>
