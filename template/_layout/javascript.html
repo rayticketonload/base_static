@@ -1,0 +1,97 @@
+{% extends "_layout/layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/output/src/css/ui.css?v={{ version }}">
+<!-- 日期选择器样式，独立引入 -->
+<link rel="stylesheet" href="/output/src/css/datetimepicker.css?v={{ version }}"/>
+{% endblock %}
+
+{% block body%}
+<Header></Header>
+<div class="uiShow-body">
+    <!-- ui导航 -->
+    <aside class="uiShow-left">
+        <nav class="ui-sidebar" id="sidebar">
+            <div class="scroll-y-hidden"></div>
+            <ul class="lv1">
+                <li>
+                    <a href="/output/html/javascript.html" class="sidebar-btn">JavaScript组件</a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/checkAll.html" class="sidebar-btn">
+                        全选
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/alert.html" class="sidebar-btn">
+                        警告框
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/dropdown.html" class="sidebar-btn">
+                        下拉框
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/placeholder.html" class="sidebar-btn">
+                        占位符
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/switcher.html" class="sidebar-btn">
+                        切换器
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/tab.html" class="sidebar-btn">
+                        TAB选项卡
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/smooth-scroll.html" class="sidebar-btn">
+                        平滑滚动
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/pagination.html" class="sidebar-btn">
+                        分页
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/modal.html" class="sidebar-btn">
+                        弹层
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="/output/html/javascript/datetimepicker.html" class="sidebar-btn">
+                        日历
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ui内容 -->
+    <div class="uiShow-right">
+        {% block mainBody%}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block jsPage %}
+<script>
+
+    //ui导航点击
+    $(function () {
+
+        var sidebar = $("#sidebar");
+
+        sidebar.find("a").click(function () {
+            $(sidebar).find("li.active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+
+</script>
+{% endblock %}
