@@ -590,6 +590,15 @@ h6,.h6 {
         min-height: @form-control-height;
         padding-bottom: 15px;
         position: relative;
+
+        > label {
+            line-height: @form-control-height;
+            position: absolute;
+            top: 0;
+            left: 16px;
+            color: @viceText-FontColor;
+            font-size: @smaller-FontSize;
+        }
     }
 
     &.has-correct,
@@ -710,6 +719,10 @@ h6,.h6 {
 
     &.has-info {
 
+        .form-control {
+            color: @formValue-FontColor;
+        }
+
         .form-notice {
             color: @info-FontColor;
 
@@ -776,7 +789,6 @@ h6,.h6 {
 
     &[readonly] {
         background-color: @bgColor-type1;
-        color: @viceText-FontColor + #222;
         cursor: default;
     }
 
@@ -830,7 +842,6 @@ h6,.h6 {
 
         &[readonly] {
             background-color: @bgColor-default;
-            color: @formValue-FontColor;
             cursor: pointer;
         }
     }
@@ -1116,6 +1127,17 @@ h6,.h6 {
     background: url("@{images-url}bank.png") no-repeat;
 }
 
+.form-control-bank-card {
+    line-height: 38px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 160px;
+    margin-top: -19px;
+    color: @formValue-FontColor;
+    font-size: @small-FontSize;
+}
+
 //招商银行
 .bank-cmb {
     background-position: 0 0px !important;
@@ -1304,17 +1326,6 @@ h6,.h6 {
 //天津银行
 .bank-tianjinbank {
     background-position: 0 -1490px !important;
-}
-
-.form-control-bank-card {
-    line-height: 38px;
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 160px;
-    margin-top: -19px;
-    color: @formValue-FontColor;
-    font-size: @small-FontSize;
 }
 
 //银行icon

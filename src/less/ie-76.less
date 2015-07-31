@@ -92,6 +92,8 @@ a.btn {
 
         .form-control {
             *padding: 0 14px;
+            *height: @form-control-height - 4px;
+            *line-height: @form-control-height - 4px;
 
             &.smallsize {
                 *width: 147px;
@@ -119,6 +121,13 @@ a.btn {
                     *width: 128px;
                 }
             }
+
+            &.active {
+
+                .form-control {
+                    *color: @formValue-FontColor;
+                }
+            }
         }
     }
 
@@ -134,10 +143,6 @@ a.btn {
                 }
             }
         }
-
-        .form-control {
-            *color: @success-FontColor1;
-        }
     }
 
     &.has-error {
@@ -151,10 +156,6 @@ a.btn {
                     *content: "";
                 }
             }
-        }
-
-        .form-control {
-            *color: @error-FontColor2;
         }
     }
 
@@ -228,7 +229,10 @@ input.form-control {
 
         &.active {
 
-            .form-control,
+            .form-control {
+                *width: 147px;
+            }
+
             .form-control-dropdown-value,
             .form-control-modal-value,
             .form-control-date-value {
