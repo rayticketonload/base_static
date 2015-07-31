@@ -134,6 +134,10 @@ a.btn {
                 }
             }
         }
+
+        .form-control {
+            *color: @success-FontColor1;
+        }
     }
 
     &.has-error {
@@ -147,6 +151,10 @@ a.btn {
                     *content: "";
                 }
             }
+        }
+
+        .form-control {
+            *color: @error-FontColor2;
         }
     }
 
@@ -189,8 +197,8 @@ input.form-control {
     &.smallsize {
         *width: 157px;
         *padding: 0 10px;
-        *height: ( @form-control-height - 13px );
-        *line-height: ( @form-control-height - 13px );
+        *height: ( @form-control-height - 10px ) - 3px;
+        *line-height: ( @form-control-height - 10px ) - 3px;
     }
 }
 
@@ -201,11 +209,17 @@ input.form-control {
     *display: inline;
 
     &.smallsize { // @form-control-height ¼õ10ÏñËØ
+        .form-control,
         .form-control-dropdown-value,
         .form-control-modal-value,
         .form-control-date-value {
             *height: ( @form-control-height - 10px ) - 3px;
             *width: 130px;
+        }
+
+        .form-control {
+            *padding: 0 ( ( @form-control-height - 10px ) - 3px ) + 10px 0 10px;
+            *line-height: ( @form-control-height - 10px ) - 3px;
         }
 
         .form-control-dropdown-menu {
@@ -214,12 +228,14 @@ input.form-control {
 
         &.active {
 
+            .form-control,
             .form-control-dropdown-value,
             .form-control-modal-value,
             .form-control-date-value {
                 *width: 128px;
             }
 
+            .form-control,
             .form-control-dropdown-value,
             .form-control-date-value {
                 *height: ( @form-control-height - 10px ) - 4px;
@@ -236,10 +252,15 @@ input.form-control {
             *width: 239px;
         }
 
+        .form-control,
         .form-control-dropdown-value,
         .form-control-date-value {
             *height: ( @form-control-height - 4px );
             *line-height: ( @form-control-height - 4px );
+        }
+
+        .form-control {
+            *padding: 0 14px;
         }
     }
 
