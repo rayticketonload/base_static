@@ -1692,7 +1692,7 @@
                                             <span class="form-control-dropdown-btn">
                                                 <i></i>
                                             </span>
-                                            <input type="text" data-toggle="dropdown" class="form-control" id="form-control-example8" placeholder="请出入文字" value=""/>
+                                            <input type="text" data-toggle="dropdown" class="form-control" id="form-control-example8" placeholder="请输入文字" value=""/>
                                             <ul class="form-control-dropdown-menu">
                                                 <li title="option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
                                                     option xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -3134,7 +3134,9 @@
                             </p>
                             <form>
 
-                                <input type="text" class="form-control smallsize" placeholder="表单提示语"/>
+                                <div class="form-control-wrap smallsize">
+                                    <input type="text" class="form-control smallsize" placeholder="表单提示语"/>
+                                </div>
 
                             </form>
                             <p class="description">
@@ -3146,9 +3148,6 @@
                                     <span class="form-control-date-btn">
                                         <i></i>
                                     </span>
-                                    <!--<div class="form-control-date-value">
-                                        2015-05-17
-                                    </div>-->
                                     <input class="form-control" type="text" value="2015-05-17" data-toggle="datetimepicker" readonly="readonly"/>
                                 </div>
 
@@ -3203,43 +3202,73 @@
                                 </div>
 
                             </form>
+                            <p class="description">
+                                <code>.form-control-dropdown.with-keyin</code>
+                            </p>
+                            <form>
+
+                                <div class="form-control-dropdown with-keyin smallsize">
+                                    <span class="form-control-dropdown-btn">
+                                        <i></i>
+                                    </span>
+                                    <input type="text" data-toggle="dropdown" class="form-control" placeholder="请输入文字" value=""/>
+                                    <ul class="form-control-dropdown-menu">
+                                        <li title="option one">
+                                            option one
+                                        </li>
+                                        <li title="option two">
+                                            option two
+                                        </li>
+                                        <li title="option three">
+                                            option three
+                                        </li>
+                                        <li title="option four">
+                                            option four
+                                        </li>
+                                        <li title="option five">
+                                            option five
+                                        </li>
+                                        <li title="option six">
+                                            option six
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </form>
                         </div>
                         <div class="ui-code">
                             <pre>
                                 <code>
                                     <strong class="info-FontColor">.form-control</strong>
-                                    <br />
-                                    &lt;input type="***" class="form-control <span>smallsize</span>" /&gt;
+                                    <br />&lt;div class="form-control-wrap <span>smallsize</span>"&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;input type="***" class="form-control <span>smallsize</span>"/&gt;
+                                    <br />&lt;/div&gt;
 
                                     <br />
                                     <br />
 
                                     <strong class="info-FontColor">.form-control-date</strong>
-                                    <br />
-                                    &lt;div class="form-control-date <span>smallsize</span>"&gt;
+                                    <br />&lt;div class="form-control-date <span>smallsize</span>"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;span class="form-control-date-btn"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;/span&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;div class="form-control-date-value"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
                                     <br />&nbsp;&nbsp;&nbsp;&lt;/div&gt;
-                                    <br />
-                                    &lt;/div&gt;
+                                    <br />&lt;/div&gt;
 
                                     <br />
                                     <br />
 
                                     <strong class="info-FontColor">.form-control-modal</strong>
-                                    <br />
-                                    &lt;div class="form-control-date <span>smallsize</span>"&gt;
+                                    <br />&lt;div class="form-control-date <span>smallsize</span>"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;span class="form-control-modal-btn"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;/span&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;div class="form-control-modal-value"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
                                     <br />&nbsp;&nbsp;&nbsp;&lt;/div&gt;
-                                    <br />
-                                    &lt;/div&gt;
+                                    <br />&lt;/div&gt;
 
                                     <br />
                                     <br />
@@ -3252,6 +3281,22 @@
                                     <br />&nbsp;&nbsp;&nbsp;&lt;div class="form-control-dropdown-value" title="..."&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
                                     <br />&nbsp;&nbsp;&nbsp;&lt;/div&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;ul class="form-control-dropdown-menu"&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li title=""&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+                                    <br />&lt;/div&gt;
+
+                                    <br />
+                                    <br />
+
+                                    <strong class="info-FontColor">.form-control-dropdown.with-keyin</strong>
+                                    <br />&lt;div class="form-control-dropdown <span>smallsize</span>"&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;span class="form-control-dropdown-btn"&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;/span&gt;
+                                    <br />&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;input type="***" data-toggle="dropdown" class="form-control" placeholder="" value=""/&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&lt;ul class="form-control-dropdown-menu"&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li title=""&gt;
                                     <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
