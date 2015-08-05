@@ -1,0 +1,224 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<section id="type" class="ui-section">
+    <h1>通知/Notify</h1>
+    <!-- 用法 -->
+    <div class="section-content">
+        <h3>
+            <strong>用法</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                创建可以被拨动显示的通知，并且能自动淡出。
+            </p>
+            <p class="description">
+                当你将鼠标悬停在通知上面时，它不会自动消失，直到你移开鼠标。还可以通过点击关闭通知。
+            </p>
+
+            <p>
+                <button class="btn default" id="j-btn">click me!</button>
+            </p>
+        </div>
+        <div class="ui-code">
+            <p>
+                    <pre>
+                        <code>
+                            $('#j-btn').notify('您有新的消息！');
+                        </code>
+                    </pre>
+            </p>
+        </div>
+    </div>
+
+    <!-- 图标 -->
+    <div class="section-content">
+        <h3>
+            <strong>图标</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">可以在通知信息内嵌HTML，比如<a href="/assist/fonticon/demo.html" target="_blank">图标</a>。</p>
+            <p>
+                <button class="btn default" id="j-btn-2">弹出有图标的通知!</button>
+            </p>
+        </div>
+        <div class="ui-code">
+            <p>
+                    <pre>
+                        <code>
+                            $('#j-btn-2').notify({ message: '&lt;i class="icon-info"&gt;&lt;/i&gt; 我是有图标的!'});
+                        </code>
+                    </pre>
+            </p>
+        </div>
+    </div>
+
+    <!-- 定时/延迟 -->
+    <div class="section-content">
+        <h3>
+            <strong>定时/延迟</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">我们可以设置<code>timeout</code>通知信息隐藏的时间。若设置为0，则不隐藏！</p>
+            <p>
+                <button class="btn default" id="j-btn-3">定时隐藏</button>
+            </p>
+        </div>
+        <div class="ui-code">
+            <p>
+                    <pre>
+                        <code>
+                            $('#j-btn-3').notify({ message: '&lt;i class="icon-info"&gt;&lt;/i&gt; 我是有图标的!', timeout: 1000});
+                        </code>
+                    </pre>
+            </p>
+        </div>
+    </div>
+
+    <!-- 定位 -->
+    <div class="section-content">
+        <h3>
+            <strong>定位</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                添加以下参数中的一个来调整通知出现的位置。
+            </p>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            属性
+                        </th>
+                        <th>
+                            描述
+                        </th>
+                        <th>
+                            示例
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>'top-center'</code></td>
+                        <td><code>$.notify({message:'顶部居中', pos: 'top-center'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="top-center">顶部居中</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'top-left'</code></td>
+                        <td><code>$.notify({message: '左上角', pos: 'top-left'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="top-left">左上角</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'top-right'</code></td>
+                        <td><code>$.notify({message: '右上角', pos: 'top-right'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="top-right">右上角</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'bottom-center'</code></td>
+                        <td><code>$.notify({message: '底部居中', pos: 'bottom-center'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="bottom-center">底部居中</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'bottom-left'</code></td>
+                        <td><code>$.notify({message: '左下角', pos: 'bottom-left'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="bottom-left">左下角</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'bottom-right'</code></td>
+                        <td><code>$.notify({message: '右下角', pos: 'bottom-left'})</code></td>
+                        <td><button class="btn default small-btn j-pos" data-pos="bottom-right">右下角</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;button class="btn default" data-toggle="tooltips" title="Hover me"&gt;Hover me&lt;/button&gt;
+                                </code>
+                            </pre>
+        </div>
+    </div>
+
+    <!-- 状态 -->
+    <div class="section-content">
+        <h3>
+            <strong>状态</strong>
+        </h3>
+        <div class="ui-example">
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            选项
+                        </th>
+                        <th>
+                            可用的值
+                        </th>
+                        <th>
+                            默认值
+                        </th>
+                        <th>
+                            描述
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="j-checkall-demo3">
+                    <tr>
+                        <td><code>offset</code></td>
+                        <td>int</td>
+                        <td>9</td>
+                        <td>与源元素之间的偏移量</td>
+                    </tr>
+                    <tr>
+                        <td><code>pos</code></td>
+                        <td>string</td>
+                        <td>'top'</td>
+                        <td>工具提示组件定位</td>
+                    </tr>
+                    <tr>
+                        <td><code>animation</code></td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>工具提示的淡入动画</td>
+                    </tr>
+                    <tr>
+                        <td><code>delay</code></td>
+                        <td>int</td>
+                        <td>0</td>
+                        <td>提示组件延迟显示多少毫秒</td>
+                    </tr>
+                    <tr>
+                        <td><code>cls</code></td>
+                        <td>string</td>
+                        <td>''</td>
+                        <td>自定义类，用来添加显示/Custom class to add on show</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/notify.js"></script>
+<script>
+    $(function(){
+        $('#j-btn').notify('您有新的消息！');
+        $('#j-btn-2').notify({ message: '<i class="icon-info"></i> 我是有图标的!'});
+        $('#j-btn-3').notify({ message: '<i class="icon-info"></i> 我是有图标的!', timeout: 1000});
+
+        $('.j-pos').on('click', function(e) {
+            var pos = $(this).data('pos');
+            var message = $(this).text();
+            $.notify({message: message, pos: pos})
+        })
+    })
+</script>
+{% endblock %}

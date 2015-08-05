@@ -1,0 +1,125 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+    <section id="type" class="ui-section">
+        <h1 id="top">平滑滚动</h1>
+        <!-- 平滑滚动 -->
+        <div class="section-content">
+            <h3>
+                <strong>用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    增强类似于锚点跳转到某位置，动画渐渐跳转效果。
+                </p>
+                <p>
+                    <a href="#top" data-toggle="smooth-scroll" class="btn default small-btn">去顶部</a>
+                    <a href="#bottom" data-toggle="smooth-scroll" class="btn default small-btn">去底部</a>
+                </p>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;a href="#top" data-toggle="smooth-scroll" class="btn default small-btn"&gt;去顶部&lt;/a&gt;
+                                    <br />
+                                    &lt;a href="#bottom" data-toggle="smooth-scroll" class="btn default small-btn"&gt;去底部&lt;/a&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 偏移 -->
+        <div class="section-content" id="offset">
+            <h3>
+                <strong>偏移</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    设置偏移<code>offset</code>让滚动条滚动到离目标位置一定距离。
+                </p>
+                <p>
+                    <a href="#offset" class="btn default small-btn" id="j-offset" data-offset="-20" data-toggle="smooth-scroll">偏移</a>
+                </p>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;a href="#offset" class="btn default small-btn" data-offset="-20" data-toggle="smooth-scroll"&gt;偏移&lt;/a&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    为元素添加&nbsp;<code>done.ui.smoothscroll</code>或者JS调用配置<code>complete</code>&nbsp;来监听滚动完成事件。
+                </p>
+                <p>
+                    <strong>参数配置</strong>
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>duration</code></td>
+                            <td><code>500</code></td>
+                            <td>动画时间</td>
+                        </tr>
+                        <tr>
+                            <td><code>transition</code></td>
+                            <td><code>easeOutExpo</code></td>
+                            <td>动画类型名称</td>
+                        </tr>
+                        <tr>
+                            <td><code>offset</code></td>
+                            <td><code>0</code></td>
+                            <td>偏移位置</td>
+                        </tr>
+                        <tr>
+                            <td><code>complete</code></td>
+                            <td><code>function(){}</code></td>
+                            <td>完成回调</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code" id="bottom">
+                            <pre><code>  $('#j-offset').on('done.ui.smoothscroll', function(){
+                                alert('到达offset偏移');
+                                })
+                            </code></pre>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/smoothScroll.js"></script>
+<script>
+    $(function(){
+        $('#j-offset').on('done.ui.smoothscroll', function(){
+            alert('到达offset偏移');
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,266 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+    <section id="type" class="ui-section">
+        <h1>日历组件</h1>
+        <!-- 概述用法 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    轻松创建可以从预填充下拉菜单中选择时间的时间选择器。
+                </p>
+                <br>
+                <p>
+                    将 <code>data-toggle="datetimepicker"</code> 属性添加到 <code>input</code> 元素中就能创建时间选择器。获得焦点后，时间选择器会自动显示。
+                </p>
+                <br>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            date
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;input class="form-control" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly"&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>参数配置</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    通过<code>data-*</code>配置，或<code>jQuery</code>插件重新绑定配置
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>skin</code></td>
+                            <td><code>default [blue|green|orange|red]</code></td>
+                            <td>主题样式</td>
+                        </tr>
+                        <tr>
+                            <td><code>format</code></td>
+                            <td><code>YYYY-MM-DD</code></td>
+                            <td>日期格式</td>
+                        </tr>
+                        <tr>
+                            <td><code>min</code></td>
+                            <td><code>1900-01-01 00:00:00</code></td>
+                            <td>最小日期</td>
+                        </tr>
+                        <tr>
+                            <td><code>max</code></td>
+                            <td><code>2099-12-31 23:59:59</code></td>
+                            <td>最大选择日期</td>
+                        </tr>
+                        <tr>
+                            <td><code>istime</code></td>
+                            <td><code>false</code></td>
+                            <td>是否显示时间选择器</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主题皮肤 -->
+        <div class="section-content">
+            <h3>
+                <strong>主题皮肤</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    通过<code>data-skin</code>配置
+                </p>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            默认(default或不填)
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" data-skin="default" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            蓝色(blue)
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" data-skin="blue" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            绿色(green)
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" data-skin="green" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            橙色(orange)
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" data-skin="orange" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        <b>
+                            *
+                        </b>
+                                        <span>
+                                            红色(red)
+                                        </span>
+                        <em>
+                            ：
+                        </em>
+                    </label>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" data-skin="red" value="2015-05-17" type="text" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 事件监听 -->
+            <div class="section-content">
+                <h3>
+                    <strong>事件监听</strong>
+                </h3>
+                <div class="ui-example">
+                    <p class="description">
+                        <code>show.ui.datetimepicker</code>日历显示触发
+                        <br/>
+                        <code>close.ui.datetimepicker</code>日历关闭触发
+                        <br/>
+                        <code>choose.ui.datetimepicker</code>日历选择后触发
+                    </p>
+                    <br/>
+                    <div class="form-control-wrap">
+                        <div class="form-control-date">
+                            <span class="form-control-date-btn">
+                                <i></i>
+                            </span>
+                            <input class="form-control" value="2015-05-17" type="text" id="j-datetimepicker-8" data-toggle="datetimepicker" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-code" id="bottom">
+                            <pre><code>$('#j-datetimepicker-8').on('show.ui.datetimepicker', function(){ alert('打开'); }) <br/>
+                                $('#j-datetimepicker-8').on('close.ui.datetimepicker', function(){ alert('关闭'); })<br/>
+                                $('#j-datetimepicker-8').on('choose.ui.datetimepicker', function(){ alert('选择'); })
+                            </code></pre>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/datetimepicker.js"></script>
+<script>
+    $(function(){
+        $('#j-datetimepicker-8').on('show.ui.datetimepicker', function(){ alert('打开'); })
+        $('#j-datetimepicker-8').on('close.ui.datetimepicker', function(){ alert('关闭'); })
+        $('#j-datetimepicker-8').on('choose.ui.datetimepicker', function(){ alert('选择'); })
+    })
+</script>
+{% endblock %}

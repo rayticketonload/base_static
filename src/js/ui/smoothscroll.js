@@ -99,7 +99,7 @@
             var $this = $(this);
             var data = $this.data('ui.smoothScroll');
             if(!data){
-                $this.data('ui.smoothScroll', (new SmoothScroll(this, options)));
+                $this.data('ui.smoothScroll', (new SmoothScroll(this, $.extend({}, $this.data(), options))));
             } else {
                 $this.trigger('click.ui.smoothScroll');
             }

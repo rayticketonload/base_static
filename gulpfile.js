@@ -54,11 +54,13 @@ var plumber = require( 'gulp-plumber' );
 //模板路径
 var tplPath = path.join(__dirname, 'template');
 //输出路径
-var outPath = path.join(__dirname, 'output/html');
+var template_url = '/output/html';
+var outPath = path.join(__dirname, template_url);
 // 静态资源源文件目录
 var staticPath = path.join(__dirname, 'src');
 // 静态资源输出路径
-var distPath = path.join(__dirname, 'output/src')
+var dist = '/output/src';
+var distPath = path.join(__dirname, dist)
 
 // 服务启动端口
 var PORT = 8888;
@@ -103,8 +105,9 @@ var filePaths = {
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
-	js: [staticPath+'/js/**/**'],
-	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html']
+	js: [staticPath+'/js/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'],
+	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html'],
+    charts: [staticPath+'/js/ui/charts/echarts.js', staticPath+'/js/ui/charts/chart/line.js', staticPath+'/js/ui/charts/theme/paywe.js', staticPath+'/js/ui/charts/payweChart.js']
 };
 
 //模板引擎
@@ -122,7 +125,7 @@ var tpl = function(){
         //var tplFile = file.path.replace(tplPath, '');
         var tplFile = file.path;
 
-        template.render(tplFile, {version: pkg.ver}, function(err, html){
+        template.render(tplFile, {version: pkg.ver, dist: dist, template_url: template_url}, function(err, html){
             if(err){
                 return next(err);
             }
@@ -211,14 +214,23 @@ gulp.task('less', function(){
 gulp.task('js', function(){
     return gulp.src(filePaths.js)
                 //.pipe(sourcemaps.init())
-                //.pipe(uglify())
+                .pipe(uglify())
                // .pipe(sourcemaps.write(distPath+'/js/maps'))
                 .pipe(gulp.dest(distPath+'/js'))
                // .pipe(connect.reload())
-})
+});
 
+/* 合并charts  */
+gulp.task('charts', function(){
+   return gulp.src(filePaths.charts)
+                .pipe(concat('charts.js'))
+                .pipe(uglify())
+                .pipe(gulp.dest(distPath+'/js/ui'));
+});
+
+/* 合并ui */
 gulp.task('ui', function(){
-    return gulp.src(staticPath+'/js/ui/**/**')
+    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
             .pipe( plumber( { errorHandler: errrHandler } ) )
                 //.pipe(sourcemaps.init())
                 .pipe(concat('ui.js'))
@@ -263,6 +275,7 @@ gulp.task('watch', function(){
     gulp.watch(filePaths.html, ['template']);
     gulp.watch(filePaths.sprite, ['sprite']);
 	gulp.watch(distPath+'/images/sprite/**/**', ['less']);
+    gulp.watch(filePaths.charts, ['charts'])
 });
 
 // 更新字体任务
@@ -288,15 +301,17 @@ gulp.task('iconfont-style', function(){
 
 
 /*------ 默认启动任务 ------ */
-gulp.task('default', ['clean'], function(){
-    gulp.start(['sprite','iconfont', 'images', 'less', 'js', 'template', 'watch', 'server']);
+gulp.task('default', ['clean'], function(next){
+    return gulp.start(['sprite','iconfont', 'images', 'less', 'charts', 'js', 'template', 'watch', 'server']);
+    //return next();
 });
 
-gulp.task('publish', function(){
+gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'charts', 'js', 'template'],  function(){
 	gulp.start(['ui', 'replace'])
 })
 
 /* 更新字体 */
-gulp.task('fonticon-update', function(){
-    gulp.start(['iconfont-style', 'iconfont-file', 'iconfont-ie7']);
+gulp.task('fonticon-update', function(next){
+    return gulp.start(['iconfont-style', 'iconfont-file', 'iconfont-ie7']);
+    //return next();
 })

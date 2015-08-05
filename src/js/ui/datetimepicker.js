@@ -36,12 +36,11 @@
 
 //全局配置，如果采用默认均不需要改动
 	var config =  {
-		path: '', //laydate所在路径
 		skin: 'default', //初始化皮肤
 		format: 'YYYY-MM-DD', //日期格式
 		min: '1900-01-01 00:00:00', //最小日期
 		max: '2099-12-31 23:59:59', //最大日期
-		isv: false
+		istime: false
 	};
 
 	var Dates = {}, $body = $(document.body);
@@ -77,9 +76,12 @@
 
 	Dates.run = function(options){
 		var elem = options.elem ? $(options.elem) : null;
+		var e = $.Event('show.ui.datetimepicker', {relatedTarge: elem});
 		if(!elem) return;
 		Dates.view(elem, options);
 		Dates.reshow();
+
+		$(elem).trigger(e);
 	};
 
 	Dates.scroll = function(type){
@@ -368,7 +370,6 @@
 	Dates.iswrite = function(){
 
 		var log = { time: $('#laydate_hms')};
-
 		log.time[Dates.options.istime ? 'show': 'hide']();
 		$(as.oclear)['isclear' in Dates.options && Dates.options.isclear === false ? 'hide' : 'show']();
 		$(as.otoday)['istoday' in Dates.options && Dates.options.istoday === false ? 'hide' : 'show']();
@@ -501,7 +502,11 @@
 		//	$(Dates.box).show();
 		//}
 
-		Dates.follow($(Dates.box).show());
+		Dates.follow(
+			$(Dates.box).attr('class', function(){
+				return as[0] + (options.skin === 'default' ? '' : ' ' + as[0] + '_' + options.skin);
+			}).show()
+		);
 		options.zIndex ? $(Dates.box).css('z-index', options.zIndex) : $(Dates.box).css('z-index', 'auto');
 		Dates.stopMosup('click', Dates.box);
 		//alert($('#laydate_table').outerWidth())
@@ -519,8 +524,10 @@
 
 //关闭控件
 	Dates.close = function(){
+		var e = $.Event('close.ui.datetimepicker', {relateTarget: Dates.elem});
 		Dates.reshow();
 		$('#'+ as[0]).hide();
+		$(Dates.elem).trigger(e);
 		Dates.elem = null;
 	};
 
@@ -766,7 +773,7 @@
 	function Plugin(option) {
 		return $(this).each(function(){
 			var $this = $(this);
-			var options = $.extend({istime: true}, $this.data(), option && typeof option == "object");
+			var options = $.extend({}, $this.data(), option && typeof option == "object");
 			var data = $(this).data('ui.datetimepicker');
 
 			if(!data) $(this).data('ui.datetimepicker', (data = new DateTimePicker(this, options)));
@@ -780,6 +787,14 @@
 	// DATA-API
 	var clickHandler = function(e) {
 		e.preventDefault();
+
+		$(this).one('close.ui.datetimepicker', function(){
+			if($(this).hasClass('active')) $(this).removeClass('active');
+			if($(this).parent('.form-control-date').hasClass('active')) $(this).parent('.form-control-date').removeClass('active');
+		}).one('show.ui.datetimepicker', function(){
+			if($(this).parent('.form-control-date').length) $(this).parent('.form-control-date').addClass('active');
+		});
+
 		Plugin.call($(this), 'show');
 	};
 

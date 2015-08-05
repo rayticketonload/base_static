@@ -28,13 +28,12 @@
         this.$el = $(element);
         this.options = options;
         this.$body = $(document.body);
-        this.$container = this.$el.parents('.modal-background');
+        //this.$container = this.$el.parents('.modal-background');
         this.$dialog = this.$el.find('.modal-wrap');
         this.$backdrop = null;
         this.isShown = null;
         this.originalBodyPad = null;
         this.scrollbarWidth = 0;
-        //this.ignoreBackdropClick = false;
 
         if(this.options.remote) {
             this.$el
@@ -49,7 +48,6 @@
 
     // 动画过渡时间
     Modal.TRANSITION_DURATION = 150;
-    //Modal.BACKDROP_TRANSITION_DURATION = 150;
 
     Modal.DEFAULTS = {
         backdrop: true,
@@ -103,7 +101,7 @@
         var that = this;
         var e = $.Event('show.ui.modal', {relatedTarget: _relatedTarget});
 
-        this.$el.trigger(e);
+        //this.$el.trigger(e);
 
         if(this.isShown || e.isDefaultPrevented()) return;
 
@@ -127,12 +125,9 @@
             that.$el[0].offsetWidth;
         }
 
-        //alert('aaaa')
-        //that.$el.addClass('in').attr('aria-hidden', false);
-
         that.enforceFocus();
 
-        var e = $.Event('shown.ui.modal', {relatedTarget: _relatedTarget});
+        //var e = $.Event('shown.ui.modal', {relatedTarget: _relatedTarget});
 
         if(transition) {
             that.$el.addClass('in').attr('aria-hidden', false);
@@ -150,13 +145,9 @@
     Modal.prototype.hide = function(e){
         if(e) e.preventDefault();
 
-        e = $.Event('hide.ui.modal');
-
         var $this = this;
 
-        this.$el.trigger(e);
-
-        if((!this.$el.is(':visible') && !this.isShown) || e.isDefaultPrevented()) return;
+        if(!this.$el.is(':visible') && !this.isShown) return;
 
         this.isShown = false;
 
@@ -168,6 +159,8 @@
         this.$el.removeClass('in').attr('aria-hidden', true).off('click.dismiss.ui.modal').off('mouseup.dismiss.ui.modal');
 
         this.$dialog.off('mousedown.dismiss.ui.modal');
+
+        console.log('here');
 
         $.support.transition && this.$el.hasClass('fade') ?
             this.$el.one('uiTransitionEnd', $.proxy(this.hideModal, this)).emulateTransitionEnd(Modal.TRANSITION_DURATION)
@@ -195,11 +188,12 @@
 
     Modal.prototype.hideModal = function() {
         var that = this;
+        var e = $.Event('hide.ui.modal', {relatedTarget: that.$el});
         that.$el.hide();
         that.$body.removeClass('modal-open');
         that.resetAdjustments();
         that.resetScrollbar();
-        that.$el.trigger('hidden.ui.modal');
+        that.$el.trigger(e);
     };
     // 重新缩放
     Modal.prototype.resize = function(){};
@@ -266,7 +260,7 @@
 
     // 扩展方法
     Modal.prototype.setContent = function(content) {
-        var $content = this.$el.find('.modal-body')
+        var $content = this.$el.find('.modal-body');
         $content.html(content || '');
     };
 
@@ -320,8 +314,6 @@
             var href = $(this).attr('href');
             var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
             var option = $target.data('ui.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href}, $target.data(), $this.data());
-
-            if($this.is('a')) e.preventDefault();
 
             // 实例化
             Plugin.call($target, option, this);

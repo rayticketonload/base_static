@@ -1,0 +1,127 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+    <section id="type" class="ui-section">
+        <h1>警告框</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>警告框结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <span class="section-tip">保证父级包含.alert类</span>
+                <p class="description">
+                    为任意&nbsp;<code>[data-dismiss="alert"]</code>，&nbsp;<code>.alert.with-close em</code>&nbsp;添加&nbsp;绑定了警告框关闭。
+                </p>
+                <div class="alert alert-warning with-close">
+                    <i></i>
+                    <em></em>
+                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>&lt;div class="alert alert-warning with-close"&gt;
+                                    &lt;i&gt;&lt;/i&gt;
+                                    &lt;em&gt;&lt;/em&gt;
+                                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                                    &lt;/div&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- a标签绑定 -->
+        <div class="section-content">
+            <h3>
+                <strong>a标签绑定</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    <code>a</code>标签通过设置 <code>data-dismiss="alert"</code> 和<code>data-target</code>来绑定触发关闭警告框。如果我们没有设置<code>data-target</code>,将会获取<code>a</code>标签中的<code>hash</code>作为目标警告框。
+                </p>
+                <div class="alert alert-warning with-close" id="j-alert-2">
+                    <i></i>
+                    <em></em>
+                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                </div>
+
+                <br/>
+                <br/>
+                <a href="#j-alert-2" data-dismiss="alert" class="btn primary small-btn">关闭警告框</a>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;a href="#j-alert-2" data-dismiss="alert" class="btn primary small-btn"&gt;关闭警告框&lt;/a&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    为元素添加&nbsp;<code>close.ui.alert</code>&nbsp;监听警告框事件。
+                </p>
+                <div class="alert alert-warning with-close" id="j-alert-3">
+                    <i></i>
+                    <em></em>
+                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                </div>
+
+                <br/>
+                <br/>
+                <a href="#j-alert-3" id="j-close-btn" data-dismiss="alert" class="btn primary small-btn">关闭警告框</a>
+            </div>
+            <div class="ui-code">
+                            <pre><code> $('#j-close-btn').on('closed.ui.alert', function(e){
+                                alert('#'+ e.relatedTarget[0].id +'已关闭')
+                                });
+                            </code></pre>
+            </div>
+        </div>
+
+        <!-- 启用css3动画 -->
+        <div class="section-content">
+            <h3>
+                <strong>启用css3动画</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    如果浏览器支持<code>CSS3</code>动画，而且目标<code>alert</code>类中包含<code>fade in</code>则使用css3动画来隐藏，反之调用<code>fadeOut</code>方法
+                </p>
+                <div class="alert alert-warning with-close fade in">
+                    <i></i>
+                    <em></em>
+                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre><code>&lt;div class="alert alert-warning with-close fade in"&gt;
+                                <br />
+                                &lt;i&gt;&lt;/i&gt;
+                                &lt;em&gt;&lt;/em&gt;
+                                警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                                &lt;/div&gt;
+                            </code></pre>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+
+        $('#j-close-btn').on('closed.ui.alert', function(e){
+            alert('#'+ e.relatedTarget[0].id +'已关闭')
+        });
+    })
+</script>
+{% endblock %}

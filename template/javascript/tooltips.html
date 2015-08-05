@@ -1,0 +1,221 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+    <section id="type" class="ui-section">
+        <h1>ToolTips提示符</h1>
+        <!-- 用法 -->
+        <div class="section-content">
+            <h3>
+                <strong>用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    轻松创建一个漂亮的工具提示。
+                </p>
+                <p>
+                    要应用这个组件，需要为某个元素添加&nbsp;<code>data-toggle="tooltips"</code>&nbsp;属性。你还需要添加一个&nbsp;<code>title</code>&nbsp;属性，它的值即是提示文本。
+                </p>
+
+                <p class="description">
+                    <a href="#" class="btn default" data-toggle="tooltips" title="看这里！粗线了">鼠标滑过</a>
+                    <a href="#" data-toggle="tooltips" title="看这里！粗线了">鼠标经过</a>
+                </p>
+            </div>
+            <div class="ui-code">
+                <p>
+                    <pre>
+                        <code>
+                            &lt;a href="#" class="btn default" data-toggle="tooltips" title="看这里！粗线了"&gt;鼠标滑过&lt;/a&gt;
+                        </code>
+                    </pre>
+                </p>
+                <p>
+                    <pre>
+                        <code>
+                            &lt;a href="#" data-toggle="tooltips" title="看这里！粗线了"&gt;鼠标滑过&lt;/a&gt;
+                        </code>
+                    </pre>
+                </p>
+
+            </div>
+        </div>
+
+        <!-- 文本框 -->
+        <div class="section-content">
+            <h3>
+                <strong>文本框</strong>
+            </h3>
+            <div class="ui-example">
+                <div class="description">
+                    <div class="form-group">
+                        <label for="" class="form-control-label"><span>邮箱：</span></label>
+                        <input type="text" class="form-control" style="width:200px;" data-toggle="tooltips" data-pos="right" title="请输入邮箱"  />
+                    </div>
+
+                </div>
+            </div>
+            <div class="ui-code">
+                <p>
+                    <pre>
+                        <code>
+                            &lt;div class="form-group"&gt;
+                            <br />
+                            &lt;label for="" class="form-control-label">&lt;span&gt;邮箱：&lt;/span&gt;&lt;/label&gt;
+                            <br />
+                            &lt;input type="text" class="form-control" style="width:200px;" data-toggle="tooltips" data-pos="right" title="请输入邮箱"  /&gt;
+                            &lt;/div&gt;
+                        </code>
+                    </pre>
+                </p>
+            </div>
+        </div>
+
+        <!-- 对齐 -->
+        <div class="section-content">
+            <h3>
+                <strong>对齐</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    添加下列选项之一到&nbsp;<code>data-tooltip</code>&nbsp;属性中来调整提示组件的文本对齐方式。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>pos:'top'</code></td>
+                                <td>将提示组件对齐到顶部。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="top" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'top-left'</code></td>
+                                <td>将提示组件对齐到左上。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="top-left" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'top-right'</code></td>
+                                <td>将提示组件对齐到右上。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="top-right" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'bottom'</code></td>
+                                <td>将提示组件对齐到底部。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="bottom" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'bottom-left'</code></td>
+                                <td>将提示组件对齐到左下。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="bottom-left" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'bottom-right'</code></td>
+                                <td>将提示组件对齐到右下。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="bottom-right" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'left'</code></td>
+                                <td>将提示组件对齐到左侧。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="left" title="Hover me">Hover me</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>pos:'right'</code></td>
+                                <td>将提示组件对齐到右侧。</td>
+                                <td><button class="btn default small-btn" data-toggle="tooltips" data-pos="right" title="Hover me">Hover me</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;button class="btn default" data-toggle="tooltips" title="Hover me"&gt;Hover me&lt;/button&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 参数配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>参数配置</strong>
+            </h3>
+            <div class="ui-example">
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                               选项
+                            </th>
+                            <th>
+                                可用的值
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody id="j-checkall-demo3">
+                            <tr>
+                                <td><code>offset</code></td>
+                                <td>int</td>
+                                <td>9</td>
+                                <td>与源元素之间的偏移量</td>
+                            </tr>
+                            <tr>
+                                <td><code>pos</code></td>
+                                <td>string</td>
+                                <td>'top'</td>
+                                <td>工具提示组件定位</td>
+                            </tr>
+                            <tr>
+                                <td><code>animation</code></td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>工具提示的淡入动画</td>
+                            </tr>
+                            <tr>
+                                <td><code>delay</code></td>
+                                <td>int</td>
+                                <td>0</td>
+                                <td>提示组件延迟显示多少毫秒</td>
+                            </tr>
+                            <tr>
+                                <td><code>cls</code></td>
+                                <td>string</td>
+                                <td>''</td>
+                                <td>自定义类，用来添加显示/Custom class to add on show</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/tooltips.js"></script>
+<script>
+    $(function(){
+
+    })
+</script>
+{% endblock %}

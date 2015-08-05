@@ -1,9 +1,9 @@
 {% extends "_layout/layout.html" %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="/output/src/css/ui.css?v={{ version }}">
+<link rel="stylesheet" type="text/css" href="{{ dist }}/css/ui.css?v={{ version }}">
 <!-- 日期选择器样式，独立引入 -->
-<link rel="stylesheet" href="/output/src/css/datetimepicker.css?v={{ version }}"/>
+<link rel="stylesheet" href="{{ dist }}/css/datetimepicker.css?v={{ version }}"/>
 {% endblock %}
 
 {% block body%}
@@ -15,56 +15,71 @@
             <div class="scroll-y-hidden"></div>
             <ul class="lv1">
                 <li>
-                    <a href="/output/html/javascript.html" class="sidebar-btn">JavaScript组件</a>
+                    <a href="{{ template_url }}/javascript.html" class="sidebar-btn">JavaScript组件</a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/checkAll.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/checkAll.html" class="sidebar-btn">
                         全选
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/alert.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/alert.html" class="sidebar-btn">
                         警告框
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/dropdown.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/dropdown.html" class="sidebar-btn">
                         下拉框
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/placeholder.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/tooltips.html" class="sidebar-btn">
+                        tooltips提示
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/javascript/placeholder.html" class="sidebar-btn">
                         占位符
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/switcher.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/switcher.html" class="sidebar-btn">
                         切换器
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/tab.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/tab.html" class="sidebar-btn">
                         TAB选项卡
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/smooth-scroll.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/smooth-scroll.html" class="sidebar-btn">
                         平滑滚动
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/pagination.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/pagination.html" class="sidebar-btn">
                         分页
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/modal.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/modal.html" class="sidebar-btn">
                         弹层
                     </a>
                 </li>
                 <li class="lv2">
-                    <a href="/output/html/javascript/datetimepicker.html" class="sidebar-btn">
+                    <a href="{{ template_url }}/javascript/notify.html" class="sidebar-btn">
+                        通知
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/javascript/datetimepicker.html" class="sidebar-btn">
                         日历
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/javascript/charts.html" class="sidebar-btn">
+                        图表
                     </a>
                 </li>
             </ul>
@@ -91,6 +106,14 @@
             $(sidebar).find("li.active").removeClass("active");
             $(this).parent().addClass("active");
         });
+
+        var url = location.href;
+        sidebar.find('a').map(function(){
+            if(url.indexOf(this.href) !== -1){
+                sidebar.find(".active").removeClass("active");
+                $(this).parent().addClass("active");
+            }
+        })
     });
 
 </script>

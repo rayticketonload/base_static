@@ -7,6 +7,10 @@
 * `gulp`
 * 预览生成的`html`下的文件`index.html`
 
+## 发布ui
+
+	gulp publish
+
 
 ## 修改日志
 

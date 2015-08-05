@@ -1,0 +1,364 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<style>
+    pre{
+        white-space: pre;
+    }
+    .question h3{
+        color: #8eb0db;
+        cursor: pointer;
+    }
+    .question .question-bd{
+        display: none;
+    }
+</style>
+    <section id="type" class="ui-section">
+        <h1>切换器</h1>
+        <!-- 切换器 -->
+        <div class="section-content">
+            <h3>
+                <strong>用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们给列表添加<code>data-toggle="switcher"</code>绑定切换效果。
+                </p>
+                <div class="ebank-wrap">
+                    <ul class="ebanks" data-toggle="switcher">
+                        <li class="" title="招商银行">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-cmb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="工商银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-icbc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="建设银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-ccb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="农业银行" class="active">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-abc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li>
+                            <label class="more-ebank">
+                                查看更多
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ui-code">
+                           <pre>                                <code>
+                               <span>&lt;div class="ebank-wrap"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;<span>&lt;ul class="ebanks"  data-toggle="switcher"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li class="active"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="ebank-label"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i&gt;&lt;/i&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="etag"&gt; 企业（个人） &lt;/span&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="ebank-logo （bank-...）"&gt;&lt;/span&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;input type="radio" style="display: none;" name="ebank/&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="more-ebank"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看更多
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;<span>&lt;/ul&gt;</span>
+                               <br><span>&lt;/div&gt;</span>
+                           </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 多选 -->
+        <div class="section-content">
+            <h3>
+                <strong>多选</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们通过配置<code>except:true</code>设置不撤销已选项进行多选效果。
+                </p>
+                <div class="ebank-wrap">
+                    <ul class="ebanks" data-toggle="switcher" data-except="true">
+                        <li class="" title="招商银行">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-cmb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="工商银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-icbc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="建设银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-ccb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="农业银行" class="active">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-abc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li>
+                            <label class="more-ebank">
+                                查看更多
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ui-code">
+                           <pre>                                <code>
+                               <span>&lt;div class="ebank-wrap"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;<span>&lt;ul class="ebanks"  data-toggle="switcher"  data-except="true"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li class="active"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="ebank-label"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i&gt;&lt;/i&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="etag"&gt; 企业（个人） &lt;/span&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;span class="ebank-logo （bank-...）"&gt;&lt;/span&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;input type="radio" style="display: none;" name="ebank/&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;label class="more-ebank"&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看更多
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/label&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                               <br>&nbsp;&nbsp;&nbsp;<span>&lt;/ul&gt;</span>
+                               <br><span>&lt;/div&gt;</span>
+                           </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>配置</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    通过<code>jQuery</code>插件方式传入参数或使用<code>data-*</code>配置参数方式。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>item</code></td>
+                            <td><code>li</code></td>
+                            <td>切换器子项选择器</td>
+                        </tr>
+                        <tr>
+                            <td><code>active</code></td>
+                            <td><code>active</code></td>
+                            <td>选中激活的样式名</td>
+                        </tr>
+                        <tr>
+                            <td><code>except</code></td>
+                            <td><code>false</code></td>
+                            <td>是否多选</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;ul class="ebanks"  data-toggle="switcher" data-item=".item" data-active="current"  data-except="true"&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    通过监听元素的<code>select.ui.switcher</code>事件
+                </p>
+                <div class="ebank-wrap">
+                    <ul class="ebanks" id="j-switcher-1" data-toggle="switcher" data-except="true">
+                        <li class="" title="招商银行">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-cmb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="工商银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-icbc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="建设银行" class="">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-ccb"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li title="农业银行" class="active">
+                            <label class="ebank-label">
+                                <i></i>
+                                <span class="etag">企业</span>
+                                <span class="ebank-logo bank-abc"></span>
+                                <input type="radio" style="display: none;" name="ebank">
+                            </label>
+                        </li>
+                        <li>
+                            <label class="more-ebank">
+                                查看更多
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre><code>   $('#j-switcher-1').on('select.ui.switcher', function(){
+                                alert(this.id)
+                                })
+                            </code></pre>
+            </div>
+        </div>
+
+        <!-- jQuery插件绑定 -->
+        <div class="section-content">
+            <h3>
+                <strong>jQuery插件绑定</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们使用<code>$(element).switcher(options)</code>来绑定切换功能。
+                </p>
+            </div>
+        </div>
+
+        <!-- 扩展 -->
+        <div class="section-content">
+            <h3>
+                <strong>扩展</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们利用<code>switcher</code>扩展一个手风琴效果
+                </p>
+
+                <ul id="j-switcher-2" class="question">
+                    <li>
+                        <h3>1. 什么是XX宝？</h3>
+                        <div class="question-bd">
+                            xx宝是XX公司携手招商银行共同打造的一款支付交易及余额增值产品，面向平台用户7*24小时提供全程在线操作、高效跨行身份验证、免费跨行结算、余额享受增值权益等定制化产品及服务，由钱途互联负责运营。
+                        </div>
+                    </li>
+                    <li>
+                        <h3>2. XX宝的优势？</h3>
+                        <div class="question-bd">
+                            免费：使用XX宝，充值、支付、提现等所有交易免费结算，再也不用支付高昂结算费用。<br />
+                            安全：使用XX宝，招商银行提供服务，交易资金安全无忧。<br />
+                            便捷：支持使用多家银行账户在线跨行交易，提供强大的电子交易凭证功能满足公司账务需求。<br />
+                            增值：XX宝内余额可享稳健收益。<br />
+                            其他：平台可根据业务需求，推出其他用户权益。<br />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="ui-code">
+<pre><code>$.fn.accordion = function(option){
+        var defaults = {
+            item: 'li',
+            target: '&gt;div',
+            active: 'active',
+            except: false
+        };
+
+        option = $.extend({}, defaults, option);
+
+        // 直接调用
+        $(this).switcher(option);
+
+        // 事件监听
+        return $(this).each(function(){
+            var $items = $(this).find(option.item);
+            $(this).on('select.ui.switcher', function(e){
+                var $this = $(e.relatedTarget), has = $this.hasClass(option.active), $actived = $items.find(option.target), $target = $this.find(option.target);
+                !!!(option.except) &amp;&amp; $actived.slideUp();
+                $target.stop()[!has ? 'slideUp': 'slideDown']();
+            });
+        });
+    };
+
+    $('#j-switcher-2').accordion();
+</code></pre>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/switcher.js"></script>
+<script src="{{dist}}/js/ui/accordion.js"></script>
+<script>
+    $(function(){
+        $('#j-switcher-1').on('select.ui.switcher', function(){
+            alert(this.id)
+        })
+
+        $('#j-switcher-2').accordion();
+    })
+</script>
+{% endblock %}

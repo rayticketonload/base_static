@@ -32,9 +32,8 @@
     };
 
     CheckAll.prototype.reverse = function(){
-        var isCheck = this.$el.is(':checked');
         var e = $.Event('reversed.ui.checkAll', {relatedTarget: this.$el});
-        this.$target.prop('checked', !isCheck);
+        this.$target.map(function(){ return $(this).prop('checked', !this.checked)});
         this.$el.trigger(e);
     };
 

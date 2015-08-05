@@ -3,9 +3,9 @@
 {% block title %}UI规范{% endblock %}
 
 {% block css %}
-        <link rel="stylesheet" type="text/css" href="../src/css/ui.css?v={{ version }}">
+        <link rel="stylesheet" type="text/css" href="{{ dist }}/css/ui.css?v={{ version }}">
         <!-- 日期选择器样式，独立引入 -->
-        <link rel="stylesheet" href="../src/css/datetimepicker.css?v={{ version }}"/>
+        <!--<link rel="stylesheet" href="{{ dist }}/css/datetimepicker.css?v={{ version }}"/>-->
 {% endblock %}
 
 {% block stylePage %}
@@ -285,6 +285,11 @@
                         <li>
                             <a href="../../assist/fonticon/demo.html" class="sidebar-btn" target="_blank">
                                 字体图标
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript.html" class="sidebar-btn" target="_blank">
+                                JavaScript组件
                             </a>
                         </li>
                     </ul>
@@ -3023,7 +3028,7 @@
                                             <!--<div class="form-control-date-value">
                                                 2015-05-17
                                             </div>-->
-                                            <input class="form-control" type="text" value="2015-05-17" data-toggle="datetimepicker" readonly="readonly"/>
+                                            <input class="form-control" type="text" value="2015-05-17" data-skin="green" data-toggle="datetimepicker" readonly="readonly"/>
                                         </div>
                                         <div class="form-notice">
                                             <i></i>
@@ -3052,7 +3057,7 @@
                                             <!--<div class="form-control-date-value">
                                                 2015-05-17
                                             </div>-->
-                                            <input class="form-control" type="text" value="2015-05-17" data-toggle="datetimepicker" readonly="readonly"/>
+                                            <input class="form-control" type="text" value="2015-05-17" data-skin="orange" data-toggle="datetimepicker" readonly="readonly"/>
                                         </div>
                                         <div class="form-notice">
                                             <i></i>
@@ -3319,16 +3324,20 @@
                         <div class="ui-example">
                             <span class="section-tip">there are nothing here</span>
                             <p class="description">
-                                每个图表都由<code>.chart-wrap</code>包裹，这个类定义图表与边界的距离
+                                每个图表都由<code>.chart-wrap</code>包裹，这个类定义图表与边界的距离。图表元素需要制定宽高。
                             </p>
                             <div class="chart-wrap">
-                                
+                                <div id="j-chart" style="width: 100%; height: 254px;"></div>
                             </div>
                         </div>
                         <div class="ui-code">
                             <pre>
                                 <code>
-                                    &lt;div <span>class="chart-wrap"</span>&gt;...&lt;/div&gt;
+                                    &lt;div <span>class="chart-wrap"</span>&gt;
+                                    <br/>
+                                    &nbsp;&nbsp;&lt;div id="j-chart" <span>style="width: 100%; height: 254px;"</span>&gt;&lt;/div&gt;
+                                    <br/>
+                                    &lt;/div&gt;
                                 </code>                      
                             </pre>
                         </div>
@@ -5295,18 +5304,19 @@
         </script>
 
         <!-- build:ui -->
-        <script src="../src/js/ui/transition.js"></script>
-        <script src="../src/js/ui/tab.js"></script>
-        <script src="../src/js/ui/alert.js"></script>
-        <script src="../src/js/ui/dropdown.js"></script>
-        <script src="../src/js/ui/pagination.js"></script>
-        <script src="../src/js/ui/checkAll.js"></script>
-        <script src="../src/js/ui/placeholder.js"></script>
-        <script src="../src/js/ui/switcher.js"></script>
-        <script src="../src/js/ui/datetimepicker.js"></script>
-        <script src="../src/js/ui/modal.js"></script>
-        <script src="../src/js/ui/smoothScroll.js"></script>
+        <script src="{{ dist }}/js/ui/transition.js"></script>
+        <script src="{{ dist }}/js/ui/tab.js"></script>
+        <script src="{{ dist }}/js/ui/alert.js"></script>
+        <script src="{{ dist }}/js/ui/dropdown.js"></script>
+        <script src="{{ dist }}/js/ui/pagination.js"></script>
+        <script src="{{ dist }}/js/ui/checkAll.js"></script>
+        <script src="{{ dist }}/js/ui/placeholder.js"></script>
+        <script src="{{ dist }}/js/ui/switcher.js"></script>
+        <script src="{{ dist }}/js/ui/modal.js"></script>
+        <script src="{{ dist }}/js/ui/smoothScroll.js"></script>
+        <script src="{{ dist }}/js/ui/datetimepicker.js"></script>
         <!-- endbuild -->
+        <script src="{{ dist }}/js/ui/charts.js"></script>
 
         <script>
             (function($) {
@@ -5329,7 +5339,7 @@
                         console.log(index)
                     }});*/
 
-                    $('.pagination').on('ui.select.pagination', function(e, index, instance){
+                    $('.pagination').on('select.ui.pagination', function(e, index, instance){
                         //console.log(index)
                     })
 
@@ -5377,5 +5387,30 @@
                     $('.form-control-date-value').datetimepicker();
                 })
             })(jQuery)
+
+            $(function(){
+                var data = {
+                    //X坐标
+                    labels : ["03-01", "03-02", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30"],
+                    //利率数据
+                    series : [
+                        // 第一条线
+                        {
+                            name:'本月（3月）',
+                            data:["200", "900", "200", "700", "200", "200","100","100","100","100","100","100"]
+                        },
+                        // 第二条线
+                        {
+                            name:'上月（2月）',
+                            data:["100", "700", "900", "800", "600", "400","300","150","180","100","200","100"]
+                        }
+                    ]
+                };
+
+
+                var myChart = new UICharts('j-chart');
+                myChart.showLoading({effect: 'whirling'});
+                myChart.setOption(data);
+            })
         </script>
 {% endblock %}

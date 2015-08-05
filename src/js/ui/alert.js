@@ -48,7 +48,9 @@
         $parent.removeClass('in');
 
         function removeElement() {
-            $parent.detach().trigger('closed.ui.alert', e, $parent).remove();
+            var ev = $.Event('closed.ui.alert',{relatedTarget: $parent});
+            $parent.detach().remove();
+            $this.trigger(ev);
         }
 
         if($.support.transition && $parent.hasClass('fade')) { // css3
@@ -74,8 +76,8 @@
 
 
     // jQuery 插件扩展
-    $.fn.dropdown = Plugin;
-    $.fn.dropdown.Constructor = Alert;
+    $.fn.alert = Plugin;
+    $.fn.alert.Constructor = Alert;
 
     // 元素插件绑定
     // ====================

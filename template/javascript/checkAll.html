@@ -2,10 +2,630 @@
 {% block mainBody %}
     <section id="type" class="ui-section">
         <h1>全选组件</h1>
+        <!-- 全选 -->
         <div class="section-content">
             <h3>
-                <strong>单个还是全部引入</strong>
+                <strong>全选</strong>
             </h3>
+            <div class="ui-example">
+                <p class="description">
+                    为任意&nbsp;<code>&lt;input type="check"&gt;</code>&nbsp;添加&nbsp;<code>data-toggle="checkall"</code>&nbsp;类为其绑定全选插件。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 70px">
+                            <col>
+                            <col style="width: 70px">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col style=" width: 70px; ">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" data-toggle="checkAll" data-target="#j-checkall-demo :checkbox">
+                                    全选
+                                </label>
+                            </th>
+                            <th>
+                                创建时间
+                            </th>
+                            <th>
+                                业务类型
+                            </th>
+                            <th>
+                                名称<span class="th-cut">|</span>订单号
+                            </th>
+                            <th>
+                                对方账号
+                            </th>
+                            <th>
+                                收支金额
+                            </th>
+                            <th>
+                                当前剩余
+                            </th>
+                            <th class="text-align-left">
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="j-checkall-demo">
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="立体声超级留声机">
+                                    立体声超级留声机
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                liang1126
+                            </td>
+                            <td>
+                                <p class="text-nowrap warning-FontColor" title="- 422,252.00">-&nbsp;422,252.00</p>
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="40,952,585,288.00">40,952,585,288.00</p>
+                            </td>
+                            <td class="text-align-left">
+                                <div class="table-ctrls">
+                                    详情<span class="caret-down"></span>
+                                    <div class="ctrls">
+                                        <a href="###">
+                                            详情
+                                        </a>
+                                        <a href="###">
+                                            打印
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="Q7mini立体声超级留声机不完全体第三阶段">
+                                    Q7mini立体声超级留声机不完全体第三阶段
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                rayalienkiss@126.com
+                            </td>
+                            <td class="text-nowrap success-FontColor2" title="+ 120,422,252.00">
+                                +&nbsp;120,422,252.00
+                            </td>
+                            <td class="text-nowrap" title="40,952,585,288.00">
+                                40,952,585,288.00
+                            </td>
+                            <td class="text-align-left">
+                                <a href="###" class="link-standard">打印</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;input type="checkbox" data-toggle="checkAll" data-target="#j-checkall-demo :checkbox"&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 反选 -->
+        <div class="section-content">
+            <h3>
+                <strong>反选</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    为任意&nbsp;<code>&lt;input type="check"&gt;</code>&nbsp;添加&nbsp;<code>data-toggle="checkall"  data-reverse="true"</code>&nbsp;设置反选功能。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 70px">
+                            <col>
+                            <col style="width: 70px">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col style=" width: 70px; ">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" data-toggle="checkAll" data-target="#j-checkall-demo2 :checkbox">
+                                    全选
+                                </label>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" data-toggle="checkAll" data-reverse="true" data-target="#j-checkall-demo2 :checkbox">
+                                    反选
+                                </label>
+                            </th>
+                            <th>
+                                创建时间
+                            </th>
+                            <th>
+                                业务类型
+                            </th>
+                            <th>
+                                名称<span class="th-cut">|</span>订单号
+                            </th>
+                            <th>
+                                对方账号
+                            </th>
+                            <th>
+                                收支金额
+                            </th>
+                            <th>
+                                当前剩余
+                            </th>
+                            <th class="text-align-left">
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="j-checkall-demo2">
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="立体声超级留声机">
+                                    立体声超级留声机
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                liang1126
+                            </td>
+                            <td>
+                                <p class="text-nowrap warning-FontColor" title="- 422,252.00">-&nbsp;422,252.00</p>
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="40,952,585,288.00">40,952,585,288.00</p>
+                            </td>
+                            <td class="text-align-left">
+                                <div class="table-ctrls">
+                                    详情<span class="caret-down"></span>
+                                    <div class="ctrls">
+                                        <a href="###">
+                                            详情
+                                        </a>
+                                        <a href="###">
+                                            打印
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="Q7mini立体声超级留声机不完全体第三阶段">
+                                    Q7mini立体声超级留声机不完全体第三阶段
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                rayalienkiss@126.com
+                            </td>
+                            <td class="text-nowrap success-FontColor2" title="+ 120,422,252.00">
+                                +&nbsp;120,422,252.00
+                            </td>
+                            <td class="text-nowrap" title="40,952,585,288.00">
+                                40,952,585,288.00
+                            </td>
+                            <td class="text-align-left">
+                                <a href="###" class="link-standard">打印</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;input type="checkbox" data-toggle="checkAll" data-target="#j-checkall-demo :checkbox"&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    为<code>&lt;input type="check"&gt;</code>&nbsp;元素添加&nbsp;<code>checked.ui.checkAll"</code>&nbsp;<code>reversed.ui.checkAll"</code>&nbsp;监听全选及反选事件。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 70px">
+                            <col>
+                            <col style="width: 70px">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col style=" width: 70px; ">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" id="j-event-1" data-toggle="checkAll" data-target="#j-checkall-demo3 :checkbox">
+                                    全选
+                                </label>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" id="j-event-2" data-toggle="checkAll" data-reverse="true" data-target="#j-checkall-demo3 :checkbox">
+                                    反选
+                                </label>
+                            </th>
+                            <th>
+                                创建时间
+                            </th>
+                            <th>
+                                业务类型
+                            </th>
+                            <th>
+                                名称<span class="th-cut">|</span>订单号
+                            </th>
+                            <th>
+                                对方账号
+                            </th>
+                            <th>
+                                收支金额
+                            </th>
+                            <th>
+                                当前剩余
+                            </th>
+                            <th class="text-align-left">
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="j-checkall-demo3">
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="立体声超级留声机">
+                                    立体声超级留声机
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                liang1126
+                            </td>
+                            <td>
+                                <p class="text-nowrap warning-FontColor" title="- 422,252.00">-&nbsp;422,252.00</p>
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="40,952,585,288.00">40,952,585,288.00</p>
+                            </td>
+                            <td class="text-align-left">
+                                <div class="table-ctrls">
+                                    详情<span class="caret-down"></span>
+                                    <div class="ctrls">
+                                        <a href="###">
+                                            详情
+                                        </a>
+                                        <a href="###">
+                                            打印
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="Q7mini立体声超级留声机不完全体第三阶段">
+                                    Q7mini立体声超级留声机不完全体第三阶段
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                rayalienkiss@126.com
+                            </td>
+                            <td class="text-nowrap success-FontColor2" title="+ 120,422,252.00">
+                                +&nbsp;120,422,252.00
+                            </td>
+                            <td class="text-nowrap" title="40,952,585,288.00">
+                                40,952,585,288.00
+                            </td>
+                            <td class="text-align-left">
+                                <a href="###" class="link-standard">打印</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre><code>   $('#j-event-1').on('checked.ui.checkAll', function(){
+                                alert($(this).prop('checked') ? '全选' : '取消全选')
+                                })
+                            </code></pre>
+                            <pre><code>    $('#j-event-2').on('reversed.ui.checkAll', function(){
+                                alert('反选')
+                                })
+                            </code></pre>
+            </div>
+        </div>
+
+        <!-- jQuery插件绑定 -->
+        <div class="section-content">
+            <h3>
+                <strong>jQuery插件绑定</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们使用<code>$(element).checkAll(options)</code>来绑定全选功能。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <colgroup>
+                            <col style="width: 70px">
+                            <col>
+                            <col style="width: 70px">
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col style=" width: 70px; ">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" id="j-event-3" data-toggle="checkAll" data-target="#j-checkall-demo4 :checkbox">
+                                    全选
+                                </label>
+                                <label class="table-checked-all">
+                                    <input type="checkbox" id="j-event-4" data-toggle="checkAll" data-reverse="true" data-target="#j-checkall-demo4 :checkbox">
+                                    反选
+                                </label>
+                            </th>
+                            <th>
+                                创建时间
+                            </th>
+                            <th>
+                                业务类型
+                            </th>
+                            <th>
+                                名称<span class="th-cut">|</span>订单号
+                            </th>
+                            <th>
+                                对方账号
+                            </th>
+                            <th>
+                                收支金额
+                            </th>
+                            <th>
+                                当前剩余
+                            </th>
+                            <th class="text-align-left">
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody id="j-checkall-demo4">
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="立体声超级留声机">
+                                    立体声超级留声机
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                liang1126
+                            </td>
+                            <td>
+                                <p class="text-nowrap warning-FontColor" title="- 422,252.00">-&nbsp;422,252.00</p>
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="40,952,585,288.00">40,952,585,288.00</p>
+                            </td>
+                            <td class="text-align-left">
+                                <div class="table-ctrls">
+                                    详情<span class="caret-down"></span>
+                                    <div class="ctrls">
+                                        <a href="###">
+                                            详情
+                                        </a>
+                                        <a href="###">
+                                            打印
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-align-left">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                                <span class="text-nowrap">
+                                                    2015-05-25
+                                                </span>
+                                                <span class="text-nowrap">
+                                                    10:25:36
+                                                </span>
+                            </td>
+                            <td>
+                                交易
+                            </td>
+                            <td>
+                                <p class="text-nowrap" title="Q7mini立体声超级留声机不完全体第三阶段">
+                                    Q7mini立体声超级留声机不完全体第三阶段
+                                </p>
+                                <p class="text-nowrap" title="TJZT2015052000258552">
+                                    TJZT2015052000258552
+                                </p>
+                            </td>
+                            <td>
+                                rayalienkiss@126.com
+                            </td>
+                            <td class="text-nowrap success-FontColor2" title="+ 120,422,252.00">
+                                +&nbsp;120,422,252.00
+                            </td>
+                            <td class="text-nowrap" title="40,952,585,288.00">
+                                40,952,585,288.00
+                            </td>
+                            <td class="text-align-left">
+                                <a href="###" class="link-standard">打印</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre><code>  $('#j-event-3').checkAll();
+
+                            </code></pre>
+                            <pre><code>   $('#j-event-4').checkAll();
+                            </code></pre>
+            </div>
         </div>
     </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/checkAll.js"></script>
+<script>
+    $(function(){
+        $('#j-event-1').on('checked.ui.checkAll', function(){
+            alert($(this).prop('checked') ? '全选' : '取消全选')
+        })
+
+        $('#j-event-2').on('reversed.ui.checkAll', function(){
+            alert('反选')
+        })
+
+        $('#j-event-3').checkAll();
+        $('#j-event-4').checkAll();
+
+    })
+</script>
 {% endblock %}

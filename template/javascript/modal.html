@@ -1,0 +1,162 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+    <section id="type" class="ui-section">
+        <h1>弹层</h1>
+        <!-- 概述用法 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    创建拥有不同样式和过渡形式的模态对话框。
+                </p>
+                <p>
+                    HTML结构上参照<code><a target="_blank" href="{{template_url}}/ui_1.1.html#modal">ui规范</a></code>
+                </p>
+                <br/>
+                <a href="#modal-1" data-toggle="modal" class="btn default small-btn">a链接打开</a>
+                <button data-target="#modal-1" data-toggle="modal" class="btn default small-btn">button打开</button>
+            </div>
+            <!-- 模拟弹框 -->
+            <div class="modal-background fade display-none" id="modal-1" role="dialog">
+                <div class="modal-layer">
+                    <div class="modal-position">
+                        <div class="modal-wrap">
+                            <div class="modal-head">
+                                modal
+                                <button class="modal-close" title="关闭">
+                                    <i></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限模态窗口高度不限
+                                </div>
+                                <div class="text-align-center margin-top-40px">
+                                    <div class="btn-with-viceLink text-align-center plural-btns">
+                                        <button type="button" class="btn primary">primary</button>
+                                        <button type="button" class="btn secondary">secondary</button>
+                                        <a href="###" class="btn-vicelink">btn-vicelink</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;a href="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;a链接打开 &lt;/a&gt;
+                                    <br/>
+                                    &lt;button data-target="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;button打开 &lt;/button&gt;
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 自定义弹层 -->
+        <div class="section-content">
+            <h3>
+                <strong>自定义弹层</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    我们通过调用<code>jQuery</code>的方法来自定义弹层。
+                </p>
+                <br/>
+                <p>
+                    <button class="btn default small-btn" id="j-pop">弹层</button>
+                </p>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                    $('#j-pop').on('click', function(){
+                                    <br/>
+                                        $('#testModal').modal({title: '提示', content: 'aaaa'});
+                                    <br/>
+                                    })
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <br/>
+                <p><code>show.ui.modal</code>监听弹层显示</p>
+                <br/>
+                <p><code>hide.ui.modal</code>监听弹层显示</p>
+
+                <br/>
+                <a href="#modal-2" data-toggle="modal" class="btn default small-btn">a链接打开</a>
+            </div>
+
+            <!-- 模拟弹框 -->
+            <div class="modal-background fade display-none" id="modal-2" role="dialog">
+                <div class="modal-layer">
+                    <div class="modal-position">
+                        <div class="modal-wrap">
+                            <div class="modal-head">
+                                modal
+                                <button class="modal-close" title="关闭">
+                                    <i></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    内容内容
+                                </div>
+                                <div class="text-align-center margin-top-40px">
+                                    <div class="btn-with-viceLink text-align-center plural-btns">
+                                        <button type="button" class="btn primary">primary</button>
+                                        <button type="button" class="btn secondary">secondary</button>
+                                        <a href="###" class="btn-vicelink">btn-vicelink</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-code">
+<pre><code>$('#modal-2').on('show.ui.modal', function(){
+        alert('弹出');
+    });
+    <br/>
+    $('#modal-2').on('hide.ui.modal', function(){
+         alert('隐藏');
+    })
+</code></pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/transition.js"></script>
+<script src="{{dist}}/js/ui/modal.js"></script>
+<script>
+    $(function(){
+        $('#j-pop').on('click', function(){
+            $('#testModal').modal({title: '提示', content: 'aaaa'});
+        })
+
+        $('#modal-2').on('show.ui.modal', function(){
+            alert('弹出');
+        });
+
+        $('#modal-2').on('hide.ui.modal', function(){
+            alert('隐藏');
+        })
+    })
+</script>
+{% endblock %}

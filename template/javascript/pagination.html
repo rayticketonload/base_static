@@ -1,0 +1,176 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<style>
+    pre{
+        white-space: pre;
+    }
+</style>
+    <section id="type" class="ui-section">
+        <h1>分页组件</h1>
+        <!-- 分页组件 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    分页组件是试用<code>Javascript</code>动态创建分页dom，主要使用在于ajax数据交互的场景。
+                </p>
+                <p>
+                    在<code>ul</code>元素上定义了<code>pagination</code>就可以启动分页组件。
+                </p>
+                <br/>
+                <div class="pagination-wrap">
+                    <ul class="pagination" data-current-page="2">
+                        <li><a href="#">上一页</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">下一页</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ui-code">
+<pre><code>&lt;div class=&quot;pagination-wrap&quot;&gt;
+   &lt;ul class=&quot;pagination data-current-page="2"&quot;&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
+   &lt;/ul&gt;
+   &lt;/div&gt;
+</code></pre>
+            </div>
+        </div>
+
+        <!-- 配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>参数配置</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    通过<code>ul</code>的<code>data-*</code>配置，或<code>jQuery</code>插件重新绑定配置
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>items</code></td>
+                            <td><code>1</code></td>
+                            <td>记录总数</td>
+                        </tr>
+                        <tr>
+                            <td><code>itemsOnPage</code></td>
+                            <td><code>1</code></td>
+                            <td>每页记录数</td>
+                        </tr>
+                        <tr>
+                            <td><code>pages</code></td>
+                            <td><code>0</code></td>
+                            <td>页数，如果传入，则不用计算</td>
+                        </tr>
+                        <tr>
+                            <td><code>displayedPages</code></td>
+                            <td><code>8</code></td>
+                            <td>导航时有多少页码是可见的。</td>
+                        </tr>
+                        <tr>
+                            <td><code>edges</code></td>
+                            <td><code>1</code></td>
+                            <td>在分页的首页或末页有多少页面是可见的。</td>
+                        </tr>
+                        <tr>
+                            <td><code>currentPage</code></td>
+                            <td><code>1</code></td>
+                            <td>当前页。</td>
+                        </tr>
+                        <tr>
+                            <td><code>lblPrev</code></td>
+                            <td><code>上一页</code></td>
+                            <td>上一页label文字</td>
+                        </tr>
+                        <tr>
+                            <td><code>lblNext</code></td>
+                            <td><code>下一页</code></td>
+                            <td>下一页label文字</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 事件监听 -->
+        <div class="section-content">
+            <h3>
+                <strong>事件监听</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    添加<code>ui.select.pagination</code>事件可以监听页码切换。
+                </p>
+                <div class="pagination-wrap">
+                    <ul id="j-page">
+
+                    </ul>
+                </div>
+                <br/>
+                <p>
+                    <button class="btn default small-btn" id="j-init-page">初始化分页</button>
+                </p>
+            </div>
+            <div class="ui-code">
+<pre><code>function ajaxData(e, index, instance){
+    alert(index);
+
+    $('#j-page').pagination('init', { currentPage: 5, pages: 50});
+    alert('现在是5，被重新初始化!');
+    }
+
+    ajaxData();
+
+    $('#j-page').on('select.ui.pagination', ajaxData);
+</code></pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/pagination.js"></script>
+<script>
+
+    $(function(){
+
+        function ajaxData(e, index, instance){
+            alert(index);
+
+            $('#j-page').pagination('init', { currentPage: 5, pages: 50});
+            alert('现在是5，被重新初始化!');
+        }
+
+        var inited = false;
+        $('#j-init-page').on('click', function(){
+            if(inited) true;
+            inited = true;
+            $('#j-page').addClass('pagination');
+            ajaxData();
+        })
+
+        $('#j-page').on('select.ui.pagination', ajaxData);
+
+    })
+</script>
+{% endblock %}

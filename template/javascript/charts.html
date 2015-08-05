@@ -1,0 +1,146 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<style>
+    pre{
+        white-space: pre-wrap;
+    }
+</style>
+    <section id="type" class="ui-section">
+        <h1>图表组件</h1>
+        <!-- 概述用法 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    给指定的元素初始化图表，其中要传入填充的数据，暂时只支持线形图。
+                </p>
+                <br>
+                <p><strong>图表dom元素必须定义宽高</strong></p>
+                <br/>
+                <div class="chart-wrap">
+                    <div id="j-chart" style="width: 100%; height: 254px;"></div>
+                </div>
+            </div>
+            <div class="ui-code">
+                <pre>
+                    <code>
+                        var myChart = new UICharts('j-chart');
+                        <br/>
+                        myChart.showLoading({effect: 'whirling'});
+                        <br/>
+                        myChart.setOption(data);
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <!-- 配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>参数配置</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    图片对象的创建需要传入dom对象或dom对象的id。提供了<code>showLoading</code>、<code>hideLoading</code>和<code>setOption</code>接口。
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>id|object</code></td>
+                            <td><code>new UIChart(id|object)</code></td>
+                            <td>创建一个图表</td>
+                        </tr>
+                        <tr>
+                            <td><code>showLoading</code></td>
+                            <td><code>{text: 'Loading...', effect: 'spin' | 'bar' | 'ring' | 'whirling' | 'dynamicLine' | 'bubble'}</code></td>
+                            <td>显示loading效果</td>
+                        </tr>
+                        <tr>
+                            <td><code>hideLoading</code></td>
+                            <td><code>无</code></td>
+                            <td>隐藏加载层</td>
+                        </tr>
+                        <tr>
+                            <td><code>setOption</code></td>
+                            <td><code>{label: [], series: []}</code></td>
+                            <td>label为x坐标文字，series为折线数据,每项的data长度应与label长度一致</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+<pre><code>var data = {
+        //X坐标
+        labels : [&quot;03-01&quot;, &quot;03-02&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;, &quot;2/30&quot;],
+        //利率数据
+        series : [
+        // 第一条线
+        {
+            name:'本月（3月）',
+            data:[&quot;200&quot;, &quot;900&quot;, &quot;200&quot;, &quot;700&quot;, &quot;200&quot;, &quot;200&quot;,&quot;100&quot;,&quot;100&quot;,&quot;100&quot;,&quot;100&quot;,&quot;100&quot;,&quot;100&quot;]
+        },
+        // 第二条线
+        {
+            name:'上月（2月）',
+            data:[&quot;100&quot;, &quot;700&quot;, &quot;900&quot;, &quot;800&quot;, &quot;600&quot;, &quot;400&quot;,&quot;300&quot;,&quot;150&quot;,&quot;180&quot;,&quot;100&quot;,&quot;200&quot;,&quot;100&quot;]
+        }
+    ]
+    };
+
+
+    var myChart = new UICharts('j-chart');
+    myChart.showLoading({effect: 'whirling'});
+    myChart.setOption(data);
+</code></pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/charts.js"></script>
+<script>
+    $(function(){
+        var data = {
+            //X坐标
+            labels : ["03-01", "03-02", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30"],
+            //利率数据
+            series : [
+                // 第一条线
+                {
+                    name:'本月（3月）',
+                    data:["200", "900", "200", "700", "200", "200","100","100","100","100","100","100"]
+                },
+                // 第二条线
+                {
+                    name:'上月（2月）',
+                    data:["100", "700", "900", "800", "600", "400","300","150","180","100","200","100"]
+                }
+            ]
+        };
+
+
+        var myChart = new UICharts('j-chart');
+        myChart.showLoading({effect: 'whirling'});
+        myChart.setOption(data);
+    })
+</script>
+{% endblock %}

@@ -24,8 +24,8 @@
     // ===============
     var Pagination = function(element, options) {
         this.$el = $(element);
-        this._setOption(options);
-        this._init();
+
+        this._init(options);
     };
 
     // 版本
@@ -51,8 +51,10 @@
 
     // 初始化
     // =================
-    Pagination.prototype._init = function() {
+    Pagination.prototype._init = function(options, inited) {
         var $this = this;
+
+        this._setOption(options);
 
         // 总页数
         $this.pages = $this.options.pages ? $this.options.pages : Math.ceil($this.options.items / this.options.itemsOnPage) ? Math.ceil($this.options.items / $this.options.itemsOnPage) : 1;
@@ -63,13 +65,17 @@
         $this.halfDisplayed = $this.options.displayedPages / 2;
 
         // 绑定点击切换页码
-        $this.$el.on('click', 'a[data-page]', function(e) {
+        !!!inited && $this.$el.on('click', 'a[data-page]', function(e) {
             e.preventDefault();
             $this.selectPage($(this).data('page'));
         });
 
         // dom 渲染
         $this._render();
+    };
+
+    Pagination.prototype.init = function(options){
+        this._init(options, true);
     };
 
     // 私有方法
@@ -88,7 +94,7 @@
         // 触发切换选择函数
         this.options.onSelectPage(pageIndex, this);
         // 触发api接口
-        this.$el.trigger('ui.select.pagination', [pageIndex, this]);
+        this.$el.trigger('select.ui.pagination', [pageIndex, this]);
     };
 
     Pagination.prototype._render  = function(){
@@ -166,7 +172,7 @@
     // opts 文本配置
     // islb 是否上一页下一页，是永不加active
     Pagination.prototype._append = function(pageIndex, opts, islb) {
-        var $this = this, item, link, options;
+        var $this = this, item, options;
 
         // 判断首页，末页，常规页
         pageIndex = pageIndex < 0 ? 0: (pageIndex < this.pages ? pageIndex : this.pages -1);
@@ -186,7 +192,7 @@
             var $this = $(this);
             var data = $this.data('ui.pagination');
 
-            if(!data) $this.data('ui.pagination', (data = new Pagination($this, options)));
+            if(!data) $this.data('ui.pagination', (data = new Pagination($this, $.extend({}, $this.data(), options))));
 
             if(typeof options == 'string') { // 调用接口方法
                 data[options].apply(data, [].slice.call(args, 1));
