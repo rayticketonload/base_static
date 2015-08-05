@@ -22,8 +22,6 @@ body {
     .font-hei();
     //height: 100%;
     //width: 100%;
-    /*height: 100%;
-    width: 100%;*/
 }
 
 body {
@@ -538,68 +536,54 @@ h6,.h6 {
     }
 }
 
-.form-group {
-    padding-left: @form-control-label-width + 10px;
-    position: relative;
+.form-control-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @form-control-label-width;
+    height: @form-control-height;
+    text-align: right;
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
     .clearfix();
 
-    .form-control-label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: @form-control-label-width;
-        height: @form-control-height;
-        text-align: right;
-        font-size: 0;
-        line-height: 0;
-        overflow: hidden;
-        .clearfix();
-
-        > em, span {
-            font-size: @forms-FontSize;
-            color: @default-FontColor;
-        }
-
-        > em {
-            .inline-block();
-            height: 100%;
-            line-height: @form-control-height;
-            vertical-align: middle;
-            font-style: normal;
-        }
-
-        > span {
-            .inline-block();
-            line-height: @line-height-base;
-            vertical-align: middle;
-            max-width: 76%;
-        }
-
-        > b {
-            .inline-block();
-            height: 100%;
-            vertical-align: middle;
-            color: @error-FontColor1;
-            line-height: @form-control-height + 9px;
-            font-size: ceil( ( @forms-FontSize * 1.7 ) );
-            padding-right: 5px;
-        }
+    > em, span {
+        font-size: @forms-FontSize;
+        color: @default-FontColor;
     }
 
-    .form-control-wrap {
-        min-height: @form-control-height;
-        padding-bottom: 15px;
-        position: relative;
-
-        > label {
-            line-height: @form-control-height;
-            position: absolute;
-            top: 0;
-            left: 16px;
-            color: @viceText-FontColor;
-            font-size: @smaller-FontSize;
-        }
+    > em {
+        .inline-block();
+        height: 100%;
+        line-height: @form-control-height;
+        vertical-align: middle;
+        font-style: normal;
     }
+
+    > span {
+        .inline-block();
+        line-height: @line-height-base;
+        vertical-align: middle;
+        max-width: 76%;
+    }
+
+    > b {
+        .inline-block();
+        height: 100%;
+        vertical-align: middle;
+        color: @error-FontColor1;
+        line-height: @form-control-height + 9px;
+        font-size: ceil( ( @forms-FontSize * 1.7 ) );
+        padding-right: 5px;
+    }
+}
+
+.form-group {
+    padding-left: @form-control-label-width + 10px;
+    padding-bottom: 15px;
+    position: relative;
+    .clearfix();
 
     &.has-correct,
     &.has-error {
@@ -832,10 +816,13 @@ h6,.h6 {
     .link-standard();
 }
 
+.form-control-wrap {
+    min-height: @form-control-height;
+}
+
 .form-control-dropdown,
 .form-control-modal,
 .form-control-date {
-    position: relative;
     cursor: pointer;
 
     .form-control {
@@ -949,6 +936,42 @@ h6,.h6 {
                 border-color: @form-focus-BorderColor;
                 border-width: 2px;
                 padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 14px;
+            }
+        }
+    }
+}
+
+.form-control-wrap,
+.form-control-dropdown,
+.form-control-modal,
+.form-control-date {
+    position: relative;
+
+    > label {
+        line-height: @form-control-height;
+        position: absolute;
+        top: 0;
+        left: 16px;
+        color: @viceText-FontColor;
+        font-size: @smaller-FontSize;
+    }
+
+    &.smallsize {
+
+        > label {
+            line-height: @form-control-height - 12px;
+            left: 10px;
+        }
+
+        &.with-keyin {
+
+            &.active {
+
+                .form-control {
+                    border-color: @form-focus-BorderColor;
+                    border-width: 2px;
+                    padding: ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px ( @form-control-height - 10px - 3px ) + 9px ( @form-control-height - ( @forms-FontSize + 4px ) ) / 2 - 2px 9px;
+                }
             }
         }
     }

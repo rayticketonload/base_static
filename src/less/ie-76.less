@@ -203,6 +203,19 @@ input.form-control {
     }
 }
 
+.form-control-wrap,
+.form-control-dropdown,
+.form-control-modal,
+.form-control-date {
+
+    &.smallsize {
+
+        > label {
+            *line-height: @form-control-height - 10px;
+        }
+    }
+}
+
 .form-control-dropdown,
 .form-control-modal,
 .form-control-date {
