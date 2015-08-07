@@ -13,6 +13,8 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "assist",
+    "output",
     "node_modules",
     "bower_components",
     "test",

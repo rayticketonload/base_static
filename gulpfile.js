@@ -239,31 +239,9 @@ gulp.task('js', function(){
                // .pipe(connect.reload())
 });
 
-/* 合并charts  */
-gulp.task('charts', function(){
-   return gulp.src(filePaths.charts)
-                .pipe(concat('charts.js'))
-                .pipe(uglify())
-                .pipe(n2a({reverse: false}))
-                .pipe(bannerHeader(banner, { pkg: pkg}))
-                .pipe(gulp.dest(distPath+'/js/ui'));
-});
 
-/* 合并ui */
-gulp.task('ui', function(){
-    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
-            .pipe( plumber( { errorHandler: errrHandler } ) )
-                //.pipe(sourcemaps.init())
 
-                .pipe(concat('ui.js'))
-                .pipe(stripDebug())
-                .pipe(n2a({reverse: false}))
-                .pipe(uglify())
-               // .pipe(sourcemaps.write(distPath+'/js/maps'))
-                .pipe(bannerHeader(banner, { pkg: pkg}))
-                .pipe(gulp.dest(distPath+'/js'))
-               // .pipe(connect.reload())
-})
+
 
 /* 编译模板 */
 gulp.task('template', function(){
@@ -326,6 +304,57 @@ gulp.task('iconfont-style', function(){
         .pipe(replace(/fonts\//g, '@{iconfont-url}'))
         .pipe(gulp.dest('./src/less/'))
 })
+
+// 更新到frontui
+// ------------------------
+var frontui_path = config.frontui_path+'static';
+gulp.task('front:ui', function(){
+    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
+        .pipe( plumber( { errorHandler: errrHandler } ) )
+        //.pipe(sourcemaps.init())
+
+        .pipe(concat('ui.js'))
+        .pipe(stripDebug())
+        .pipe(n2a({reverse: false}))
+        .pipe(uglify())
+        // .pipe(sourcemaps.write(distPath+'/js/maps'))
+        .pipe(bannerHeader(banner, { pkg: pkg}))
+        .pipe(gulp.dest(frontui_path+'/js'))
+    // .pipe(connect.reload())
+});
+/* 合并charts  */
+gulp.task('frontui:charts', function(){
+    return gulp.src(filePaths.charts)
+        .pipe(concat('charts.js'))
+        .pipe(uglify())
+        .pipe(n2a({reverse: false}))
+        .pipe(bannerHeader(banner, { pkg: pkg}))
+        .pipe(gulp.dest(frontui_path+'/js'));
+});
+// images
+gulp.task('frontui:images', function(){
+   return gulp.src(distPath+'/images/**/**')
+              .pipe(gulp.dest(frontui_path+'/images'))
+});
+// iconfont
+gulp.task('frontui:iconfont', function(){
+    return gulp.src(distPath+'/iconfont/**/**')
+                .pipe(gulp.dest(frontui_path+'/iconfont'));
+});
+// ie7
+gulp.task('frontui:ie7', function(){
+    return gulp.src(distPath+'/iconfont-ie7/**/**')
+                .pipe(gulp.dest(frontui_path+'/iconfont-ie7'));
+})
+// less
+gulp.task('frontui:less', function(){
+    return gulp.src([staticPath+'/less/**/**', '!'+staticPath+'/less/ui.less'])
+                .pipe(gulp.dest(frontui_path+'/less'));
+});
+
+gulp.task('frontui', function(){
+    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less']);
+});
 
 
 /*------ 默认启动任务 ------ */
