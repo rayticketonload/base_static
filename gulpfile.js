@@ -12,7 +12,8 @@
 "use strict";
 
 // 配置
-var pkg = require('./config.json')
+var config = require('./config.json')
+var pkg = require('./package.json')
 
 var nunjucks = require('nunjucks');
 var path = require('path');
@@ -37,11 +38,14 @@ var spawn = require('child_process').spawn;
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var del = require('del')
+// 中文转ascii
+var n2a = require('gulp-native2ascii');
 //var liveReload = require('gulp-livereload')
 //var browserSync = require('browser-sync')
 //
 
 var htmlreplace = require('gulp-html-replace')
+var bannerHeader = require('gulp-header')
 var concat = require('gulp-concat')
 // 去掉console,alert语句
 var stripDebug = require('gulp-strip-debug');
@@ -51,6 +55,8 @@ var replace = require('gulp-replace');
 var gutil = require( 'gulp-util' )
 var plumber = require( 'gulp-plumber' );
 
+// 组件路径
+var components_url = path.join(__dirname, 'bower_components');
 //模板路径
 var tplPath = path.join(__dirname, 'template');
 //输出路径
@@ -64,6 +70,17 @@ var distPath = path.join(__dirname, dist)
 
 // 服务启动端口
 var PORT = 8888;
+
+var createdTime = (new Date().toLocaleDateString().split(' '))[0];
+var banner = [
+        '/*! <%=pkg.name%> v<%=pkg.version%>',
+        '*  by <%=pkg.author%>',
+        '*  (c) '+ createdTime + ' www.frontpay.cn',
+        '*  Licensed under <%= pkg.license %>',
+        '*/',
+        ''
+    ].join('\n');
+
 
 /* 启动浏览器 */
 var openURL = function (url) {
@@ -85,18 +102,6 @@ function errrHandler( e ){
     gutil.beep();
     gutil.log( e );
 }
-
-/* 启动服务 */
-gulp.task('server', function () {
-    connect.server({
-        root: __dirname,
-        port: PORT
-    });
-
-    console.log('server start at: http://localhost:' + PORT + '/');
-
-    openURL('http://localhost:' + PORT + '/');
-})
 
 /* 路径 */
 var filePaths = {
@@ -125,7 +130,7 @@ var tpl = function(){
         //var tplFile = file.path.replace(tplPath, '');
         var tplFile = file.path;
 
-        template.render(tplFile, {version: pkg.ver, dist: dist, template_url: template_url}, function(err, html){
+        template.render(tplFile, {version: config.ver, dist: dist, template_url: template_url}, function(err, html){
             if(err){
                 return next(err);
             }
@@ -163,7 +168,7 @@ gulp.task('sprite', function(cb){
 
 	var spriteData = gulp.src(filePaths.sprite)
 						.pipe(spritesmith({
-							imgPath: '../images/sprite/sprite.png?v='+pkg.ver,
+							imgPath: '../images/sprite/sprite.png?v='+config.ver,
 					        imgName: 'sprite.png',
 					        cssName: cssName
 					        ,padding: 20
@@ -200,9 +205,11 @@ gulp.task('less', function(){
                 // 编译less
                 .pipe(less())
                 // 自动添加前缀
-                .pipe(autoprefixer(pkg.browser))
+                .pipe(autoprefixer(config.browser))
                 // 压缩css
+                //
                 .pipe(minifyCSS({compatibility: 'ie7'}))
+                .pipe(bannerHeader(banner, { pkg: pkg}))
                 // 生成sourcemap
                 .pipe(sourcemaps.write('../css/maps'))
                 // 输出css文件
@@ -210,12 +217,24 @@ gulp.task('less', function(){
                 .pipe(connect.reload())
 })
 
+gulp.task('animated', function(){
+    return gulp.src(components_url+'/animate.css/source/**/*.css')
+                .pipe(rename(function(path){
+                    path.basename = (path.basename.charAt(0) === '_' ? '' : '_' ) + path.basename;
+                    path.extname = '.less';
+                }))
+                .pipe(gulp.dest(staticPath+'/less/animate'));
+});
+
 /* js */
 gulp.task('js', function(){
     return gulp.src(filePaths.js)
                 //.pipe(sourcemaps.init())
                 .pipe(uglify())
+                //
                // .pipe(sourcemaps.write(distPath+'/js/maps'))
+                .pipe(n2a({reverse: false}))
+                .pipe(bannerHeader(banner, { pkg: pkg}))
                 .pipe(gulp.dest(distPath+'/js'))
                // .pipe(connect.reload())
 });
@@ -225,6 +244,8 @@ gulp.task('charts', function(){
    return gulp.src(filePaths.charts)
                 .pipe(concat('charts.js'))
                 .pipe(uglify())
+                .pipe(n2a({reverse: false}))
+                .pipe(bannerHeader(banner, { pkg: pkg}))
                 .pipe(gulp.dest(distPath+'/js/ui'));
 });
 
@@ -233,10 +254,13 @@ gulp.task('ui', function(){
     return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
             .pipe( plumber( { errorHandler: errrHandler } ) )
                 //.pipe(sourcemaps.init())
+
                 .pipe(concat('ui.js'))
                 .pipe(stripDebug())
+                .pipe(n2a({reverse: false}))
                 .pipe(uglify())
                // .pipe(sourcemaps.write(distPath+'/js/maps'))
+                .pipe(bannerHeader(banner, { pkg: pkg}))
                 .pipe(gulp.dest(distPath+'/js'))
                // .pipe(connect.reload())
 })
@@ -258,13 +282,17 @@ gulp.task('replace', function(){
         .pipe(gulp.dest(outPath));
 })
 
-///* 启动服务 */
-//gulp.task('server', ['template'], function(){
-//    connect.server({
-//        root:['output'],
-//        port: pkg.port || 8000
-//    });
-//});
+/* 启动服务 */
+gulp.task('server', function () {
+    connect.server({
+        root: __dirname,
+        port: PORT
+    });
+
+    console.log('server start at: http://localhost:' + PORT + '/');
+
+    openURL('http://localhost:' + PORT + '/');
+})
 
 /*--- watch 监听 ---*/
 gulp.task('watch', function(){

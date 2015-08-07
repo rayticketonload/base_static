@@ -1,0 +1,27 @@
+{
+  "name": "frontui",
+  "version": "1.0.0",
+  "homepage": "https://github.com/rayalienkiss/base_static",
+  "authors": [
+    "tomieric <tomieric@gmail.com>"
+  ],
+  "description": "ui component for frontpay",
+  "main": "gulpfile.js",
+  "keywords": [
+    "ui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11.1",
+    "animate.css": "~3.4.0",
+    "html5shiv": "~3.7.3",
+    "respond": "~1.4.2"
+  }
+}
