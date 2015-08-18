@@ -363,7 +363,7 @@ gulp.task('default', ['clean'], function(next){
     //return next();
 });
 
-gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'charts', 'js', 'template'],  function(){
+gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'frontui:charts', 'js', 'template'],  function(){
 	gulp.start(['ui', 'replace'])
 })
 
