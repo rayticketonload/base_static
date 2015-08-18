@@ -364,7 +364,7 @@ gulp.task('default', ['clean'], function(next){
 });
 
 gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'frontui:charts', 'js', 'template'],  function(){
-	gulp.start(['ui', 'replace'])
+	gulp.start(['front:ui', 'replace'])
 })
 
 /* 更新字体 */
