@@ -80,6 +80,18 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#breadcrumb" class="sidebar-btn">
+                                路径导航
+                            </a>
+                            <ul class="lv2">
+                                <li>
+                                    <a href="#breadcrumb-base" class="sidebar-btn">
+                                        实例
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="#tables" class="sidebar-btn">
                                 表格
                             </a>
@@ -828,6 +840,101 @@
                                     <br />
                                     &lt;/div&gt;
                                 </code>                     
+                            </pre>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- 路径导航 -->
+                <section id="breadcrumb" class="ui-section">
+                    <h1>
+                        路径导航
+                    </h1>
+
+                    <!-- 实例 -->
+                    <div class="section-content" id="breadcrumb-base">
+                        <h3>
+                            <strong>实例</strong>
+                        </h3>
+                        <div class="ui-example">
+                            <span class="section-tip">在一个带有层次的导航结构中标明当前页面的位置</span>
+                            <p class="description">
+                                各路径间的分隔符用&nbsp;fonticon&nbsp;代替<code>a</code>的<code>:after</code>属性，因为&nbsp;IE7&nbsp;不兼容
+                            </p>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="###">
+                                        首页
+                                        <i class="icon-chevron-thin-right"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="###">
+                                        二级页面位置
+                                        <i class="icon-chevron-thin-right"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="###">
+                                        三级页面位置
+                                        <i class="icon-chevron-thin-right"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    当前位置
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="ui-code">
+                            <pre>
+                                <code>
+                                    <span> &lt;ol class="breadcrumb"&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;a href="###"&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首页
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i class="icon-chevron-thin-right"&gt;</span><span>&lt;/i&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/a&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;a href="###"&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二级页面位置
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i class="icon-chevron-thin-right"&gt;</span><span>&lt;/i&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/a&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;a href="###"&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;三级页面位置
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;i class="icon-chevron-thin-right"&gt;</span><span>&lt;/i&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&lt;/a&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;li&gt;</span>
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前位置
+                                    <br />
+                                    &nbsp;&nbsp;&nbsp;<span>&lt;/li&gt;</span>
+                                    <br />
+                                    <span> &lt;/ol&gt;</span>
+                                </code>                   
                             </pre>
                         </div>
                     </div>
