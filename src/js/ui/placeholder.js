@@ -29,7 +29,7 @@
         this.$placeholder = $this.$el.data('placeholder');
         if(!isSupport && !this.$placeholder) {
             var text = $this.$el.attr('placeholder');
-            $this.$placeholder = $('<label />').html(text);
+            $this.$placeholder = $('<label class="form-placeholder" />').html(text);
             $this.$el.data('placeholder', $this.$placeholder).before($this.$placeholder);
         }
 
