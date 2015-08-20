@@ -1,5 +1,5 @@
 /*!
- * switcher ÇĞ»»Æ÷
+ * switcher Ã‡ÃÂ»Â»Ã†Ã·
  * tommyshao <jinhong.shao@frontpay.cn>
  * API:
  *      <div data-toggle="switcher" [data-except="true"|data-item="a"|data-active="current"]/>
@@ -12,7 +12,7 @@
 
     var toggle = '[data-toggle="switcher"]';
 
-    // ¹¹Ôìº¯Êı
+    // Â¹Â¹Ã”Ã¬ÂºÂ¯ÃŠÃ½
     // ===============
     var Switcher = function(element, option) {
         var $this = this;
@@ -29,17 +29,19 @@
     Switcher.DEFAULTS = {
         item: 'li',
         active: 'active',
-        except: false
+        except: false,
+        keep: false
     };
 
     Switcher.prototype.select = function ($target) {
         var o = this.option, e = $.Event('select.ui.switcher', {relatedTarget: $target});
+        if(o.keep && $target.hasClass(o.active)) return;
         $target.toggleClass(o.active).trigger(e);
         if(!o.except) $target.siblings(o.item).removeClass(o.active);
     };
 
 
-    // ²å¼ş¶¨Òå
+    // Â²Ã¥Â¼Ã¾Â¶Â¨Ã’Ã¥
     //======================
     function Plugin(option) {
         return $(this).each(function () {
@@ -52,11 +54,11 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery Â²Ã¥Â¼Ã¾Ã€Â©Ã•Â¹
     $.fn.switcher = Plugin;
     $.fn.switcher.Constructor = Switcher;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // Ã”ÂªÃ‹Ã˜Â²Ã¥Â¼Ã¾Â°Ã³Â¶Â¨
     // ====================
     $(document).ready(function(){ $(toggle).switcher() });
 })( jQuery );
