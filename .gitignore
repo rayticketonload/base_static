@@ -10,6 +10,9 @@ bower_components/
 
 build/node_modules/
 output/
+www
+www/
+
 
 tags
 
