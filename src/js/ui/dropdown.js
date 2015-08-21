@@ -12,8 +12,10 @@
     // 默认高亮类
     var active = 'active';
     // 绑定默认选择器
+    var wrap = '.form-control-dropdown';
     var toggle = '[data-toggle="dropdown"],.form-control-dropdown-value';
     var toggleBtn = '.form-control-dropdown-btn, [data-toggle="dropdown-btn"]';
+    var ul = '.form-control-dropdown-menu';
     var list = '.form-control-dropdown-menu li, [role="list"] li';
 
     // 构造函数
@@ -111,10 +113,12 @@
         var $target = el.find(toggle);
         return function(e){
             e.preventDefault();
+            e.stopPropagation();
             var isInput = /input/i.test($target[0].tagName);
             var option = $.trim($(this)[isInput ? 'text' : 'html']());
             $target[isInput ? 'val' : 'html'](option).trigger('selected.ui.dropdown', this);
             clearMenus();
+            return false;
         }
     };
 
@@ -167,19 +171,80 @@
 
     // 清除页面所有dropdown
     // ==================
-    function clearMenus(e) {
+    function clearMenus(e, auto) {
         $(toggle).each(function () {
             var $this = $(this);
             var $target = getParent($this);
+            var $input = $target.find(toggle);
             active = $this.data('active') || active;
 
             if(!$target.hasClass(active)) return;
             if(e && e.isDefaultPrevented()) return;
 
+            // 隐藏之前赋值
+            auto && autoFill($this, $input);
+
             $target.removeClass(active).find(list).removeClass('hover').show();
-            $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this).data('currentItem', -1)
+            $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this).data('currentItem', -1);
+
         })
     }
+
+    function hideAllMenus (e) {
+        clearMenus(e, 1)
+    }
+
+    // 默认选中
+    // ===============
+    function autoFill(element, input){
+        var $Li = getList(element), $vLi, isMatch = 0, txt = '', value = $.trim(input.val());
+
+        $vLi = $Li.filter(function(){
+            if($(this).is(':visible')) {
+                if(isMatch === 0) {
+                    txt = $.trim($(this).text());
+                    isMatch = txt == value ? 1 : 0;
+                }
+                return true;
+            }
+            return false;
+        });
+
+        if(!isMatch) {
+            if($vLi.length === 0) {
+                $Li.eq(0).trigger('click')
+            } else {
+                $vLi.eq(0).trigger('click.ui.dropSelect')
+            }
+        }
+    }
+
+    // 匹配
+    // ===============
+    function chkMatch() {
+        var $this = $(this),
+            placeholder = $this.attr('placeholder'),
+            value = $.trim($this.val()),
+            $items = getList($this);
+
+        if(value === '' || value === placeholder) {
+            return;
+        }
+
+        $items.hide()
+              .filter(function(){
+                    var txt = $.trim($(this).text()) || '';
+                    
+                    if(txt == value){
+                        $(this).addClass('hover');
+                    }
+
+                    return txt.indexOf(value) > -1; 
+               })
+              .show();
+    }
+
+
 
     // 获取响应的元素
     // ===================
@@ -224,14 +289,26 @@
     $(toggle).dropdown();
     $(document)
         // 点击页面其他地方收起
-        .on('click.ui.dropdown', clearMenus)
+        .on('click.ui.dropdown', hideAllMenus)
         // 按钮触发
         .on('click.ui.dropdown-btn', toggleBtn, function(e){
             var $target = $(this).siblings(toggle);
-            $target.length && $target.trigger('click.ui.dropdown');
+            $target.length && $target.dropdown('toggle');
             return false;
         })
+        .on('click.ui.dropdown', ul, function(e){
+            e.stopPropagation(); 
+            return false;
+        })
+        // .on('click.ui.dropdown', list, function(e){
+        //     var $toggle = $(e.target).closest(wrap);
+        //     console.log($toggle);
+        //     var $target = getParent($toggle.find(ul));
+        //     $target.trigger('click.ui.dropSelect');
+        //     e.stopPropagation(); 
+        //     return false;
+        // })
         // focus
-        //.on('click.ui.dropdown', toggle, Dropdown.prototype.toggle)
+        .on('focus.ui.dropdown', toggle, chkMatch)
         .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
 })(jQuery);

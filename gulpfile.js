@@ -230,7 +230,7 @@ gulp.task('animated', function(){
 gulp.task('js', function(){
     return gulp.src(filePaths.js)
                 //.pipe(sourcemaps.init())
-                .pipe(uglify())
+                //.pipe(uglify())
                 //
                // .pipe(sourcemaps.write(distPath+'/js/maps'))
                 .pipe(n2a({reverse: false}))
