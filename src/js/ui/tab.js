@@ -113,7 +113,7 @@
     // 元素插件绑定
     // ====================
     var clickHandler = function(e) {
-        e.preventDefault();
+        if(!$(e.target).hasClass('tab-disabled')) e.preventDefault();
         Plugin.call($(this), 'show')
     };
 
