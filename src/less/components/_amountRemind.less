@@ -1,145 +1,117 @@
 //可提现金额提示结构
 .ar-wrapper {
     border: 4px solid @primary-BorderColor;
+    border-bottom: none;
     position: relative;
+}
 
-    > h4 {
-        position: relative;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 50% 0 20px;
+.ar-top {
+    padding: 15px 0;
+    .clearfix();
+    border-bottom: 4px solid @primary-BorderColor;
 
-        > span {
-            color: @viceText-FontColor;
-            font-size: @smallest-FontSize;
+    .amountbox {
+        width: 50%;
+        float: left;
+        padding: 0 30px;
+
+        > h3 {
+            position: relative;
+
+            > span {
+                position: absolute;
+                right: 0;
+                top: 4px;
+                font-size: @smallest-FontSize;
+                color: @viceText-FontColor;
+            }
+        }
+
+        > h2 {
+            color: @warning-FontColor;
+        }
+
+        &.left {
+            border-right: 1px solid @primary-BorderColor;
         }
     }
-
-    .in-right {
-        position: absolute;
-        right: 20px;
-        top: 0;
-    }
-
-    .sh-btn {
-        position: absolute;
-        bottom: -22px;
-        left: 50%;
-        margin-left: -25px;
-        cursor: pointer;
-        width: 50px;
-        height: 22px;
-        .border-radius( 0,0,5px,5px );
-        background-color: @primary-BorderColor;
-        text-align: center;
-        line-height: 28px;
-        font-size: @large-FontSize;
-    }
 }
 
-.ar-table-wrap {
-    margin: 0 20px;
-    overflow: hidden;
-    height: 95px;
-    .transition( height,0.3s,ease,0 );
-    position: relative;
-
-    &.show {
-        height: 260px;
-    }
-}
-
-.ar-table {
-    width: 100%;
-    max-width: 100%;
-    table-layout: fixed;
+.sh-btn {
+    width: 148px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    .link-standard();
+    text-align: center;
     font-size: @smallest-FontSize;
-    background-color: #fff;
-
-    td {
-        padding: 20px 15px;
-    }
-}
-
-.ar-tr {
-    border-bottom: 1px solid @primary-BorderColor;
-}
-
-.ar-data-box {
-    position: relative;
-    border-right: 1px solid @secondary-BorderColor;
-    padding-left: 72px;
-    padding-right: 15px;
-
-    > h2 {
-        color: @warning-FontColor;
-        line-height: 1.2;
-        .text-hide();
-    }
-
-    > p {
-        color: @viceText-FontColor;
-        line-height: 1.2;
-        .text-hide();
-    }
-}
-
-.ar-data {
-    .square( 54px );
-    .rounded( 10px );
-    background-color: #556d8f;
+    .border-radius( 0,0,5px,5px );
     position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-
-    > b {
-        background-color: #7699c8;
-        text-align: center;
-        height: 40px;
-        line-height: 40px;
-        font-size: @largest-FontSize;
-        display: block;
-        .rounded( 10px );
-    }
-
-    > span {
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        display: block;
-        text-align: center;
-        font-size: @smallest-FontSize - 2px;
-    }
-
-    &.one {
-        background-color: #b15202;
-
-        > b {
-            background-color: #f57403;
-        }
-    }
-
-    &.two {
-        background-color: #416b0d;
-
-        > b {
-            background-color: #5a9712;
-        }
-    }
+    bottom: -28px;
+    right: -4px;
+    background-color: @primary-BorderColor;
 }
 
-.ar-page-wrap {
+.ar-bottom {
+    background-color: @bgColor-type1;
+    border-bottom: 4px solid @primary-BorderColor;
+    padding: 20px 0 20px 100px;
     position: relative;
-    padding-top: 15px;
+    font-size: @smallest-FontSize;
+    display: none;
 
     > p {
-        color: @viceText-FontColor;
+        color: @heading-FontColor;
         position: absolute;
-        top: 15px;
-        left: 0;
-        font-size: @smallest-FontSize;
-        line-height: 26px;
+        left: 26px;
+
+        &.a {
+            top: 20px;
+        }
+
+        &.b {
+            top: 52px;
+        }
+    }
+
+    > div {
+        position: relative;
+        overflow: hidden;
+        height: 45px;
+
+        .arlist {
+            .clearfix;
+            .reset-list( left,block,@smaller-FontSize,@line-height-base );
+
+            > li {
+                width: 100%;
+
+                > ul {
+                    .clearfix;
+                    .reset-list( left,block,@smallest-FontSize,1.2 );
+
+                    > li {
+                        border-left: 1px solid @primary-BorderColor;
+                        text-align: center;
+                        padding: 0 15px;
+                        width: 14.25%;
+                        overflow: hidden;
+
+                        > p {
+                            color: @viceText-FontColor;
+                            padding-bottom: 20px;
+                        }
+
+                        > h6 {
+                            .text-hide();
+                        }
+
+                        &:first-child {
+                            border-left: none;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

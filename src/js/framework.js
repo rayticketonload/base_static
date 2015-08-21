@@ -9,6 +9,6 @@ noautoform();
 //双色球开关
 $(function () {
     $("#sh").click(function () {
-        $("#atw").toggleClass("show");
+        $("#arb").slideToggle();
     });
 });
