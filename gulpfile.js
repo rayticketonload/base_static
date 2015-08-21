@@ -239,6 +239,16 @@ gulp.task('js', function(){
                // .pipe(connect.reload())
 });
 
+/* 合并charts  */
+gulp.task('charts', function(){
+    return gulp.src(filePaths.charts)
+        .pipe(concat('charts.js'))
+        .pipe(uglify())
+        .pipe(n2a({reverse: false}))
+        .pipe(bannerHeader(banner, { pkg: pkg}))
+        .pipe(gulp.dest(distPath+'/js'));
+});
+
 
 
 
@@ -309,7 +319,7 @@ gulp.task('iconfont-style', function(){
 // ------------------------
 var frontui_path = config.frontui_path+'static';
 gulp.task('front:ui', function(){
-    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
+    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
         .pipe( plumber( { errorHandler: errrHandler } ) )
         //.pipe(sourcemaps.init())
 
@@ -359,7 +369,7 @@ gulp.task('frontui', function(){
 
 /*------ 默认启动任务 ------ */
 gulp.task('default', ['clean'], function(next){
-    return gulp.start(['sprite','iconfont', 'images', 'less',  'js', 'template', 'watch', 'server']);
+    return gulp.start(['sprite','iconfont', 'images', 'less',  'js', 'charts', 'template', 'watch', 'server']);
     //return next();
 });
 

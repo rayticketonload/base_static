@@ -5,7 +5,7 @@
 {% block css %}
         <link rel="stylesheet" type="text/css" href="{{ dist }}/css/ui.css?v={{ version }}">
         <!-- 日期选择器样式，独立引入 -->
-        <!--<link rel="stylesheet" href="{{ dist }}/css/datetimepicker.css?v={{ version }}"/>-->
+        <link rel="stylesheet" href="{{ dist }}/css/datetimepicker.css?v={{ version }}"/>
 {% endblock %}
 
 {% block stylePage %}
@@ -5637,9 +5637,9 @@
         <script src="{{ dist }}/js/ui/switcher.js"></script>
         <script src="{{ dist }}/js/ui/modal.js"></script>
         <script src="{{ dist }}/js/ui/smoothScroll.js"></script>
-        <script src="{{ dist }}/js/ui/datetimepicker.js"></script>
         <!-- endbuild -->
-        <script src="{{ dist }}/js/ui/charts.js"></script>
+        <script src="{{ dist }}/js/ui/datetimepicker.js"></script>
+        <script src="{{ dist }}/js/charts.js"></script>
 
         <script>
             (function($) {
