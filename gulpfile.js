@@ -369,7 +369,7 @@ gulp.task('frontui', function(){
 
 /*------ 默认启动任务 ------ */
 gulp.task('default', ['clean'], function(next){
-    return gulp.start(['sprite','iconfont', 'images', 'less',  'js', 'charts', 'template', 'watch', 'server']);
+    return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
     //return next();
 });
 

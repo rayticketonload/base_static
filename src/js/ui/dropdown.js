@@ -187,6 +187,8 @@
             $target.removeClass(active).find(list).removeClass('hover').show();
             $this.attr('aria-expanded', 'false').trigger('hide.ui.dropdown', this).data('currentItem', -1);
 
+            $input.length && $input.trigger('blur');
+
         })
     }
 
