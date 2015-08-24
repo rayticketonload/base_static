@@ -101,14 +101,14 @@
             var data = $this.data('ui.tab');
 
             if(!data) $this.data('ui.tab', (data = new Tab(this)));
-            if(typeof option == 'string') data[option]();
+            if(typeof option == 'string') data[option] && data[option]();
         })
     }
 
 
     // jQuery 插件扩展
-    $.fn.dropdown = Plugin;
-    $.fn.dropdown.Constructor = Tab;
+    $.fn.tab = Plugin;
+    $.fn.tab.Constructor = Tab;
 
     // 元素插件绑定
     // ====================
