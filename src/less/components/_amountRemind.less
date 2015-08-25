@@ -78,6 +78,7 @@
         position: relative;
         overflow: hidden;
         height: 46px;
+        padding: 0 30px;
 
         .arlist {
             .clearfix;
@@ -113,5 +114,25 @@
                 }
             }
         }
+    }
+}
+
+.ar-arrow {
+    .link-custom( @viceText-FontColor,@linkHover-FontColor,none );
+    display: block;
+    width: 30px;
+    text-align: center;
+    height: 46px;
+    line-height: 46px;
+    font-size: @small-FontSize;
+    position: absolute;
+    top: 0;
+
+    &.left {
+        left: 0;
+    }
+
+    &.right {
+        right: 0;
     }
 }
