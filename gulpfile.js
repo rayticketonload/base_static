@@ -3,7 +3,7 @@
  * paywefrontside
  * version: 0.1
  */
- 
+
  /**
   * doc:
   *     1. _file.(html|less)文件为私有文件不产生文件到发布环境
@@ -110,7 +110,7 @@ var filePaths = {
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
-	js: [staticPath+'/js/**/**', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'],
+	js: [staticPath+'/js/**/**',  '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'],
 	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html'],
     charts: [staticPath+'/js/ui/charts/echarts.js', staticPath+'/js/ui/charts/chart/line.js', staticPath+'/js/ui/charts/theme/paywe.js', staticPath+'/js/ui/charts/payweChart.js']
 };
@@ -137,7 +137,7 @@ var tpl = function(){
             file.contents = new Buffer(html);
             return next(null, file);
         });
-    });   
+    });
 };
 
 /*------- 任务定义 --------- */
@@ -319,7 +319,7 @@ gulp.task('iconfont-style', function(){
 // ------------------------
 var frontui_path = config.frontui_path+'static';
 gulp.task('front:ui', function(){
-    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
+    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/datetimepicker.js', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
         .pipe( plumber( { errorHandler: errrHandler } ) )
         //.pipe(sourcemaps.init())
 
