@@ -17,6 +17,8 @@
  *      // 自定义弹窗
  *      $(id).modal({title: '提示', content: 'abc'});
         $(id).modal('setContent', 'cdfg');
+
+        // loading
  */
 
 +(function($) {
@@ -286,6 +288,8 @@
                 data[fnName](_relatedTarget);
             }
 
+            if(option['callback']) option['callback'].call($this);
+
             //return data.show(_relatedTarget);
             data.show(_relatedTarget);
             return $(this);
@@ -305,6 +309,34 @@
     // jQuery 插件扩展
     $.fn.modal = Plugin;
     $.fn.modal.Constructor = Modal;
+
+
+    // ajaxLoading
+    $.fn.showLoading = function(title, content){
+        var $this, title = title || '处理中...', content = content || '请不要关闭浏览器，系统正在处理';
+        if($(this).length) {
+            if(title) $(this).find('.modal-body h3').html(title);
+            if(content ) $(this).find('.loading-content').html(content);
+
+            $(this).modal('show');
+        } else {
+            var template = ['<div class="notice-wrap waiting in-modal">',
+                                '<div class="notice-box">',
+                                    '<span class="notice-img"></span>',
+                                    '<h3>'+ title +'</h3>',
+                                    '<div class="loading-content">'+ content +'</div>',
+                                '</div>',
+                            '</div>'].join('');
+            $(this).modal({title: '提示', content: template , callback: function(){
+                $(this).find('.modal-close').hide();
+            }});
+        }
+    };
+
+    $.fn.hideLoading = function(){
+        $(this).length && $(this).modal('hide');
+    }
+
 
     // 元素插件绑定
     // ====================
