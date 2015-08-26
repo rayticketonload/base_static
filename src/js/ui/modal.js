@@ -337,6 +337,62 @@
         $(this).length && $(this).modal('hide');
     }
 
+    // alert,error,success
+    $.fn.modalLayer = function(option) {
+        var defaults = {
+            icon: 'success',
+            title: '成功',
+            content: '',
+            buttons : [
+                {
+                    text: '确定',
+                    href: false,
+                    style: 'btn primary',
+                    target: false,
+                    ok: $.noop
+                }
+            ]
+        };
+
+        var opt = $.extend({}, defaults, option);
+        var $that = $(this);
+
+        if($that.length) {
+            $that.modal('show');
+        } else { // 初始化
+            var template = ['<div class="notice-wrap '+ opt.icon +' in-modal">',
+                                '<div class="modalLayer notice-box">',
+                                    '<span class="notice-img"></span>',
+                                    '<h3 class="modalLayer-title '+ (opt.content ? '' : 'fn-mt-30') +'">'+ opt.title +'</h3>',
+                                    '<div class="modalLayer-content">'+ opt.content +'</div>',
+                                '</div>',
+                            '</div>',
+                            '<div class="in-modal-btns text-align-center">',
+                            '</div>'];
+            var btnHtml = [], btns = opt.buttons;
+            for(var i = 0; i < btns.length; i++) {
+                if(btns[i].href) {
+                    btnHtml.push('<a href="'+ btns[i].href +'" '+ (btns[i].target ? 'target="'+ btns[i].target +'"'  : '') +' class="'+ btns[i].style +'" data-index="'+ i +'">'+ btns[i].text +'</a>');
+                } else {
+                    btnHtml.push('<button type="button" class="'+ btns[i].style +'" data-index="'+ i +'">'+ btns[i].text +'</button>');
+                }
+            }
+
+            template.splice(-1, 0, btnHtml.join(''));
+            $that = $(this).modal({title: '提示', content: template.join(''), callback: function(obj){
+                $(this).on('click', '.in-modal-btns .btn' , function(){
+                    var index = $(this).data('index');
+                    if(opt.buttons.length && opt.buttons[index] && opt.buttons[index]['ok']) {
+                        if(opt.buttons[index]['ok'] && typeof  opt.buttons[index]['ok'] === "function") {
+                            opt.buttons[index]['ok'].call(null, $(this), index);
+                        }
+                        $($that.selector).modal('hide')
+                    }
+                })
+            }});
+        }
+    };
+
 
     // 元素插件绑定
     // ====================
