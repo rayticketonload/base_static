@@ -363,7 +363,7 @@
             var template = ['<div class="notice-wrap '+ opt.icon +' in-modal">',
                                 '<div class="modalLayer notice-box">',
                                     '<span class="notice-img"></span>',
-                                    '<h3 class="modalLayer-title '+ (opt.content ? '' : 'fn-mt-30') +'">'+ opt.title +'</h3>',
+                                    '<h3 class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-30': '') +'">'+ opt.title +'</h3>',
                                     '<div class="modalLayer-content">'+ opt.content +'</div>',
                                 '</div>',
                             '</div>',
@@ -372,9 +372,9 @@
             var btnHtml = [], btns = opt.buttons;
             for(var i = 0; i < btns.length; i++) {
                 if(btns[i].href) {
-                    btnHtml.push('<a href="'+ btns[i].href +'" '+ (btns[i].target ? 'target="'+ btns[i].target +'"'  : '') +' class="'+ btns[i].style +'" data-index="'+ i +'">'+ btns[i].text +'</a>');
+                    btnHtml.push('<a href="'+ btns[i].href +'" '+ (btns[i].target ? 'target="'+ btns[i].target +'"'  : '') +' class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</a>');
                 } else {
-                    btnHtml.push('<button type="button" class="'+ btns[i].style +'" data-index="'+ i +'">'+ btns[i].text +'</button>');
+                    btnHtml.push('<button type="button" class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</button>');
                 }
             }
 
