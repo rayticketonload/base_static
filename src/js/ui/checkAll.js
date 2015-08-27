@@ -57,8 +57,8 @@
 
     // 元素插件绑定
     // ====================
-    $(function(){
-        $(document).ready(function(){ $(toggle).checkAll() });
-    });
+
+    $(document).ready(function(){ $(toggle).checkAll() });
+
 })( jQuery );
 
