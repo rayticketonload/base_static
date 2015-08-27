@@ -1,5 +1,5 @@
 /*!
- * ·ÖÒ³|pagination
+ * åˆ†é¡µ|pagination
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference uikit.pagination.js
  * API:
@@ -17,10 +17,10 @@
 +(function($) {
     'use strict';
 
-    // Ä¬ÈÏ¸ßÁÁÀà
+    // é»˜è®¤é«˜äº®ç±»
     var active = 'active';
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var Pagination = function(element, options) {
         this.$el = $(element);
@@ -28,49 +28,49 @@
         this._init(options);
     };
 
-    // °æ±¾
+    // ç‰ˆæœ¬
     Pagination.VERSION = '1.0.0';
     Pagination.DEFAULTS = {
-        // ×Ü¼ÇÂ¼Êı
+        // æ€»è®°å½•æ•°
         items: 1,
-        // Ã¿Ò³¼ÇÂ¼Êı
+        // æ¯é¡µè®°å½•æ•°
         itemsOnPage: 1,
-        // ×ÜÒ³Êı
+        // æ€»é¡µæ•°
         pages: 100,
-        // Ö»ÏÔÊ¾Ò³ÊıÇø¼ä
+        // åªæ˜¾ç¤ºé¡µæ•°åŒºé—´
         displayedPages: 8,
-        // µ½Ä©Ò³ÏÔÊ¾¶àÉÙÒ³Âë
+        // åˆ°æœ«é¡µæ˜¾ç¤ºå¤šå°‘é¡µç 
         edges: 1,
-        // µ±Ç°Ò³
+        // å½“å‰é¡µ
         currentPage: 1,
-        lblPrev: '\u4e0a\u4e00\u9875', //ÉÏÒ»Ò³
-        lblNext: '\u4e0b\u4e00\u9875', //ÏÂÒ»Ò³
-        // Ñ¡ÖĞ´¥·¢ÊÂ¼ş
+        lblPrev: '\u4e0a\u4e00\u9875', //ä¸Šä¸€é¡µ
+        lblNext: '\u4e0b\u4e00\u9875', //ä¸‹ä¸€é¡µ
+        // é€‰ä¸­è§¦å‘äº‹ä»¶
         onSelectPage: function(){}
     };
 
-    // ³õÊ¼»¯
+    // åˆå§‹åŒ–
     // =================
     Pagination.prototype._init = function(options, inited) {
         var $this = this;
 
         this._setOption(options);
 
-        // ×ÜÒ³Êı
+        // æ€»é¡µæ•°
         $this.pages = $this.options.pages ? $this.options.pages : Math.ceil($this.options.items / this.options.itemsOnPage) ? Math.ceil($this.options.items / $this.options.itemsOnPage) : 1;
 
-        // µ±Ç°Ò³£¬´Ó0¿ªÊ¼
+        // å½“å‰é¡µï¼Œä»0å¼€å§‹
         $this.currentPage = $this.options.currentPage -1;
-        // Ò³ÊıÇø¼äµÄÒ»°ë
+        // é¡µæ•°åŒºé—´çš„ä¸€åŠ
         $this.halfDisplayed = $this.options.displayedPages / 2;
 
-        // °ó¶¨µã»÷ÇĞ»»Ò³Âë
+        // ç»‘å®šç‚¹å‡»åˆ‡æ¢é¡µç 
         !!!inited && $this.$el.on('click', 'a[data-page]', function(e) {
             e.preventDefault();
             $this.selectPage($(this).data('page'));
         });
 
-        // dom äÖÈ¾
+        // dom æ¸²æŸ“
         $this._render();
     };
 
@@ -78,36 +78,36 @@
         this._init(options, true);
     };
 
-    // Ë½ÓĞ·½·¨
-    // ÉèÖÃÅäÖÃ
+    // ç§æœ‰æ–¹æ³•
+    // è®¾ç½®é…ç½®
     Pagination.prototype._setOption = function(options){
         this.options = $.extend({}, Pagination.DEFAULTS, options);
     };
 
-    // ÇĞ»»Ò³Âë
+    // åˆ‡æ¢é¡µç 
     Pagination.prototype.selectPage = function(pageIndex, pages) {
-        // ÇĞ»»µ½ÉèÖÃÒ³
+        // åˆ‡æ¢åˆ°è®¾ç½®é¡µ
         this.currentPage = pageIndex - 1;
-        // ÖØĞÂäÖÈ¾dom
+        // é‡æ–°æ¸²æŸ“dom
         this.render(pages);
 
-        // ´¥·¢ÇĞ»»Ñ¡Ôñº¯Êı
+        // è§¦å‘åˆ‡æ¢é€‰æ‹©å‡½æ•°
         this.options.onSelectPage(pageIndex, this);
-        // ´¥·¢api½Ó¿Ú
+        // è§¦å‘apiæ¥å£
         this.$el.trigger('select.ui.pagination', [pageIndex, this]);
     };
 
     Pagination.prototype._render  = function(){
         var o = this.options, interval = this._getInterval(), i;
-        // Çå¿Õdom
+        // æ¸…ç©ºdom
         this.$el.empty();
 
-        // ÉÏÒ»Ò³,falseÊ±²»ÏÔÊ¾£¬µ±Ç°Ò³-1£¬textÎªÏÔÊ¾ÎÄ×Ö£¬trueÎª×Ô¶¨Òålabel
+        // ä¸Šä¸€é¡µ,falseæ—¶ä¸æ˜¾ç¤ºï¼Œå½“å‰é¡µ-1ï¼Œtextä¸ºæ˜¾ç¤ºæ–‡å­—ï¼Œtrueä¸ºè‡ªå®šä¹‰label
         if(o.lblPrev) this._append(o.currentPage - 1, { text: o.lblPrev}, true);
 
 
-        // ×ó±ßÊ×Ò³ÏÔÊ¾±ßÔµÒ³Êı
-        if(interval.start > 0 && o.edges > 0) { // ÏÔÊ¾Ä©Ò³
+        // å·¦è¾¹é¦–é¡µæ˜¾ç¤ºè¾¹ç¼˜é¡µæ•°
+        if(interval.start > 0 && o.edges > 0) { // æ˜¾ç¤ºæœ«é¡µ
             var end = Math.min(o.edges, interval.start);
             for(i = 0; i < end; i++) this._append(i);
 
@@ -118,10 +118,10 @@
             }
         }
 
-        // ÏÔÊ¾ (µ±Ç°Ò³-4, µ±Ç°Ò³£¬ µ±Ç°Ò³+4)
+        // æ˜¾ç¤º (å½“å‰é¡µ-4, å½“å‰é¡µï¼Œ å½“å‰é¡µ+4)
         for(i = interval.start; i < interval.end; i++) this._append(i);
 
-        // ÓÒ±ßÄ©Ò³ÏÔÊ¾±ßÔµÒ³Êı
+        // å³è¾¹æœ«é¡µæ˜¾ç¤ºè¾¹ç¼˜é¡µæ•°
         if(interval.end < this.pages && o.edges > 0) {
             if(this.pages - o.edges > interval.end && (this.pages - o.edges - interval.end != 1)) {
                 this.$el.append('<li><span>...</span></li>')
@@ -134,57 +134,57 @@
             for(i = begin; i < this.pages; i++) this._append(i);
         }
 
-        // ÏÂÒ»Ò³,falseÊ±²»ÏÔÊ¾£¬µ±Ç°Ò³+1£¬textÎªÏÔÊ¾ÎÄ×Ö£¬trueÎª×Ô¶¨Òålabel
+        // ä¸‹ä¸€é¡µ,falseæ—¶ä¸æ˜¾ç¤ºï¼Œå½“å‰é¡µ+1ï¼Œtextä¸ºæ˜¾ç¤ºæ–‡å­—ï¼Œtrueä¸ºè‡ªå®šä¹‰label
         if(o.lblNext) this._append(o.currentPage+1, {text: o.lblNext}, true);
     };
 
-    // ÖØĞÂäÖÈ¾,Íâ²¿½Ó¿Ú
+    // é‡æ–°æ¸²æŸ“,å¤–éƒ¨æ¥å£
     Pagination.prototype.render = function(pages){
         this.pages = pages ? pages: this.pages;
         this._render();
     };
 
-    // »ñÈ¡ÏÔÊ¾Ò³Âë·¶Î§
+    // è·å–æ˜¾ç¤ºé¡µç èŒƒå›´
     Pagination.prototype._getInterval = function(){
         return {
             start: Math.ceil(
-                // µ±Ç°Ò³ÊÇ·ñ´óÓÚÏÔÊ¾·¶Î§µÄÒ»°ë
+                // å½“å‰é¡µæ˜¯å¦å¤§äºæ˜¾ç¤ºèŒƒå›´çš„ä¸€åŠ
                 this.currentPage > this.halfDisplayed
                 ? Math.max(
-                    // ´Óµ±Ç°Ò³-ÏÔÊ¾Ò»°ë·¶Î§¿ªÊ¼
+                    // ä»å½“å‰é¡µ-æ˜¾ç¤ºä¸€åŠèŒƒå›´å¼€å§‹
                     Math.min(this.currentPage - this.halfDisplayed, (this.pages - this.options.displayedPages))
-                    // µ±Ç°Ò³Ğ¡ÓÚÒ»°ëÇÒ×ÜÒ³ÊıĞ¡ÓÚÏÔÊ¾·¶Î§£¬´ÓµÚÒ»Ò³¿ªÊ¼
+                    // å½“å‰é¡µå°äºä¸€åŠä¸”æ€»é¡µæ•°å°äºæ˜¾ç¤ºèŒƒå›´ï¼Œä»ç¬¬ä¸€é¡µå¼€å§‹
                     , 0)
-                // ´ÓµÚÒ»Ò³¿ªÊ¼
+                // ä»ç¬¬ä¸€é¡µå¼€å§‹
                 : 0),
             end: Math.ceil(
-                // µ±Ç°Ò³ÊÇ·ñ´óÓÚÏÔÊ¾·¶Î§µÄÒ»°ë
+                // å½“å‰é¡µæ˜¯å¦å¤§äºæ˜¾ç¤ºèŒƒå›´çš„ä¸€åŠ
                 this.currentPage > this.halfDisplayed
-                    // µ±Ç°Ò³+ÏÔÊ¾·¶Î§µÄÒ»°ë
+                    // å½“å‰é¡µ+æ˜¾ç¤ºèŒƒå›´çš„ä¸€åŠ
                     ? Math.min(this.currentPage + this.halfDisplayed, this.pages)
-                    // ½áÊøÎª×î¶àÏÔÊ¾£¬Ä©Ò³
+                    // ç»“æŸä¸ºæœ€å¤šæ˜¾ç¤ºï¼Œæœ«é¡µ
                     : Math.min(this.options.displayedPages, this.pages))
         }
     };
 
-    // ÖØĞÂ×éÖ¯dom½á¹¹
-    // pageIndex äÖÈ¾Ò³Âë
-    // opts ÎÄ±¾ÅäÖÃ
-    // islb ÊÇ·ñÉÏÒ»Ò³ÏÂÒ»Ò³£¬ÊÇÓÀ²»¼Óactive
+    // é‡æ–°ç»„ç»‡domç»“æ„
+    // pageIndex æ¸²æŸ“é¡µç 
+    // opts æ–‡æœ¬é…ç½®
+    // islb æ˜¯å¦ä¸Šä¸€é¡µä¸‹ä¸€é¡µï¼Œæ˜¯æ°¸ä¸åŠ active
     Pagination.prototype._append = function(pageIndex, opts, islb) {
         var $this = this, item, options;
 
-        // ÅĞ¶ÏÊ×Ò³£¬Ä©Ò³£¬³£¹æÒ³
+        // åˆ¤æ–­é¦–é¡µï¼Œæœ«é¡µï¼Œå¸¸è§„é¡µ
         pageIndex = pageIndex < 0 ? 0: (pageIndex < this.pages ? pageIndex : this.pages -1);
         options = $.extend({ text: pageIndex + 1}, opts);
 
-        // ÅĞ¶Ïµ±Ç°Ò³Óë·Çµ±Ç°Ò³
+        // åˆ¤æ–­å½“å‰é¡µä¸éå½“å‰é¡µ
         item = (pageIndex == this.currentPage) ? '<li '+ (islb ? '' : 'class="'+ active +'"') +'><a href="###">'+ (options.text) +'</a></li>' : '<li><a href="#page-'+ (pageIndex + 1) +'" data-page="'+ (pageIndex + 1) +'">'+ options.text +'</a></li>';
 
         $this.$el.append(item);
     };
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(options) {
         var args = arguments;
@@ -194,17 +194,17 @@
 
             if(!data) $this.data('ui.pagination', (data = new Pagination($this, $.extend({}, $this.data(), options))));
 
-            if(typeof options == 'string') { // µ÷ÓÃ½Ó¿Ú·½·¨
+            if(typeof options == 'string') { // è°ƒç”¨æ¥å£æ–¹æ³•
                 data[options].apply(data, [].slice.call(args, 1));
             }
         })
     }
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.pagination = Plugin;
     $.fn.pagination.Constructor = Pagination;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // å…ƒç´ æ’ä»¶ç»‘å®š
     // ====================
     $(document).ready(function(){
         $('[ui-pagination],.pagination').pagination();

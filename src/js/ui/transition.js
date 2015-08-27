@@ -1,5 +1,5 @@
 /*!
- * 动画支持判断扩展
+ * 鍔ㄧ敾鏀寔鍒ゆ柇鎵╁睍
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference bootstrap.transition.js
  *           http://getbootstrap.com/javascript/#transitions

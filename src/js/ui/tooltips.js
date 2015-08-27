@@ -1,5 +1,5 @@
 /*!
- * tipÌáÊ¾
+ * tipæç¤º
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference uikit.tooltips.js
  * API:
@@ -11,7 +11,7 @@
 
     var toggle = '[data-toggle="tooltips"]';
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var Tooltips = function(el, option) {
         this.$el = $(el);
@@ -25,7 +25,7 @@
 
     Tooltips.VERSION = '1.0.0';
 
-    // ¶¯»­¹ı¶ÉÊ±¼ä
+    // åŠ¨ç”»è¿‡æ¸¡æ—¶é—´
     Tooltips.TRANSITION_DURATION = 150;
 
     Tooltips.DEFAULTS = {
@@ -196,7 +196,7 @@
     };
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(option) {
         return $(this).each(function () {
@@ -208,16 +208,18 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.tooltips = Plugin;
     $.fn.tooltips.Constructor = Tooltips;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // å…ƒç´ æ’ä»¶ç»‘å®š
     // ====================
     var handler = function() {
         $(this).tooltips('show');
     };
 
-    $(document).on('mouseenter.tooltip.ui focus tooltip.ui', toggle, handler)
+    $(function(){
+        $(document).on('mouseenter.tooltip.ui focus tooltip.ui', toggle, handler)
+    })
 
 })( jQuery );

@@ -1,5 +1,5 @@
 /*!
- * checkAll È«Ñ¡
+ * checkAll å…¨é€‰
  * tommyshao <jinhong.shao@frontpay.cn>
  * API:
  *      <input type="checkbox" data-toggle="checkAll" data-target="selector" />
@@ -12,7 +12,7 @@
 
     var toggle = '[data-toggle="checkAll"]';
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var CheckAll = function(element) {
         var $this = this;
@@ -38,7 +38,7 @@
     };
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(option) {
         return $(this).each(function () {
@@ -51,12 +51,14 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.checkAll = Plugin;
     $.fn.checkAll.Constructor = CheckAll;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // å…ƒç´ æ’ä»¶ç»‘å®š
     // ====================
-    $(document).ready(function(){ $(toggle).checkAll() });
+    $(function(){
+        $(document).ready(function(){ $(toggle).checkAll() });
+    });
 })( jQuery );
 

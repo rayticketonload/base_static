@@ -1,6 +1,6 @@
 /*!
- * accordion ÊÖ·çÇÙ
- * ÒÀÀµÓÚ ui/switcher.js
+ * accordion æ‰‹é£ç´
+ * ä¾èµ–äº ui/switcher.js
  * tommyshao <jinhong.shao@frontpay.cn>
  * API:
  *
@@ -19,10 +19,10 @@
 
         option = $.extend({}, defaults, option);
 
-        // Ö±½Óµ÷ÓÃ
+        // ç›´æ¥è°ƒç”¨
         $(this).switcher(option);
 
-        // ÊÂ¼ş¼àÌı
+        // äº‹ä»¶ç›‘å¬
         return $(this).each(function(){
             var $items = $(this).find(option.item);
             $(this).on('select.ui.switcher', function(e){

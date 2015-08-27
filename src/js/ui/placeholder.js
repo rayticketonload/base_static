@@ -1,5 +1,5 @@
 /*!
- * placeholder Õ¼Î»·û
+ * placeholder å ä½ç¬¦
  * tommyshao <jinhong.shao@frontpay.cn>
  * API:
  *      $(element).placeholder();
@@ -13,7 +13,7 @@
     var input = document.createElement('input');
     var isSupport = 'placeholder' in input;
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var Placeholder = function(element) {
         var $this = this;
@@ -47,7 +47,7 @@
     };
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin() {
         return $(this).each(function () {
@@ -58,11 +58,11 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.placeholder = Plugin;
     $.fn.placeholder.Constructor = Placeholder;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // å…ƒç´ æ’ä»¶ç»‘å®š
     // ====================
     $(document).ready(function(){ $(toggle).placeholder() });
 })( jQuery );

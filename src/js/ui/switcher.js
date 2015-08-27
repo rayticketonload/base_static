@@ -1,5 +1,5 @@
 /*!
- * switcher ÇÐ»»Æ÷
+ * switcher 脟脨禄禄脝梅
  * tommyshao <jinhong.shao@frontpay.cn>
  * API:
  *      <div data-toggle="switcher" [data-except="true"|data-item="a"|data-active="current"]/>
@@ -12,7 +12,7 @@
 
     var toggle = '[data-toggle="switcher"]';
 
-    // ¹¹Ôìº¯Êý
+    // 鹿鹿脭矛潞炉脢媒
     // ===============
     var Switcher = function(element, option) {
         var $this = this;
@@ -41,7 +41,7 @@
     };
 
 
-    // ²å¼þ¶¨Òå
+    // 虏氓录镁露篓脪氓
     //======================
     function Plugin(option) {
         return $(this).each(function () {
@@ -54,11 +54,11 @@
     }
 
 
-    // jQuery ²å¼þÀ©Õ¹
+    // jQuery 虏氓录镁脌漏脮鹿
     $.fn.switcher = Plugin;
     $.fn.switcher.Constructor = Switcher;
 
-    // ÔªËØ²å¼þ°ó¶¨
+    // 脭陋脣脴虏氓录镁掳贸露篓
     // ====================
     $(document).ready(function(){ $(toggle).switcher() });
 })( jQuery );

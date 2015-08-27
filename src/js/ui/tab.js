@@ -117,6 +117,8 @@
         Plugin.call($(this), 'show')
     };
 
-    $(document).on('click.ui.tab', tab, clickHandler)
+    $(function(){
+        $(document).on('click.ui.tab', tab, clickHandler)
+    })
 
 })( jQuery );

@@ -236,12 +236,12 @@
         $items.hide()
               .filter(function(){
                     var txt = $.trim($(this).text()) || '';
-                    
+
                     if(txt == value){
                         $(this).addClass('hover');
                     }
 
-                    return txt.indexOf(value) > -1; 
+                    return txt.indexOf(value) > -1;
                })
               .show();
     }
@@ -288,29 +288,31 @@
 
     // 元素插件绑定
     // ====================
-    $(toggle).dropdown();
-    $(document)
-        // 点击页面其他地方收起
-        .on('click.ui.dropdown', hideAllMenus)
-        // 按钮触发
-        .on('click.ui.dropdown-btn', toggleBtn, function(e){
-            var $target = $(this).siblings(toggle);
-            $target.length && $target.dropdown('toggle');
-            return false;
-        })
-        .on('click.ui.dropdown', ul, function(e){
-            e.stopPropagation(); 
-            return false;
-        })
-        // .on('click.ui.dropdown', list, function(e){
-        //     var $toggle = $(e.target).closest(wrap);
-        //     console.log($toggle);
-        //     var $target = getParent($toggle.find(ul));
-        //     $target.trigger('click.ui.dropSelect');
-        //     e.stopPropagation(); 
-        //     return false;
-        // })
-        // focus
-        .on('focus.ui.dropdown', toggle, chkMatch)
-        .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
+    $(function(){
+        $(toggle).dropdown();
+        $(document)
+            // 点击页面其他地方收起
+            .on('click.ui.dropdown', hideAllMenus)
+            // 按钮触发
+            .on('click.ui.dropdown-btn', toggleBtn, function(e){
+                var $target = $(this).siblings(toggle);
+                $target.length && $target.dropdown('toggle');
+                return false;
+            })
+            .on('click.ui.dropdown', ul, function(e){
+                e.stopPropagation();
+                return false;
+            })
+            // .on('click.ui.dropdown', list, function(e){
+            //     var $toggle = $(e.target).closest(wrap);
+            //     console.log($toggle);
+            //     var $target = getParent($toggle.find(ul));
+            //     $target.trigger('click.ui.dropSelect');
+            //     e.stopPropagation();
+            //     return false;
+            // })
+            // focus
+            .on('focus.ui.dropdown', toggle, chkMatch)
+            .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
+    })
 })(jQuery);

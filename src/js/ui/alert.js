@@ -1,5 +1,5 @@
 /*!
- * ¾¯¸æ¿ò
+ * è­¦å‘Šæ¡†
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference bootstrap.alert.js
  * API:
@@ -11,7 +11,7 @@
 
     var dismiss = '[data-dismiss="alert"],.alert.with-close em';
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var Alert = function(el) {
         $(el).on('click', dismiss, this.close);
@@ -19,16 +19,16 @@
 
     Alert.VERSION = '1.0.0';
 
-    // ¶¯»­¹ı¶ÉÊ±¼ä
+    // åŠ¨ç”»è¿‡æ¸¡æ—¶é—´
     Alert.TRANSITION_DURATION = 150;
 
-    // ¹Ø±Õ
+    // å…³é—­
     // ===============
     Alert.prototype.close = function(e) {
         var $this = $(this);
         var selector = $(this).attr('data-target');
 
-        if (!selector) { // a[href=#test]¹Ø±Õ idÎªtestµÄalert
+        if (!selector) { // a[href=#test]å…³é—­ idä¸ºtestçš„alert
             selector = $this.attr('href');
             selector = selector && selector.replace(/.*(?=#[^\s]*$)/, ''); // strip for ie7
         }
@@ -62,7 +62,7 @@
     };
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(option) {
         return $(this).each(function () {
@@ -75,12 +75,14 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.alert = Plugin;
     $.fn.alert.Constructor = Alert;
 
-    // ÔªËØ²å¼ş°ó¶¨
+    // å…ƒç´ æ’ä»¶ç»‘å®š
     // ====================
-    $(document).on('click.ui.alert', dismiss, Alert.prototype.close)
+    $(function(){
+        $(document).on('click.ui.alert', dismiss, Alert.prototype.close)
+    })
 
 })( jQuery );

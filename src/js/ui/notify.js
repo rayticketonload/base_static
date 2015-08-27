@@ -1,5 +1,5 @@
 /*!
- * Notify Í¨Öª
+ * Notify é€šçŸ¥
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference uikit.notify.js
  * API:
@@ -17,11 +17,11 @@
 +(function($) {
     'use strict';
 
-    // ´æ·Å·½Î»¼¯ºÏ
+    // å­˜æ”¾æ–¹ä½é›†åˆ
     var containers = {};
-    //  Í¨Öª¼¯ºÏ
+    //  é€šçŸ¥é›†åˆ
     var messages = {};
-    // ½Ó¿Ú£¬À©Õ¹$.notify
+    // æ¥å£ï¼Œæ‰©å±•$.notify
     var notify = function(options) {
         if(typeof options === 'string') {
             options = { message: options };
@@ -33,7 +33,7 @@
 
         return (new Notify(options)).show();
     };
-    // ¹Ø±ÕËùÓĞ½Ó¿Ú
+    // å…³é—­æ‰€æœ‰æ¥å£
     var closeAll = function(group, instantly) {
         var id;
 
@@ -46,7 +46,7 @@
         }
     };
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var Notify = function(options) {
 
@@ -55,10 +55,10 @@
         this.group = false;
         this.options = $.extend({}, Notify.DEFAULTS, options);
 
-        // uuid ÉèÖÃÎ¨Ò»id
+        // uuid è®¾ç½®å”¯ä¸€id
         this.uuid = 'Notify_'+ Math.random().toString(36).substr(2);
 
-        // ´´½¨ÔªËØ
+        // åˆ›å»ºå…ƒç´ 
         this.$el = $([
             '<div class="notify-message">',
                 '<a class="notify-close">&times;</a>',
@@ -66,22 +66,22 @@
             '</div>'
         ].join('')).data('ui.notify', this);
 
-        // ÉèÖÃÄÚÈİ
+        // è®¾ç½®å†…å®¹
         this.content(this.options.message);
 
-        // ÉèÖÃ×´Ì¬
+        // è®¾ç½®çŠ¶æ€
         if(this.options.status) {
             this.$el.addClass('notify-message-'+ this.options.status);
             this.currentStatus = this.options.status;
         }
 
-        // ·Ö×é
+        // åˆ†ç»„
         this.group = this.options.group;
 
-        // ÏûÏ¢°´uuid´æ·Å
+        // æ¶ˆæ¯æŒ‰uuidå­˜æ”¾
         messages[this.uuid] = this;
 
-        // ·½Î»´æ·Å
+        // æ–¹ä½å­˜æ”¾
         if(!containers[this.options.pos]) {
             containers[this.options.pos] = $('<div class="notify notify-'+ this.options.pos +'"></div>')
                                             .appendTo($('body'))
@@ -96,32 +96,32 @@
     Notify.VERSION = '1.0.0';
 
     Notify.DEFAULTS = {
-        message: "", // ÌáÊ¾ÄÚÈİ
-        status: "",  // ×´Ì¬£¬ÑùÊ½ÑÕÉ«
-        opacity:.85, // ²ãÍ¸Ã÷¶È
-        timeout: 5000, // ¶¨Ê±ÑÓ³ÙÏûÊ§
-        group: null,   // ÊÇ·ñ·Ö×é
-        pos: "top-center", // ¶¨Î»
-        onClose: function() {}  // ¹Ø±Õ´¥·¢ÊÂ¼ş
+        message: "", // æç¤ºå†…å®¹
+        status: "",  // çŠ¶æ€ï¼Œæ ·å¼é¢œè‰²
+        opacity:.85, // å±‚é€æ˜åº¦
+        timeout: 5000, // å®šæ—¶å»¶è¿Ÿæ¶ˆå¤±
+        group: null,   // æ˜¯å¦åˆ†ç»„
+        pos: "top-center", // å®šä½
+        onClose: function() {}  // å…³é—­è§¦å‘äº‹ä»¶
     };
 
     // Public Method
     // ===============
-    /* ÏÔÊ¾ */
+    /* æ˜¾ç¤º */
     Notify.prototype.show = function(){
         if(this.$el.is(':visible')) return;
 
         var $this = this;
 
-        // ·½Î»Ìí¼ÓÔªËØ
+        // æ–¹ä½æ·»åŠ å…ƒç´ 
         containers[this.options.pos].show().prepend(this.$el);
 
         var marginbottom = parseInt(this.$el.css('margin-bottom'), 10);
 
-        // ¶¯»­ÏÔÊ¾
+        // åŠ¨ç”»æ˜¾ç¤º
         this.$el.css({ opacity: 0, "margin-top": -1 * this.$el.outerHeight(), "margin-bottom": 0})
             .animate({opacity: this.options.opacity, "margin-top": 0, "margin-bottom": marginbottom}, function(){
-                if($this.options.timeout) { // ÑÓÊ±¹Ø±Õ
+                if($this.options.timeout) { // å»¶æ—¶å…³é—­
                     var closefn = function(){ $this.close() };
                     $this.timeout = setTimeout(closefn, $this.options.timeout);
 
@@ -135,7 +135,7 @@
         return this;
     };
 
-    /* ¹Ø±Õ */
+    /* å…³é—­ */
     Notify.prototype.close = function(instanly){
         var $this = this,
             finalize = function(){
@@ -162,7 +162,7 @@
         }
     };
 
-    /* ÉèÖÃÄÚÈİ»ò»ñÈ¡ */
+    /* è®¾ç½®å†…å®¹æˆ–è·å– */
     Notify.prototype.content = function(html){
         var container = this.$el.find('>div');
 
@@ -175,7 +175,7 @@
         return this;
     };
 
-    /* ÉèÖÃ×´Ì¬¼°ÑùÊ½ */
+    /* è®¾ç½®çŠ¶æ€åŠæ ·å¼ */
     Notify.prototype.status = function(status) {
           if(!status) {
               return this.currentStatus;
@@ -189,7 +189,7 @@
     };
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(option) {
         return $(this).on('click', function(){
@@ -200,7 +200,7 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.notify = notify;
     $.notify.closeAll = closeAll;
     $.fn.notify = Plugin;

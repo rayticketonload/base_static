@@ -1,5 +1,5 @@
 /*!
- * smooth-scroll Æ½»¬¹ö¶¯
+ * smooth-scroll å¹³æ»‘æ»šåŠ¨
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference uikit.smoothscroll.js
  * API:
@@ -11,7 +11,7 @@
 
     if(!$.easing.easeOutExpo) $.easing.easeOutExpo = function(x, t, b, c, d) { return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b; };
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     // ===============
     var SmoothScroll = function(element, options) {
         this.$el = $(element);
@@ -22,11 +22,11 @@
     SmoothScroll.VERSION = '1.0.0';
 
     /**
-     * Ä¬ÈÏÅäÖÃ²ÎÊı
-     * @param duration ¶¯»­Ê±¼ä
-     * @param transition ¶¯»­ÀàĞÍ
-     * @param offset ¾àÀëÄ¿±êÎ»ÖÃ
-     * @param complete µ½´ïÎ»ÖÃÊ±Íê³ÉÖ´ĞĞ
+     * é»˜è®¤é…ç½®å‚æ•°
+     * @param duration åŠ¨ç”»æ—¶é—´
+     * @param transition åŠ¨ç”»ç±»å‹
+     * @param offset è·ç¦»ç›®æ ‡ä½ç½®
+     * @param complete åˆ°è¾¾ä½ç½®æ—¶å®Œæˆæ‰§è¡Œ
      * @type {{duration: number, transition: string, offset: number, complete: (*|number|noop|Function)}}
      */
     SmoothScroll.DEFAULTS = {
@@ -37,7 +37,7 @@
     };
 
     /**
-     * init ³õÊ¼»¯
+     * init åˆå§‹åŒ–
      */
     SmoothScroll.prototype.init = function(){
         this.$el.on('click.ui.smoothScroll', this.scroll(this.$el, this.options));
@@ -46,7 +46,7 @@
 
 
     /**
-     * ¹öÌõ
+     * æ»šæ¡
      * @param options
      * @returns {Function}
      */
@@ -58,7 +58,7 @@
     };
 
     /**
-     * Íê³É´¥·¢
+     * å®Œæˆè§¦å‘
      */
     function emit(elem){
         return function(){
@@ -68,9 +68,9 @@
     };
 
     /**
-     * ¹ö¶¯ÌõÌø×ªµ½Ä³ÔªËØ
-     * @param elem Ä¿µÄÔªËØ
-     * @param options ÅäÖÃ²ÎÊı
+     * æ»šåŠ¨æ¡è·³è½¬åˆ°æŸå…ƒç´ 
+     * @param elem ç›®çš„å…ƒç´ 
+     * @param options é…ç½®å‚æ•°
      */
     function scrollToElement(elem, targetElement, options) {
         options = $.extend({}, SmoothScroll.DEFAULTS, options);
@@ -92,7 +92,7 @@
 
 
 
-    // ²å¼ş¶¨Òå
+    // æ’ä»¶å®šä¹‰
     //======================
     function Plugin(options) {
         return $(this).each(function () {
@@ -107,7 +107,7 @@
     }
 
 
-    // jQuery ²å¼şÀ©Õ¹
+    // jQuery æ’ä»¶æ‰©å±•
     $.fn.smoothScroll = Plugin;
     $.fn.smoothScroll.Constructor = SmoothScroll;
 
