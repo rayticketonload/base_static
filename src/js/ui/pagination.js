@@ -36,7 +36,7 @@
         // 每页记录数
         itemsOnPage: 1,
         // 总页数
-        pages: 100,
+        pages: 0,
         // 只显示页数区间
         displayedPages: 8,
         // 到末页显示多少页码
@@ -101,6 +101,7 @@
         var o = this.options, interval = this._getInterval(), i;
         // 清空dom
         this.$el.empty();
+        if(this.pages <= 1) return;
 
         // 上一页,false时不显示，当前页-1，text为显示文字，true为自定义label
         if(o.lblPrev) this._append(o.currentPage - 1, { text: o.lblPrev}, true);
