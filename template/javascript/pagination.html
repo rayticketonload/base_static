@@ -1,6 +1,15 @@
 {% extends "../_layout/javascript.html" %}
 {% block mainBody %}
 <style>
+    .pull-left{
+        float: left;
+    }
+    .fs-12{
+        font-size: 12px;
+    }
+    .lh-26{
+        line-height: 26px;
+    }
     pre{
         white-space: pre;
     }
@@ -8,7 +17,7 @@
     <section id="type" class="ui-section">
         <h1>分页组件</h1>
         <!-- 分页组件 -->
-        <div class="section-content">
+        <div class="section-content" id="normal">
             <h3>
                 <strong>概述用法</strong>
             </h3>
@@ -21,7 +30,7 @@
                 </p>
                 <br/>
                 <div class="pagination-wrap">
-                    <ul class="pagination" data-current-page="2">
+                    <ul class="pagination" data-pages="10" data-current-page="2">
                         <li><a href="#">上一页</a></li>
                         <li class="active"><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
@@ -41,7 +50,7 @@
         </div>
 
         <!-- 配置 -->
-        <div class="section-content">
+        <div class="section-content" id="config">
             <h3>
                 <strong>参数配置</strong>
             </h3>
@@ -105,6 +114,21 @@
                             <td><code>下一页</code></td>
                             <td>下一页label文字</td>
                         </tr>
+                        <tr>
+                            <td><code>pageStr</code></td>
+                            <td><code>{show: false, template: ''}</code>
+                                <br>
+                                模板template默认：<code>&lt;p class="pull-left fs-12 lh-26"&gt;当前是{$current}页，共{$pages}页，{$items}条记录，每页显示{$itemsOnPage}条。&lt;/p&gt;</code>
+                            </td>
+                            <td>
+                                显示总页码字符 <br>
+                                <code>{$currentPage}</code>当前页占位符
+                                <br>
+                                <code>{$pages}</code>总页数占位符
+                                <br>
+                                <code>{$itemsOnPage}</code> 每页技术数
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -112,7 +136,7 @@
         </div>
 
         <!-- 事件监听 -->
-        <div class="section-content">
+        <div class="section-content" id="event">
             <h3>
                 <strong>事件监听</strong>
             </h3>
@@ -120,7 +144,7 @@
                 <p class="description">
                     添加<code>ui.select.pagination</code>事件可以监听页码切换。
                 </p>
-                <div class="pagination-wrap">
+                <div class="pagination-wrap text-align-center">
                     <ul id="j-page">
 
                     </ul>
@@ -133,14 +157,28 @@
             <div class="ui-code">
 <pre><code>function ajaxData(e, index, instance){
     alert(index);
+    index = index || 5;
 
-    $('#j-page').pagination('init', { currentPage: 5, pages: 50});
-    alert('现在是5，被重新初始化!');
-    }
+    // 显示总页码
+    //$('#j-page').pagination({ currentPage: index, items: 50, itemsOnPage: 5, pageStr: {show: true}});
+
+    // 自定义总页码模板
+    $('#j-page').pagination({
+        currentPage: index,
+        items: 50,
+        itemsOnPage: 5,
+        pageStr: {
+            show: true,
+            template: '&lt;p class="pull-left fs-12 lh-26"&gt;当前是第{$current}页，共{$pages}页，{$items}条记录，每页显示{$itemsOnPage}条。&lt;/p&gt;'
+        }
+    });
+
+    $('#j-page').on('select.ui.pagination', ajaxData);
+}
 
     ajaxData();
 
-    $('#j-page').on('select.ui.pagination', ajaxData);
+
 </code></pre>
             </div>
         </div>
@@ -156,9 +194,15 @@
 
         function ajaxData(e, index, instance){
             alert(index);
+            index = index || 5;
 
-            $('#j-page').pagination('init', { currentPage: 5, pages: 50});
-            alert('现在是5，被重新初始化!');
+            // 显示总页码
+            //$('#j-page').pagination({ currentPage: index, items: 50, itemsOnPage: 5, pageStr: {show: true}});
+
+            // 自定义总页码模板
+            $('#j-page').pagination({ currentPage: index, items: 50, itemsOnPage: 5, pageStr: {show: true, template: '<p class="pull-left fs-12 lh-26">当前是第{$current}页，共{$pages}页，{$items}条记录，每页显示{$itemsOnPage}条。</p>'}});
+            //alert('现在是5，被重新初始化!');
+
         }
 
         var inited = false;

@@ -34,7 +34,7 @@
                                                 <i></i>
                                             </span>
                             <div class="form-control-dropdown-value" title="请选择一个选项" aria-expanded="false">请选择一个选项</div>
-                            <ul class="form-control-dropdown-menu">
+                            <ul class="form-control-dropdown-menu" id="j-dropdown-ul">
                                 <li title="option xxxxxx">
                                     option xxxxxx
                                 </li>
@@ -66,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="btn primary" id="j-select-menu">默认选中</button>
             </div>
             <div class="ui-code">
 <pre><code>
@@ -74,7 +75,7 @@
     &lt;i&gt;&lt;/i&gt;
     &lt;/span&gt;
     &lt;div class=&quot;form-control-dropdown-value&quot; title=&quot;请选择一个选项&quot; aria-expanded=&quot;false&quot;&gt;请选择一个选项&lt;/div&gt;
-    &lt;ul class=&quot;form-control-dropdown-menu&quot;&gt;
+    &lt;ul class=&quot;form-control-dropdown-menu  id="j-dropdown-ul"&quot;&gt;
     &lt;li title=&quot;option one&quot;&gt;
     option one
     &lt;/li&gt;
@@ -86,6 +87,17 @@
     &lt;/li&gt;
     &lt;/ul&gt;
     &lt;/div&gt;
+
+    &lt;button class="btn primary" id="j-select-menu"&gt;默认选中&lt;/button&gt;
+
+    &lt;script&gt;
+     // 默认选中
+        $('#j-select-menu').on('click', function(){
+            $('#j-dropdown-ul li').eq(1).trigger('click')
+          })
+        // 默认选中第一个
+        $('#j-dropdown-ul li').eq(0).trigger('click')
+    &lt;/script&gt;
 </code></pre>
             </div>
         </div>
@@ -235,6 +247,13 @@
         $('#form-control-example').on('selected.ui.dropdown', function(e, obj) {
             alert(this.id)
         })
+
+        // 默认选中
+        $('#j-select-menu').on('click', function(){
+            $('#j-dropdown-ul li').eq(1).trigger('click')
+          })
+        // 默认选中第一个
+        $('#j-dropdown-ul li').eq(0).trigger('click')
     })
 </script>
 {% endblock %}

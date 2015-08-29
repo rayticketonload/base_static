@@ -64,7 +64,7 @@
                                 '<div class="modal-position">',
                                     '<div class="modal-wrap">',
                                         '<div class="modal-head">',
-                                            '{{title}}',
+                                            '<span class="modal-title">{{title}}</span>',
                                             '<button class="modal-close">',
                                             '<i></i>',
                                             '</button>',
@@ -161,8 +161,6 @@
         this.$el.removeClass('in').attr('aria-hidden', true).off('click.dismiss.ui.modal').off('mouseup.dismiss.ui.modal');
 
         this.$dialog.off('mousedown.dismiss.ui.modal');
-
-        console.log('here');
 
         $.support.transition && this.$el.hasClass('fade') ?
             this.$el.one('uiTransitionEnd', $.proxy(this.hideModal, this)).emulateTransitionEnd(Modal.TRANSITION_DURATION)
@@ -263,7 +261,13 @@
     // 扩展方法
     Modal.prototype.setContent = function(content) {
         var $content = this.$el.find('.modal-body');
-        $content.html(content || '');
+        $content.length && $content.html(content || '');
+    };
+
+    // 设置标题
+    Modal.prototype.setTitle = function(title) {
+        var $title = this.$el.find('.modal-title');
+        $title.length && $title.html(title || '')
     };
 
 
@@ -299,8 +303,16 @@
                 var data = $this.data('ui.modal');
                 var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option== 'object' && option);
                 if(!data) $this.data('ui.modal', (data = new Modal(this, options)));
-                if(typeof option == 'string') data[option](_relatedTarget);
-                else if(options.show) data.show(_relatedTarget);
+                if(typeof option == 'string'){
+                    data[option](_relatedTarget);
+                }else if(options.show){
+                    // 重新设置标题
+                    if(options.title) data.setTitle(options.title);
+                    // 重新设置内容
+                    if(options.content) data.setContent(options.content);
+
+                    data.show(_relatedTarget);
+                }
             })
         }
     }
@@ -369,6 +381,7 @@
                             '</div>',
                             '<div class="in-modal-btns text-align-center">',
                             '</div>'];
+            // 拼接按钮html结构
             var btnHtml = [], btns = opt.buttons;
             for(var i = 0; i < btns.length; i++) {
                 if(btns[i].href) {
@@ -378,16 +391,26 @@
                 }
             }
 
+            // 添加自定义按钮html
             template.splice(-1, 0, btnHtml.join(''));
+
+            // 自定义对话弹层实例
             $that = $(this).modal({title: '提示', content: template.join(''), callback: function(obj){
+                // 按钮点击触发配置回调函数，没有配置则默认关闭层
                 $(this).on('click', '.in-modal-btns .btn' , function(){
-                    var index = $(this).data('index');
+                    // 获取当前按钮位置, e 获取用户决定按钮是否可以关闭层，回调函数return false则不关闭层
+                    var index = $(this).data('index'), e = true;
+                    // 监测用户是否配置回调函数
                     if(opt.buttons.length && opt.buttons[index] && opt.buttons[index]['ok']) {
+                        // ok为函数才执行
                         if(opt.buttons[index]['ok'] && typeof  opt.buttons[index]['ok'] === "function") {
-                            opt.buttons[index]['ok'].call(null, $(this), index);
+                            // 获取用户是否关闭层指令，默认关闭
+                            e = opt.buttons[index]['ok'].call(null, $(this), index) === false ? false : true;
                         }
-                        $($that.selector).modal('hide')
                     }
+
+                    // 指令为true时关闭层
+                    e && $($that.selector).modal('hide')
                 })
             }});
         }

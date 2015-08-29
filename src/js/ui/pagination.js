@@ -19,17 +19,24 @@
 
     // 默认高亮类
     var active = 'active';
+    // 分页总码数模板
+    var pageStr = '<p class="pull-left fs-12 lh-26">共{$pages}页，{$items}条记录，每页显示{$itemsOnPage}条。</p>';
+
 
     // 构造函数
+    // @param {object} element 容器dom元素
+    // @param {json}   options 配置参数面量
     // ===============
     var Pagination = function(element, options) {
+        // 分页主容器
         this.$el = $(element);
-
+        // 初始化
         this._init(options);
     };
 
     // 版本
     Pagination.VERSION = '1.0.0';
+    // 分页默认参数
     Pagination.DEFAULTS = {
         // 总记录数
         items: 1,
@@ -42,7 +49,9 @@
         // 到末页显示多少页码
         edges: 1,
         // 当前页
-        currentPage: 1,
+        currentPage: 0,
+        // 分页总码数字符, 默认不显示, show-是否显示, template 字符模板
+        pageStr: { show: false, template: ''},
         lblPrev: '\u4e0a\u4e00\u9875', //上一页
         lblNext: '\u4e0b\u4e00\u9875', //下一页
         // 选中触发事件
@@ -56,22 +65,26 @@
 
         this._setOption(options);
 
+        $this.itemsOnPage = this.options.itemsOnPage;
+        $this.items = this.options.items;
+        $this.current = this.options.currentPage;
+
         // 总页数
-        $this.pages = $this.options.pages ? $this.options.pages : Math.ceil($this.options.items / this.options.itemsOnPage) ? Math.ceil($this.options.items / $this.options.itemsOnPage) : 1;
+        $this.pages = $this.options.pages ? $this.options.pages : Math.ceil($this.items / this.itemsOnPage) ? Math.ceil($this.items / $this.itemsOnPage) : 1;
 
         // 当前页，从0开始
         $this.currentPage = $this.options.currentPage -1;
         // 页数区间的一半
         $this.halfDisplayed = $this.options.displayedPages / 2;
 
+        // dom 渲染
+        $this._render();
+
         // 绑定点击切换页码
         !!!inited && $this.$el.on('click', 'a[data-page]', function(e) {
             e.preventDefault();
             $this.selectPage($(this).data('page'));
         });
-
-        // dom 渲染
-        $this._render();
     };
 
     Pagination.prototype.init = function(options){
@@ -88,6 +101,7 @@
     Pagination.prototype.selectPage = function(pageIndex, pages) {
         // 切换到设置页
         this.currentPage = pageIndex - 1;
+        this.current = pageIndex;
         // 重新渲染dom
         this.render(pages);
 
@@ -104,7 +118,8 @@
         if(this.pages <= 1) return;
 
         // 上一页,false时不显示，当前页-1，text为显示文字，true为自定义label
-        if(o.lblPrev) this._append(o.currentPage - 1, { text: o.lblPrev}, true);
+        //console.log('currentPage:'+ o.currentPage)
+        if(o.lblPrev && this.currentPage - 1 >= 0) this._append(this.currentPage - 1, { text: o.lblPrev}, true);
 
 
         // 左边首页显示边缘页数
@@ -136,8 +151,28 @@
         }
 
         // 下一页,false时不显示，当前页+1，text为显示文字，true为自定义label
-        if(o.lblNext) this._append(o.currentPage+1, {text: o.lblNext}, true);
+        //console.log(this.currentPage, this.pages)
+        if(o.lblNext && this.currentPage < this.pages - 1) this._append(this.currentPage+1, {text: o.lblNext}, true);
+
+        this.renderPageStr();
     };
+
+    // 渲染总页码
+    Pagination.prototype.renderPageStr = function(){
+        if(this.options.pageStr && this.options.pageStr.show) {
+            var that = this;
+            var oPageStr = that.$el.prevAll();
+            var template = this.options.pageStr.template || pageStr;
+
+            template = template.replace(/{\$(\w*)}/gi, function(matches, key, index){
+                return that[key] ? that[key] : 0;
+            })
+
+            oPageStr.length && oPageStr.remove();
+
+            that.$el.before($(template));
+        }
+    }
 
     // 重新渲染,外部接口
     Pagination.prototype.render = function(pages){
@@ -179,8 +214,14 @@
         pageIndex = pageIndex < 0 ? 0: (pageIndex < this.pages ? pageIndex : this.pages -1);
         options = $.extend({ text: pageIndex + 1}, opts);
 
+        // console.log(pageIndex, this.currentPage, islb)
+
         // 判断当前页与非当前页
-        item = (pageIndex == this.currentPage) ? '<li '+ (islb ? '' : 'class="'+ active +'"') +'><a href="###">'+ (options.text) +'</a></li>' : '<li><a href="#page-'+ (pageIndex + 1) +'" data-page="'+ (pageIndex + 1) +'">'+ options.text +'</a></li>';
+        item = (pageIndex == this.currentPage) ?
+                // 当前页， 上一页下一页不加active类
+                '<li '+ (islb ? '' : 'class="'+ active +'"') +'><a href="javascript:void(0);">'+ (options.text) +'</a></li>'
+                // 分当前页标识为可点击
+                : '<li><a href="#page-'+ (pageIndex + 1) +'" data-page="'+ (pageIndex + 1) +'">'+ options.text +'</a></li>';
 
         $this.$el.append(item);
     };
@@ -188,14 +229,17 @@
     // 插件定义
     //======================
     function Plugin(options) {
+        // 获取传入参数，可能不止options一个参数
         var args = arguments;
+        // jquery 链式
         return $(this).each(function () {
             var $this = $(this);
             var data = $this.data('ui.pagination');
 
+            // 创建一个新实例
             if(!data) $this.data('ui.pagination', (data = new Pagination($this, $.extend({}, $this.data(), options))));
 
-            if(typeof options == 'string') { // 调用接口方法
+            if(typeof options == 'string') { // 调用接口方法,第二个参数为方法传入参数
                 data[options].apply(data, [].slice.call(args, 1));
             }
         })

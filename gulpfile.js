@@ -73,12 +73,11 @@ var PORT = 8888;
 
 var createdTime = (new Date().toLocaleDateString().split(' '))[0];
 var banner = [
-        '/*! <%=pkg.name%> v<%=pkg.version%>',
-        '*  by <%=pkg.author%>',
+        '/*! <%= pkg.name%> v<%= pkg.version%>',
+        '*  by <%= pkg.author%>',
         '*  (c) '+ createdTime + ' www.frontpay.cn',
         '*  Licensed under <%= pkg.license %>',
-        '*/',
-        ''
+        '*/'
     ].join('\n');
 
 
@@ -124,13 +123,21 @@ var template = nunjucks.configure(tplPath, {
 });
 
 // 输出静态模板文件
-var tpl = function(){
+var tpl = function(o){
+    var option = {version: config.ver, dist: dist, template_url: template_url};
+    if(o && typeof o === 'object') {
+        for(var i in o) {
+            option[i] = o[i]
+        }
+    }
+
+
     return through2.obj(function(file, enc, next){
         // windows环境下不用替换
         //var tplFile = file.path.replace(tplPath, '');
         var tplFile = file.path;
 
-        template.render(tplFile, {version: config.ver, dist: dist, template_url: template_url}, function(err, html){
+        template.render(tplFile, option, function(err, html){
             if(err){
                 return next(err);
             }
@@ -228,13 +235,16 @@ gulp.task('animated', function(){
 
 /* js */
 gulp.task('js', function(){
+    //banner = 'Hello <%= name %>\n';
+    //console.log(bannerHeader('Hello <%= name %>\n', { name: '123' } ));
+    //return;
     return gulp.src(filePaths.js)
                 //.pipe(sourcemaps.init())
                 //.pipe(uglify())
                 //
                // .pipe(sourcemaps.write(distPath+'/js/maps'))
-                .pipe(n2a({reverse: false}))
-                .pipe(bannerHeader(banner, { pkg: pkg}))
+                //.pipe(bannerHeader(banner, { pkg: { name: '123' }}))
+                //.pipe(n2a({reverse: false}))
                 .pipe(gulp.dest(distPath+'/js'))
                // .pipe(connect.reload())
 });
@@ -369,6 +379,7 @@ gulp.task('frontui', function(){
 
 /*------ 默认启动任务 ------ */
 gulp.task('default', ['clean'], function(next){
+    //return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
     return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
     //return next();
 });
@@ -381,4 +392,37 @@ gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'frontui:charts', '
 gulp.task('fonticon-update', function(next){
     return gulp.start(['iconfont-style', 'iconfont-file', 'iconfont-ie7']);
     //return next();
+})
+
+
+/*------- 发布文档 -------*/
+var documentPath = '../frontui.github.com/document';
+gulp.task('document:template', function(){
+    return gulp.src(filePaths.html)
+        .pipe( plumber( { errorHandler: errrHandler } ) )
+        .pipe(tpl({ dist: '/document/src', template_url: '/document'}))
+        .pipe(replace('../../assist/', './'))
+        .pipe(gulp.dest(documentPath))
+})
+gulp.task('document:index', ['document:template'], function(){
+    return gulp.src(documentPath+'/ui_1.1.html')
+            .pipe(rename('index.html'))
+            .pipe(gulp.dest(documentPath))
+})
+gulp.task('document:static', function(){
+    return gulp.src(['./output/src/**/**', '!./output/src/js', '!./output/src/js/**/**', '!./output/src/css/maps', '!./output/src/css/maps/**/**'])
+            .pipe(gulp.dest(documentPath+'/src'));
+})
+gulp.task('document:js', function(){
+    return gulp.src(['./output/src/js/**/**'])
+            .pipe(n2a({reverse: false}))
+            .pipe(uglify())
+            .pipe(gulp.dest(documentPath+'/src/js'));
+})
+gulp.task('document:icon', function(){
+    return gulp.src(['./assist/**/**'])
+            .pipe(gulp.dest(documentPath));
+})
+gulp.task('document', function(){
+    return gulp.start(['document:index', 'document:static','document:js', 'document:icon']);
 })

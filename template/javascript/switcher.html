@@ -274,10 +274,11 @@
                 </div>
             </div>
             <div class="ui-code">
-                            <pre><code>   $('#j-switcher-1').on('select.ui.switcher', function(){
-                                alert(this.id)
-                                })
-                            </code></pre>
+<pre><code>   $('#j-switcher-1').on('select.ui.switcher', function(){
+        alert(this.id)
+        alert(e.relatedTarget.html())
+    })
+</code></pre>
             </div>
         </div>
 
@@ -359,8 +360,9 @@
 <script src="{{dist}}/js/ui/accordion.js"></script>
 <script>
     $(function(){
-        $('#j-switcher-1').on('select.ui.switcher', function(){
+        $('#j-switcher-1').on('select.ui.switcher', function(e){
             alert(this.id)
+            alert(e.relatedTarget.html())
         })
 
         $('#j-switcher-2').accordion();

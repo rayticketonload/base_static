@@ -9,12 +9,23 @@
 +(function($) {
     'use strict';
 
-    var dismiss = '[data-dismiss="alert"],.alert.with-close em';
+    var dismiss = '[data-dismiss="alert"]';
+    var closeBtn = 'em';
 
     // 构造函数
     // ===============
-    var Alert = function(el) {
-        $(el).on('click', dismiss, this.close);
+    var Alert = function(el, callback) {
+        var that = this;
+        if(typeof callback === 'function') {
+           $(el).on('click', closeBtn, function(){
+                var $close = $(this);
+                callback(function(){
+                    that.close.call($close)
+                });
+           });
+        } else {
+            $(el).on('click', closeBtn, this.close);
+        }
     };
 
     Alert.VERSION = '1.0.0';
@@ -69,7 +80,7 @@
             var $this = $(this);
             var data = $this.data('ui.alert');
 
-            if(!data) $this.data('ui.alert', (data = new Alert(this)));
+            if(!data) $this.data('ui.alert', (data = new Alert(this, option)));
             if(typeof option == 'string') data[option].call($(this));
         })
     }

@@ -1,18 +1,21 @@
 {% extends "../_layout/javascript.html" %}
 {% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
     <section id="type" class="ui-section">
         <h1>弹层</h1>
         <!-- 概述用法 -->
-        <div class="section-content">
+        <div class="section-content" id="normal">
             <h3>
                 <strong>概述用法</strong>
             </h3>
             <div class="ui-example">
                 <p class="description">
-                    创建拥有不同样式和过渡形式的模态对话框。
+                    创建拥有不同样式和过渡形式的模态对话框。一般常规做法是在页面添加隐藏的弹层<code>div</code>元素
                 </p>
                 <p>
-                    HTML结构上参照<code><a target="_blank" href="{{template_url}}/ui_1.1.html#modal">ui规范</a></code>
+                    HTML结构上参照<code><a target="_blank" href="{{template_url}}/ui_1.1.html#modal">ui规范</a></code>,页面上一有弹层html结构代码。可以通过配置<code>data-target="弹层id"</code>及<code>data-toggle="modal"</code>调用触发。
                 </p>
                 <br/>
                 <a href="#modal-1" data-toggle="modal" class="btn default small-btn">a链接打开</a>
@@ -46,24 +49,24 @@
                 </div>
             </div>
             <div class="ui-code">
-                            <pre>
-                                <code>
-                                    &lt;a href="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;a链接打开 &lt;/a&gt;
-                                    <br/>
-                                    &lt;button data-target="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;button打开 &lt;/button&gt;
-                                </code>
-                            </pre>
+<pre>
+    <code>
+        &lt;a href="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;a链接打开 &lt;/a&gt;
+        <br/>
+        &lt;button data-target="#modal-1" data-toggle="modal" class="btn default small-btn"&gt;button打开 &lt;/button&gt;
+    </code>
+</pre>
             </div>
         </div>
 
         <!-- 自定义弹层 -->
-        <div class="section-content">
+        <div class="section-content" id="define">
             <h3>
                 <strong>自定义弹层</strong>
             </h3>
             <div class="ui-example">
                 <p class="description">
-                    我们通过调用<code>jQuery</code>的方法来自定义弹层。
+                    当页面并没有我们要弹层的dom元素时，我们通过调用<code>$(#自定义id).modal(title, content)</code>的方法来自定义弹层。
                 </p>
                 <br/>
                 <p>
@@ -71,20 +74,17 @@
                 </p>
             </div>
             <div class="ui-code">
-                            <pre>
-                                <code>
-                                    $('#j-pop').on('click', function(){
-                                    <br/>
-                                        $('#testModal').modal({title: '提示', content: 'aaaa'});
-                                    <br/>
-                                    })
-                                </code>
-                            </pre>
+<pre><code>var i = 0;
+$('#j-pop').on('click', function(){
+    // 自定义弹层使用 $(自定义弹层id).modal({ title: '标题', content: '内容'});
+    $('#testModal').modal({title: '提示'+ (i++), content: 'aaaa'+ i});
+})
+</code></pre>
             </div>
         </div>
 
         <!-- 事件监听 -->
-        <div class="section-content">
+        <div class="section-content" id="event">
             <h3>
                 <strong>事件监听</strong>
             </h3>
@@ -127,13 +127,172 @@
             </div>
 
             <div class="ui-code">
-<pre><code>$('#modal-2').on('show.ui.modal', function(){
+<pre><code>
+// 监听弹层#modal-2的弹出和隐藏动作
+$('#modal-2').on('show.ui.modal', function(){
         alert('弹出');
     });
     <br/>
     $('#modal-2').on('hide.ui.modal', function(){
          alert('隐藏');
     })
+</code></pre>
+            </div>
+        </div>
+
+
+        <!-- loading -->
+        <div class="section-content" id="loading">
+            <h3>
+                <strong>加载层</strong>
+            </h3>
+            <div class="ui-example">
+                <br/>
+                <p><code>$(自定义id).showLoading()</code>显示加载层</p>
+                <br/>
+                <p><code>$(自定义id).hideLoading()</code>关闭加载层</p>
+
+                <br/>
+                <a href="#modal-2" id="j-showLoading-btn" class="btn default small-btn">a链接打开</a>
+            </div>
+
+            <div class="ui-code">
+<pre><code>$(function(){
+    $('#j-loading').on('click', function(){
+      <b>// 显示加载层 $(自定义id).showLoading(提示内容);</b>
+      $('#myLoading').showLoading('正在处理');
+        setTimeout(function(){
+            <b>// 隐藏加载层,关闭#myLoading加载层</b>
+          $('#myLoading').hideLoading();
+         }, 3000)
+
+         /*
+         // 异步
+         $.get(url).done(function(){
+            $('#myLoading').hideLoading();
+         })
+          */
+      })
+    })
+</code></pre>
+            </div>
+        </div>
+
+        <!-- 弹框对话框 -->
+        <div class="section-content" id="modalLayer">
+            <h3>
+                <strong>弹框对话框</strong>
+            </h3>
+            <div class="ui-example">
+                <br>
+                <p>基于<code>modal</code>的带<code>icon</code>弹层, 所有按钮点击默认关闭层</p>
+                <br/>
+                <h4>参数配置</h4>
+                <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            属性
+                        </th>
+                        <th>
+                            描述
+                        </th>
+                        <th>
+                            示例
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><code>'title'</code></td>
+                        <td><code>提示标题</code></td>
+                        <td><button class="btn default small-btn j-modal" data-id="j-modal-1" data-title="自定义title">自定义title</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'icon'</code></td>
+                        <td>状态提示图标<code>success|error|info</code></td>
+                        <td><button class="btn default small-btn j-modal" data-id="j-modal-2" data-icon="success" data-title="成功">成功</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'content'</code></td>
+                        <td><code>提示副标题</code></td>
+                        <td><button class="btn default small-btn j-modal" data-id="j-modal-3" data-icon="info" data-title="排队中" data-content="提示副标题">提示副标题</button></td>
+                    </tr>
+                    <tr>
+                        <td><code>'buttons'</code></td>
+                        <td>自定义按钮<code>
+                            <br>
+                            text 按钮文字
+                            <br>
+                            href 填写了为显示a链接地址不为按钮
+                            <br>
+                            style 按钮样式名，默认 btn primary<br/>
+                            ok 按钮回调
+                        </code></td>
+                        <td><button class="btn default small-btn j-modal" data-id="j-modal-4" data-icon="error" data-title="标题" data-content="副标题" data-ok="callbackOk">自定义按钮</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+
+            <div class="ui-code">
+<pre><code>$('.j-modal').on('click', function(){
+        var data = $(this).data();
+        if(data.ok) {
+            data.buttons = [
+                {
+                    text: '确定',
+                    ok: function(){
+                        alert('我是个2b');
+                        // 使用return false，则点击按钮不关闭层
+                        //return false;
+                    }
+                },
+                {
+                    text: '返回修改',
+                    href: 'pagination.html',
+                    style: 'btn links'
+                }
+            ];
+        }
+        $('#'+data.id).modalLayer(data);
+    })
+
+    /**
+     // 1.提示标题
+     $('#j-modalLayer-1').modalLayer({title: '自定义title'});
+
+     // 2.自定义icon
+     $('#j-modalLayer-2').modalLayer({ title: '自定义title', icon: 'success'})
+
+     // 3. 自定义副标题
+        $('#j-modalLayer-3').modalLayer({ title: '自定义title', icon: 'info', content: '我是副标题可以是html代码'})
+
+     // 4. 自定义按钮
+     $('#j-modalLayer-4').modalLayer({
+        title: '自定义title',
+        icon: 'error',
+        content: '我是副标题可以是html代码',
+        buttons: [
+                    {
+                        text: '确定',
+                        ok: function(){
+                            alert('我是个2b');
+                            // 使用return false，则点击按钮不关闭层
+                            //return false;
+                        }
+                    },
+                    {
+                        text: '返回修改',
+                        href: 'pagination.html',
+                        style: 'btn links'
+                    }
+                ];
+     })
+     */
 </code></pre>
             </div>
         </div>
@@ -146,8 +305,9 @@
 <script src="{{dist}}/js/ui/modal.js"></script>
 <script>
     $(function(){
+        var i = 0;
         $('#j-pop').on('click', function(){
-            $('#testModal').modal({title: '提示', content: 'aaaa'});
+            $('#testModal').modal({title: '提示'+ (i++), content: 'aaaa'+i});
         })
 
         $('#modal-2').on('show.ui.modal', function(){
@@ -156,6 +316,37 @@
 
         $('#modal-2').on('hide.ui.modal', function(){
             alert('隐藏');
+        })
+
+        // 加载层
+        $('#j-showLoading-btn').on('click', function(){
+            $('#j-showLoading').showLoading();
+
+            setTimeout(function(){
+                $('#j-showLoading').hideLoading();
+            }, 3000)
+        });
+
+        $('.j-modal').on('click', function(){
+            var data = $(this).data();
+            if(data.ok) {
+                data.buttons = [
+                    {
+                        text: '确定',
+                        ok: function(){
+                            alert('我是个2b');
+                            // 使用return false，则点击按钮不关闭层
+                            //return false;
+                        }
+                    },
+                    {
+                        text: '返回修改',
+                        href: 'pagination.html',
+                        style: 'btn links'
+                    }
+                ];
+            }
+            $('#'+data.id).modalLayer(data);
         })
     })
 </script>

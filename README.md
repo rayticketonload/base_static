@@ -14,6 +14,8 @@
 
 ## 修改日志
 
+* 2015-08-29 增加可发布在线文档任务`gulp document`
+
 * 2015-08-07 增加`gulp animated`任务更新`animated.css`库。
 
 			 增加`bower`管理第三方组件
