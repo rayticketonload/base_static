@@ -385,7 +385,7 @@ gulp.task('default', ['clean'], function(next){
 });
 
 gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'frontui:charts', 'js', 'template'],  function(){
-	gulp.start(['front:ui', 'replace'])
+	gulp.start(['frontui', 'replace'])
 })
 
 /* 更新字体 */
