@@ -375,7 +375,7 @@
             var template = ['<div class="notice-wrap '+ opt.icon +' in-modal">',
                                 '<div class="modalLayer notice-box">',
                                     '<span class="notice-img"></span>',
-                                    '<h3 class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-30': '') +'">'+ opt.title +'</h3>',
+                                    '<h3 class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-20': '') +'">'+ opt.title +'</h3>',
                                     '<div class="modalLayer-content">'+ opt.content +'</div>',
                                 '</div>',
                             '</div>',
