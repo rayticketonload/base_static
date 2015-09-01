@@ -145,6 +145,7 @@
                     添加<code>ui.select.pagination</code>事件可以监听页码切换。
                 </p>
                 <div class="pagination-wrap text-align-center">
+                    <p class="pull-left fs-12 lh-26">当前是第{$current}页，共{$pages}页，{$items}条记录，每页显示{$itemsOnPage}条。</p>
                     <ul id="j-page">
 
                     </ul>
@@ -194,7 +195,7 @@
 
         function ajaxData(e, index, instance){
             alert(index);
-            index = index || 5;
+            index = index || 1;
 
             // 显示总页码
             //$('#j-page').pagination({ currentPage: index, items: 50, itemsOnPage: 5, pageStr: {show: true}});

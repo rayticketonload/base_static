@@ -114,7 +114,7 @@
     Pagination.prototype._render  = function(){
         var o = this.options, interval = this._getInterval(), i;
         // 清空dom
-        this.$el.empty();
+        this.$el.empty().prevAll().remove();
         if(this.pages <= 1) return;
 
         // 上一页,false时不显示，当前页-1，text为显示文字，true为自定义label
