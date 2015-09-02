@@ -270,6 +270,21 @@
         $title.length && $title.html(title || '')
     };
 
+    // 设置对话框title
+    Modal.prototype.layerUpdate = function(option){
+        var $el = this.$el, $obj;
+        for(var o in option) {
+            if ( o != 'buttons') {
+                $obj = $el.find('[role="'+ o +'"]');
+                if(o == 'icon') {
+                    $obj.attr('class', 'notice-wrap '+ option[o] +' in-modal');
+                } else {
+                    $el.find('[role="'+ o +'"]').html(option[o])
+                }
+            }
+        }
+    }
+
 
 
     // 插件定义
@@ -366,17 +381,22 @@
             ]
         };
 
-        var opt = $.extend({}, defaults, option);
-        var $that = $(this);
+
+        var $that = $(this), opt;
 
         if($that.length) {
+            var Instance = $that.data('ui.modal'), dfOption = $that.data('options');
+            opt = $.extend(defaults, dfOption, option)
+            // 重新设置title，content，icon
+            Instance && typeof opt === "object" && Instance.layerUpdate(opt);
             $that.modal('show');
         } else { // 初始化
-            var template = ['<div class="notice-wrap '+ opt.icon +' in-modal">',
+            opt = $.extend({}, defaults, option);
+            var template = ['<div class="notice-wrap '+ opt.icon +' in-modal" role="icon">',
                                 '<div class="modalLayer notice-box">',
                                     '<span class="notice-img"></span>',
-                                    '<h3 class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-20': '') +'">'+ opt.title +'</h3>',
-                                    '<div class="modalLayer-content">'+ opt.content +'</div>',
+                                    '<h3 role="title" class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-20': '') +'">'+ opt.title +'</h3>',
+                                    '<div class="modalLayer-content" role="content">'+ opt.content +'</div>',
                                 '</div>',
                             '</div>',
                             '<div class="in-modal-btns text-align-center">',
@@ -409,6 +429,7 @@
                         }
                     }
 
+                    $($that.selector).data('options', opt);
                     // 指令为true时关闭层
                     e && $($that.selector).modal('hide')
                 })

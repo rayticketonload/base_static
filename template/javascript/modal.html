@@ -232,6 +232,15 @@ $('#modal-2').on('show.ui.modal', function(){
                         </code></td>
                         <td><button class="btn default small-btn j-modal" data-id="j-modal-4" data-icon="error" data-title="标题" data-content="副标题" data-ok="callbackOk">自定义按钮</button></td>
                     </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            重置更新文字
+                            <br>
+                            <code>{title: '新标题', content: '这里是什么', icon: 'success'}</code>
+                        </td>
+                        <td><button class="btn default small-btn" id="j-modal-btn-5">更新内容</button></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -292,6 +301,11 @@ $('#modal-2').on('show.ui.modal', function(){
                     }
                 ];
      })
+
+    // 更新内容
+    $('#j-modal-btn-5').on('click', function(){
+            $('#j-modal-4').modalLayer({title: '新标题', content: '这里是什么', icon: 'success'});
+        })
      */
 </code></pre>
             </div>
@@ -347,6 +361,10 @@ $('#modal-2').on('show.ui.modal', function(){
                 ];
             }
             $('#'+data.id).modalLayer(data);
+        })
+
+        $('#j-modal-btn-5').on('click', function(){
+            $('#j-modal-4').modalLayer({title: '新标题', content: '这里是什么', icon: 'success'});
         })
     })
 </script>
