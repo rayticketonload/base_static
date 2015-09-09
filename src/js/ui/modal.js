@@ -21,6 +21,11 @@
         // loading
  */
 
+/**
+ * log:
+ * 1. 加属性`tabindex=-1`解决聚焦问题
+ */
+
 +(function($) {
     'use strict';
 
@@ -119,7 +124,7 @@
 
 
         var transition = $.support.transition && that.$el.hasClass('fade');
-        that.$el.show().scrollTop(0);
+        that.$el.show().scrollTop(0).attr('tabindex', -1);
 
         that.adjustDialog();
 
@@ -156,7 +161,7 @@
         this.escape();
         this.resize();
 
-        $(document).off('focusin.ui.modal');
+        $(document).off('focusin.ui.modal').off('keydown.ui.modal');
 
         this.$el.removeClass('in').attr('aria-hidden', true).off('click.dismiss.ui.modal').off('mouseup.dismiss.ui.modal');
 

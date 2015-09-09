@@ -311,6 +311,183 @@ $('#modal-2').on('show.ui.modal', function(){
             </div>
         </div>
 
+
+        <!-- loading -->
+        <div class="section-content" id="loading">
+            <h3>
+                <strong>表单</strong>
+            </h3>
+            <div class="ui-example">
+            	<br>
+                <div class="form-layer1">
+                                    <div class="form-layer2">
+                                        <form autocomplete="off">
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example1">
+                                                    <b>*
+                                                    </b>
+                                                    <span>标准表单标题宽度可以放十八个中文字符
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="Text2" placeholder="表单提示语">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example2">
+                                                    <b>*
+                                                    </b>
+                                                    <span>请输入密码
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="password" class="form-control" id="Password1" placeholder="表单提示语">
+                                                    <a class="form-control-tools-link">忘记密码</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="***">
+                                                    <b>*</b>
+                                                    <span>dropdown </span>
+                                                    <em>:</em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-dropdown">
+                                                        <span class="form-control-dropdown-btn">
+                                                            <i></i>
+                                                        </span>
+                                                        <div class="form-control-dropdown-value">
+                                                            <span class="bank-icon icon-cmb" title="招商银行"></span>
+                                                            <span class="form-control-bank-card">招商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                        </div>
+                                                        <ul class="form-control-dropdown-menu">
+                                                            <li title="">
+                                                                <span class="bank-icon icon-icbc" title="工商银行"></span>
+                                                                <span class="form-control-bank-card">工商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <span class="h3">陈少峰</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <span class="bank-icon icon-cmb" title="招商银行"></span>
+                                                        <span class="form-control-bank-card">招商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <strong class="h2 warning-FontColor">14,000.00</strong>&nbsp;元
+                                            <div class="tooltips-icon">
+                                                i
+                                                <div class="tooltips">
+                                                    部分款项未到期
+                                                    <span class="tips-arrow-border"></span>
+                                                    <span class="tips-arrow"></span>
+                                                </div>
+                                            </div>
+                                                        <a class="link-standard">提现明细</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        06月18日24点前
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="***">
+                                                    <b>* </b>
+                                                    <span>输入验证码 </span>
+                                                    <em>: </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-verify">
+                                                        <input type="text" class="form-control" id="***">
+                                                        <button class="btn form-control-verify-btn">
+                                                            获取验证码 
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-control-wrap text-align-left plural-btns margin-top-20px">
+                                                    <button type="submit" class="btn primary" id="j-modal-form">确定</button>
+                                                    <a href="###" class="btn links">button link</a>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+            </div>
+
+            <div class="ui-code">
+<pre><code>$(function(){
+    $('#j-loading').on('click', function(){
+      <b>// 显示加载层 $(自定义id).showLoading(提示内容);</b>
+      $('#myLoading').showLoading('正在处理');
+        setTimeout(function(){
+            <b>// 隐藏加载层,关闭#myLoading加载层</b>
+          $('#myLoading').hideLoading();
+         }, 3000)
+
+         /*
+         // 异步
+         $.get(url).done(function(){
+            $('#myLoading').hideLoading();
+         })
+          */
+      })
+    })
+</code></pre>
+            </div>
+        </div>
+
     </section>
 {% endblock %}
 
@@ -365,6 +542,25 @@ $('#modal-2').on('show.ui.modal', function(){
 
         $('#j-modal-btn-5').on('click', function(){
             $('#j-modal-4').modalLayer({title: '新标题', content: '这里是什么', icon: 'success'});
+        });
+
+
+        var clicked = 0;
+        $('#j-modal-form').on('click', function(e){
+        	e.preventDefault();
+        	console.log(++clicked);
+        	$('#j-form-modal').modalLayer({
+        		title: '提示！',
+        		content: '密码错误',
+        		buttons: [
+        			{
+        				text: '确定',
+        				ok: function() {
+        					alert('Ok');
+        				}
+        			}
+        		]
+        	});
         })
     })
 </script>
