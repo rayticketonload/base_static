@@ -47,7 +47,7 @@
 		this.init = function(el, opts) {
 			this.el = el;
 			this.ul = el.children('ul');
-			this.max = [el.outerWidth(), el.outerHeight()];
+			this.max = [(el.outerWidth() || el.parent().outerWidth()), (el.outerHeight() || el.parent().outerHeight())];
 			this.items = this.ul.children('li').each(this.calculate);
 
 			//  Check whether we're passing any options in to Unslider
@@ -67,7 +67,6 @@
 
 			//  Add it to the sizes list
 			_.sizes[index] = [width, height];
-
 			//  Set the max values
 			if(width > _.max[0]) _.max[0] = width;
 			if(height > _.max[1]) _.max[1] = height;
@@ -82,6 +81,8 @@
 				width: _.max[0],
 				height: this.items.first().outerHeight()
 			});
+
+      // console.log(_.max[0]);
 
 			//  Set the relative widths
 			this.ul.css({width: (this.items.length * 100) + '%', position: 'relative'});
@@ -101,27 +102,26 @@
 			//  Little patch for fluid-width sliders. Screw those guys.
 			if(this.opts.fluid) {
 				var resize = function() {
-          console.log(_.el.parent().outerWidth());
 					_.el.css('width', Math.min(Math.round((_.el.width() / _.el.parent().width()) * 100), 100) + '%');
 				};
 
 				resize();
-				$(window).resize(resize);
+				$(window).off('resize.ui.slider').on('resize.ui.slider', resize);
 			}
 
 			if(this.opts.arrows) {
 				this.el.parent().append('<p class="arrows"><span class="prev">'+ (this.opts.prevText || 'prev') +'</span><span class="next">'+ (this.opts.nextText || 'next') +'</span></p>')
-					.find('.arrows span').click(function() {
+					.find('.arrows span').off('click').on('click', function() {
 						$.isFunction(_[this.className]) && _[this.className]();
 					});
 			};
 
-      if(this.opts.prev) $(this.opts.prev).on('click', $.proxy(this.prev, this));
-      if(this.opts.next) $(this.opts.next).on('click', $.proxy(this.next, this));
+      if(this.opts.prev) $(this.opts.prev).off('click').on('click', $.proxy(this.prev, this));
+      if(this.opts.next) $(this.opts.next).off('click').on('click', $.proxy(this.next, this));
 
 			//  Swipe support
 			if($.event.swipe) {
-				this.el.on('swipeleft', _.prev).on('swiperight', _.next);
+				this.el.off('swipeleft').on('swipeleft', _.prev).off('swiperight').on('swiperight', _.next);
 			}
 
       this.el.trigger(initEvent)
@@ -191,7 +191,7 @@
 				html += '</ol>';
 
 			//  Add it to the Unslider
-			this.el.addClass('has-dots').append(html).find('.dot').click(function() {
+			this.el.addClass('has-dots').append(html).find('.dot').off('click').on('click', function() {
 				_.move($(this).index());
 			});
 		};
@@ -207,16 +207,16 @@
         //  Cache a copy of $(this), so it
         var me = $(this);
         var config = me.data();
-        var data = me.data('ui.slider');
-        o = $.extend({}, o, config);
+        var instance = me.data('ui.slider');
 
-        if(!data) {
-          var instance = (new Unslider).init(me, o);
+        if(!instance) {
+          o = $.extend({}, o, config);
+          instance = (new Unslider).init(me, o);
           //  Invoke an Unslider instance
           me.data('ui.slider', instance);
         }
-
-        if(typeof o === 'string') instance[option] && instance[option](s);
+        s = $.extend({}, s, config);
+        if(typeof o === 'string') instance[o] && instance[o](me, s);
       });
     }
 
