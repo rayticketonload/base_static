@@ -40,6 +40,7 @@ $RECYCLE.BIN/
 .DS_Store
 
 .svn
+.log
 
 *.swo
 *.swp
