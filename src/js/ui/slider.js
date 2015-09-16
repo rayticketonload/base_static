@@ -3,7 +3,7 @@
  * tommyshao <jinhong.shao@frontpay.cn>
  * REFFRENCE: http://unslider.com
  * API:
- *      $(element).placeholder();
+ *      $(element).slider();
  */
 
 +(function($, f) {
