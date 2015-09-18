@@ -327,7 +327,7 @@ gulp.task('iconfont-style', function(){
 
 // 更新到frontui
 // ------------------------
-var frontui_path = config.frontui_path+'static';
+var frontui_path = config.frontui_path;
 gulp.task('front:ui', function(){
     return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/datetimepicker.js', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
         .pipe( plumber( { errorHandler: errrHandler } ) )
