@@ -287,9 +287,9 @@ gulp.task('server', function () {
         port: PORT
     });
 
-    console.log('server start at: http://localhost:' + PORT + '/');
+    console.log('server start at: http://localhost:' + PORT + '/output/html');
 
-    openURL('http://localhost:' + PORT + '/');
+    openURL('http://localhost:' + PORT + '/output/html');
 })
 
 /*--- watch 监听 ---*/

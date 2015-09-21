@@ -1,0 +1,84 @@
+{% extends "_layout/components.html" %}
+
+{% block mainBody %}
+
+<!-- 排版 -->
+<section id="type" class="ui-section">
+    <h1>
+        概览
+    </h1>
+
+    <!-- 单个还是全部引入 -->
+    <div class="section-content" id="heading">
+        <h3>
+            <strong>单个还是全部引入</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                JavaScript 插件可以单个引入（使用 uikit 提供的单个 *.js 文件），或者一次性全部引入（使用 ui.js 或压缩版的 ui.min.js）。
+            </p>
+
+            <div class="warning-FontColor">
+                <p class="h3">建议使用压缩版的 JavaScript 文件</p>
+                <p>ui.js 和 ui.min.js 都包含了所有插件，你在使用时，只需选择一个引入页面就可以了。</p>
+            </div>
+
+            <br/>
+            <br/>
+
+
+            <div class="warning-FontColor">
+                <p class="h3">插件之间的依赖关系</p>
+                <p>某些插件和 CSS 组件依赖于其它插件。如果你是单个引入每个插件的，请确保在文档中检查插件之间的依赖关系。注意，所有插件都依赖 jQuery （也就是说，jQuery必须在所有插件之前引入页面）。 建议jQuery版本1.11.0以上。</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- data 属性 -->
+    <div class="section-content" id="string">
+        <h3>
+            <strong>data 属性</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                你可以仅仅通过 data 属性 API 就能使用所有的 ui 插件，无需写一行 JavaScript 代码。这是 ui 中的一等 API，也应该是你的首选方式。
+            </p>
+        </div>
+        <div class="ui-code">
+                            <pre>
+                                <code>
+                                    &lt;a <span>data-toggle="modal"</span> <span>data-target="#myModal"</span> &gt;点击弹窗&lt;/a&gt;
+                                </code>
+
+                            </pre>
+        </div>
+    </div>
+
+    <!-- 事件 -->
+    <div class="section-content" id="alignment">
+        <h3>
+            <strong>事件</strong>
+        </h3>
+        <div class="ui-example">
+            <!--<span class="section-tip">尽量能在元素样式里面申明就不要用到这种附加类，否则会增加兼容性样式编写的难度，此类工具多用在对版面布局没影响的元素中</span>-->
+            <p class="description">
+                Bootstrap 为大部分插件所具有的动作提供了自定义事件。一般来说，这些事件都有不定式和过去式两种动词的命名形式，例如，不定式形式的动词（例如 show）表示其在事件开始时被触发；而过去式动词（例如 shown ）表示在动作执行完毕之后被触发。
+            </p>
+            <p>
+                所有以不定式形式的动词命名的事件都提供了 preventDefault 功能。这就赋予你在动作开始执行前将其停止的能力。
+            </p>
+        </div>
+        <div class="ui-code">
+                            <pre>
+                                <code>
+                                    $('#myModal').on('show.bs.modal', function (e) {
+                                    if (!data) return e.preventDefault() // 阻止模态框的展示
+                                    })
+                                </code>
+                            </pre>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
