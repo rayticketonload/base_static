@@ -379,7 +379,7 @@ gulp.task('frontui:template', function(){
 })
 
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less']);
+    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template']);
 });
 
 
