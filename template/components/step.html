@@ -1,0 +1,60 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>步骤</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    警告模板<code>_components/step.html</code>包括<code>expand</code>、<code>text1</code>、<code>text2</code>、<code>text3</code>参数。
+                </p>
+
+                <br>
+                {% import "_components/step.html" as Step %}
+
+                {{ Step.render('pass1', '修改密码', '验证密码', '修改成功') }}
+
+                {{ Step.render('pass2', '修改密码', '验证密码', '修改成功') }}
+
+                {{ Step.render('pass3', '修改密码', '验证密码', '修改成功') }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/step.html" as Step %_}
+
+{_{ Step.render('pass1', '修改密码', '验证密码', '修改成功') }_}
+
+{_{ Step.render('pass2', '修改密码', '验证密码', '修改成功') }_}
+
+{_{ Step.render('pass3', '修改密码', '验证密码', '修改成功') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

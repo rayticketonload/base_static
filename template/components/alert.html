@@ -1,0 +1,76 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>警告</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    警告模板<code>_components/alert.html</code>包括<code>expand</code>、<code>text</code>参数。
+                </p>
+
+                <br>
+                {% import "_components/alert.html" as Alert %}
+
+                {{ Alert.render('alert-warning', '<span class="warning-FontColor">rayalienkiss</span>，您尚未进行账户验证，<a href="###" class="link-standard text-nowrap">请先验证</a>') }}
+
+                <br>
+
+                {{ Alert.render('alert-warning with-close', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }}
+                <br>
+
+                {{ Alert.render('alert-warning with-close fade in', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }}
+
+                <br>
+
+                {{ Alert.render('alert-success', '充值成功') }}
+
+                <br>
+
+                {{ Alert.render('alert-danger', '充值失败') }}
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/alert.html" as Alert %_}
+
+{_{ Alert.render('alert-warning', '&lgt;span class="warning-FontColor">rayalienkiss&lt;/span&gt;，您尚未进行账户验证，&lt;a href="###" class="link-standard text-nowrap"&gt;请先验证&lt;/a&gt;') }_}
+
+
+{_{ Alert.render('alert-warning with-close', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }_}
+
+{_{ Alert.render('alert-warning with-close fade in', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }_}
+
+
+{_{ Alert.render('alert-success', '充值成功') }_}
+
+{_{ Alert.render('alert-danger', '充值失败') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

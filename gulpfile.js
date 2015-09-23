@@ -110,7 +110,7 @@ var filePaths = {
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
 	js: [staticPath+'/js/**/**',  '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'],
-	html: [tplPath+'/**/*.html','!'+tplPath+'/_**/*.html'],
+	html: [tplPath+'/**/**.html','!'+tplPath+'/_**/*.html'],
     charts: [staticPath+'/js/ui/charts/echarts.js', staticPath+'/js/ui/charts/chart/line.js', staticPath+'/js/ui/charts/theme/paywe.js', staticPath+'/js/ui/charts/payweChart.js']
 };
 
@@ -298,7 +298,7 @@ gulp.task('watch', function(){
 	gulp.watch(filePaths.images, ['images']);
 	gulp.watch(filePaths.less[0], ['less']);
 	gulp.watch(filePaths.js, ['js']);
-    gulp.watch(filePaths.html, ['template']);
+    gulp.watch(filePaths.html[0], ['template']);
     gulp.watch(filePaths.sprite, ['sprite']);
 	gulp.watch(distPath+'/images/sprite/**/**', ['less']);
     gulp.watch(filePaths.charts, ['charts'])
@@ -371,6 +371,12 @@ gulp.task('frontui:less', function(){
     return gulp.src([staticPath+'/less/**/**', '!'+staticPath+'/less/ui.less'])
                 .pipe(gulp.dest(frontui_path+'/less'));
 });
+
+// template
+gulp.task('frontui:template', function(){
+    return gulp.src('./template/_components/**/**.html')
+            .pipe(gulp.dest(frontui_path+'/template'));
+})
 
 gulp.task('frontui', function(){
     return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less']);
