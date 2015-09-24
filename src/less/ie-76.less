@@ -48,7 +48,7 @@ h1,h2,h3,h4,h5,h6,p {
         &:hover,
         &:active,
         &.current {
-            *border-color: @thirdly-BtnColor * 0.8;        
+            *border-color: @thirdly-BtnColor * 0.8;
         }
     }
 
@@ -328,11 +328,11 @@ input.form-control {
 .form-control-modal-btn,
 .form-control-date-btn {
 
-    > i {        
+    > i {
         *position: absolute;
         *top: 50%;
         *left: 50%;
-        *display: block;       
+        *display: block;
     }
 }
 
@@ -739,26 +739,33 @@ input.form-control {
     }
 }
 
-// 可提金额统计
-.ar-bottom{
-  &>div {
-
-    .arlist {
-      > li {
-        > ul {
-          > li{
-            padding: 0;
-            width: percentage(1/7.1);
-            p, h6{
-              margin: 0 15px;
-            }
-            p{
-              padding-bottom: 15px;
-            }
-          }
-        }
-      }
-    }
-  }
+// 可提金额
+.ar-wrapper{
+    zoom: 1; // clear height
+}
+.ar-top .amountbox {
+    display:inline;
+    width:43%
 }
 
+.ar-bottom{
+    &>div {
+
+        .arlist {
+            > li {
+                > ul {
+                    > li{
+                        padding: 0;
+                        width: 20%;
+                        p, h6{
+                            margin: 0 15px;
+                        }
+                        p{
+                            padding-bottom: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
