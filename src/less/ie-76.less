@@ -368,6 +368,11 @@ input.form-control {
     > .form-control {
         *width: 160px;
     }
+
+    &-btn{
+      left: 192px;
+      right: auto;
+    }
 }
 
 .form-control-check {
@@ -403,7 +408,6 @@ input.form-control {
 
 //表格
 .tables-title {
-
     > .table-title-btns {
 
         > a {
@@ -703,13 +707,13 @@ input.form-control {
 
 //面包屑
 .breadcrumb {
-
+  padding: 5px 0;
     > li {
-
+        height: 20px;
+        line-height: 20px;
         > a {
-
             > i {
-                *margin-left: 2px;
+              margin-left: 2px;
             }
         }
     }
@@ -750,7 +754,9 @@ input.form-control {
 
 .ar-bottom{
     &>div {
-
+        &>div{
+          position: relative;
+        }
         .arlist {
             > li {
                 > ul {
