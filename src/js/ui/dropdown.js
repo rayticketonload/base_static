@@ -116,7 +116,7 @@
             e.stopPropagation();
             var isInput = /input/i.test($target[0].tagName);
             var option = $.trim($(this)[isInput ? 'text' : 'html']());
-            $target[isInput ? 'val' : 'html'](option).trigger('selected.ui.dropdown', this);
+            $target[isInput ? 'val' : 'html'](option).trigger('selected.ui.dropdown', this).trigger('blur');
             clearMenus();
             return false;
         }
@@ -183,7 +183,7 @@
             if(e && e.isDefaultPrevented()) return;
 
             // 隐藏之前自动赋值
-            console.log(isAuto)
+            // console.log(isAuto)
             auto && isAuto && autoFill($this, $input);
 
             $target.removeClass(active).find(list).removeClass('hover').show();
