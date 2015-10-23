@@ -331,14 +331,14 @@ var frontui_path = config.frontui_path;
 gulp.task('front:ui', function(){
     return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/datetimepicker.js', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
         .pipe( plumber( { errorHandler: errrHandler } ) )
-        //.pipe(sourcemaps.init())
+       // .pipe(sourcemaps.init())
 
         .pipe(concat('ui.js'))
         .pipe(stripDebug())
         .pipe(n2a({reverse: false}))
         .pipe(uglify())
-        // .pipe(sourcemaps.write(distPath+'/js/maps'))
         .pipe(bannerHeader(banner, { pkg: pkg}))
+        //.pipe(sourcemaps.write(path.join(__dirname, frontui_path+'/js')))
         .pipe(gulp.dest(frontui_path+'/js'))
     // .pipe(connect.reload())
 });
