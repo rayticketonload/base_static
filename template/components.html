@@ -1,0 +1,29 @@
+{% extends "_layout/components.html" %}
+
+{% block mainBody %}
+
+<!-- 排版 -->
+<section id="type" class="ui-section">
+    <h1>
+        概览
+    </h1>
+
+    <!-- 单个还是全部引入 -->
+    <div class="section-content" id="heading">
+        <h3>
+            <strong>nunjucks模板</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                通过<code>import</code>关键字导入模板，使用<code>set</code>定义数组活变量来填充模板。
+            </p>
+
+            <div class="warning-FontColor">
+                <p class="h3">关于模板标签</p>
+                <p>由于<code>{ {</code>和<code>} }</code>，<code>{ %</code>和<code>% }</code>会被编译，展示代码用<code>{_{</code>、<code>}_}</code>和<code>{_%</code>、<code>%_}</code>替换</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

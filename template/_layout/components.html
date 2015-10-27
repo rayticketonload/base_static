@@ -1,0 +1,100 @@
+{% extends "_layout/layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ dist }}/css/ui.css?v={{ version }}">
+<!-- 日期选择器样式，独立引入 -->
+<link rel="stylesheet" href="{{ dist }}/css/datetimepicker.css?v={{ version }}"/>
+{% endblock %}
+
+{% block body%}
+<Header></Header>
+<div class="uiShow-body">
+    <!-- ui导航 -->
+    <aside class="uiShow-left">
+        <nav class="ui-sidebar" id="sidebar">
+            <div class="scroll-y-hidden"></div>
+            <ul class="lv1">
+                <li>
+                    <a href="{{ template_url }}/components.html" class="sidebar-btn">html模板组件</a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/breadcrumb.html" class="sidebar-btn">
+                        面包屑导航
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/table.html" class="sidebar-btn">
+                        表格
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/pagination.html" class="sidebar-btn">
+                        分页
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/notice.html" class="sidebar-btn">
+                        提示
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/alert.html" class="sidebar-btn">
+                        警告
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/step.html" class="sidebar-btn">
+                        步骤
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/navigator.html" class="sidebar-btn">
+                        导航
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/modal.html" class="sidebar-btn">
+                        弹层
+                    </a>
+                </li>
+                <li class="lv2">
+                    <a href="{{ template_url }}/components/chart.html" class="sidebar-btn">
+                        图表
+                    </a>
+                </li>              
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ui内容 -->
+    <div class="uiShow-right">
+        {% block mainBody%}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block jsPage %}
+<script>
+
+    //ui导航点击
+    $(function () {
+
+        var sidebar = $("#sidebar");
+
+        sidebar.find("a").click(function () {
+            $(sidebar).find("li.active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+
+        var url = location.href;
+        sidebar.find('a').map(function(){
+            if(url.indexOf(this.href) !== -1){
+                sidebar.find(".active").removeClass("active");
+                $(this).parent().addClass("active");
+            }
+        })
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>弹层</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    弹层模板<code>_components/modal.html</code>包括<code>title</code>, <code>body</code>, <code>btns</code>, <code>hasClose</code>参数。
+                </p>
+
+                <br>
+                {% import "_components/modal.html" as Modal %}
+                {%
+                    set btns = [
+                        {text: 'primary', expand: 'primary', id: 'j-modal-2-ok'},
+                        {text: 'secondary', expand: 'secondary'},
+                        {text: 'btn-vicelink', type: 1, url: '###', dismiss: true}
+                    ]
+                %}
+                {{ Modal.render('j-modal','title', 'aaaa') }}
+                {{ Modal.render('j-modal-2','弹层', 'bbb', btns) }}
+
+                <a href="#j-modal" class="btn primary" data-toggle="modal">打开弹层</a>
+                <a href="#j-modal-2" class="btn primary" data-toggle="modal">打开有按钮弹层</a>
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/modal.html" as Modal %_}
+{_%
+    set btns = [
+        {text: 'primary', expand: 'primary', id: 'j-modal-2-ok'},
+        {text: 'secondary', expand: 'secondary'},
+        {text: 'btn-vicelink', type: 1, url: '###', dismiss: true}
+    ]
+%_}
+{_{ Modal.render('j-modal','title', 'aaaa') }_}
+{_{ Modal.render('j-modal-2','弹层', 'bbb', btns) }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/modal.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

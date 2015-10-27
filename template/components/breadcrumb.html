@@ -1,0 +1,72 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>面包屑导航</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    面包屑导航模板<code>_components/breadcrumb.html</code>需要传入自定义数组，其中数组每项包括<code>text</code>、<code>link</code>两个字段，而最后一个数组的<code>link</code>属性不用设置
+                </p>
+                
+                {# 定义面包屑数组 #}
+                {%
+                    set bcList = [
+                        {text: '首页', link: '/'}, 
+                        {text: '二级页面位置', link: '###'},
+                        {text: '三级页面位置', link: '###'},
+                        {text: '当前位置 '}
+                    ]
+                %}
+                {% import "_components/breadcrumb.html" as breadcrumb %}
+                {{ breadcrumb.render(bcList) }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+# 定义面包屑数组 #
+{_%
+    set bcList = [
+        {text: '首页', link: '/'}, 
+        {text: '二级页面位置', link: '###'},
+        {text: '三级页面位置', link: '###'},
+        {text: '当前位置 '}
+    ]
+%_}
+{_% import "_components/breadcrumb.html" as breadcrumb %_}
+{_{ breadcrumb.render(bcList) }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+
+        $('#j-alert-5').alert(ajaxHandler);
+        $('.alert').alert();
+        $('#j-close-btn').on('closed.ui.alert', function(e){
+            alert('#'+ e.relatedTarget[0].id +'已关闭')
+        });
+    })
+</script>
+{% endblock %}

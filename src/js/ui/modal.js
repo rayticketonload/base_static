@@ -276,7 +276,7 @@
     };
 
     // 设置对话框title
-    Modal.prototype.layerUpdate = function(option){
+    /*Modal.prototype.layerUpdate = function(option){
         var $el = this.$el, $obj;
         for(var o in option) {
             if ( o != 'buttons') {
@@ -288,7 +288,7 @@
                 }
             }
         }
-    }
+    }*/
 
 
 
@@ -389,13 +389,18 @@
 
         var $that = $(this), opt;
 
-        if($that.length) {
+        /*if($that.length) {
             var Instance = $that.data('ui.modal'), dfOption = $that.data('options');
             opt = $.extend(defaults, dfOption, option)
             // 重新设置title，content，icon
             Instance && typeof opt === "object" && Instance.layerUpdate(opt);
             $that.modal('show');
-        } else { // 初始化
+        } else { */
+        /*
+        * log: 隐藏即关闭
+        * 2015-10-16
+        */
+            // 初始化
             opt = $.extend({}, defaults, option);
             var template = ['<div class="notice-wrap '+ opt.icon +' in-modal" role="icon">',
                                 '<div class="modalLayer notice-box">',
@@ -438,8 +443,11 @@
                     // 指令为true时关闭层
                     e && $($that.selector).modal('hide')
                 })
+                .on('hide.ui.modal', function(){  // 调用隐藏的时候删除dom
+                    $(this).remove();
+                });
             }});
-        }
+      /*  } */
     };
 
 

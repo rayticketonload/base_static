@@ -1,0 +1,152 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>表格</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    表格模板<code>_components/table.html</code>包括<code>data</code>、<code>expand</code>、<code>cols</code>三个参数。
+                </p>
+                <br>
+                <code>expand</code>传入扩展的样式名
+                <br>
+                <code>cols</code>传入<code>&lt;col /&gt;&lt;col style="width: 20%" /&gt;</code>字符串
+                <br>
+                <br>
+                <br>
+                
+                {# 定义面包屑数组 #}
+                {%
+                    set data = {
+                        thead: ['时间','流水号','类型','付款方','金额','状态','可提现时间'],
+                        items: [
+                            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 '],
+                            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 ']
+                        ]
+                    }
+                %}
+                {% import "_components/table.html" as table %}
+                {{ table.render(data) }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+# 定义面包屑数组 #
+{_%
+    set data = {
+        thead: ['时间','流水号','类型','付款方','金额','状态','可提现时间'],
+        items: [
+            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 '],
+            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 ']
+        ]
+    }
+%_}
+{_% import "_components/table.html" as table %_}
+{_{ table.render(data) }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+        <div class="section-content">
+            <h3>
+                <strong>expand 样式扩展</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    <code>expand</code>扩展样式，比如传入<code>inverse</code>
+                </p>
+                
+                {# 定义面包屑数组 #}
+                {%
+                    set data = {
+                        thead: ['时间','流水号','类型','付款方','金额','状态','可提现时间'],
+                        items: [
+                            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 '],
+                            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 ']
+                        ]
+                    }
+                %}
+                {% import "_components/table.html" as table %}
+                {{ table.render(data, 'inverse') }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+# 定义面包屑数组 #
+{_%
+    set data = {
+        thead: ['时间','流水号','类型','付款方','金额','状态','可提现时间'],
+        items: [
+            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 '],
+            ['2015-05-25   10:25:36', 'DOBA201506060000118000011', '充值', '建设银行 |  尾号 8435 ', '422,252.00', '可提现 ', '2015-05-25 ']
+        ]
+    }
+%_}
+{_% import "_components/table.html" as table %_}
+{_{ table.render(data, 'inverse') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+        <div class="section-content">
+            <h3>
+                <strong>表格标题</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    <code>title</code>、<code>btns</code>、<code>expand</code>
+                </p>
+                
+                {# 定义面包屑数组 #}
+                {% import "_components/table.html" as table %}
+                {{ table.title('表格标题', '<a href="javascript:void(0);">XLS格式</a><a href="javascript:void(0);">CSV格式</a><a href="javascript:void(0);">批量打印凭证</a>') }}
+                {{ table.title('表格标题', '<a href="javascript:void(0);">更多&nbsp;&gt;&gt;</a>', expand='margin-top-20px') }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/table.html" as table %_}
+{_{ table.title('表格标题', '&lt;a href="javascript:void(0);"&gt;XLS格式&lt;/a&gt;&lt;a href="javascript:void(0);"&gt;CSV格式&lt;/a&gt;&lt;a href="javascript:void(0);"&gt;批量打印凭证&lt;/a&gt;') }_}
+{_{ table.title('表格标题', '&lt;a href="javascript:void(0);"&gt;更多&nbsp;&gt;&gt;&lt;/a&gt;', expand='margin-top-20px') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+
+        $('#j-alert-5').alert(ajaxHandler);
+        $('.alert').alert();
+        $('#j-close-btn').on('closed.ui.alert', function(e){
+            alert('#'+ e.relatedTarget[0].id +'已关闭')
+        });
+    })
+</script>
+{% endblock %}

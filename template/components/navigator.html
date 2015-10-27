@@ -1,0 +1,66 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>导航</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    警告模板<code>_components/navigator.html</code>包括<code>expand</code>参数。
+                </p>
+
+                <br>
+                {% import "_components/navigator.html" as Nav %}
+                {%
+                    set items = [
+                        {text: '账户总览', url: 'index.html'},
+                        {text: '交易明细', url: 'index.html'},
+                        {text: '提现明细', url: 'index.html'},
+                        {text: '账户管理', url: 'index.html'}
+                    ]
+                %}
+                {{ Nav.render(items, 2) }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/navigator.html" as Nav %_}
+{_%
+    set items = [
+        {text: '账户总览', url: 'index.html'},
+        {text: '交易明细', url: 'index.html'},
+        {text: '提现明细', url: 'index.html'},
+        {text: '账户管理', url: 'index.html'}
+    ]
+%_}
+{_{ Nav.render(items, 2) }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/alert.js"></script>
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

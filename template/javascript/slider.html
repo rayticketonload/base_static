@@ -1,0 +1,222 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<style media="screen">
+  pre{
+    white-space: pre;
+  }
+</style>
+    <section id="type" class="ui-section">
+        <h1>轮播</h1>
+        <!-- 占位符 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    轮播可以用于banner多列表信息滚动，数据模块信息滚动。
+                </p>
+                <strong>请在IE9-下查看</strong>
+                <div class="ar-wrapper">
+                                <div class="ar-top">
+                                    <div class="amountbox left">
+                                        <h3>
+                                            可提金额
+                                            <span>
+                                                单位：元
+                                            </span>
+                                        </h3>
+                                        <h2>
+                                            7,000,000,00
+                                            <a href="###" class="btn primary small-btn" style="margin-left: 10px;">提现</a>
+                                        </h2>
+                                    </div>
+                                    <div class="amountbox">
+                                        <h3>
+                                            未来7天内可提金额
+                                            <span>
+                                                单位：元
+                                            </span>
+                                        </h3>
+                                        <h2>
+                                            3,000,000,00
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="ar-bottom" id="arb">
+                                    <p class="a">
+                                        日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期
+                                    </p>
+                                    <p class="b">
+                                        金额（元）
+                                    </p>
+                                    <div>
+                                        <!-- 到时候在这一层加2个左右箭头结构，做banner滚动动作-->
+                                        <a href="###" class="ar-arrow left" id="j-slider-prev">
+                                            <i class="icon-chevron-thin-left"></i>
+                                        </a>
+                                        <a href="###" class="ar-arrow right" id="j-slider-next">
+                                            <i class="icon-chevron-thin-right"></i>
+                                        </a>
+                                        <div class="slider" id="j-slider" data-prev="#j-slider-prev" data-next="#j-slider-next">
+                                          <ul class="arlist">
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-01
+                                                        </p>
+                                                        <h6>
+                                                            10,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-02
+                                                        </p>
+                                                        <h6>
+                                                            25,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-03
+                                                        </p>
+                                                        <h6>
+                                                            188,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-04
+                                                        </p>
+                                                        <h6>
+                                                            178,800.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-05
+                                                        </p>
+                                                        <h6>
+                                                            1,112,580,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-06
+                                                        </p>
+                                                        <h6>
+                                                            9,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-07
+                                                        </p>
+                                                        <h6>
+                                                            9,200.00
+                                                        </h6>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-01
+                                                        </p>
+                                                        <h6>
+                                                            10,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-02
+                                                        </p>
+                                                        <h6>
+                                                            25,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-03
+                                                        </p>
+                                                        <h6>
+                                                            188,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-04
+                                                        </p>
+                                                        <h6>
+                                                            178,800.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-05
+                                                        </p>
+                                                        <h6>
+                                                            1,112,580,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-06
+                                                        </p>
+                                                        <h6>
+                                                            9,000.00
+                                                        </h6>
+                                                    </li>
+                                                    <li>
+                                                        <p>
+                                                            2015-11-07
+                                                        </p>
+                                                        <h6>
+                                                            9,200.00
+                                                        </h6>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="sh-btn" href="###" id="sh" data-target="#j-slider">
+                                    隐藏
+                                </a>
+                            </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+<code>
+  &lt;a href="###" class="ar-arrow left" id="j-slider-prev"&gt;
+      &lt;i class="icon-chevron-thin-left"&gt;&lt;/i&gt;
+  &lt;/a&gt;
+  &lt;a href="###" class="ar-arrow right" id="j-slider-next"&gt;
+      &lt;i class="icon-chevron-thin-right"&gt;&lt;/i&gt;
+  &lt;/a&gt;
+  &lt;div class="slider" id="j-slider" data-prev="#j-slider-prev" data-next="#j-slider-next"&gt;
+    &lt;ul class="arlist"&gt;
+      &lt;li&gt;...&lt;/li&gt;
+      &lt;li&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+</code>
+                            </pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/ui/slider.js"></script>
+<script>
+    $(function(){
+      $('#j-slider').slider();
+    })
+</script>
+{% endblock %}

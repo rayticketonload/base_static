@@ -1,0 +1,105 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>提示</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    提示模板<code>_components/notice.html</code>包括<code>expand</code>、<code>title</code>、<code>desc</code>、<code>links</code>参数。
+                </p>
+                <br>
+                <br>
+                {% import "_components/notice.html" as Notice %}
+                {# 成功 #}
+                {{ Notice.render('success', title='...成功！', desc='预计资金2个工作日到您的银行卡<br/>交易结果以交易记录显示为准',links='<a href="###" class="link-standard">查看提现明细</a>') }}
+                {# 等待 #}
+                {{ Notice.render('waiting', title='正在...', desc='账户余额不足或超出发卡单笔支付限额',links='<a href="###" class="link-standard">重新支付</a><a href="###" class="link-standard link-border">返回我的资产</a>') }}
+                {# 出错 #}
+                {{ Notice.render('error', title='...失败！', desc='账户余额不足或超出发卡单笔支付限额',links='<a href="###" class="link-standard">重新支付</a><a href="###" class="link-standard link-border">返回我的资产</a>') }}
+                {# 信息 #}
+                {{ Notice.render('info', title='验证中...！', desc='<b>账户正在验证中，预计24小时内完成验证，请耐心等待。</b><br/>审核记过将通过短信发送到您的手机号码。 <br/>验证成功后验证金额可用于交易或提现。',links='<a href="###" class="link-standard">进入账户管理</a>') }}
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/notice.html" as Notice %_}
+
+{_# 成功 #_}
+{_{ Notice.render('success', title='...成功！', desc='预计资金2个工作日到您的银行卡&lt;br/&gt;交易结果以交易记录显示为准',links='&lt;a href="###" class="link-standard"&gt;查看提现明细&lt;/a&gt;') }_}
+
+{_# 等待 #_}
+{_{ Notice.render('waiting', title='正在...', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }_}
+
+{_# 出错 #_}
+{_{ Notice.render('error', title='...失败！', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }_}
+
+{_# 信息 #_}
+{_{ Notice.render('info', title='验证中...！', desc='&lt;b&gt;账户正在验证中，预计24小时内完成验证，请耐心等待。&lt;/b&gt;&lt;br/&gt;审核记过将通过短信发送到您的手机号码。 &lt;br/&gt;验证成功后验证金额可用于交易或提现。',links='&lt;a href="###" class="link-standard"&gt;进入账户管理&lt;/a&gt;') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+        <div class="section-content">
+            <h3>
+                <strong>模态窗</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    提示模态窗模板<code>Notice.modal</code>包括<code>expand</code>、<code>title</code>、<code>desc</code>参数。
+                </p>
+                
+                {# 模态窗 #}
+
+                {{ Notice.modal(expand='success', title='...成功！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
+
+                {{ Notice.modal(expand='info', title='...信息！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
+
+                {{ Notice.modal(expand='error', title='...错误！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
+
+                {{ Notice.modal(expand='waiting', title='...等待！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_# 模态窗 #_}
+
+{_{ Notice.modal(expand='success', title='...成功！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+
+{_{ Notice.modal(expand='info', title='...信息！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+
+{_{ Notice.modal(expand='error', title='...错误！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+
+{_{ Notice.modal(expand='waiting', title='...等待！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<!-- <script src="{{dist}}/js/ui/pagination.js"></script> -->
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

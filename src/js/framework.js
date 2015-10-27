@@ -9,6 +9,11 @@ noautoform();
 //双色球开关
 $(function () {
     $("#sh").click(function () {
-        $("#arb").slideToggle();
+      var slider = $(this).attr('data-target');
+        $("#arb").slideToggle(function(){
+          if($(this).is(':visible')) {
+            $(slider).slider('init');
+          }
+        });
     });
 });

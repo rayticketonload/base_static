@@ -1,0 +1,76 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>分页</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    表格模板<code>_components/pagination.html</code>包括<code>expand</code>参数。
+                </p>
+                <br>
+                <code>expand</code>传入扩展的样式名
+                <br>
+                                <br>
+                <br>
+                {% import "_components/pagination.html" as pagination %}
+                {{ pagination.render('text-align-center') }}
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+# 输出分页 #
+{_% import "_components/pagination.html" as pagination %_}
+{_{ pagination.render('text-align-center') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+
+        <div class="section-content">
+            <h3>
+                <strong>ajax模板</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    <code>title</code>、<code>btns</code>、<code>expand</code>
+                </p>
+                
+                {# 定义ajax方式 #}
+                {{ pagination.ajax() }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_{ pagination.ajax() }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<!-- <script src="{{dist}}/js/ui/pagination.js"></script> -->
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+    })
+</script>
+{% endblock %}

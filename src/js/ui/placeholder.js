@@ -36,6 +36,9 @@
         $this.$el.on('focus', $.proxy(this.focus, this));
         $this.$el.on('blur', $.proxy(this.blur, this));
         $this.$placeholder.on('click', $.proxy(this.focus, this));
+
+        // 默认隐藏placeholder
+        this.blur();
     };
 
     Placeholder.prototype.focus = function(){

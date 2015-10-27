@@ -1,0 +1,108 @@
+{% extends "../_layout/components.html" %}
+{% block mainBody %}
+<style>
+    pre{ white-space: pre}
+</style>
+    <section id="type" class="ui-section">
+        <h1>图表</h1>
+        <!-- 警告框结构 -->
+        <div class="section-content">
+            <h3>
+                <strong>结构</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    <code>id</code>、<code>height</code>、<code>expand</code>三个参数。
+                </p>
+                
+                {# 定义面包屑数组 #}
+                {% import "_components/chart.html" as chart %}
+                {{ chart.render() }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+# 定义面包屑数组 #
+{_% import "_components/chart.html" as chart %_}
+{_{ chart.render() }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+        <div class="section-content">
+            <h3>
+                <strong>图表标题</strong>
+            </h3>
+
+            <div class="ui-example">
+                <p class="description">
+                    <code>title</code>、<code>small</code>、<code>btns</code>、<code>expand</code>
+                </p>
+                
+                {# 定义面包屑数组 #}
+                {% import "_components/chart.html" as chart %}
+                {{ chart.title(title='交易数据统计', small='( 2015.05.01-2015.05.29 )' , btns='<a href="###" class="btn default small-btn">今日</a><a href="###" class="btn default small-btn current">最近30天</a> ') }}
+
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+{_% import "_components/chart.html" as chart %_}
+{_{ chart.title(title='交易数据统计', small='( 2015.05.01-2015.05.29 )' , btns='&lt;a href="###" class="btn default small-btn"&gt;今日&lt;/a&gt;&lt;a href="###" class="btn default small-btn current"&gt;最近30天&lt;/a&gt; ') }_}
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="/output/src/js/charts.js"></script>
+<script>
+    $(function(){
+        var data = {
+            //X坐标
+            labels : ["03-01", "03-02", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30", "2/30"],
+            //利率数据
+            series : [
+                // 第一条线
+                {
+                    name:'本月（3月）',
+                    data:["200", "900", "200", "700", "200", "200","100","100","100","100","100","100"]
+                },
+                // 第二条线
+                {
+                    name:'上月（2月）',
+                    data:["100", "700", "900", "800", "600", "400","300","150","180","100","200","100"]
+                }
+            ]
+        };
+
+
+        var myChart = new UICharts('j-chart');
+        myChart.showLoading({effect: 'whirling'});
+        myChart.setOption(data);
+    })
+</script>
+
+<script>
+    $(function(){
+        function ajaxHandler(alertClose){
+            setTimeout(function(){
+                alert('aaa');
+                alertClose();
+            }, 1000)
+        }
+
+        $('#j-alert-5').alert(ajaxHandler);
+        $('.alert').alert();
+        $('#j-close-btn').on('closed.ui.alert', function(e){
+            alert('#'+ e.relatedTarget[0].id +'已关闭')
+        });
+    })
+</script>
+{% endblock %}

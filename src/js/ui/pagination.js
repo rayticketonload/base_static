@@ -234,6 +234,7 @@
         // jquery 链式
         return $(this).each(function () {
             var $this = $(this);
+            if($this.hasClass('no-js')) return;
             var data = $this.data('ui.pagination');
 
             // 创建一个新实例
