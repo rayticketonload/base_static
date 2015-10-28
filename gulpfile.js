@@ -378,8 +378,26 @@ gulp.task('frontui:template', function(){
             .pipe(gulp.dest(frontui_path+'/template'));
 })
 
+gulp.task('frontui:datatables-css', function() {
+    return gulp.src([staticPath+'/js/datatables/**/**.css'])
+            .pipe(concat('datatables.css'))
+            .pipe(minifyCSS({compatibility: 'ie7'}))
+            .pipe(gulp.dest(frontui_path+'/js/datatables'));
+})
+gulp.task('frontui:datatables-js', function() {
+    return gulp.src([staticPath+'/js/datatables/**/**.js'])
+            .pipe(concat('datatables.js'))
+            .pipe(uglify())
+            .pipe(n2a({reverse: false}))
+            .pipe(gulp.dest(frontui_path+'/js/datatables'));
+})
+gulp.task('frontui:datatables', ['frontui:datatables-js', 'frontui:datatables-css'], function(){
+    return gulp.src([staticPath+'/js/datatables/**/**.png'])
+            .pipe(gulp.dest(frontui_path+'/js/datatables'));
+});
+
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template']);
+    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables']);
 });
 
 

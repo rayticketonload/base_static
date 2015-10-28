@@ -46,7 +46,7 @@
     };
 
     Placeholder.prototype.blur = function(){
-        this.$placeholder[$.trim(this.$el.val()) === '' ? 'show' : 'hide']();
+        this.$placeholder[this.$el.val() === '' ? 'show' : 'hide']();
     };
 
 

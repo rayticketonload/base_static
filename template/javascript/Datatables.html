@@ -1,0 +1,174 @@
+{% extends "../_layout/javascript.html" %}
+{% block stylePage %}
+    <link rel="stylesheet" href="{{dist}}/js/datatables/jquery.dataTables.css">
+    <link rel="stylesheet" href="{{dist}}/js/datatables/jquery.dataTables.ui.css">
+{% endblock %}
+
+{% block mainBody %}
+<style>
+    pre{ white-space: pre-wrap; }
+</style>
+    <section id="type" class="ui-section">
+        <h1>jQuery.DataTables</h1>
+        <!-- 概述用法 -->
+        <div class="section-content">
+            <h3>
+                <strong>概述用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    <code>DataTables</code>是一款jquery库的table管理插件，它提供了丰富的table管理功能。比如分页，即使搜索和排序。
+                </p>
+                <br/>
+                <p>
+                    <a href="http://www.datatables.net/">Datatables官网</a>
+                </p>
+                <br/>
+                <p>
+                    <a href="http://dt.thxopen.com/" class="link-starndar">Datatables中文网</a>
+                </p>
+                <br>
+                <p>详细用法请阅读官网API</p>
+                <br/>
+                
+                
+                <div class="table-wrap">
+                    <table class="table inverse">
+                        <thead>
+                            <tr>
+                                <th>
+                                    日期
+                                </th>
+                                <th>
+                                    总资金
+                                </th>
+                                <th>
+                                    收益金额
+                                </th>
+                                <th>
+                                    分润金额
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2015-10-27</td>
+                                <td>1,000,000.00</td>
+                                <td>5,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-26</td>
+                                <td>2,000,000.00</td>
+                                <td>8,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-25</td>
+                                <td>4,000,000.00</td>
+                                <td>2,000.00</td>
+                                <td>9,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-24</td>
+                                <td>12,000,000.00</td>
+                                <td>7,000.00</td>
+                                <td>23,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-23</td>
+                                <td>190,000,000.00</td>
+                                <td>56,000.00</td>
+                                <td>33,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-27</td>
+                                <td>1,000,000.00</td>
+                                <td>5,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-26</td>
+                                <td>2,000,000.00</td>
+                                <td>8,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-25</td>
+                                <td>4,000,000.00</td>
+                                <td>2,000.00</td>
+                                <td>9,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-24</td>
+                                <td>12,000,000.00</td>
+                                <td>7,000.00</td>
+                                <td>23,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-23</td>
+                                <td>190,000,000.00</td>
+                                <td>56,000.00</td>
+                                <td>33,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-27</td>
+                                <td>1,000,000.00</td>
+                                <td>5,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-26</td>
+                                <td>2,000,000.00</td>
+                                <td>8,000.00</td>
+                                <td>3,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-25</td>
+                                <td>4,000,000.00</td>
+                                <td>2,000.00</td>
+                                <td>9,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-24</td>
+                                <td>12,000,000.00</td>
+                                <td>7,000.00</td>
+                                <td>23,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>2015-10-23</td>
+                                <td>190,000,000.00</td>
+                                <td>56,000.00</td>
+                                <td>33,000.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+<pre><code>&lt;ul class=&quot;tabs&quot;&gt;
+        &lt;li class=&quot;active&quot;&gt;
+            &lt;a href=&quot;#ttp1&quot; class=&quot;tabs-btn&quot; aria-expanded=&quot;true&quot;&gt;
+            tab one
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+</code></pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/datatables/jquery.dataTables.min.js"></script>
+<script src="{{dist}}/js/datatables/jquery.dataTables.ui.js"></script>
+<script>
+    $(function(){
+        $('.table').dataTable();
+
+        console.log($.fn.DataTable.defaults);
+    })
+</script>
+{% endblock %}
