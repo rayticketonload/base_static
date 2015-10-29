@@ -63,6 +63,9 @@ table.dataTable thead > tr > th,
 table.dataTable thead > tr > td {
   padding-right: 30px;
 }
+table.dataTable thead > tr > th{
+  border-bottom: none;
+}
 table.dataTable thead > tr > th:active,
 table.dataTable thead > tr > td:active {
   outline: none;
