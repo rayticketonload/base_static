@@ -438,15 +438,19 @@ gulp.task('document:static', function(){
             .pipe(gulp.dest(documentPath+'/src'));
 })
 gulp.task('document:js', function(){
-    return gulp.src(['./output/src/js/**/**'])
+    return gulp.src(['./output/src/js/**/**', '!./output/src/js/datatables/**/**'])
             .pipe(n2a({reverse: false}))
             .pipe(uglify())
             .pipe(gulp.dest(documentPath+'/src/js'));
+})
+gulp.task('document:copy', function() {
+     return gulp.src(['./output/src/js/datatables/**/**'])
+            .pipe(gulp.dest(documentPath+'/src/js/datatables'));
 })
 gulp.task('document:icon', function(){
     return gulp.src(['./assist/**/**'])
             .pipe(gulp.dest(documentPath));
 })
 gulp.task('document', function(){
-    return gulp.start(['document:index', 'document:static','document:js', 'document:icon']);
+    return gulp.start(['document:index', 'document:static','document:js', 'document:icon', 'document:copy']);
 })

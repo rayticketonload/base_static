@@ -453,15 +453,19 @@
 
     // 元素插件绑定
     // ====================
-    var initModal = function(){
-        $(document).on('click.ui.modal', '[data-toggle="modal"]', function(e) {
-            var $this = $(this);
+    var Handler = function() {
+        var $this = $(this);
             var href = $(this).attr('href');
             var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
             var option = $target.data('ui.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href}, $target.data(), $this.data());
 
             // 实例化
             Plugin.call($target, option, this);
+    };
+    var initModal = function(){
+        $(document).on('click.ui.modal', '[data-toggle="modal"]', function(e) {
+            var that = e.target;
+            $(that).is('[data-toggle="modal"]') && Handler.call(that, e);
         });
 
         // 全局绑定，默认不显示

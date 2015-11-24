@@ -219,7 +219,12 @@
     };
 
     $(function(){
-        $(document).on('mouseenter.tooltip.ui focus tooltip.ui', toggle, handler)
+        //$(document).on('mouseenter.tooltip.ui focus tooltip.ui', toggle, handler)
+        //$(toggle).tooltips();
+        $(document).on('mouseover.tooltip.ui focus.tooltip.ui', function(e) {
+            var $this = $(e.target);
+            $this.is(toggle) && handler.call($this);
+        })
     })
 
 })( jQuery );

@@ -93,7 +93,10 @@
     // 元素插件绑定
     // ====================
     $(function(){
-        $(document).on('click.ui.alert', dismiss, Alert.prototype.close)
+        $(document).on('click.ui.alert', function(e){
+            var that = e.target;
+            $(that).is(dismiss) && Alert.prototype.close.call(that, e);
+        })
     })
 
 })( jQuery );

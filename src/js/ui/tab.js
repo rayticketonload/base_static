@@ -120,7 +120,11 @@
     };
 
     $(function(){
-        $(document).on('click.ui.tab', tab, clickHandler)
+        // $(document).on('click.ui.tab', tab, clickHandler)
+        $(document).on('click.ui.tab', function(e) {
+            var that = e.target;
+            $(that).is(tab) && clickHandler.call(that, e)
+        })
     })
 
 })( jQuery );

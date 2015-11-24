@@ -296,14 +296,23 @@
             // 点击页面其他地方收起
             .on('click.ui.dropdown', hideAllMenus)
             // 按钮触发
-            .on('click.ui.dropdown-btn', toggleBtn, function(e){
-                var $target = $(this).siblings(toggle);
-                $target.length && $target.dropdown('toggle');
-                return false;
+            .on('click.ui.dropdown-btn', function(e){
+                var that = e.target;
+                if($(that).is(toggleBtn)) {
+                    var $target = $(that).siblings(toggle);
+                    $target.length && $target.dropdown('toggle');
+                    return false;
+                }
+                
             })
-            .on('click.ui.dropdown', ul, function(e){
-                e.stopPropagation();
-                return false;
+            // .on('click.ui.dropdown', ul, function(e){
+            .on('click.ui.dropdown', function(e){
+                var that = e.target;
+                if($(that).is(ul)) {
+                    e.stopPropagation();
+                    return false;
+                }
+                
             })
             // .on('click.ui.dropdown', list, function(e){
             //     var $toggle = $(e.target).closest(wrap);
@@ -314,7 +323,15 @@
             //     return false;
             // })
             // focus
-            .on('focus.ui.dropdown', toggle, chkMatch)
-            .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
+            // .on('focus.ui.dropdown', toggle, chkMatch)
+            .on('focus.ui.dropdown', function(e) {
+                var that = e.target;
+                $(that).is(toggle) && chkMatch(that, e);
+            })
+            // .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
+            .on('keydown.ui.dropdown', function(e) {
+                var that = e.target;
+                $(that).is(toggle) && Dropdown.prototype.keydown.call(that, e);
+            });
     })
 })(jQuery);

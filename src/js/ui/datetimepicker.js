@@ -49,6 +49,7 @@
 
 	var laydate = function(options){
 		options = $.extend({}, config, options);
+		// console.log(options);
 		Dates.run(options);
 		return laydate;
 	};
@@ -806,7 +807,11 @@
 			Dates.close();
 			$el.remove();
 		}
-		$(document).on('click.ui.datetimepicker', '[data-toggle="datetimepicker"]', clickHandler);
+		//$(document).on('click.ui.datetimepicker', '[data-toggle="datetimepicker"]', clickHandler);
+		$(document).on('click.ui.datetimepicker', function(ev) {
+			var that = ev.target;
+			$(that).is('[data-toggle="datetimepicker"]') && clickHandler.call(that, ev);
+		});
 	});
 
 })(jQuery);
