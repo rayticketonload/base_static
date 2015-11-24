@@ -396,8 +396,20 @@ gulp.task('frontui:datatables', ['frontui:datatables-js', 'frontui:datatables-cs
             .pipe(gulp.dest(frontui_path+'/js/datatables'));
 });
 
+gulp.task('frontui:uploadify', function(){
+    return gulp.src([staticPath+'/js/uploadify/**/**'])
+                .pipe(gulp.dest(frontui_path+'/js/uploadify'));
+});
+
+gulp.task('frontui:validate', function(){
+    return gulp.src([staticPath+'/js/validate/jquery.validate.js', staticPath+'/js/validate/messages_zh.js'])
+                .pipe(concat('validate.js'))
+                .pipe(uglify())
+                .pipe(gulp.dest(frontui_path+'/js/validate'));
+});
+
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables']);
+    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:uploadify', 'frontui:validate']);
 });
 
 
