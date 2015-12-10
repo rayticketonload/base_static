@@ -408,8 +408,14 @@ gulp.task('frontui:validate', function(){
                 .pipe(gulp.dest(frontui_path+'/js/validate'));
 });
 
+gulp.task('frontui:aloneJs', function(){
+  return gulp.src([staticPath+'/js/ui/datetimepicker.js'])
+      .pipe(uglify())
+      .pipe(gulp.dest(frontui_path+'/js/ui'));
+});
+
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:uploadify', 'frontui:validate']);
+    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:uploadify', 'frontui:validate', 'frontui:aloneJs']);
 });
 
 

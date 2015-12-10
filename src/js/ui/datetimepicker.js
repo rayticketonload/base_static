@@ -49,7 +49,6 @@
 
 	var laydate = function(options){
 		options = $.extend({}, config, options);
-		// console.log(options);
 		Dates.run(options);
 		return laydate;
 	};
@@ -106,6 +105,7 @@
 		MM = MM|0;
 		DD = DD|0;
 
+
 		if(YY < Dates.mins[0]){
 			back = ['y'];
 		} else if(YY > Dates.maxs[0]){
@@ -161,7 +161,15 @@
 	Dates.check = function(){
 		var reg = Dates.options.format.replace(/YYYY|MM|DD|hh|mm|ss/g,'\\d+\\').replace(/\\$/g, '');
 		var exp = new RegExp(reg), value = $(Dates.elem)[as.elemv]();
-		var arr = value.match(/\d+/g) || [], isvoid = Dates.checkVoid(arr[0], arr[1], arr[2]);
+		var arr = value.match(/\d+/g) || [], isvoid;
+
+		if(!Dates.options.format.match(/YYYY/g)) {
+			var _yyyy = (new Date()).getFullYear();
+			arr.unshift(_yyyy);
+		}
+
+		isvoid = Dates.checkVoid(arr[0], arr[1], arr[2]);
+
 		if(value.replace(/\s/g, '') !== ''){
 			if(!exp.test(value)){
 				$(Dates.elem)[as.elemv]('');
@@ -174,6 +182,13 @@
 			} else {
 				isvoid.value = Dates.elem[as.elemv]().match(exp).join();
 				arr = isvoid.value.match(/\d+/g);
+
+				if(!Dates.options.format.match(/YYYY/g)) {
+					var _yyyy = (new Date()).getFullYear();
+					arr.unshift(_yyyy);
+				}
+
+
 				if(arr[1] < 1){
 					arr[1] = 1;
 					isvoid.auto = 1;
@@ -183,15 +198,18 @@
 				} else if(arr[1].length < 2){
 					isvoid.auto = 1;
 				}
-				if(arr[2] < 1){
-					arr[2] = 1;
-					isvoid.auto = 1;
-				} else if(arr[2] > Dates.months[(arr[1]|0)-1]){
-					arr[2] = 31;
-					isvoid.auto = 1;
-				} else if(arr[2].length < 2){
-					isvoid.auto = 1;
+				if(arr.length > 2) {
+					if(arr[2] < 1){
+						arr[2] = 1;
+						isvoid.auto = 1;
+					} else if(arr[2] > Dates.months[(arr[1]|0)-1]){
+						arr[2] = 31;
+						isvoid.auto = 1;
+					} else if(arr[2].length < 2){
+						isvoid.auto = 1;
+					}
 				}
+
 				if(arr.length > 3){
 					if(Dates.timeVoid(arr[3], 0)){
 						isvoid.auto = 1;
@@ -204,6 +222,7 @@
 					};
 				}
 				if(isvoid.auto){
+					console.log(arr);
 					Dates.creation([arr[0], arr[1]|0, arr[2]|0], 1);
 				} else if(isvoid.value !== Dates.elem[as.elemv]()){
 					Dates.elem[as.elemv](isvoid.value);
@@ -356,11 +375,23 @@
 //初始化面板数据
 	Dates.initDate = function(){
 		var De = new Date();
-		var ymd = $(Dates.elem).val().match(/\d+/g) || [];
-		if(ymd.length < 3){
-			ymd = Dates.options.start.match(/\d+/g) || [];
-			if(ymd.length < 3){
-				ymd = [De.getFullYear(), De.getMonth()+1, De.getDate()];
+		var elemVal = $(Dates.elem).val();
+		var ymd = elemVal.match(/\d+/g) || [];
+		var format = Dates.options ? Dates.options.format : config.format;
+		if($.trim(elemVal) == "") {
+			ymd = [De.getFullYear(), De.getMonth()+1, De.getDate()];
+		}else if(ymd.length < 3){
+			if(!format.match(/YYYY/g)) {
+				ymd.unshift(De.getFullYear());
+			} else {
+				if(Dates.options.start == "") {
+					ymd.push("01");
+				} else {
+					ymd = Dates.options.start.match(/\d+/g) || [];
+					if(ymd.length < 3){
+						ymd = [De.getFullYear(), De.getMonth()+1, De.getDate()];
+					}
+				}
 			}
 		}
 		Dates.inymd = ymd;
@@ -536,6 +567,11 @@
 	Dates.parse = function(ymd, hms, format){
 		ymd = ymd.concat(hms);
 		format = format || (Dates.options ? Dates.options.format : config.format);
+
+		if(!format.match(/YYYY/g)) {
+			ymd.shift();
+		}
+
 		return format.replace(/YYYY|MM|DD|hh|mm|ss/g, function(str, index){
 			ymd.index = ++ymd.index|0;
 			return Dates.digit(ymd[ymd.index]);
