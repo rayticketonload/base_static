@@ -1,12 +1,24 @@
-/*!
- * 菜单下拉|select
- * tommyshao <jinhong.shao@frontpay.cn>
- * Reference bootstrap.dropdown.js
- * API:
- *      $(element).on('selected.ui.dropdown', function(e, obj){});
- */
+//     菜单下拉|select
+//     tommyshao <jinhong.shao@frontpay.cn>
+//     Reference bootstrap.dropdown.js
 
-+(function($) {
+// API
+// -----
+// $(element).on('selected.ui.dropdown', function(e, obj){});
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/dropdown', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
+
     'use strict';
 
     // 默认高亮类
@@ -19,14 +31,14 @@
     var list = '.form-control-dropdown-menu li, [role="list"] li';
 
     // 构造函数
-    // ===============
+    // -------
     var Dropdown = function(el) {
         $(el).on('click.ui.dropdown', this.toggle);
 
         if(/input/i.test(el.tagName)) {
             $(el).on('keyup.ui.dropFilter', this.filter)
 
-                //.on('focusin.ui.dropFilter', this.focusIn)
+            //.on('focusin.ui.dropFilter', this.focusIn)
         }
 
 
@@ -35,10 +47,13 @@
     };
 
     // 版本
+    // ----------
+    // 1.0.0
+
     Dropdown.VERSION = '1.0.0';
 
     // 鼠标点击
-    // =================
+    // ---------
     Dropdown.prototype.toggle = function(e) {
         var $this = $(this);
 
@@ -50,7 +65,7 @@
     };
 
     // 键盘按键 focus
-    // ==============
+    // -------------
     //Dropdown.prototype.CURRENT_ITEM = -1;
     Dropdown.prototype.keydown = function (e) {
         //console.log(e.which)
@@ -108,7 +123,7 @@
     };
 
     // 下拉菜单选中
-    // ==================
+    // ---------
     Dropdown.prototype.selected = function(el){
         var $target = el.find(toggle);
         return function(e){
@@ -123,9 +138,9 @@
     };
 
     // input输入过滤
-    // ===========
+    // -----------
     Dropdown.prototype.filter = function(e) {
-      if(!/input/i.test(e.target.tagName)) return;
+        if(!/input/i.test(e.target.tagName)) return;
 
         var $this = $(this);
         var inputText = $.trim($this.val());
@@ -154,7 +169,8 @@
     };
 
     // 显示当前展开dropdown
-    // ==================
+    // -------------------
+
     function dropMenus($this, always) {
         var $target = getParent($this);
         active = $this.data('active') || active;
@@ -170,7 +186,7 @@
     }
 
     // 清除页面所有dropdown
-    // ==================
+    // ------------------
     function clearMenus(e, auto) {
         $(toggle).each(function () {
             var $this = $(this);
@@ -199,7 +215,7 @@
     }
 
     // 默认选中
-    // ===============
+    // -----------
     function autoFill(element, input){
         var $Li = getList(element), $vLi, isMatch = 0, txt = '', value = $.trim(input.val());
 
@@ -224,7 +240,7 @@
     }
 
     // 匹配
-    // ===============
+    // -----------
     function chkMatch() {
         var $this = $(this),
             placeholder = $this.attr('placeholder'),
@@ -236,36 +252,36 @@
         }
 
         $items.hide()
-              .filter(function(){
-                    var txt = $.trim($(this).text()) || '';
+            .filter(function(){
+                var txt = $.trim($(this).text()) || '';
 
-                    if(txt == value){
-                        $(this).addClass('hover');
-                    }
+                if(txt == value){
+                    $(this).addClass('hover');
+                }
 
-                    return txt.indexOf(value) > -1;
-               })
-              .show();
+                return txt.indexOf(value) > -1;
+            })
+            .show();
     }
 
 
 
     // 获取响应的元素
-    // ===================
+    // --------------
     function getParent(el) {
         var $parent = $(el).data('target') || $(el).parent();
         return $parent;
     }
 
     // 获取列表项
-    // =============
+    // -----------
     function getList(el) {
         var $parent = getParent(el);
         return $parent.find(list);
     }
 
     // 滚动条自动跳到某位置
-    // ================
+    // -----------------
     function scrollTop(el, i) {
         var $parent = el.parent();
         var top = el.eq(i).position().top;
@@ -273,7 +289,7 @@
     }
 
     // 插件定义
-    //======================
+    // ------------
     function Plugin(option) {
         return $(this).each(function () {
             var $this = $(this);
@@ -285,15 +301,16 @@
     }
 
     // jQuery 插件扩展
+    // --------------
     $.fn.dropdown = Plugin;
     $.fn.dropdown.Constructor = Dropdown;
 
     // 元素插件绑定
-    // ====================
+    // --------------
     $(function(){
         $(toggle).dropdown();
         $(document)
-            // 点击页面其他地方收起
+        // 点击页面其他地方收起
             .on('click.ui.dropdown', hideAllMenus)
             // 按钮触发
             .on('click.ui.dropdown-btn', function(e){
@@ -303,7 +320,7 @@
                     $target.length && $target.dropdown('toggle');
                     return false;
                 }
-                
+
             })
             // .on('click.ui.dropdown', ul, function(e){
             .on('click.ui.dropdown', function(e){
@@ -312,7 +329,7 @@
                     e.stopPropagation();
                     return false;
                 }
-                
+
             })
             // .on('click.ui.dropdown', list, function(e){
             //     var $toggle = $(e.target).closest(wrap);
@@ -334,4 +351,7 @@
                 $(that).is(toggle) && Dropdown.prototype.keydown.call(that, e);
             });
     })
-})(jQuery);
+
+    return $;
+
+}));

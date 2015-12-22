@@ -1,18 +1,29 @@
-/*!
- * 动画支持判断扩展
- * tommyshao <jinhong.shao@frontpay.cn>
- * Reference bootstrap.transition.js
- *           http://getbootstrap.com/javascript/#transitions
- * API:
- *      $.support.transition
- *      $(element).one('uiTransitionEnd', fn).emulateTransitionEnd(duration)
- */
+//     动画支持判断扩展
+//     tommyshao <jinhong.shao@frontpay.cn>
+//     Reference bootstrap.transition.js
+//     http://getbootstrap.com/javascript/#transitions
 
-+function ($) {
+// API:
+// -----
+// $.support.transition
+// $(element).one('uiTransitionEnd', fn).emulateTransitionEnd(duration)
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/transition', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-    // ============================================================
+    // --------------------------------------------
 
     function transitionEnd() {
         var el = document.createElement('ui')
@@ -57,4 +68,7 @@
         }
     })
 
-}(jQuery);
+    return $;
+
+}));
+

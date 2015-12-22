@@ -6,13 +6,24 @@
  *      $(element).on('closed.ui.alert', function(e, obj){});
  */
 
-+(function($) {
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/tab', ['jquery', 'ui/transition'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     var tab = '[data-toggle="tab"],.tabs-btn';
 
     // 构造函数
-    // ===============
+    // ----------
     var Tab = function(element) {
         this.$el = $(element);
     };
@@ -23,7 +34,7 @@
     Tab.TRANSITION_DURATION = 150;
 
     // 关闭
-    // ===============
+    // ---------
     Tab.prototype.show = function( ) {
         var $this = this.$el;
         var $ul = $this.closest('.tabs');
@@ -67,8 +78,8 @@
     Tab.prototype.activate = function (element, container, callback) {
         var $active = container.find('> .active');
         var transition = callback
-                            && $.support.transition
-                            && (($active.length && $active.hasClass('fade')) || !!container.find('> .fade').length)
+            && $.support.transition
+            && (($active.length && $active.hasClass('fade')) || !!container.find('> .fade').length)
 
         function next() {
             $active.removeClass('active').find(tab).attr('aria-expanded', false);
@@ -86,15 +97,15 @@
         }
 
         $active.length && transition ?
-                $active.one('uiTransitionEnd', next).emulateTransitionEnd(Tab.TRANSITION_DURATION)
-                :
-                next();
+            $active.one('uiTransitionEnd', next).emulateTransitionEnd(Tab.TRANSITION_DURATION)
+            :
+            next();
         $active.removeClass('in');
     };
 
 
     // 插件定义
-    //======================
+    // ----------
     function Plugin(option) {
         return $(this).each(function () {
             var $this = $(this);
@@ -111,7 +122,7 @@
     $.fn.tab.Constructor = Tab;
 
     // 元素插件绑定
-    // ====================
+    // -------------
     var clickHandler = function(e) {
         if(!$(e.target).hasClass('tab-disabled')){
             e.preventDefault();
@@ -127,4 +138,6 @@
         })
     })
 
-})( jQuery );
+    return Tab;
+
+}));

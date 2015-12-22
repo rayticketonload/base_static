@@ -1,12 +1,21 @@
-/*!
- * accordion 手风琴
- * 依赖于 ui/switcher.js
- * tommyshao <jinhong.shao@frontpay.cn>
- * API:
- *
- */
+//     accordion 手风琴
+//     依赖于 ui/switcher.js
+//     tommyshao <jinhong.shao@frontpay.cn>
 
-+(function($) {
+// API:
+// -----
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/according', ['jquery', 'ui/switcher'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
     'use strict';
 
     $.fn.accordion = function(option){
@@ -36,5 +45,6 @@
         });
     };
 
-})( jQuery );
+    return $;
 
+}));

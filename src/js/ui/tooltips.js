@@ -1,18 +1,29 @@
-/*!
- * tip提示
- * tommyshao <jinhong.shao@frontpay.cn>
- * Reference uikit.tooltips.js
- * API:
- *      $(element).tooltips(option);
- */
+//     tip提示
+//     tommyshao <jinhong.shao@frontpay.cn>
+//     Reference uikit.tooltips.js
 
-+(function($) {
+// API:
+// -----
+// $(element).tooltips(option);
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/tooltips', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     var toggle = '[data-toggle="tooltips"]';
 
     // 构造函数
-    // ===============
+    // ---------
     var Tooltips = function(el, option) {
         this.$el = $(el);
         this.options = $.extend({}, Tooltips.DEFAULTS, this.$el.data(),  option && typeof option == "object");
@@ -45,7 +56,7 @@
     };
 
     // Public Method
-    // ===============
+    // --------------
     Tooltips.prototype.init = function() {
         var $this = this;
 
@@ -197,7 +208,7 @@
 
 
     // 插件定义
-    //======================
+    // ----------
     function Plugin(option) {
         return $(this).each(function () {
             var $this = $(this);
@@ -209,11 +220,12 @@
 
 
     // jQuery 插件扩展
+    // -------------
     $.fn.tooltips = Plugin;
     $.fn.tooltips.Constructor = Tooltips;
 
     // 元素插件绑定
-    // ====================
+    // ----------
     var handler = function() {
         $(this).tooltips('show');
     };
@@ -227,4 +239,6 @@
         })
     })
 
-})( jQuery );
+    return Tooltips;
+
+}));

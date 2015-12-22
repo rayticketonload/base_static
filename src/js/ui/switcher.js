@@ -1,19 +1,30 @@
-/*!
- * switcher 脟脨禄禄脝梅
- * tommyshao <jinhong.shao@frontpay.cn>
- * API:
- *      <div data-toggle="switcher" [data-except="true"|data-item="a"|data-active="current"]/>
- *      $(element).switcher({except:true, item: 'a', active: 'current'});
- *      $(element).on('select.ui.switcher', function(e){ e.relatedTarget; });
- */
+//     switcher 脟脨禄禄脝梅
+//     tommyshao <jinhong.shao@frontpay.cn>
 
-+(function($) {
+// API:
+// ------
+// <div data-toggle="switcher" [data-except="true"|data-item="a"|data-active="current"]/>
+// $(element).switcher({except:true, item: 'a', active: 'current'});
+// $(element).on('select.ui.switcher', function(e){ e.relatedTarget; });
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/switcher', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     var toggle = '[data-toggle="switcher"]';
 
-    // 鹿鹿脭矛潞炉脢媒
-    // ===============
+    // 构造函数
+    // ----------
     var Switcher = function(element, option) {
         var $this = this;
         this.$el = $(element);
@@ -25,7 +36,17 @@
         });
     };
 
+    // 版本号
+    // ------
+    // 1.0.0
     Switcher.VERSION = '1.0.0';
+
+    // 默认配置参数
+    // ----------
+    // * `item`
+    // * `active`
+    // * `except`
+    // * `keep`
     Switcher.DEFAULTS = {
         item: 'li',
         active: 'active',
@@ -33,6 +54,8 @@
         keep: false
     };
 
+    // 选中
+    // -----
     Switcher.prototype.select = function ($target) {
         var o = this.option, e = $.Event('select.ui.switcher', {relatedTarget: $target});
         if(o.keep && $target.hasClass(o.active)) return;
@@ -41,8 +64,8 @@
     };
 
 
-    // 虏氓录镁露篓脪氓
-    //======================
+    // 插件接口
+    // --------
     function Plugin(option) {
         return $(this).each(function () {
             var $this = $(this);
@@ -58,8 +81,10 @@
     $.fn.switcher = Plugin;
     $.fn.switcher.Constructor = Switcher;
 
-    // 脭陋脣脴虏氓录镁掳贸露篓
-    // ====================
-    $(document).ready(function(){ $(toggle).switcher() });
-})( jQuery );
+    // 全局绑定
+    // -----------
+    $(function(){ $(toggle).switcher() });
 
+    return Switcher;
+
+}));

@@ -26,11 +26,22 @@
  * 1. 加属性`tabindex=-1`解决聚焦问题
  */
 
-+(function($) {
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/modal', ['jquery', 'ui/transition'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     // 构造函数
-    // ===============
+    // --------
     var Modal = function(element, options) {
         this.$el = $(element);
         this.options = options;
@@ -64,24 +75,24 @@
 
     // 自定义弹框模板
     Modal.TEMPLATE =[
-                        '<div class="modal-background fade" id="{{mid}}">',
-                            '<div class="modal-layer">',
-                                '<div class="modal-position">',
-                                    '<div class="modal-wrap">',
-                                        '<div class="modal-head">',
-                                            '<span class="modal-title">{{title}}</span>',
-                                            '<button class="modal-close">',
-                                            '<i></i>',
-                                            '</button>',
-                                        '</div>',
-                                        '<div class="modal-body">',
-                                            '{{content}}',
-                                        '</div>',
-                                    '</div>',
-                                '</div>',
-                            '</div>',
-                        '</div>'
-                    ].join('');
+        '<div class="modal-background fade" id="{{mid}}">',
+        '<div class="modal-layer">',
+        '<div class="modal-position">',
+        '<div class="modal-wrap">',
+        '<div class="modal-head">',
+        '<span class="modal-title">{{title}}</span>',
+        '<button class="modal-close">',
+        '<i></i>',
+        '</button>',
+        '</div>',
+        '<div class="modal-body">',
+        '{{content}}',
+        '</div>',
+        '</div>',
+        '</div>',
+        '</div>',
+        '</div>'
+    ].join('');
 
     Modal.CreateModal = function(option) {
         var $body = $(document.body), element;
@@ -99,7 +110,7 @@
 
     // 打开
     Modal.prototype.toggle = function (_relatedTarget) {
-      return this.isShown ? this.hide() : this.show(_relatedTarget);
+        return this.isShown ? this.hide() : this.show(_relatedTarget);
     };
 
 
@@ -170,10 +181,10 @@
         $.support.transition && this.$el.hasClass('fade') ?
             this.$el.one('uiTransitionEnd', $.proxy(this.hideModal, this)).emulateTransitionEnd(Modal.TRANSITION_DURATION)
             : (function(){
-                $this.$el.fadeOut(Modal.TRANSITION_DURATION, function(){
-                    $this.hideModal()
-                })
-              })();
+            $this.$el.fadeOut(Modal.TRANSITION_DURATION, function(){
+                $this.hideModal()
+            })
+        })();
     };
 
     Modal.prototype.close = function(id) {
@@ -277,18 +288,18 @@
 
     // 设置对话框title
     /*Modal.prototype.layerUpdate = function(option){
-        var $el = this.$el, $obj;
-        for(var o in option) {
-            if ( o != 'buttons') {
-                $obj = $el.find('[role="'+ o +'"]');
-                if(o == 'icon') {
-                    $obj.attr('class', 'notice-wrap '+ option[o] +' in-modal');
-                } else {
-                    $el.find('[role="'+ o +'"]').html(option[o])
-                }
-            }
-        }
-    }*/
+     var $el = this.$el, $obj;
+     for(var o in option) {
+     if ( o != 'buttons') {
+     $obj = $el.find('[role="'+ o +'"]');
+     if(o == 'icon') {
+     $obj.attr('class', 'notice-wrap '+ option[o] +' in-modal');
+     } else {
+     $el.find('[role="'+ o +'"]').html(option[o])
+     }
+     }
+     }
+     }*/
 
 
 
@@ -353,12 +364,12 @@
             $(this).modal('show');
         } else {
             var template = ['<div class="notice-wrap waiting in-modal">',
-                                '<div class="notice-box">',
-                                    '<span class="notice-img"></span>',
-                                    '<h3>'+ title +'</h3>',
-                                    '<div class="loading-content">'+ content +'</div>',
-                                '</div>',
-                            '</div>'].join('');
+                '<div class="notice-box">',
+                '<span class="notice-img"></span>',
+                '<h3>'+ title +'</h3>',
+                '<div class="loading-content">'+ content +'</div>',
+                '</div>',
+                '</div>'].join('');
             $(this).modal({title: '提示', content: template , callback: function(){
                 $(this).find('.modal-close').hide();
             }});
@@ -390,44 +401,44 @@
         var $that = $(this), opt;
 
         /*if($that.length) {
-            var Instance = $that.data('ui.modal'), dfOption = $that.data('options');
-            opt = $.extend(defaults, dfOption, option)
-            // 重新设置title，content，icon
-            Instance && typeof opt === "object" && Instance.layerUpdate(opt);
-            $that.modal('show');
-        } else { */
+         var Instance = $that.data('ui.modal'), dfOption = $that.data('options');
+         opt = $.extend(defaults, dfOption, option)
+         // 重新设置title，content，icon
+         Instance && typeof opt === "object" && Instance.layerUpdate(opt);
+         $that.modal('show');
+         } else { */
         /*
-        * log: 隐藏即关闭
-        * 2015-10-16
-        */
-            // 初始化
-            opt = $.extend({}, defaults, option);
-            var template = ['<div class="notice-wrap '+ opt.icon +' in-modal" role="icon">',
-                                '<div class="modalLayer notice-box">',
-                                    '<span class="notice-img"></span>',
-                                    '<h3 role="title" class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-20': '') +'">'+ opt.title +'</h3>',
-                                    '<div class="modalLayer-content" role="content">'+ opt.content +'</div>',
-                                '</div>',
-                            '</div>',
-                            '<div class="in-modal-btns text-align-center">',
-                            '</div>'];
-            // 拼接按钮html结构
-            var btnHtml = [], btns = opt.buttons;
-            for(var i = 0; i < btns.length; i++) {
-                if(btns[i].href) {
-                    btnHtml.push('<a href="'+ btns[i].href +'" '+ (btns[i].target ? 'target="'+ btns[i].target +'"'  : '') +' class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</a>');
-                } else {
-                    btnHtml.push('<button type="button" class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</button>');
-                }
+         * log: 隐藏即关闭
+         * 2015-10-16
+         */
+        // 初始化
+        opt = $.extend({}, defaults, option);
+        var template = ['<div class="notice-wrap '+ opt.icon +' in-modal" role="icon">',
+            '<div class="modalLayer notice-box">',
+            '<span class="notice-img"></span>',
+            '<h3 role="title" class="modalLayer-title '+ ($.trim(opt.content) == '' ? 'fn-mt-20': '') +'">'+ opt.title +'</h3>',
+            '<div class="modalLayer-content" role="content">'+ opt.content +'</div>',
+            '</div>',
+            '</div>',
+            '<div class="in-modal-btns text-align-center">',
+            '</div>'];
+        // 拼接按钮html结构
+        var btnHtml = [], btns = opt.buttons;
+        for(var i = 0; i < btns.length; i++) {
+            if(btns[i].href) {
+                btnHtml.push('<a href="'+ btns[i].href +'" '+ (btns[i].target ? 'target="'+ btns[i].target +'"'  : '') +' class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</a>');
+            } else {
+                btnHtml.push('<button type="button" class="'+ (btns[i].style || 'btn primary') +'" data-index="'+ i +'">'+ btns[i].text +'</button>');
             }
+        }
 
-            // 添加自定义按钮html
-            template.splice(-1, 0, btnHtml.join(''));
+        // 添加自定义按钮html
+        template.splice(-1, 0, btnHtml.join(''));
 
-            // 自定义对话弹层实例
-            $that = $(this).modal({title: '提示', content: template.join(''), callback: function(obj){
-                // 按钮点击触发配置回调函数，没有配置则默认关闭层
-                $(this).on('click', '.in-modal-btns .btn' , function(){
+        // 自定义对话弹层实例
+        $that = $(this).modal({title: '提示', content: template.join(''), callback: function(obj){
+            // 按钮点击触发配置回调函数，没有配置则默认关闭层
+            $(this).on('click', '.in-modal-btns .btn' , function(){
                     // 获取当前按钮位置, e 获取用户决定按钮是否可以关闭层，回调函数return false则不关闭层
                     var index = $(this).data('index'), e = true;
                     // 监测用户是否配置回调函数
@@ -446,8 +457,8 @@
                 .on('hide.ui.modal', function(){  // 调用隐藏的时候删除dom
                     $(this).remove();
                 });
-            }});
-      /*  } */
+        }});
+        /*  } */
     };
 
 
@@ -455,12 +466,12 @@
     // ====================
     var Handler = function() {
         var $this = $(this);
-            var href = $(this).attr('href');
-            var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
-            var option = $target.data('ui.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href}, $target.data(), $this.data());
+        var href = $(this).attr('href');
+        var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
+        var option = $target.data('ui.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href}, $target.data(), $this.data());
 
-            // 实例化
-            Plugin.call($target, option, this);
+        // 实例化
+        Plugin.call($target, option, this);
     };
     var initModal = function(){
         $(document).on('click.ui.modal', '[data-toggle="modal"]', function(e) {
@@ -472,5 +483,8 @@
         //$('.modal-background:not(".display-none")').modal();
     };
 
-    $(document).ready(initModal);
-})(jQuery);
+    $(initModal);
+
+    return Modal;
+
+}));

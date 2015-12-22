@@ -6,11 +6,22 @@
  *      $(element).slider();
  */
 
-+(function($, f) {
-    'use strict';
+;(function (root, factory) {
 
-    var toggle = '[data-toggle="slider"]';
-    //  If there's no jQuery, Unslider can't work, so kill the operation.
+	if (typeof define === 'function' && define.amd) {
+		define('ui/slider', ['jquery'], factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(root.jQuery);
+	}
+
+}(this, function ($, f) {
+
+	'use strict';
+
+	var toggle = '[data-toggle="slider"]';
+	//  If there's no jQuery, Unslider can't work, so kill the operation.
 	if(!$) return f;
 
 	var Unslider = function() {
@@ -36,9 +47,9 @@
 			keys: f, // keyboard shortcuts - disable if it breaks things
 			dots: f, // display 鈥⑩€⑩€⑩€鈥� pagination
 			fluid: !f, // is it a percentage width?,
-      prev: f,
-      next: f,
-      arrows: f
+			prev: f,
+			next: f,
+			arrows: f
 		};
 
 		//  Create a deep clone for methods where context changes
@@ -63,7 +74,7 @@
 		//  Pass a jQuery element as the context with .call(), and the index as a parameter: Unslider.calculate.call($('li:first'), 0)
 		this.calculate = function(index) {
 			var me = $(this),
-				width = me.outerWidth(), height = me.outerHeight();
+					width = me.outerWidth(), height = me.outerHeight();
 
 			//  Add it to the sizes list
 			_.sizes[index] = [width, height];
@@ -74,7 +85,7 @@
 
 		//  Work out what methods need calling
 		this.setup = function() {
-      var initEvent = $.Event('init.ui.slider', {relatedTarget: this.el });
+			var initEvent = $.Event('init.ui.slider', {relatedTarget: this.el });
 			//  Set the main element
 			this.el.css({
 				overflow: 'hidden',
@@ -82,7 +93,7 @@
 				height: this.items.first().outerHeight()
 			});
 
-      // console.log(_.max[0]);
+			// console.log(_.max[0]);
 
 			//  Set the relative widths
 			this.ul.css({width: (this.items.length * 100) + '%', position: 'relative'});
@@ -111,20 +122,20 @@
 
 			if(this.opts.arrows) {
 				this.el.parent().append('<p class="arrows"><span class="prev">'+ (this.opts.prevText || 'prev') +'</span><span class="next">'+ (this.opts.nextText || 'next') +'</span></p>')
-					.find('.arrows span').off('click').on('click', function() {
-						$.isFunction(_[this.className]) && _[this.className]();
-					});
+						.find('.arrows span').off('click').on('click', function() {
+					$.isFunction(_[this.className]) && _[this.className]();
+				});
 			};
 
-      if(this.opts.prev) $(this.opts.prev).off('click').on('click', $.proxy(this.prev, this));
-      if(this.opts.next) $(this.opts.next).off('click').on('click', $.proxy(this.next, this));
+			if(this.opts.prev) $(this.opts.prev).off('click').on('click', $.proxy(this.prev, this));
+			if(this.opts.next) $(this.opts.next).off('click').on('click', $.proxy(this.next, this));
 
 			//  Swipe support
 			if($.event.swipe) {
 				this.el.off('swipeleft').on('swipeleft', _.prev).off('swiperight').on('swiperight', _.next);
 			}
 
-      this.el.trigger(initEvent)
+			this.el.trigger(initEvent)
 		};
 
 		//  Move Unslider to a slide index
@@ -137,7 +148,7 @@
 			var obj = {height: target.outerHeight()};
 			var speed = cb ? 5 : this.opts.speed;
 
-      var moveEvent = $.Event('move.ui.slider', { relatedTarget: target, curIndex: index });
+			var moveEvent = $.Event('move.ui.slider', { relatedTarget: target, curIndex: index });
 
 			if(!this.ul.is(':animated')) {
 				//  Handle those pesky dots
@@ -187,8 +198,8 @@
 		this.dots = function() {
 			//  Create the HTML
 			var html = '<ol class="dots">';
-				$.each(this.items, function(index) { html += '<li class="dot' + (index < 1 ? ' active' : '') + '">' + (index + 1) + '</li>'; });
-				html += '</ol>';
+			$.each(this.items, function(index) { html += '<li class="dot' + (index < 1 ? ' active' : '') + '">' + (index + 1) + '</li>'; });
+			html += '</ol>';
 
 			//  Add it to the Unslider
 			this.el.addClass('has-dots').append(html).find('.dot').off('click').on('click', function() {
@@ -197,35 +208,38 @@
 		};
 	};
 
-    // 插件定义
-    //======================
-    function Plugin(o, s) {
-      var len = this.length;
+	// 插件定义
+	//======================
+	function Plugin(o, s) {
+		var len = this.length;
 
-      //  Enable multiple-slider support
-      return this.each(function(index) {
-        //  Cache a copy of $(this), so it
-        var me = $(this);
-        var config = me.data();
-        var instance = me.data('ui.slider');
+		//  Enable multiple-slider support
+		return this.each(function(index) {
+			//  Cache a copy of $(this), so it
+			var me = $(this);
+			var config = me.data();
+			var instance = me.data('ui.slider');
 
-        if(!instance) {
-          o = $.extend({}, o, config);
-          instance = (new Unslider).init(me, o);
-          //  Invoke an Unslider instance
-          me.data('ui.slider', instance);
-        }
-        s = $.extend({}, s, config);
-        if(typeof o === 'string') instance[o] && instance[o](me, s);
-      });
-    }
+			if(!instance) {
+				o = $.extend({}, o, config);
+				instance = (new Unslider).init(me, o);
+				//  Invoke an Unslider instance
+				me.data('ui.slider', instance);
+			}
+			s = $.extend({}, s, config);
+			if(typeof o === 'string') instance[o] && instance[o](me, s);
+		});
+	}
 
 
-    // jQuery 插件扩展
-    $.fn.slider = Plugin;
-    $.fn.slider.Constructor = Unslider;
+	// jQuery 插件扩展
+	$.fn.slider = Plugin;
+	$.fn.slider.Constructor = Unslider;
 
-    // 元素插件绑定
-    // ====================
-    $(document).ready(function(){ $(toggle).slider() });
-})( jQuery, false );
+	// 元素插件绑定
+	// ====================
+	$(function(){ $(toggle).slider() });
+
+	return Unslider;
+
+}));

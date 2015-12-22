@@ -14,7 +14,18 @@
         $(element).pagination('selectPage', 2, 100);
  */
 
-+(function($) {
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/pagination', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     // 默认高亮类
@@ -186,13 +197,13 @@
             start: Math.ceil(
                 // 当前页是否大于显示范围的一半
                 this.currentPage > this.halfDisplayed
-                ? Math.max(
+                    ? Math.max(
                     // 从当前页-显示一半范围开始
                     Math.min(this.currentPage - this.halfDisplayed, (this.pages - this.options.displayedPages))
                     // 当前页小于一半且总页数小于显示范围，从第一页开始
                     , 0)
-                // 从第一页开始
-                : 0),
+                    // 从第一页开始
+                    : 0),
             end: Math.ceil(
                 // 当前页是否大于显示范围的一半
                 this.currentPage > this.halfDisplayed
@@ -218,10 +229,10 @@
 
         // 判断当前页与非当前页
         item = (pageIndex == this.currentPage) ?
-                // 当前页， 上一页下一页不加active类
-                '<li '+ (islb ? '' : 'class="'+ active +'"') +'><a href="javascript:void(0);">'+ (options.text) +'</a></li>'
-                // 分当前页标识为可点击
-                : '<li><a href="#page-'+ (pageIndex + 1) +'" data-page="'+ (pageIndex + 1) +'">'+ options.text +'</a></li>';
+            // 当前页， 上一页下一页不加active类
+        '<li '+ (islb ? '' : 'class="'+ active +'"') +'><a href="javascript:void(0);">'+ (options.text) +'</a></li>'
+            // 分当前页标识为可点击
+            : '<li><a href="#page-'+ (pageIndex + 1) +'" data-page="'+ (pageIndex + 1) +'">'+ options.text +'</a></li>';
 
         $this.$el.append(item);
     };
@@ -252,7 +263,10 @@
 
     // 元素插件绑定
     // ====================
-    $(document).ready(function(){
+    $(function(){
         $('[ui-pagination],.pagination').pagination();
     })
-})(jQuery);
+
+    return;
+
+}));

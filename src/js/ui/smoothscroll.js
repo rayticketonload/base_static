@@ -6,13 +6,24 @@
  *      $(element).placeholder();
  */
 
-+(function($) {
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/smoothScroll', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
     'use strict';
 
     if(!$.easing.easeOutExpo) $.easing.easeOutExpo = function(x, t, b, c, d) { return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b; };
 
     // 构造函数
-    // ===============
+    // ---------
     var SmoothScroll = function(element, options) {
         this.$el = $(element);
         this.options = options;
@@ -93,7 +104,7 @@
 
 
     // 插件定义
-    //======================
+    // ---------
     function Plugin(options) {
         return $(this).each(function () {
             var $this = $(this);
@@ -111,7 +122,10 @@
     $.fn.smoothScroll = Plugin;
     $.fn.smoothScroll.Constructor = SmoothScroll;
 
-    $(document).ready(function(){ $('[data-toggle="smooth-scroll"]').smoothScroll() })
+    $(function(){ $('[data-toggle="smooth-scroll"]').smoothScroll() })
 
-})( jQuery );
+    return SmoothScroll;
+
+}));
+
 

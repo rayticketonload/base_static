@@ -35,6 +35,30 @@
         </div>
     </div>
 
+    <!-- UMD -->
+    <div class="section-content" id="heading">
+        <h3>
+            <strong>UMD</strong>
+        </h3>
+        <div class="ui-example">
+            <p class="description">
+                每个单独的组件<code>js</code>都使用<code>UMD</code>规范包裹，兼容目前流行的组件管理框架<code>requirejs</code>、<code>seajs</code>、<code>webpack</code>等，建议推荐使用<code>requirejs</code>
+            </p>
+
+            <br/>
+            <br/>
+
+
+            <div class="warning-FontColor">
+                <p class="h3">测试requirejs</p>
+                <p>
+                    <button class="btn primary" id="j-test">测试requirejs</button>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
     <!-- data 属性 -->
     <div class="section-content" id="string">
         <h3>
@@ -81,4 +105,23 @@
     </div>
 
 </section>
+{% endblock %}
+
+{% block jsPage %}
+<script src="{{dist}}/js/require.js"></script>
+<script>
+    require.config({
+        baseUrl: '{{dist}}/js/',
+        urlArgs: 'v={{version}}',
+        paths: {
+            //'jquery': 'jquery.min'
+        }
+    });
+
+    require(['ui/modal'], function(Modal) {
+        $('#j-test').on('click', function() {
+            $('#test').modalLayer({ title: '加载了modal模块' });
+        })
+    });
+</script>
 {% endblock %}

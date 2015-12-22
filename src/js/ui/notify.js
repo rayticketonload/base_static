@@ -14,7 +14,19 @@
  *      });
  */
 
-+(function($) {
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/notify', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
+
+
     'use strict';
 
     // 存放方位集合
@@ -61,8 +73,8 @@
         // 创建元素
         this.$el = $([
             '<div class="notify-message">',
-                '<a class="notify-close">&times;</a>',
-                '<div></div>',
+            '<a class="notify-close">&times;</a>',
+            '<div></div>',
             '</div>'
         ].join('')).data('ui.notify', this);
 
@@ -84,12 +96,12 @@
         // 方位存放
         if(!containers[this.options.pos]) {
             containers[this.options.pos] = $('<div class="notify notify-'+ this.options.pos +'"></div>')
-                                            .appendTo($('body'))
-                                            .on('click', '.notify-message', function(){
-                                                var message = $(this).data('ui.notify');
-                                                message.$el.trigger('manualclose.ui.notify', [message]);
-                                                message.close();
-                                            });
+                .appendTo($('body'))
+                .on('click', '.notify-message', function(){
+                    var message = $(this).data('ui.notify');
+                    message.$el.trigger('manualclose.ui.notify', [message]);
+                    message.close();
+                });
         }
     };
 
@@ -177,9 +189,9 @@
 
     /* 设置状态及样式 */
     Notify.prototype.status = function(status) {
-          if(!status) {
-              return this.currentStatus;
-          }
+        if(!status) {
+            return this.currentStatus;
+        }
 
         this.$el.removeClass('nofity-message-'+ this.currentStatus).addClass('notify-message-'+ status);
 
@@ -206,4 +218,7 @@
     $.fn.notify = Plugin;
     $.fn.notify.Constructor = Notify;
 
-})( jQuery );
+
+    return Notify;
+
+}));

@@ -1,11 +1,21 @@
-/*!
- * placeholder 占位符
- * tommyshao <jinhong.shao@frontpay.cn>
- * API:
- *      $(element).placeholder();
- */
+//     placeholder 占位符
+//     tommyshao <jinhong.shao@frontpay.cn>
 
-+(function($) {
+// API:
+// ------
+// $(element).placeholder();
+
+;(function (root, factory) {
+
+    if (typeof define === 'function' && define.amd) {
+        define('ui/placeholder', ['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(root.jQuery);
+    }
+
+}(this, function ($) {
     'use strict';
 
     var toggle = 'input[placeholder]';
@@ -67,6 +77,10 @@
 
     // 元素插件绑定
     // ====================
-    $(document).ready(function(){ $(toggle).placeholder() });
-})( jQuery );
+    $(function(){ $(toggle).placeholder() });
+
+    return Placeholder;
+
+}));
+
 

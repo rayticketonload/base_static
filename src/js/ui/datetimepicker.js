@@ -32,9 +32,20 @@
  *
  */
 
-+(function($){
+;(function (root, factory) {
 
-//全局配置，如果采用默认均不需要改动
+	if (typeof define === 'function' && define.amd) {
+		define('ui/datetimepicker', ['jquery'], factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(root.jQuery);
+	}
+
+}(this, function ($) {
+
+
+	//全局配置，如果采用默认均不需要改动
 	var config =  {
 		skin: 'default', //初始化皮肤
 		format: 'YYYY-MM-DD', //日期格式
@@ -478,47 +489,47 @@
 
 			div = $('<div id="'+ as[0] +'" class="'+ as[0] +'" />').css('position', 'absolute').hide();
 			log.html = '<div class="laydate_top">'
-						+'<div class="laydate_ym laydate_y" id="laydate_YY">'
-						+'<a class="laydate_choose laydate_chprev laydate_tab"><cite></cite></a>'
-						+'<input id="laydate_y" readonly><label></label>'
-						+'<a class="laydate_choose laydate_chnext laydate_tab"><cite></cite></a>'
-						+'<div class="laydate_yms">'
-						+'<a class="laydate_tab laydate_chtop"><cite></cite></a>'
-						+'<ul id="laydate_ys"></ul>'
-						+'<a class="laydate_tab laydate_chdown"><cite></cite></a>'
-						+'</div>'
-						+'</div>'
-						+'<div class="laydate_ym laydate_m" id="laydate_MM">'
-						+'<a class="laydate_choose laydate_chprev laydate_tab"><cite></cite></a>'
-						+'<input id="laydate_m" readonly><label></label>'
-						+'<a class="laydate_choose laydate_chnext laydate_tab"><cite></cite></a>'
-						+'<div class="laydate_yms" id="laydate_ms">'+ function(){
-							var str = '';
-							$.each(new Array(12), function(i){
-								str += '<span m="'+ i +'">'+ Dates.digit(i+1) +'月</span>';
-							});
-							return str;
-						}() +'</div>'
-						+'</div>'
-						+'</div>'
+					+'<div class="laydate_ym laydate_y" id="laydate_YY">'
+					+'<a class="laydate_choose laydate_chprev laydate_tab"><cite></cite></a>'
+					+'<input id="laydate_y" readonly><label></label>'
+					+'<a class="laydate_choose laydate_chnext laydate_tab"><cite></cite></a>'
+					+'<div class="laydate_yms">'
+					+'<a class="laydate_tab laydate_chtop"><cite></cite></a>'
+					+'<ul id="laydate_ys"></ul>'
+					+'<a class="laydate_tab laydate_chdown"><cite></cite></a>'
+					+'</div>'
+					+'</div>'
+					+'<div class="laydate_ym laydate_m" id="laydate_MM">'
+					+'<a class="laydate_choose laydate_chprev laydate_tab"><cite></cite></a>'
+					+'<input id="laydate_m" readonly><label></label>'
+					+'<a class="laydate_choose laydate_chnext laydate_tab"><cite></cite></a>'
+					+'<div class="laydate_yms" id="laydate_ms">'+ function(){
+						var str = '';
+						$.each(new Array(12), function(i){
+							str += '<span m="'+ i +'">'+ Dates.digit(i+1) +'月</span>';
+						});
+						return str;
+					}() +'</div>'
+					+'</div>'
+					+'</div>'
 
-						+ Dates.viewtb
+					+ Dates.viewtb
 
-						+'<div class="laydate_bottom">'
-						+'<ul id="laydate_hms">'
-						+'<li class="laydate_sj">时间</li>'
-						+'<li><input readonly>:</li>'
-						+'<li><input readonly>:</li>'
-						+'<li><input readonly></li>'
-						+'</ul>'
-						+'<div class="laydate_time" id="laydate_time"></div>'
-						+'<div class="laydate_btn">'
-						+'<a id="laydate_clear">清空</a>'
-						+'<a id="laydate_today">今天</a>'
-						+'<a id="laydate_ok">确认</a>'
-						+'</div>'
+					+'<div class="laydate_bottom">'
+					+'<ul id="laydate_hms">'
+					+'<li class="laydate_sj">时间</li>'
+					+'<li><input readonly>:</li>'
+					+'<li><input readonly>:</li>'
+					+'<li><input readonly></li>'
+					+'</ul>'
+					+'<div class="laydate_time" id="laydate_time"></div>'
+					+'<div class="laydate_btn">'
+					+'<a id="laydate_clear">清空</a>'
+					+'<a id="laydate_today">今天</a>'
+					+'<a id="laydate_ok">确认</a>'
+					+'</div>'
 						//+(config.isv ? '<a href="http://sentsin.com/layui/laydate/" class="laydate_v" target="_blank">laydate-v'+ laydate.v +'</a>' : '')
-						+'</div>';
+					+'</div>';
 
 			div.html(log.html);
 
@@ -535,9 +546,9 @@
 		//}
 
 		Dates.follow(
-			$(Dates.box).attr('class', function(){
-				return as[0] + (options.skin === 'default' ? '' : ' ' + as[0] + '_' + options.skin);
-			}).show()
+				$(Dates.box).attr('class', function(){
+					return as[0] + (options.skin === 'default' ? '' : ' ' + as[0] + '_' + options.skin);
+				}).show()
 		);
 		options.zIndex ? $(Dates.box).css('z-index', options.zIndex) : $(Dates.box).css('z-index', 'auto');
 		Dates.stopMosup('click', Dates.box);
@@ -674,6 +685,7 @@
 		$('#laydate_ms').on('click', 'span', function(ev) {
 			ev.stopPropagation();
 			if(!$(this).hasClass(as[1])) {
+				Dates.reshow();
 				Dates.viewDate(Dates.ymd[0], $(this).attr('m')|0, Dates.ymd[2]);
 			}
 		});
@@ -688,15 +700,15 @@
 
 		//清空
 		as.oclear = $('#laydate_clear').on('click', function() {
-				Dates.elem[as.elemv]('');
-				Dates.close();
-			});
+			Dates.elem[as.elemv]('');
+			Dates.close();
+		});
 
 		//今天
 		as.otoday = $('#laydate_today').on('click', function(){
-				var now = new Date();
-				Dates.creation([now.getFullYear(), now.getMonth() + 1, now.getDate()]);
-			});
+			var now = new Date();
+			Dates.creation([now.getFullYear(), now.getMonth() + 1, now.getDate()]);
+		});
 
 		//确认
 		as.ok = $('#laydate_ok').on('click', function(){
@@ -739,14 +751,14 @@
 		log.hmson = function(input, index){
 			var span = $('#laydate_hmsno span'), set = Dates.valid ? null : 1;
 			span.each(function(i) {
-						if(set || Dates.timeVoid(i, index)) {
-							$(this).addClass(as[1])
-						}
-					}).on('click', function() {
-						if(!$(this).hasClass(as[1])) {
-							input.value = Dates.digit($(this).html() || 0);
-						}
-					});
+				if(set || Dates.timeVoid(i, index)) {
+					$(this).addClass(as[1])
+				}
+			}).on('click', function() {
+				if(!$(this).hasClass(as[1])) {
+					input.value = Dates.digit($(this).html() || 0);
+				}
+			});
 			$(span).eq(input.value || 0).addClass('laydate_click');
 		};
 
@@ -762,15 +774,15 @@
 		});
 
 		$(document).on('mouseup', function(ev) {
-						var box = $('#'+ as[0]);
-						if(box && box.length > 0 && box.is(':visible')) {
-							Dates.check() || Dates.close();
-						}
-					}).on('mousedown', function(ev) {
-						if(ev.which === 13 && Dates.elem && Dates.elem.length > 0) {
-							Dates.creation([Dates.ymd[0], Dates.ymd[1]+1, Dates.ymd[2]]);
-						}
-					});
+			var box = $('#'+ as[0]);
+			if(box && box.length > 0 && box.is(':visible')) {
+				Dates.check() || Dates.close();
+			}
+		}).on('mousedown', function(ev) {
+			if(ev.which === 13 && Dates.elem && Dates.elem.length > 0) {
+				Dates.creation([Dates.ymd[0], Dates.ymd[1]+1, Dates.ymd[2]]);
+			}
+		});
 	};
 
 
@@ -785,9 +797,9 @@
 			return tamp < 86400000 ? (+new Date + tamp*86400000) : tamp;
 		}(parseInt(timestamp)) : +new Date);
 		return Dates.parse(
-			[De.getFullYear(), De.getMonth()+1, De.getDate()],
-			[De.getHours(), De.getMinutes(), De.getSeconds()],
-			format
+				[De.getFullYear(), De.getMonth()+1, De.getDate()],
+				[De.getHours(), De.getMinutes(), De.getSeconds()],
+				format
 		);
 	};
 
@@ -850,4 +862,7 @@
 		});
 	});
 
-})(jQuery);
+
+	return DateTimePicker;
+
+}));
