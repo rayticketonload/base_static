@@ -27,6 +27,7 @@
     var wrap = '.form-control-dropdown';
     var toggle = '[data-toggle="dropdown"],.form-control-dropdown-value';
     var toggleBtn = '.form-control-dropdown-btn, [data-toggle="dropdown-btn"]';
+    var toggleIBtn = '.form-control-dropdown-btn > i, [data-toggle="dropdown-btn"] > i';
     var ul = '.form-control-dropdown-menu';
     var list = '.form-control-dropdown-menu li, [role="list"] li';
 
@@ -291,12 +292,13 @@
     // 插件定义
     // ------------
     function Plugin(option) {
+        var args = [].slice.call(arguments, 1);
         return $(this).each(function () {
             var $this = $(this);
             var data = $this.data('ui.dropdown');
 
             if(!data) $this.data('ui.dropdown', (data = new Dropdown(this)));
-            if(typeof option == 'string') data[option].call($(this));
+            if(typeof option == 'string') data[option].apply(this, args);
         })
     }
 
@@ -315,9 +317,16 @@
             // 按钮触发
             .on('click.ui.dropdown-btn', function(e){
                 var that = e.target;
-                if($(that).is(toggleBtn)) {
-                    var $target = $(that).siblings(toggle);
-                    $target.length && $target.dropdown('toggle');
+                if($(that).is(toggleBtn) || $(that).is(toggleIBtn)) {
+                    var $wrap = $(that).closest(wrap);
+                    var $target = $wrap.find(toggle);
+                    //console.log($wrap);
+                    //$target.length && $target.dropdown('toggle');
+                    dropMenus($target)
+                    //console.log($target);
+                    //$target.dropdown('selected', $target[0]);
+                    //$target.trigger('toggle')
+                    //Dropdown.prototype.selected($target)();
                     return false;
                 }
 
