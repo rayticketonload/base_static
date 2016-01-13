@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 
 html {
     font-size: 62.5%;
@@ -16,6 +16,11 @@ body {
     color: @default-FontColor;
     background-color: @bgColor-default;
     line-height: @line-height-base;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga","kern";
+
 
     * {
         .border-box();
