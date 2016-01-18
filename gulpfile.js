@@ -456,7 +456,7 @@ gulp.task('document:static', function(){
             .pipe(gulp.dest(documentPath+'/src'));
 })
 gulp.task('document:js', function(){
-    return gulp.src(['./output/src/js/**/**', '!./output/src/js/datatables/**/**'])
+    return gulp.src(['./output/src/js/**/**.js', '!./output/src/js/datatables/**/**'])
             .pipe(n2a({reverse: false}))
             .pipe(uglify())
             .pipe(gulp.dest(documentPath+'/src/js'));
