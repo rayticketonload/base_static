@@ -1,4 +1,4 @@
-﻿/**!
+/**!
  * 日期控件
  * tommyshao <jinhong.shao@frontpay.cn>
  * Reference laydate v1.1 http://sentsin.com/layui/laydate
@@ -478,8 +478,10 @@
 		Dates.elem = $(elem);
 		Dates.options = options;
 		Dates.options.format || (Dates.options.format = config.format);
+
+        var $$min = Dates.elem.data('min'), $$max = Dates.elem.data('max');
 		Dates.options.start = Dates.options.start || '';
-		Dates.mm = log.mm = [Dates.options.min || config.min, Dates.options.max || config.max];
+		Dates.mm = log.mm = [$$min || Dates.options.min || config.min, $$max || Dates.options.max || config.max];
 		Dates.mins = log.mm[0].match(/\d+/g);
 		Dates.maxs = log.mm[1].match(/\d+/g);
 
@@ -599,8 +601,8 @@
 		if(!hide){
 			Dates.close();
 			typeof Dates.options.choose === 'function' && Dates.options.choose(getDates);
-			var e = $.Event('choose.ui.datetimepicker', {relatedTarget: $this});
-			$this.trigger(e, getDates);
+            var e = $.Event('choose.ui.datetimepicker', {relatedTarget: $this});
+            $this.trigger(e, getDates);
 		}
 	};
 

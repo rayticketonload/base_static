@@ -405,12 +405,14 @@ gulp.task('frontui:validate', function(){
     return gulp.src([staticPath+'/js/validate/jquery.validate.js', staticPath+'/js/validate/messages_zh.js'])
                 .pipe(concat('validate.js'))
                 .pipe(uglify())
+                .pipe(bannerHeader(banner, { pkg: pkg}))
                 .pipe(gulp.dest(frontui_path+'/js/validate'));
 });
 
 gulp.task('frontui:aloneJs', function(){
   return gulp.src([staticPath+'/js/ui/datetimepicker.js'])
       .pipe(uglify())
+      .pipe(bannerHeader(banner, { pkg: pkg}))
       .pipe(gulp.dest(frontui_path+'/js/ui'));
 });
 

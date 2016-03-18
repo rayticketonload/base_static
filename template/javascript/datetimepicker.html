@@ -279,15 +279,15 @@
                                 <span class="form-control-date-btn">
                                     <i></i>
                                 </span>
-                                <input class="form-control" value="2015-05-17" type="text" id="j-datetimepicker-12" data-toggle="datetimepicker" readonly="readonly">
+                                <input class="form-control" value="2015-05-19" type="text" id="j-datetimepicker-12" data-toggle="datetimepicker" readonly="readonly">
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="ui-code" id="bottom">
-                            <pre><code>$('#j-datetimepicker-11').on('choose.ui.datetimepicker', function(e) { <br />
-            &emsp;&emsp;var curDate = $(this).val(); <br />
+                            <pre><code>$('#j-datetimepicker-11').on('choose.ui.datetimepicker', function(e, date) { <br />
+            &emsp;&emsp;var curDate = date || $(this).val(); <br />
             &emsp;&emsp;$('#j-datetimepicker-12').val(curDate).data('min', curDate) <br />
         })
                             </code></pre>
@@ -306,10 +306,13 @@
         $('#j-datetimepicker-8').on('close.ui.datetimepicker', function(){ alert('关闭'); })
         $('#j-datetimepicker-8').on('choose.ui.datetimepicker', function(){ alert('选择'); })
 
-        $('#j-datetimepicker-11').on('choose.ui.datetimepicker', function(e) {
-            var curDate = $(this).val();
-            $('#j-datetimepicker-12').val(curDate).data('min', curDate)
-        })
+        var setMinDate = function(e, date) {
+            var curDate = date || $(this).val();
+            $('#j-datetimepicker-12')
+                                    //.val(curDate)
+                                    .data('min', curDate)
+        };
+        $('#j-datetimepicker-11').on('choose.ui.datetimepicker', setMinDate)
     })
 </script>
 {% endblock %}
