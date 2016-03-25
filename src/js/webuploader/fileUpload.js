@@ -22,7 +22,7 @@
 
     'use strict';
 
-	var 
+	var
 	// 所有文件的进度信息，key为file id
     percentages = {},
     // 判断浏览器是否支持图片的base64
@@ -72,7 +72,7 @@
 	 * Uploader
 	 * @param  {string} el  the element of upload's button
 	 * @param  {object} options initiliaze configure
-	 * @return  
+	 * @return
 	 */
 	var Uploader = function(el, options) {
 		this.$el = $(el);
@@ -115,7 +115,7 @@
 	Uploader.prototype = {
 		constructor: Uploader,
 		init: function() {
-			
+
 			// 检测浏览器是否支持上传控件
 	        if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
 	        	var swfUrl = this.options.swf;
@@ -182,6 +182,7 @@
 			this.$queue = $( '<ul class="filelist"></ul>' ).appendTo( this.$queueContainer );
 			this.rotation = 0;
 			this.uploading = false;
+            this.$toolbar = null;
 			this.__initUploader();
 		},
 		__initUploader: function() {
@@ -281,12 +282,14 @@
             uploader.on('uploadError', function (file, reason) {
                 uploader.removeFile(file); //从队列中移除
                 alert(file.name + "上传失败，错误代码：" + reason);
+                self.$container.off().remove();
+                self.$editor.hide();
             });
 
             //当文件上传成功时触发
             uploader.on('uploadSuccess', function (file, data) {
                 self.$container.append( '<span class="success"></span>' );
-                self.$progress.hide();
+
                 uploader.removeFile(file); //从队列中移除
 
                 function success() {
@@ -305,9 +308,11 @@
             //不管成功或者失败，文件上传完成时触发
             uploader.on('uploadComplete', function (file) {
             	self.$uploadBtn.removeClass('disabled');
+                self.$progress.hide();
+                self.$toolbar.show();
             	self.uploading = false;
             });
-            
+
 		},
 		__addFile: function(file){
 			var self = this,
@@ -373,7 +378,7 @@
                     if( isSupportBase64 ) {
                         $img = $('<img src="'+src+'">');
                         $wrap.empty().append( $img );
-                    } 
+                    }
                 }, opt.thumbnailWidth, opt.thumbnailHeight );
 
                 percentages[ file.id ] = [ file.size, 0 ];
@@ -423,6 +428,7 @@
 	        $li.appendTo( $queue );
 
 	        this.$container = $li;
+            this.$toolbar = $btns;
 
 	        this.$info.html(WebUploader.formatSize( percentages[file.id][0] )+'<span class="wu-percent-text"></span>');
 
@@ -436,7 +442,7 @@
 	            uploader.upload();
 
 	            $(this).addClass('disabled');
-	        });  
+	        });
 
 		}
 	}
