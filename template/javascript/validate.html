@@ -1,0 +1,426 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<style>
+    pre{
+        white-space: pre;
+    }
+    .question h3{
+        color: #8eb0db;
+        cursor: pointer;
+    }
+    .question .question-bd{
+        display: none;
+    }
+</style>
+    <section id="type" class="ui-section">
+        <h1>表单验证</h1>
+        <!-- 表单验证 -->
+        <div class="section-content">
+            <h3>
+                <strong>用法</strong>
+            </h3>
+            <div class="ui-example">
+                <br>
+                <br>
+                <a href="http://jqueryvalidation.org/">jquery.validate官网</a>
+                <br>
+                <br>
+                定制<code>frontui</code>皮肤的<code>$(selector).validation(option)</code>扩展，提供了<code>telphone</code>等类型的验证
+                <br>
+                <br>
+
+                <h4>示例</h4>
+                <div class="form-layer1">
+                                    <div class="form-layer2">
+                                        <form autocomplete="off" id="form">
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example1">
+                                                    <b>*
+                                                    </b>
+                                                    <span>标准表单标题宽度可以放十八个中文字符
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="Text2" name="name" placeholder="表单提示语">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example2">
+                                                    <b>*
+                                                    </b>
+                                                    <span>请输入密码
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="password" name="password" class="form-control" id="Password1" placeholder="表单提示语">
+                                                    <a class="form-control-tools-link">忘记密码</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example2">
+                                                    <b>*
+                                                    </b>
+                                                    <span>确认输入密码
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="password" name="repassword" class="form-control" id="Password2" placeholder="表单提示语">
+                                                    <a class="form-control-tools-link">忘记密码</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example2">
+                                                    <b>*
+                                                    </b>
+                                                    <span>提交时间
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" name="time" class="form-control" id="time" placeholder="表单提示语">
+                                                    <a class="form-control-tools-link">忘记密码</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-example2">
+                                                    <b>*
+                                                    </b>
+                                                    <span>手机号码
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" name="telphone" class="form-control" id="telphone" placeholder="请输入手机号码">
+                                                    <a class="form-control-tools-link">忘记密码</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="***">
+                                                    <b>*</b>
+                                                    <span>dropdown </span>
+                                                    <em>:</em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-dropdown">
+                                                        <span class="form-control-dropdown-btn">
+                                                            <i></i>
+                                                        </span>
+                                                        <div class="form-control-dropdown-value">
+                                                            <span class="bank-icon icon-cmb" title="招商银行"></span>
+                                                            <span class="form-control-bank-card">招商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                        </div>
+                                                        <ul class="form-control-dropdown-menu">
+                                                            <li title="">
+                                                                <span class="bank-icon icon-icbc" title="工商银行"></span>
+                                                                <span class="form-control-bank-card">工商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <span class="h3">陈少峰</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <span class="bank-icon icon-cmb" title="招商银行"></span>
+                                                        <span class="form-control-bank-card">招商银行&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;尾号1234</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        <strong class="h2 warning-FontColor">14,000.00</strong>&nbsp;元
+                                            <div class="tooltips-icon">
+                                                i
+                                                <div class="tooltips">
+                                                    部分款项未到期
+                                                    <span class="tips-arrow-border"></span>
+                                                    <span class="tips-arrow"></span>
+                                                </div>
+                                            </div>
+                                                        <a class="link-standard">提现明细</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="form-control-5">
+                                                    <span>Data in form
+                                                    </span>
+                                                    <em>：
+                                                    </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-data">
+                                                        06月18日24点前
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="***">
+                                                    <b>* </b>
+                                                    <span>输入验证码 </span>
+                                                    <em>: </em>
+                                                </label>
+                                                <div class="form-control-wrap">
+                                                    <div class="form-control-verify">
+                                                        <input type="text" class="form-control" id="***">
+                                                        <button class="btn form-control-verify-btn">
+                                                            获取验证码
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="form-control-wrap text-align-left plural-btns margin-top-20px">
+                                                    <button type="submit" class="btn primary" id="j-modal-form">确定</button>
+                                                    <a href="###" class="btn links">button link</a>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+            </div>
+            <div class="ui-code">
+                           <pre>                                <code>
+ $(function(){
+        /**
+         * 统一显示验证错误信息
+         */
+        var $form = $('#form').validation({
+            // 验证项
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 16,
+                    //ajax 验证
+                    remote: {
+                        url: "/api?do=validate&filed=name",
+                        type: "post",
+                        data: {
+                            username: function() {
+                                return $('#Text2').val();
+                            }
+                        }
+                    }
+                },
+                password: "required",
+                repassword: {
+                    required: true,
+                    equalTo: '#Password1'
+                },
+                time: {
+                    required: true,
+                    date: true
+                },
+                telphone: {
+                    required: true,
+                    telphone: true
+                }
+            },
+            // 错误提示
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: jQuery.validator.format("名称长度不能少于{0}个字"),
+                    remote: '用户名已存在'
+                },
+                password: {
+                    required: "请输入"
+                },
+                repassword: {
+                    required: "请输入确认密码",
+                    equalTo: "两次密码不一致"
+                },
+                time: {
+                    required: "请输入时间",
+                    date: "时间格式有误"
+                },
+                telphone: {
+                    required: "请输入手机号码",
+                    telphone: "手机号码格式有误"
+                }
+            },
+            // 提交
+            submitHandler: function(form) {
+                // 直接提交
+                // form.submit();
+            }
+        });
+    })
+                           </code>
+                            </pre>
+            </div>
+        </div>
+
+
+        <!-- 配置 -->
+        <div class="section-content">
+            <h3>
+                <strong>配置</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    详细的配置，请参考 <a href="http://jqueryvalidation.org/validate">http://jqueryvalidation.org/validate</a>
+                </p>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                默认值
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>rules</code></td>
+                            <td><code>null</code></td>
+                            <td>文本域的验证规则，require:true为必填</td>
+                        </tr>
+                        <tr>
+                            <td><code>messages</code></td>
+                            <td><code>null</code></td>
+                            <td>文本域验证规则对应的错误提示</td>
+                        </tr>
+                        <tr>
+                            <td><code>submitHandler</code></td>
+                            <td><code>function</code></td>
+                            <td>决定直接提交或是异步提交数据</td>
+                        </tr>
+                        <tr>
+                            <td><code>onsubmit</code></td>
+                            <td><code>true</code></td>
+                            <td>设置是否禁止默认提交</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                            <pre>
+                                <code>
+                                </code>
+                            </pre>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/validate/validate.all.js"></script>
+<script>
+    $(function(){
+        /**
+         * 统一显示验证错误信息
+         */
+        var $form = $('#form').validation({
+            // 验证项
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 16,
+                    //ajax 验证
+                    remote: {
+                        url: "/api?do=validate&filed=name",
+                        type: "post",
+                        data: {
+                            username: function() {
+                                return $('#Text2').val();
+                            }
+                        }
+                    }
+                },
+                password: "required",
+                repassword: {
+                    required: true,
+                    equalTo: '#Password1'
+                },
+                time: {
+                    required: true,
+                    date: true
+                },
+                telphone: {
+                    required: true,
+                    telphone: true
+                }
+            },
+            // 错误提示
+            messages: {
+                name: {
+                    required: "请输入名称",
+                    minlength: jQuery.validator.format("名称长度不能少于{0}个字"),
+                    remote: '用户名已存在'
+                },
+                password: {
+                    required: "请输入"
+                },
+                repassword: {
+                    required: "请输入确认密码",
+                    equalTo: "两次密码不一致"
+                },
+                time: {
+                    required: "请输入时间",
+                    date: "时间格式有误"
+                },
+                telphone: {
+                    required: "请输入手机号码",
+                    telphone: "手机号码格式有误"
+                }
+            },
+            // 提交
+            submitHandler: function(form) {
+                // 直接提交
+                // form.submit();
+            }
+        });
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends "../_layout/javascript.html" %}
+{% block mainBody %}
+<link rel="stylesheet" href="{{dist}}/js/webuploader/style.css">
+<style>
+    pre{
+        white-space: pre;
+    }
+    .question h3{
+        color: #8eb0db;
+        cursor: pointer;
+    }
+    .question .question-bd{
+        display: none;
+    }
+</style>
+    <section id="type" class="ui-section">
+        <h1>文件上传</h1>
+        <!-- 文件上传 -->
+        <div class="section-content">
+            <h3>
+                <strong>用法</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                    文件上传组件<code>fileUpload</code>是基于百度的<code><a href="http://fex-team.github.io/webuploader/">webuploader</a></code>定制
+                </p>
+                <p>
+                    <div class="form-frame">
+                        <div class="form-layer1">
+                            <div class="form-layer2">
+                                <form action="">
+                                    <div class="form-group">
+                                        <label for="" class="form-control-label">
+                                            <span>上传图片</span>
+                                            <em>:</em>
+                                        </label>
+                                        <div class="form-control-wrap">
+                                            <span class="upload-name"></span>
+                                            <button type="button" class="btn primary small-btn" id="upload-btn">选择文件</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </p>
+                 <br>
+                 <br>
+                 <br>
+                <h4>参数配置</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>tpl</code></td>
+                            <td>
+                                <code>string</code>,默认
+                                <br>
+                                <p>
+                                    '&lt;div class="img-editor"&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &lt;div class="queueList"&gt;&lt;/div&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &lt;div class="statusBar"&gt;'+<br />
+                                &nbsp; &nbsp;            ' &nbsp; &nbsp; &nbsp; &lt;div class="info"&gt;&lt;/div&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &nbsp; &nbsp; &lt;div class="btns"&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="uploadBtn"&gt;开始上传&lt;/div&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &nbsp; &nbsp; &lt;/div&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' &nbsp; &lt;/div&gt;'+<br />
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'&lt;/div&gt;',
+                                </p>
+                                <p>
+                                    <br />
+                                </p>
+                            </td>
+                            <td>
+                                不建议修改，修改必须保留<code>img-editor</code>、<code>queueList</code>、<code>statusBar</code>、<code>info</code>、<code>uploadBtn</code>类
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code> auto</code></td>
+                            <td><code>false</code></td>
+                            <td>自动上传，默认手动</td>
+                        </tr>
+                        <tr>
+                            <td><code>multiple</code></td>
+                            <td><code>false</code></td>
+                            <td>多个文件上传，默认是单个文件</td>
+                        </tr>
+                        <tr>
+                            <td><code>water</code></td>
+                            <td><code>false</code></td>
+                            <td>
+                                是否添加水印
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>thumbnail</code></td>
+                            <td><code>false</code></td>
+                            <td>
+                                是否生成缩略图
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>sendurl</code></td>
+                            <td><code>null</code></td>
+                            <td>
+                                发送地址,上传地址
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>fileVal</code></td>
+                            <td><code>File</code></td>
+                            <td>
+                                上传文件域名称
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>filetypes</code></td>
+                            <td><code>jpg,jpeg,bmp,png,gif,pdf,doc,docx</code></td>
+                            <td>
+                                文件类型
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>filesize</code></td>
+                            <td><code>204800</code></td>
+                            <td>
+                                文件大小,200M
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>btntext</code></td>
+                            <td><code>点击上传</code></td>
+                            <td>
+                                上传按钮的文字
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>swf</code></td>
+                            <td><code>null</code></td>
+                            <td>
+                                SWF上传控件相对地址
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>thumbnailWidth</code></td>
+                            <td><code>400</code></td>
+                            <td>
+                                预览缩略图宽度
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>thumbnailHeight</code></td>
+                            <td><code>400</code></td>
+                            <td>
+                                预览缩略图高度
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>success</code></td>
+                            <td><code>function(file, data)</code></td>
+                            <td>
+                                上传成功后回调
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ui-code">
+                           <pre>                                <code>
+/**
+     * uploadSuccess 上传成功后回调
+     * @return {[type]} [description]
+     */
+    function uploadSuccess(el, file, data) {
+        /*var names = data.name.split('.');
+        var name = names[0].length > 13 ? names[0].substring(0, 13) + "..." : names[0];
+        $(el).siblings(".uploadName").val(data.name);
+        $(el).siblings(".upload-name").text(name + "." + names[1]);
+        $(el).siblings(".upload-path").val(data.path);
+        $(el).siblings(".upload-size").val(data.size);*/
+        // todo: test
+        $(el).siblings(".upload-name").html(file.name);
+    }
+    $(function() {
+        $('#upload-btn').fileUpload({
+            swf: '{{dist}}/js/webuploader/Uploader.swf',
+            sendurl: '{{dist}}/js/webuploader/fileupload.php',
+            //fileVal: 'FileData',
+            success: uploadSuccess
+        });
+    });
+                           </code>
+                            </pre>
+            </div>
+        </div>
+
+
+
+    </section>
+{% endblock %}
+
+{% block js %}
+<script src="{{dist}}/js/webuploader/webuploader.all.js"></script>
+<script>
+    /**
+     * uploadSuccess 上传成功后回调
+     * @return {[type]} [description]
+     */
+    function uploadSuccess(el, file, data) {
+        /*var names = data.name.split('.');
+        var name = names[0].length > 13 ? names[0].substring(0, 13) + "..." : names[0];
+        $(el).siblings(".uploadName").val(data.name);
+        $(el).siblings(".upload-name").text(name + "." + names[1]);
+        $(el).siblings(".upload-path").val(data.path);
+        $(el).siblings(".upload-size").val(data.size);*/
+        // todo: test
+        $(el).siblings(".upload-name").html(file.name);
+    }
+    $(function() {
+        $('#upload-btn').fileUpload({
+            swf: '{{dist}}/js/webuploader/Uploader.swf',
+            sendurl: '{{dist}}/js/webuploader/fileupload.php',
+            //fileVal: 'FileData',
+            success: uploadSuccess
+        });
+    });
+</script>
+{% endblock %}

@@ -73,11 +73,13 @@ var PORT = 8888;
 
 var createdTime = (new Date().toLocaleDateString().split(' '))[0];
 var banner = [
-        '/*! <%= pkg.name%> v<%= pkg.version%>',
+        '/*! ',
+        '*  <%= pkg.name%> v<%= pkg.version%>',
         '*  by <%= pkg.author%>',
         '*  (c) '+ createdTime + ' www.frontpay.cn',
         '*  Licensed under <%= pkg.license %>',
-        '*/'
+        '*/',
+        ''
     ].join('\n');
 
 
@@ -297,7 +299,7 @@ gulp.task('watch', function(){
 	gulp.watch(filePaths.iconfont, ['iconfont']);
 	gulp.watch(filePaths.images, ['images']);
 	gulp.watch(filePaths.less[0], ['less']);
-	gulp.watch(filePaths.js, ['js']);
+	gulp.watch(filePaths.js, ['js', 'all']);
     gulp.watch(filePaths.html[0], ['template']);
     gulp.watch(filePaths.sprite, ['sprite']);
 	gulp.watch(distPath+'/images/sprite/**/**', ['less']);
@@ -329,28 +331,28 @@ gulp.task('iconfont-style', function(){
 // ------------------------
 var frontui_path = config.frontui_path;
 gulp.task('front:ui', function(){
-    return gulp.src([staticPath+'/js/ui/**/**', '!'+staticPath+'/js/ui/datetimepicker.js', '!'+staticPath+'/js/datetimepicker.js', '!'+staticPath+'/js/ui/charts', '!'+staticPath+'/js/ui/charts/**/**'])
+    return gulp.src([staticPath+'/js/ui/**/**'])
         .pipe( plumber( { errorHandler: errrHandler } ) )
        // .pipe(sourcemaps.init())
 
         .pipe(concat('ui.js'))
         .pipe(stripDebug())
-        .pipe(n2a({reverse: false}))
         .pipe(uglify())
+        .pipe(n2a({reverse: false}))
         .pipe(bannerHeader(banner, { pkg: pkg}))
         //.pipe(sourcemaps.write(path.join(__dirname, frontui_path+'/js')))
         .pipe(gulp.dest(frontui_path+'/js'))
     // .pipe(connect.reload())
 });
 /* 合并charts  */
-gulp.task('frontui:charts', function(){
-    return gulp.src(filePaths.charts)
-        .pipe(concat('charts.js'))
-        .pipe(uglify())
-        .pipe(n2a({reverse: false}))
-        .pipe(bannerHeader(banner, { pkg: pkg}))
-        .pipe(gulp.dest(frontui_path+'/js'));
-});
+// gulp.task('frontui:charts', function(){
+//     return gulp.src(filePaths.charts)
+//         .pipe(concat('charts.js'))
+//         .pipe(uglify())
+//         .pipe(n2a({reverse: false}))
+//         .pipe(bannerHeader(banner, { pkg: pkg}))
+//         .pipe(gulp.dest(frontui_path+'/js'));
+// });
 // images
 gulp.task('frontui:images', function(){
    return gulp.src(distPath+'/images/**/**')
@@ -384,51 +386,72 @@ gulp.task('frontui:datatables-css', function() {
             .pipe(minifyCSS({compatibility: 'ie7'}))
             .pipe(gulp.dest(frontui_path+'/js/datatables'));
 })
-gulp.task('frontui:datatables-js', function() {
-    return gulp.src([staticPath+'/js/datatables/**/**.js'])
-            .pipe(concat('datatables.js'))
-            .pipe(uglify())
-            .pipe(n2a({reverse: false}))
-            .pipe(gulp.dest(frontui_path+'/js/datatables'));
-})
-gulp.task('frontui:datatables', ['frontui:datatables-js', 'frontui:datatables-css'], function(){
+// gulp.task('frontui:datatables-js', function() {
+//     return gulp.src([staticPath+'/js/datatables/**/**.js'])
+//             .pipe(concat('datatables.js'))
+//             .pipe(uglify())
+//             .pipe(n2a({reverse: false}))
+//             .pipe(gulp.dest(frontui_path+'/js/datatables'));
+// })
+//gulp.task('frontui:datatables', ['frontui:datatables-js', 'frontui:datatables-css'], function(){
+gulp.task('frontui:datatables', [ 'frontui:datatables-css'], function(){
     return gulp.src([staticPath+'/js/datatables/**/**.png'])
             .pipe(gulp.dest(frontui_path+'/js/datatables'));
 });
 
-gulp.task('frontui:uploadify', function(){
-    return gulp.src([staticPath+'/js/uploadify/**/**'])
-                .pipe(gulp.dest(frontui_path+'/js/uploadify'));
+// gulp.task('frontui:uploadify', function(){
+//     return gulp.src([staticPath+'/js/uploadify/**/**'])
+//                 .pipe(gulp.dest(frontui_path+'/js/uploadify'));
+// });
+
+// gulp.task('frontui:validate', function(){
+//     return gulp.src([staticPath+'/js/validate/jquery.validate.js', staticPath+'/js/validate/messages_zh.js'])
+//                 .pipe(concat('validate.js'))
+//                 .pipe(uglify())
+//                 .pipe(bannerHeader(banner, { pkg: pkg}))
+//                 .pipe(gulp.dest(frontui_path+'/js/validate'));
+// });
+
+// gulp.task('frontui:aloneJs', function(){
+//   return gulp.src([staticPath+'/js/ui/datetimepicker.js'])
+//       .pipe(uglify())
+//       .pipe(bannerHeader(banner, { pkg: pkg}))
+//       .pipe(gulp.dest(frontui_path+'/js/ui'));
+// });
+//
+gulp.task('frontui:copyStatic', function() {
+    return gulp.src(['./output/src/js/**/**', '!./output/src/js/**/**.js', '!./output/src/js/ui/**/**', '!./output/src/js/ui'], { baseClient: true})
+                .pipe(gulp.dest(frontui_path+'/js/'));
 });
 
-gulp.task('frontui:validate', function(){
-    return gulp.src([staticPath+'/js/validate/jquery.validate.js', staticPath+'/js/validate/messages_zh.js'])
-                .pipe(concat('validate.js'))
-                .pipe(uglify())
+gulp.task('frontui:copyJS', function() {
+     //return gulp.src(['./output/src/js/datatables/**/**'])
+     //       .pipe(gulp.dest(documentPath+'/src/js/datatables'));
+     return gulp.src(['./output/src/js/**/**.all.js'], { baseClient: true})
+                .pipe(rename(function(file){
+                        file.basename = file.basename.replace('.all', '')
+                    }))
+                .pipe(uglify({mangle: false}))
                 .pipe(bannerHeader(banner, { pkg: pkg}))
-                .pipe(gulp.dest(frontui_path+'/js/validate'));
-});
-
-gulp.task('frontui:aloneJs', function(){
-  return gulp.src([staticPath+'/js/ui/datetimepicker.js'])
-      .pipe(uglify())
-      .pipe(bannerHeader(banner, { pkg: pkg}))
-      .pipe(gulp.dest(frontui_path+'/js/ui'));
-});
+                .pipe(gulp.dest(frontui_path+'/js/'))
+})
 
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:charts', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:uploadify', 'frontui:validate', 'frontui:aloneJs']);
+    return gulp.start(['front:ui', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:copyJS', 'frontui:copyStatic']);
 });
 
 
 /*------ 默认启动任务 ------ */
+var allTask = require('./gulpfile/')();
+
 gulp.task('default', ['clean'], function(next){
     //return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
-    return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
+    //return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
+    return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'template', 'watch', 'all', 'server']);
     //return next();
 });
 
-gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'frontui:charts', 'js', 'template'],  function(){
+gulp.task('publish', ['sprite','iconfont', 'images', 'less', 'js', 'template'],  function(){
 	gulp.start(['frontui', 'replace'])
 })
 
@@ -446,6 +469,7 @@ gulp.task('document:template', function(){
         .pipe( plumber( { errorHandler: errrHandler } ) )
         .pipe(tpl({ dist: '/document/src', template_url: '/document'}))
         .pipe(replace('../../assist/', './'))
+        .pipe(replace('.all.js', '.js'))
         .pipe(gulp.dest(documentPath))
 })
 gulp.task('document:index', ['document:template'], function(){
@@ -454,18 +478,28 @@ gulp.task('document:index', ['document:template'], function(){
             .pipe(gulp.dest(documentPath))
 })
 gulp.task('document:static', function(){
-    return gulp.src(['./output/src/**/**', '!./output/src/js', '!./output/src/js/**/**', '!./output/src/css/maps', '!./output/src/css/maps/**/**'])
+    //return gulp.src(['./output/src/**/**', '!./output/src/js', '!./output/src/js/**/**', '!./output/src/css/maps', '!./output/src/css/maps/**/**'])
+    return gulp.src(['./output/src/**/**', '!./output/src/js/**/**.js', '!./output/src/css/maps', '!./output/src/css/maps/**/**'])
             .pipe(gulp.dest(documentPath+'/src'));
 })
 gulp.task('document:js', function(){
-    return gulp.src(['./output/src/js/**/**.js', '!./output/src/js/datatables/**/**'])
-            .pipe(n2a({reverse: false}))
+    //return gulp.src(['./output/src/js/**/**.js', '!./output/src/js/datatables/**/**'])
+    return gulp.src(['./output/src/js/**.js','./output/src/js/ui/**.js'])
             .pipe(uglify())
+            .pipe(n2a({reverse: false}))
+            .pipe(bannerHeader(banner, { pkg: pkg}))
             .pipe(gulp.dest(documentPath+'/src/js'));
 })
 gulp.task('document:copy', function() {
-     return gulp.src(['./output/src/js/datatables/**/**'])
-            .pipe(gulp.dest(documentPath+'/src/js/datatables'));
+     //return gulp.src(['./output/src/js/datatables/**/**'])
+     //       .pipe(gulp.dest(documentPath+'/src/js/datatables'));
+     return gulp.src(['./output/src/js/**/**.all.js'], { baseClient: true})
+                .pipe(rename(function(file){
+                        file.basename = file.basename.replace('.all', '')
+                    }))
+                .pipe(uglify({mangle: false}))
+                .pipe(bannerHeader(banner, { pkg: pkg}))
+                .pipe(gulp.dest(documentPath+'/src/js'))
 })
 gulp.task('document:icon', function(){
     return gulp.src(['./assist/**/**'])

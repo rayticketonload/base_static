@@ -22,7 +22,7 @@
                 <button data-target="#modal-1" data-toggle="modal" class="btn default small-btn">button打开</button>
             </div>
             <!-- 模拟弹框 -->
-            <div class="modal-background fade display-none" id="modal-1" role="dialog">
+            <div class="modal-background fade display-none" data-keyboard="false" id="modal-1" role="dialog">
                 <div class="modal-layer">
                     <div class="modal-position">
                         <div class="modal-wrap">
@@ -311,6 +311,258 @@ $('#modal-2').on('show.ui.modal', function(){
             </div>
         </div>
 
+        <!-- 扩展 -->
+        <div class="section-content" id="loading">
+            <h3>
+                <strong> alert,confirm,success,close扩展</strong>
+            </h3>
+            <div class="ui-example">
+                <br/>
+                <p>
+                    我们对自定义弹层进行了扩展了四个方法,分别是<code>$.successModalLayer()</code>、<code>$.confirmModalLayer()</code>、<code>$.alertModalLayer()</code>、<code>$.closeModalLayer()</code>
+                </p>
+                <br>
+                <br>
+                <h4>successModalLayer</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><code>string</code>弹层元素标识</td>
+                            <td>
+                                <code>
+                                    $.successModalLayer({id: '#test', title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>title</code></td>
+                            <td><code>string</code>提示标题</td>
+                            <td>
+                                <code>
+                                    $.successModalLayer({ title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>content</code></td>
+                            <td><code>string</code>提示副标题</td>
+                            <td>
+                                <code>
+                                    $.successModalLayer({ title: 'xxxx', content: 'oooooo'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>link</code></td>
+                            <td><code>string</code>确定按钮链接，优先于<code>callback</code></td>
+                            <td>
+                                <code>$.successModalLayer({ title: 'xxxx', content: 'oooooo', link: 'http://www.frontpay.cn'});</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>callback</code></td>
+                            <td>
+                                <code>function</code>
+                                确定回调
+                            </td>
+                            <td>
+                                <code>$.successModalLayer({ title: 'xxxx', content: 'oooooo', callback:function(){
+                                    alert('ok')
+                                }});</code>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <p>
+                    <button id="btn-success" class="btn primary">成功</button>
+                </p>
+
+                <br/>
+                <br/>
+                <h4>confirmModalLayer</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><code>string</code>弹层元素标识</td>
+                            <td>
+                                <code>
+                                    $.confirmModalLayer({id: '#test', title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>title</code></td>
+                            <td><code>string</code>提示标题</td>
+                            <td>
+                                <code>
+                                    $.confirmModalLayer({ title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>content</code></td>
+                            <td><code>string</code>提示副标题</td>
+                            <td>
+                                <code>
+                                    $.confirmModalLayer({ title: 'xxxx', content: 'oooooo'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>callback</code></td>
+                            <td>
+                                <code>function</code>
+                                确定回调
+                            </td>
+                            <td>
+                                <code>$.confirmModalLayer({ title: 'xxxx', content: 'oooooo', callback:function(){
+                                    alert('ok')
+                                }});</code>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <p>
+                    <button id="btn-confirm" class="btn secondary">询问</button>
+                </p>
+
+                <br/>
+                <br/>
+                <h4>alertModalLayer</h4>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><code>string</code>弹层元素标识</td>
+                            <td>
+                                <code>
+                                    $.alertModalLayer({id: '#test', title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>title</code></td>
+                            <td><code>string</code>提示标题</td>
+                            <td>
+                                <code>
+                                    $.alertModalLayer({ title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>content</code></td>
+                            <td><code>string</code>提示副标题</td>
+                            <td>
+                                <code>
+                                    $.alertModalLayer({ title: 'xxxx', content: 'oooooo'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>icon</code></td>
+                            <td>
+                                <code>string</code>
+                                图标的类型
+                                <code>success|error|info</code>
+                            </td>
+                            <td>
+                                <code>$.alertModalLayer({ title: 'xxxx', content: 'oooooo', icon: 'success'});</code>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br/>
+                <p>
+                    <button id="btn-alert" class="btn thirdly">警告</button>
+                </p>
+
+                <br/>
+                <br/>
+                <h4>closeModalLayer</h4>
+                <p><code>$.closeModalLayer(id)</code>同$(id).modal('hide')</p>
+
+
+
+
+            </div>
+
+            <div class="ui-code">
+<pre><code>
+// 成功
+$('#btn-success').on('click', function(){
+    $.successModalLayer({ title: '操作成功', content:'数据已保存到后台', callback: function(){
+        alert('ok');
+    } });
+});
+
+// 询问
+$('#btn-confirm').on('click', function(){
+    $.confirmModalLayer({ title: '确定取消当前用户', content:'取消用户后将不可以再登录！', callback: function(){
+        alert('ok');
+    } });
+});
+
+// 警告
+$('#btn-alert').on('click', function() {
+    $.alertModalLayer({ title: 'xxx', content: 'ooo' });
+})
+</code></pre>
+            </div>
+        </div>
+
 
         <!-- loading -->
         <div class="section-content" id="loading">
@@ -448,7 +700,7 @@ $('#modal-2').on('show.ui.modal', function(){
                                                     <div class="form-control-verify">
                                                         <input type="text" class="form-control" id="***">
                                                         <button class="btn form-control-verify-btn">
-                                                            获取验证码 
+                                                            获取验证码
                                                         </button>
                                                     </div>
                                                 </div>
@@ -484,6 +736,105 @@ $('#modal-2').on('show.ui.modal', function(){
           */
       })
     })
+</code></pre>
+            </div>
+        </div>
+
+
+        <!-- iframe -->
+        <div class="section-content" id="iframe">
+            <h3>
+                <strong>iframeModal 支持 iframe 方式</strong>
+            </h3>
+            <div class="ui-example">
+                <br/>
+                <p>iframeModal 支持 iframe 方式</p>
+                <p>直接用<code>a</code>标签打开，需在元素上加上属性<code>data-toggle="iframeModal"</code>、<code>data-url</code>、<code>data-title</code></p>
+                <br/>
+                <br/>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                属性
+                            </th>
+                            <th>
+                                描述
+                            </th>
+                            <th>
+                                示例
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><code>id</code></td>
+                            <td><code>string</code>弹层元素标识</td>
+                            <td>
+                                <code>
+                                    $.iframeModal({id: '#test', title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>title</code></td>
+                            <td><code>string</code>提示标题</td>
+                            <td>
+                                <code>
+                                    $('#xxx').iframeModal({ title: 'xxxx'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>url</code></td>
+                            <td><code>string</code>访问地址</td>
+                            <td>
+                                <code>
+                                    $('#test').iframeModal({ title: 'xxxx', url: 'http://www.frontpay.cn'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>width</code></td>
+                            <td><code>string|number</code>iframe宽度</td>
+                            <td>
+                                <code>
+                                    $('#test').iframeModal({ title: 'xxxx', url: 'http://www.frontpay.cn', width:'100%'});
+                                </code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>height</code></td>
+                            <td><code>string|number</code>iframe 高度</td>
+                            <td>
+                                <code>
+                                    $('#test').iframeModal({ title: 'xxxx', url: 'http://www.frontpay.cn', height: 1000});
+                                </code>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <br/>
+                <button id="btn-iframe" class="btn primary small-btn">钱沿支付官网</button>
+                <a href="javascript:void(0);" data-toggle="iframeModal" data-url="http://www.frontpay.cn" data-title="钱沿支付官网">钱沿支付官网</a>
+            </div>
+
+            <div class="ui-code">
+<pre><code>
+$('#btn-iframe').on('click', function() {
+    $('#test').iframeModal({
+        title: '钱沿支付',
+        url: 'http://www.frontpay.cn',
+        width: '100%',
+        height: 1000
+    })
+
+    // 关闭
+    // $('#test').iframeModal('hide')
+})
 </code></pre>
             </div>
         </div>
@@ -562,6 +913,37 @@ $('#modal-2').on('show.ui.modal', function(){
         		]
         	});
         })
+    })
+
+
+
+    // --- example2
+    $('#btn-success').on('click', function(){
+        $.successModalLayer({ title: '操作成功', content:'数据已保存到后台', callback: function(){
+            alert('ok');
+        } });
+    });
+
+    $('#btn-confirm').on('click', function(){
+        $.confirmModalLayer({ title: '确定取消当前用户', content:'取消用户后将不可以再登录！', callback: function(){
+            alert('ok');
+        } });
+    });
+
+    $('#btn-alert').on('click', function() {
+        $.alertModalLayer({ title: 'xxx', content: 'ooo' });
+    })
+
+    // ---- example3
+    $('#btn-iframe').on('click', function() {
+        $('#test').iframeModal({
+            title: '钱沿支付',
+            url: 'http://www.frontpay.cn',
+            height: 1000
+        })
+
+        // 关闭
+        // $('#test').iframeModal('hide')
     })
 </script>
 {% endblock %}

@@ -76,6 +76,39 @@
             </div>
         </div>
 
+        <!-- 插件接口 -->
+        <div class="section-content">
+            <h3>
+                <strong>插件接口</strong>
+            </h3>
+            <div class="ui-example">
+                <p class="description">
+                     <code>alert</code>插件提供了<code>close</code>关闭的方法
+                </p>
+                <div class="alert alert-warning with-close" id="j-alert-5">
+                    <i></i>
+                    <em></em>
+                    警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息
+                </div>
+
+                <br/>
+                <br/>
+                <button id="j-close-btn5" class="btn primary small-btn">button关闭</button>
+            </div>
+            <div class="ui-code">
+<pre>
+    <code>
+// 通过$(el).alert('close');
+function ajax() {
+    // .... 异步操作
+        $('#j-alert-5').alert('close');
+}
+$('#j-close-btn5').on('click', ajax)
+    </code>
+</pre>
+            </div>
+        </div>
+
         <!-- 事件监听 -->
         <div class="section-content">
             <h3>
@@ -96,7 +129,9 @@
                 <a href="#j-alert-3" id="j-close-btn" data-dismiss="alert" class="btn primary small-btn">关闭警告框</a>
             </div>
             <div class="ui-code">
-<pre><code> $('#j-close-btn').on('closed.ui.alert', function(e){
+<pre><code>
+// 链接绑定
+$('#j-close-btn').on('closed.ui.alert', function(e){
     alert('#'+ e.relatedTarget[0].id +'已关闭')
     });
 </code></pre>
@@ -191,6 +226,10 @@ $('#j-alert-5').alert(ajaxHandler);
         $('#j-close-btn').on('closed.ui.alert', function(e){
             alert('#'+ e.relatedTarget[0].id +'已关闭')
         });
+
+        $('#j-close-btn5').on('click', function() {
+            $('#j-alert-5').alert('close');
+        })
     })
 </script>
 {% endblock %}

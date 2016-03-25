@@ -24,6 +24,12 @@
 /**
  * log:
  * 1. 加属性`tabindex=-1`解决聚焦问题
+ * 2. 增加方法
+ *   $.successModalLayer({id:string, title: string, content: string, link: string, callback: function})
+     $.confirmModalLayer({id: string, title: string, content: string, callback: function})
+     $.alertModalLayer({id: string, icon: string, title: string, content: string})
+     $.closeModalLayer(id)
+ * 3. 增加支持 iframe
  */
 
 ;(function (root, factory) {
@@ -353,7 +359,9 @@
     $.fn.modal = Plugin;
     $.fn.modal.Constructor = Modal;
 
-
+    //-------------------------
+    //--- 扩展 ----------------
+    //-------------------------
     // ajaxLoading
     $.fn.showLoading = function(title, content){
         var $this, title = title || '处理中...', content = content || '请不要关闭浏览器，系统正在处理';
@@ -361,7 +369,7 @@
             if(title) $(this).find('.modal-body h3').html(title);
             if(content ) $(this).find('.loading-content').html(content);
 
-            $(this).modal('show');
+            return $(this).modal('show');
         } else {
             var template = ['<div class="notice-wrap waiting in-modal">',
                 '<div class="notice-box">',
@@ -370,15 +378,29 @@
                 '<div class="loading-content">'+ content +'</div>',
                 '</div>',
                 '</div>'].join('');
-            $(this).modal({title: '提示', content: template , callback: function(){
+            return $(this).modal({title: '提示', content: template , callback: function(){
                 $(this).find('.modal-close').hide();
             }});
         }
     };
 
     $.fn.hideLoading = function(){
-        $(this).length && $(this).modal('hide');
+        return $(this).length && $(this).modal('hide');
     }
+
+    $.showLoading = function(title, content){
+        var id = '#ui-loading';
+        return $(id).showLoading(title, content);
+    }
+    $.hideLoading = function() {
+        var id = '#ui-loading';
+        return $(id).hideLoading();
+    }
+
+
+    // --------
+    // 自定义弹层
+    // --------
 
     // alert,error,success
     $.fn.modalLayer = function(option) {
@@ -484,6 +506,311 @@
     };
 
     $(initModal);
+
+
+    // --------
+    // 扩展成功失败弹窗
+    /**
+     * 依赖 /js/ui/modal.js
+     * @param {string} icon 图标样式
+     * @param {string} title 提示标题
+     * @param {string|html} 提示内容
+     * @param {array} buttons 按钮定义
+     */
+    // 成功弹层
+    var successModalLayer = (function($){
+        return function(config){
+            var id = config['id'] ? config['id'] : '#j-modal-status';
+            // 使用modalLayer api
+            $(id).modalLayer({
+                icon: 'success',
+                title: (config['title'] || ''),
+                content: (config['content'] || ''),
+                buttons: [
+                    {
+                        text: '确认',
+                        ok: function(){
+                            if(config && typeof config['link'] == 'string') {
+                                location.href = config['link'];
+                            }
+                            if(config && typeof config['callback'] == 'function') {
+                                config['callback']();
+                            }
+                        }
+                    }
+                ]
+            });
+        }
+    })(jQuery);
+
+    // 确认询问弹层
+    var confirmModalLayer = (function($) {
+        return function(config){
+            var id = config['id'] ? config['id'] : '#confirmModalLayer';
+            $(id).modalLayer({
+                icon: 'info',
+                title: (config['title'] || ''),
+                content: (config['content'] || ''),
+                buttons: [
+                    {
+                        text: '确定',
+                        ok: config['callback']
+                    },
+                    {
+                        text: '取消',
+                        href: 'javascript:void(0);',
+                        style: 'btn links fn-ml-10'
+                    }
+                ]
+            });
+        }
+    })(jQuery);
+
+    // 警告弹层
+    var alertModalLayer = (function($) {
+        return function(config){
+            var id = config['id'] ? config['id'] : '#alertModalLayer';
+            $(id).modalLayer({
+                icon: (config['icon'] || 'info'),
+                title: (config['title'] || ''),
+                content: (config['content'] || '')
+            });
+        }
+    })(jQuery);
+
+    // 关闭弹层不是隐藏
+    var closeModalLayer = (function($){
+        return function(id, fn) {
+            $(id).modal('hide').on('hide.ui.modal', function(){
+                $(this).remove();
+                typeof fn === 'function' && fn();
+            })
+        }
+    })(jQuery);
+
+
+    // 外部
+    $.successModalLayer = successModalLayer;
+    $.confirmModalLayer = confirmModalLayer;
+    $.alertModalLayer   = alertModalLayer;
+    $.closeModalLayer   = closeModalLayer;
+
+
+    // ---------------
+    // --- 扩展 支持iframe
+
+    /**
+     * 扩展modal,iframe modal
+     * 简单指
+     * require ui.js(modal.js)
+     */
+    ~(function($) {
+
+        var APILIST = {};
+
+        /**
+         * iframe
+         * @param selector
+         */
+        function dialogApi(selector, opt, next) {
+            this.selector = selector;
+            this.next = next;
+            this.opt = opt;
+            this.dialog = this.get(selector);
+
+            this.showModal(opt);
+
+        }
+
+        /**
+         * modal
+         */
+        dialogApi.prototype.showModal = function(opt) {
+            var that = this;
+
+            // 设置默认为hide
+            opt.show = false;
+            opt.content = '';
+
+            opt.callback = function(){
+                that.dialog = $(that.selector);
+                that.$dom = $(this);
+                if(opt && opt['url']){
+                    that.originalUrl = opt.url;
+                    that.init();
+
+                    typeof that.next == "function" && that.next.call(that, that.$dom);
+                }
+            }
+
+            that.dialog.modal(opt);
+        }
+
+        /**
+         * 初始化iframe对象
+         */
+        dialogApi.prototype.init = function(url){
+            var $body = this.$dom.find('.modal-body');
+            this.$title = this.$dom.find('.modal-title');
+            this.$iframe = $('<iframe />');
+            this.$iframe.attr({
+                src: (url || this.originalUrl),
+                //name: api.id,
+                width: (this.opt.width || '100%'),
+                height: (this.opt.height || '100%'),
+                allowtransparency: 'yes',
+                frameborder: 'no',
+                scrolling: 'no'
+            }).on('load', $.proxy(this.adjustHeight, this));
+
+            $body.empty().append(this.$iframe);
+            //this.show();
+        }
+
+        // 重新设置 title,content
+        dialogApi.prototype.setProp = function(config) {
+            (config['title'] && this.$title.html(config['title']));
+            (config['url'] && (this.$iframe[0].src=config['url']));
+        }
+
+        dialogApi.prototype.setUrl = function(url) {
+            //this.$iframe && this.$iframe.attr('src', url);
+            this.init(url);
+            return true;
+        }
+
+        /**
+         * iframe自适应高度
+         */
+        dialogApi.prototype.adjustHeight = function() {
+            var test, h;
+
+            try {
+                // 跨域测试
+                test = this.$iframe[0].contentWindow.frameElement;
+            } catch (e) {}
+
+            if (test) {
+                h = this.$iframe.contents().height();
+                this.$iframe.css({height: h+'px'})
+            }
+        }
+
+        /**
+         * iframe调用父窗口
+         * @param opt
+         */
+
+        /**
+         * 显示
+         */
+        dialogApi.prototype.show = function(){
+            this.dialog.modal('show');
+        }
+
+        /**
+         * 隐藏
+         */
+        dialogApi.prototype.hide = function(){
+            this.dialog.modal('hide');
+        }
+
+        /**
+         * 获取父窗口
+         * @param opt
+         */
+        dialogApi.get = dialogApi.prototype.get = function(id){
+            // 从iframe中传入window
+            if(id && id.frameElement) {
+                var iframe = id.frameElement;
+                var api;
+                var modalList = $('.modal-background', id.parent.document);
+                modalList.each(function(i, item){
+                    var ifr = $(item).find('iframe');
+                    if(ifr[0] === iframe) api = $(item);
+                });
+                return api;
+            } else {
+                return $(id);
+            }
+        }
+
+        dialogApi.close = function(id){
+            var dialog = dialogApi.get(id);
+            $(dialog).find('.modal-close').trigger('click');
+            $(dialog).remove();
+        }
+
+        /**
+         * 重复了，暂无方法优化
+         * @param id
+         */
+        dialogApi.adjustHeight = function(id){
+            var dialog = dialogApi.get(id);
+            var $iframe = $(dialog).find('iframe');
+            var test, h;
+
+            try {
+                // 跨域测试
+                test = $iframe[0].contentWindow.frameElement;
+            } catch (e) {}
+
+            if (test) {
+                h = $iframe.contents().height();
+                $iframe.css({height: h+'px'})
+            }
+        }
+
+        $.fn.iframeModal = function(opt, args){
+            var that = $(this);
+            var selector = $(this).selector;
+
+            if((this[0] === window || this[0] === parent) && opt == 'hide') {
+                dialogApi.close(window);
+                return;
+            }
+
+            if(this[0] === window && opt == 'adjustHeight') {
+                dialogApi.adjustHeight(window);
+                return;
+            }
+
+            var data =  that.data('ui.iframeModal');
+            if(!data){
+                data = new dialogApi(selector, opt, function(obj){
+                    $(obj).data('ui.iframeModal', this);
+                })
+            } else {
+                if(opt && opt['url'] && opt['reset']) {
+                    data && data.setUrl(opt.url) && data.show();
+                } else {
+                    if($.isPlainObject(opt)) {
+                        data.setProp(opt);
+                    }
+                    data && data.show();
+                }
+            }
+
+            // 调用关闭方法
+            if(typeof opt === 'string') {
+                data[opt] && data[opt](args)
+            }
+        };
+
+        $(function() {
+            $(document).on('click', '[data-toggle="iframeModal"]', function(e) {
+                e.preventDefault();
+                var title = $(this).attr('data-title') || '提示';
+                var url =  $(this).attr('data-url');
+
+                url && title && $('#iframe-modal').iframeModal({
+                    title:　title,
+                    url: url
+                });
+            })
+        })
+    })(jQuery);
+
 
     return Modal;
 
