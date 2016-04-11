@@ -15,6 +15,7 @@
                 <p>
                     将 <code>data-toggle="datetimepicker"</code> 属性添加到 <code>input</code> 元素中就能创建时间选择器。获得焦点后，时间选择器会自动显示。
                 </p>
+                <p>禁止弹出日历组件层只需要设置<code>input</code>元素为<code>disabled</code></p>
                 <br>
                 <div class="form-group">
                     <label class="form-control-label">
@@ -299,7 +300,7 @@
 {% endblock %}
 
 {% block js %}
-<script src="{{dist}}/js/ui/datetimepicker.js"></script>
+<script src="{{dist}}/js/datetimepicker/datetimepicker.js"></script>
 <script>
     $(function(){
         $('#j-datetimepicker-8').on('show.ui.datetimepicker', function(){ alert('打开'); })

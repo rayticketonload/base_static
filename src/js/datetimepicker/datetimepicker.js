@@ -827,6 +827,10 @@
 			var options = $.extend({}, $this.data(), option && typeof option == "object");
 			var data = $(this).data('ui.datetimepicker');
 
+
+            // 检测是否激活
+            if($this.is(':disabled')) return;
+
 			if(!data) $(this).data('ui.datetimepicker', (data = new DateTimePicker(this, options)));
 			if(typeof option === 'string') data[option]();
 		});
@@ -862,6 +866,11 @@
 			var that = ev.target;
 			$(that).is('[data-toggle="datetimepicker"]') && clickHandler.call(that, ev);
 		});
+
+        $(document).on('click.ui.datetimepicker', '.form-control-date-btn', function(ev) {
+            var $input = $(this).next('[data-toggle="datetimepicker"]');
+            $input.length && $input.trigger('click');
+        })
 	});
 
 
