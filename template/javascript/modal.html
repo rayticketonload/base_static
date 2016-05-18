@@ -71,6 +71,7 @@
                 <br/>
                 <p>
                     <button class="btn default small-btn" id="j-pop">弹层</button>
+                    <button class="btn default small-btn" id="j-pop-2">弹层</button>
                 </p>
             </div>
             <div class="ui-code">
@@ -240,6 +241,15 @@ $('#modal-2').on('show.ui.modal', function(){
                             <code>{title: '新标题', content: '这里是什么', icon: 'success'}</code>
                         </td>
                         <td><button class="btn default small-btn" id="j-modal-btn-5">更新内容</button></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            不带有关闭按钮
+                            <br>
+                            <code>{title: '新标题', content: '这里是什么', icon: 'success', close: false}</code>
+                        </td>
+                        <td><button class="btn default small-btn" id="j-modal-btn-6">无关闭按钮</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -893,6 +903,10 @@ $('#btn-iframe').on('click', function() {
 
         $('#j-modal-btn-5').on('click', function(){
             $('#j-modal-4').modalLayer({title: '新标题', content: '这里是什么', icon: 'success'});
+        });
+
+        $('#j-modal-btn-6').on('click', function(){
+            $('#j-modal-6').modalLayer({title: '新标题', content: '这里是什么', icon: 'success', close: false});
         });
 
 

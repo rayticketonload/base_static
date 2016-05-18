@@ -8,18 +8,8 @@
 // $.support.transition
 // $(element).one('uiTransitionEnd', fn).emulateTransitionEnd(duration)
 
-;(function (root, factory) {
 
-    if (typeof define === 'function' && define.amd) {
-        define('ui/transition', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
++(function($) {
     'use strict';
 
     // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
@@ -29,15 +19,15 @@
         var el = document.createElement('ui')
 
         var transEndEventNames = {
-            WebkitTransition : 'webkitTransitionEnd',
-            MozTransition    : 'transitionend',
-            OTransition      : 'oTransitionEnd otransitionend',
-            transition       : 'transitionend'
+            WebkitTransition: 'webkitTransitionEnd',
+            MozTransition: 'transitionend',
+            OTransition: 'oTransitionEnd otransitionend',
+            transition: 'transitionend'
         }
 
         for (var name in transEndEventNames) {
             if (el.style[name] !== undefined) {
-                return { end: transEndEventNames[name] }
+                return {end: transEndEventNames[name]}
             }
         }
 
@@ -48,8 +38,12 @@
     $.fn.emulateTransitionEnd = function (duration) {
         var called = false
         var $el = this
-        $(this).one('uiTransitionEnd', function () { called = true })
-        var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+        $(this).one('uiTransitionEnd', function () {
+            called = true
+        })
+        var callback = function () {
+            if (!called) $($el).trigger($.support.transition.end)
+        }
         setTimeout(callback, duration)
         return this
     }
@@ -68,7 +62,4 @@
         }
     })
 
-    return $;
-
-}));
-
+})(jQuery);

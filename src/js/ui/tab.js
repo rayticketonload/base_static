@@ -6,25 +6,14 @@
  *      $(element).on('closed.ui.alert', function(e, obj){});
  */
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/tab', ['jquery', 'ui/transition'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
++(function($) {
     'use strict';
 
     var tab = '[data-toggle="tab"],.tabs-btn';
 
     // 构造函数
     // ----------
-    var Tab = function(element) {
+    var Tab = function (element) {
         this.$el = $(element);
     };
 
@@ -35,7 +24,7 @@
 
     // 关闭
     // ---------
-    Tab.prototype.show = function( ) {
+    Tab.prototype.show = function () {
         var $this = this.$el;
         var $ul = $this.closest('.tabs');
         var selector = $this.data('target');
@@ -45,7 +34,7 @@
             selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
         }
 
-        if($this.hasClass('active')) return;
+        if ($this.hasClass('active')) return;
 
         var $previous = $ul.find('.active a');
         var hideEvent = $.Event('hide.ui.tab', {
@@ -58,12 +47,12 @@
         $previous.trigger(hideEvent);
         $this.trigger(showEvent);
 
-        if(showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return;
+        if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return;
 
         var $target = $(selector);
 
         this.activate($this.closest('li'), $ul);
-        this.activate($target, $target.parent(), function(){
+        this.activate($target, $target.parent(), function () {
             $previous.trigger({
                 type: 'hidden.ui.tab',
                 relatedTarget: $this[0]
@@ -86,7 +75,7 @@
 
             element.addClass('active').find(tab).attr('aria-expanded', true);
 
-            if(transition) {
+            if (transition) {
                 element[0].offsetWidth;
                 element.addClass('in');
             } else {
@@ -111,8 +100,8 @@
             var $this = $(this);
             var data = $this.data('ui.tab');
 
-            if(!data) $this.data('ui.tab', (data = new Tab(this)));
-            if(typeof option == 'string') data[option] && data[option]();
+            if (!data) $this.data('ui.tab', (data = new Tab(this)));
+            if (typeof option == 'string') data[option] && data[option]();
         })
     }
 
@@ -123,21 +112,19 @@
 
     // 元素插件绑定
     // -------------
-    var clickHandler = function(e) {
-        if(!$(e.target).hasClass('tab-disabled')){
+    var clickHandler = function (e) {
+        if (!$(e.target).hasClass('tab-disabled')) {
             e.preventDefault();
             Plugin.call($(this), 'show')
         }
     };
 
-    $(function(){
+    $(function () {
         // $(document).on('click.ui.tab', tab, clickHandler)
-        $(document).on('click.ui.tab', function(e) {
+        $(document).on('click.ui.tab', function (e) {
             var that = e.target;
             $(that).is(tab) && clickHandler.call(that, e)
         })
     })
 
-    return Tab;
-
-}));
+})(jQuery);

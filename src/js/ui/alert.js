@@ -4,18 +4,7 @@
 //     API:
 //     $(element).on('closed.ui.alert', function(e, obj){});
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/alert', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory('ui/alert', require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
++(function($) {
     'use strict';
 
     var dismiss = '[data-dismiss="alert"]';
@@ -23,12 +12,12 @@
 
     // 构造函数
     // ------
-    var Alert = function(el, callback) {
+    var Alert = function (el, callback) {
         var that = this;
-        if(typeof callback === 'function') {
-            $(el).on('click', closeBtn, function(){
+        if (typeof callback === 'function') {
+            $(el).on('click', closeBtn, function () {
                 var $close = $(this);
-                callback(function(){
+                callback(function () {
                     that.close.call($close)
                 });
             });
@@ -44,7 +33,7 @@
 
     // 关闭
     // -----
-    Alert.prototype.close = function(e) {
+    Alert.prototype.close = function (e) {
         var $this = $(this);
         var selector = $(this).attr('data-target');
 
@@ -55,25 +44,25 @@
 
         var $parent = $(selector);
 
-        if(e) e.preventDefault();
+        if (e) e.preventDefault();
 
-        if(!$parent.length) {
+        if (!$parent.length) {
             $parent = $this.closest('.alert');
         }
 
         $parent.trigger(e = $.Event('close.ui.alert'));
 
-        if(e.isDefaultPrevented()) return;
+        if (e.isDefaultPrevented()) return;
 
         $parent.removeClass('in');
 
         function removeElement() {
-            var ev = $.Event('closed.ui.alert',{relatedTarget: $parent});
+            var ev = $.Event('closed.ui.alert', {relatedTarget: $parent});
             $parent.detach().remove();
             $this.trigger(ev);
         }
 
-        if($.support.transition && $parent.hasClass('fade')) { // css3
+        if ($.support.transition && $parent.hasClass('fade')) { // css3
             $parent.one('uiTransitionEnd', removeElement)
                 .emulateTransitionEnd(Alert.TRANSITION_DURATION)
         } else {
@@ -89,8 +78,8 @@
             var $this = $(this);
             var data = $this.data('ui.alert');
 
-            if(!data) $this.data('ui.alert', (data = new Alert(this, option)));
-            if(typeof option == 'string') data[option].call($(this));
+            if (!data) $this.data('ui.alert', (data = new Alert(this, option)));
+            if (typeof option == 'string') data[option].call($(this));
         })
     }
 
@@ -102,14 +91,10 @@
 
     // 元素插件绑定
     // -----------
-    $(function(){
-        $(document).on('click.ui.alert', function(e){
+    $(function () {
+        $(document).on('click.ui.alert', function (e) {
             var that = e.target;
             $(that).is(dismiss) && Alert.prototype.close.call(that, e);
         })
     })
-
-
-    return $;
-
-}));
+})(jQuery);

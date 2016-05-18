@@ -6,25 +6,17 @@
  *      $(element).placeholder();
  */
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/smoothScroll', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
++(function($) {
 
     'use strict';
 
-    if(!$.easing.easeOutExpo) $.easing.easeOutExpo = function(x, t, b, c, d) { return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b; };
+    if (!$.easing.easeOutExpo) $.easing.easeOutExpo = function (x, t, b, c, d) {
+        return (t == d) ? b + c : c * (-Math.pow(2, -10 * t / d) + 1) + b;
+    };
 
     // 构造函数
     // ---------
-    var SmoothScroll = function(element, options) {
+    var SmoothScroll = function (element, options) {
         this.$el = $(element);
         this.options = options;
         this.init();
@@ -50,10 +42,9 @@
     /**
      * init 初始化
      */
-    SmoothScroll.prototype.init = function(){
+    SmoothScroll.prototype.init = function () {
         this.$el.on('click.ui.smoothScroll', this.scroll(this.$el, this.options));
     };
-
 
 
     /**
@@ -61,8 +52,8 @@
      * @param options
      * @returns {Function}
      */
-    SmoothScroll.prototype.scroll = function(elem, options) {
-        return function(e) {
+    SmoothScroll.prototype.scroll = function (elem, options) {
+        return function (e) {
             e.preventDefault();
             scrollToElement(elem, $(this.hash).length ? $(this.hash) : $("body"), options);
         }
@@ -71,8 +62,8 @@
     /**
      * 完成触发
      */
-    function emit(elem){
-        return function(){
+    function emit(elem) {
+        return function () {
             var e = $.Event('done.ui.smoothscroll', {relatedTarget: elem});
             elem.trigger(e);
         }
@@ -90,17 +81,16 @@
             docH = $(document).height(),
             winH = $(window).height();
 
-        if((target + winH) > docH) {
+        if ((target + winH) > docH) {
             target = docH - winH;
         }
 
         $('html,body')
             .stop()
-            .animate({ scrollTop: target}, options.duration, options.transition)
+            .animate({scrollTop: target}, options.duration, options.transition)
             .promise()
             .done([options.complete, emit(elem)]);
     }
-
 
 
     // 插件定义
@@ -109,7 +99,7 @@
         return $(this).each(function () {
             var $this = $(this);
             var data = $this.data('ui.smoothScroll');
-            if(!data){
+            if (!data) {
                 $this.data('ui.smoothScroll', (new SmoothScroll(this, $.extend({}, $this.data(), options))));
             } else {
                 $this.trigger('click.ui.smoothScroll');
@@ -122,10 +112,8 @@
     $.fn.smoothScroll = Plugin;
     $.fn.smoothScroll.Constructor = SmoothScroll;
 
-    $(function(){ $('[data-toggle="smooth-scroll"]').smoothScroll() })
+    $(function () {
+        $('[data-toggle="smooth-scroll"]').smoothScroll()
+    })
 
-    return SmoothScroll;
-
-}));
-
-
+})(jQuery);

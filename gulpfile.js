@@ -55,6 +55,9 @@ var replace = require('gulp-replace');
 var gutil = require( 'gulp-util' )
 var plumber = require( 'gulp-plumber' );
 
+// UMD wrapper
+var umd = require('gulp-umd')
+
 // 组件路径
 var components_url = path.join(__dirname, 'bower_components');
 //模板路径
@@ -82,6 +85,8 @@ var banner = [
         ''
     ].join('\n');
 
+var umd_header = '',
+    umd_footer = '';
 
 /* 启动浏览器 */
 var openURL = function (url) {
@@ -102,6 +107,7 @@ function errrHandler( e ){
     // 控制台发声,错误时beep一下
     gutil.beep();
     gutil.log( e );
+    return this;
 }
 
 /* 路径 */
@@ -210,7 +216,7 @@ gulp.task('less', function(){
     return gulp.src(filePaths.less)
                 .pipe( plumber( { errorHandler: errrHandler } ) )
                 // 初始化sourcemap
-                .pipe(sourcemaps.init())
+                //.pipe(sourcemaps.init())
                 // 编译less
                 .pipe(less())
                 // 自动添加前缀
@@ -220,7 +226,7 @@ gulp.task('less', function(){
                 .pipe(minifyCSS({compatibility: 'ie7'}))
                 .pipe(bannerHeader(banner, { pkg: pkg}))
                 // 生成sourcemap
-                .pipe(sourcemaps.write('../css/maps'))
+                //.pipe(sourcemaps.write(distPath+'/css/maps'))
                 // 输出css文件
                 .pipe(gulp.dest(distPath+'/css'))
                 .pipe(connect.reload())
@@ -337,6 +343,16 @@ gulp.task('front:ui', function(){
 
         .pipe(concat('ui.js'))
         .pipe(stripDebug())
+        .pipe(umd({
+            dependencies: function(file){
+                return [{
+                    name: '$',
+                    amd: 'jquery',
+                    cjs: 'jquery',
+                    global: 'jQuery'
+                }]
+            }
+        }))
         .pipe(uglify())
         .pipe(n2a({reverse: false}))
         .pipe(bannerHeader(banner, { pkg: pkg}))
@@ -482,13 +498,22 @@ gulp.task('document:static', function(){
     return gulp.src(['./output/src/**/**', '!./output/src/js/**/**.js', '!./output/src/css/maps', '!./output/src/css/maps/**/**'])
             .pipe(gulp.dest(documentPath+'/src'));
 })
-gulp.task('document:js', function(){
+gulp.task('document:js', ['document:prejs'], function(){
     //return gulp.src(['./output/src/js/**/**.js', '!./output/src/js/datatables/**/**'])
-    return gulp.src(['./output/src/js/**.js','./output/src/js/ui/**.js'])
+    return gulp.src(['./output/src/js/**.js'])
             .pipe(uglify())
             .pipe(n2a({reverse: false}))
             .pipe(bannerHeader(banner, { pkg: pkg}))
             .pipe(gulp.dest(documentPath+'/src/js'));
+})
+
+gulp.task('document:prejs', function(){
+    //return gulp.src(['./output/src/js/**/**.js', '!./output/src/js/datatables/**/**'])
+    return gulp.src(['./output/src/js/ui/**.js'])
+        .pipe(uglify())
+        .pipe(n2a({reverse: false}))
+        .pipe(bannerHeader(banner, { pkg: pkg}))
+        .pipe(gulp.dest(documentPath+'/src/js/ui'));
 })
 gulp.task('document:copy', function() {
      //return gulp.src(['./output/src/js/datatables/**/**'])

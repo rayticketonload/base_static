@@ -6,7 +6,7 @@
  */
 ;(function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define('ui/tab', ['jquery', 'ui/validate'], factory);
+        define(['jquery', 'jquery.validate'], factory);
     } else if (typeof exports === 'object') {
         module.exports = factory(require('jquery'));
     } else {

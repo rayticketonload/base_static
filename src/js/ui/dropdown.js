@@ -6,19 +6,7 @@
 // -----
 // $(element).on('selected.ui.dropdown', function(e, obj){});
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/dropdown', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
-
++(function($) {
     'use strict';
 
     // 默认高亮类
@@ -33,10 +21,10 @@
 
     // 构造函数
     // -------
-    var Dropdown = function(el) {
+    var Dropdown = function (el) {
         $(el).on('click.ui.dropdown', this.toggle);
 
-        if(/input/i.test(el.tagName)) {
+        if (/input/i.test(el.tagName)) {
             $(el).on('keyup.ui.dropFilter', this.filter)
 
             //.on('focusin.ui.dropFilter', this.focusIn)
@@ -55,10 +43,10 @@
 
     // 鼠标点击
     // ---------
-    Dropdown.prototype.toggle = function(e) {
+    Dropdown.prototype.toggle = function (e) {
         var $this = $(this);
 
-        if($this.is('.disabled,:disabled')) return;
+        if ($this.is('.disabled,:disabled')) return;
 
         dropMenus($this);
 
@@ -70,7 +58,7 @@
     //Dropdown.prototype.CURRENT_ITEM = -1;
     Dropdown.prototype.keydown = function (e) {
         //console.log(e.which)
-        if(e.which === 27){ // esc
+        if (e.which === 27) { // esc
             clearMenus(e);
             return;
         }
@@ -82,7 +70,7 @@
         //e.preventDefault();
         e.stopPropagation();
 
-        if($this.is('.disabled, :disabled')) return;
+        if ($this.is('.disabled, :disabled')) return;
 
         var $target = getParent($this);
         active = $this.data('active') || active;
@@ -98,15 +86,14 @@
 
         var $items = $target.find(list).filter(':visible');
 
-        if(!$items.length) return;
+        if (!$items.length) return;
 
-        if(e.which == 13 && $items.filter('.hover').length) { // enter
+        if (e.which == 13 && $items.filter('.hover').length) { // enter
             $items.filter('.hover').trigger('click.ui.dropSelect');
             return;
         }
 
         var index = $items.index(e.target) > -1 ? $items.index(e.target) : currentItem;
-
 
 
         if (e.which == 38 && index >= 0)  index--;  // up
@@ -125,9 +112,9 @@
 
     // 下拉菜单选中
     // ---------
-    Dropdown.prototype.selected = function(el){
+    Dropdown.prototype.selected = function (el) {
         var $target = el.find(toggle);
-        return function(e){
+        return function (e) {
             e.preventDefault();
             e.stopPropagation();
             var isInput = /input/i.test($target[0].tagName);
@@ -140,21 +127,21 @@
 
     // input输入过滤
     // -----------
-    Dropdown.prototype.filter = function(e) {
-        if(!/input/i.test(e.target.tagName)) return;
+    Dropdown.prototype.filter = function (e) {
+        if (!/input/i.test(e.target.tagName)) return;
 
         var $this = $(this);
         var inputText = $.trim($this.val());
         var $list = getList($this);
-        if(inputText === '') {
+        if (inputText === '') {
             $list.show();
             return;
         }
 
-        if($list.length) {
-            $list.map(function(){
+        if ($list.length) {
+            $list.map(function () {
                 var text = $(this).text();
-                if(text.indexOf(inputText) > -1) {
+                if (text.indexOf(inputText) > -1) {
                     return $(this).show();
                 } else {
                     return $(this).hide();
@@ -163,7 +150,7 @@
         }
     };
 
-    Dropdown.prototype.focusIn = function(e){
+    Dropdown.prototype.focusIn = function (e) {
         var $this = $(this);
         dropMenus($this, true)
         //Dropdown.prototype.filter.call(this, e);
@@ -180,7 +167,7 @@
 
         always === undefined && clearMenus();
 
-        if(!isActive) {
+        if (!isActive) {
             $target.addClass(active);
             $this.attr('aria-expanded', true).trigger('show.ui.dropdown', this)
         }
@@ -196,8 +183,8 @@
             var isAuto = $this.attr('data-auto');
             active = $this.data('active') || active;
 
-            if(!$target.hasClass(active)) return;
-            if(e && e.isDefaultPrevented()) return;
+            if (!$target.hasClass(active)) return;
+            if (e && e.isDefaultPrevented()) return;
 
             // 隐藏之前自动赋值
             // console.log(isAuto)
@@ -211,18 +198,18 @@
         })
     }
 
-    function hideAllMenus (e) {
+    function hideAllMenus(e) {
         clearMenus(e, 1)
     }
 
     // 默认选中
     // -----------
-    function autoFill(element, input){
+    function autoFill(element, input) {
         var $Li = getList(element), $vLi, isMatch = 0, txt = '', value = $.trim(input.val());
 
-        $vLi = $Li.filter(function(){
-            if($(this).is(':visible')) {
-                if(isMatch === 0) {
+        $vLi = $Li.filter(function () {
+            if ($(this).is(':visible')) {
+                if (isMatch === 0) {
                     txt = $.trim($(this).text());
                     isMatch = txt == value ? 1 : 0;
                 }
@@ -231,8 +218,8 @@
             return false;
         });
 
-        if(!isMatch) {
-            if($vLi.length === 0) {
+        if (!isMatch) {
+            if ($vLi.length === 0) {
                 $Li.eq(0).trigger('click')
             } else {
                 $vLi.eq(0).trigger('click.ui.dropSelect')
@@ -248,15 +235,15 @@
             value = $.trim($this.val()),
             $items = getList($this);
 
-        if(value === '' || value === placeholder) {
+        if (value === '' || value === placeholder) {
             return;
         }
 
         $items.hide()
-            .filter(function(){
+            .filter(function () {
                 var txt = $.trim($(this).text()) || '';
 
-                if(txt == value){
+                if (txt == value) {
                     $(this).addClass('hover');
                 }
 
@@ -264,7 +251,6 @@
             })
             .show();
     }
-
 
 
     // 获取响应的元素
@@ -297,8 +283,8 @@
             var $this = $(this);
             var data = $this.data('ui.dropdown');
 
-            if(!data) $this.data('ui.dropdown', (data = new Dropdown(this)));
-            if(typeof option == 'string') data[option].apply(this, args);
+            if (!data) $this.data('ui.dropdown', (data = new Dropdown(this)));
+            if (typeof option == 'string') data[option].apply(this, args);
         })
     }
 
@@ -309,15 +295,15 @@
 
     // 元素插件绑定
     // --------------
-    $(function(){
+    $(function () {
         $(toggle).dropdown();
         $(document)
         // 点击页面其他地方收起
             .on('click.ui.dropdown', hideAllMenus)
             // 按钮触发
-            .on('click.ui.dropdown-btn', function(e){
+            .on('click.ui.dropdown-btn', function (e) {
                 var that = e.target;
-                if($(that).is(toggleBtn) || $(that).is(toggleIBtn)) {
+                if ($(that).is(toggleBtn) || $(that).is(toggleIBtn)) {
                     var $wrap = $(that).closest(wrap);
                     var $target = $wrap.find(toggle);
                     //console.log($wrap);
@@ -332,9 +318,9 @@
 
             })
             // .on('click.ui.dropdown', ul, function(e){
-            .on('click.ui.dropdown', function(e){
+            .on('click.ui.dropdown', function (e) {
                 var that = e.target;
-                if($(that).is(ul)) {
+                if ($(that).is(ul)) {
                     e.stopPropagation();
                     return false;
                 }
@@ -350,17 +336,14 @@
             // })
             // focus
             // .on('focus.ui.dropdown', toggle, chkMatch)
-            .on('focus.ui.dropdown', function(e) {
+            .on('focus.ui.dropdown', function (e) {
                 var that = e.target;
                 $(that).is(toggle) && chkMatch(that, e);
             })
             // .on('keydown.ui.dropdown', toggle, Dropdown.prototype.keydown);
-            .on('keydown.ui.dropdown', function(e) {
+            .on('keydown.ui.dropdown', function (e) {
                 var that = e.target;
                 $(that).is(toggle) && Dropdown.prototype.keydown.call(that, e);
             });
     })
-
-    return $;
-
-}));
+})(jQuery);

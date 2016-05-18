@@ -5,17 +5,7 @@
 // ------
 // $(element).placeholder();
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/placeholder', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
++(function($) {
     'use strict';
 
     var toggle = 'input[placeholder]';
@@ -25,7 +15,7 @@
 
     // 构造函数
     // ===============
-    var Placeholder = function(element) {
+    var Placeholder = function (element) {
         var $this = this;
         $this.$el = $(element);
         this.init();
@@ -33,11 +23,11 @@
 
     Placeholder.VERSION = '1.0.0';
 
-    Placeholder.prototype.init = function(){
-        if(isSupport) return;
+    Placeholder.prototype.init = function () {
+        if (isSupport) return;
         var $this = this;
         this.$placeholder = $this.$el.data('placeholder');
-        if(!isSupport && !this.$placeholder) {
+        if (!isSupport && !this.$placeholder) {
             var text = $this.$el.attr('placeholder');
             $this.$placeholder = $('<label class="form-placeholder" />').html(text);
             $this.$el.data('placeholder', $this.$placeholder).before($this.$placeholder);
@@ -51,11 +41,11 @@
         this.blur();
     };
 
-    Placeholder.prototype.focus = function(){
+    Placeholder.prototype.focus = function () {
         this.$placeholder.hide();
     };
 
-    Placeholder.prototype.blur = function(){
+    Placeholder.prototype.blur = function () {
         this.$placeholder[this.$el.val() === '' ? 'show' : 'hide']();
     };
 
@@ -66,7 +56,7 @@
         return $(this).each(function () {
             var $this = $(this);
             var data = $this.data('ui.placeholder');
-            if(!data) $this.data('ui.placeholder', (data = new Placeholder(this)));
+            if (!data) $this.data('ui.placeholder', (data = new Placeholder(this)));
         })
     }
 
@@ -77,10 +67,9 @@
 
     // 元素插件绑定
     // ====================
-    $(function(){ $(toggle).placeholder() });
-
-    return Placeholder;
-
-}));
+    $(function () {
+        $(toggle).placeholder()
+    });
 
 
+})(jQuery);

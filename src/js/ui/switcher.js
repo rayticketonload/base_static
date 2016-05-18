@@ -7,17 +7,7 @@
 // $(element).switcher({except:true, item: 'a', active: 'current'});
 // $(element).on('select.ui.switcher', function(e){ e.relatedTarget; });
 
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/switcher', ['jquery'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
++(function($) {
 
     'use strict';
 
@@ -25,11 +15,11 @@
 
     // 构造函数
     // ----------
-    var Switcher = function(element, option) {
+    var Switcher = function (element, option) {
         var $this = this;
         this.$el = $(element);
         this.option = $.extend({}, Switcher.DEFAULTS, option, this.$el.data());
-        this.$el.on('click.ui.switcher', this.option.item,  function(e){
+        this.$el.on('click.ui.switcher', this.option.item, function (e) {
             e.stopPropagation();
             e.preventDefault();
             $this.select($(this));
@@ -58,9 +48,9 @@
     // -----
     Switcher.prototype.select = function ($target) {
         var o = this.option, e = $.Event('select.ui.switcher', {relatedTarget: $target});
-        if(o.keep && $target.hasClass(o.active)) return;
+        if (o.keep && $target.hasClass(o.active)) return;
         $target.toggleClass(o.active).trigger(e);
-        if(!o.except) $target.siblings(o.item).removeClass(o.active);
+        if (!o.except) $target.siblings(o.item).removeClass(o.active);
     };
 
 
@@ -71,8 +61,8 @@
             var $this = $(this);
             var data = $this.data('ui.switcher');
 
-            if(!data) $this.data('ui.switcher', (data = new Switcher(this, option)));
-            if(typeof option == 'string') data[option]();
+            if (!data) $this.data('ui.switcher', (data = new Switcher(this, option)));
+            if (typeof option == 'string') data[option]();
         })
     }
 
@@ -83,8 +73,8 @@
 
     // 全局绑定
     // -----------
-    $(function(){ $(toggle).switcher() });
+    $(function () {
+        $(toggle).switcher()
+    });
 
-    return Switcher;
-
-}));
+})(jQuery);

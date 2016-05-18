@@ -10,7 +10,7 @@
 ;(function (root, factory) {
 
     if (typeof define === 'function' && define.amd) {
-        define('ui/fileUpload', ['jquery', 'webuploader'], factory);
+        define(['jquery', 'webuploader'], factory);
     } else if (typeof exports === 'object') {
         module.exports = factory(require('jquery'), require('webuploader'));
     } else {

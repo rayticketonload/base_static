@@ -115,10 +115,17 @@
         urlArgs: 'v={{version}}',
         paths: {
             //'jquery': 'jquery.min'
+            'modal': 'modal'
+        },
+        shim: {
+            'modal': {
+                deps: ['jquery']
+            }
+
         }
     });
 
-    require(['ui/modal'], function(Modal) {
+    require(['modal'], function(Modal) {
         $('#j-test').on('click', function() {
             $('#test').modalLayer({ title: '加载了modal模块' });
         })

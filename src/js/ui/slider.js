@@ -6,23 +6,13 @@
  *      $(element).slider();
  */
 
-;(function (root, factory) {
-
-	if (typeof define === 'function' && define.amd) {
-		define('ui/slider', ['jquery'], factory);
-	} else if (typeof exports === 'object') {
-		module.exports = factory(require('jquery'));
-	} else {
-		factory(root.jQuery);
-	}
-
-}(this, function ($, f) {
+;(function ($, f) {
 
 	'use strict';
 
 	var toggle = '[data-toggle="slider"]';
 	//  If there's no jQuery, Unslider can't work, so kill the operation.
-	if(!$) return f;
+	if(typeof $ === 'undefined') return f;
 
 	var Unslider = function() {
 		//  Set up our elements
@@ -240,6 +230,4 @@
 	// ====================
 	$(function(){ $(toggle).slider() });
 
-	return Unslider;
-
-}));
+})(jQuery);
