@@ -162,7 +162,7 @@
 
 	            // 压根就没有安转。
 	            } else {
-	                this.$el.parent().html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="get flash player" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
+	                this.$el.parent().html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="获取最新的flash插件" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
 	            }
 
 	            return;
@@ -318,6 +318,7 @@
 			var self = this,
 				$queue= this.$queue,
 				opt = this.options,
+        text = '',
 				uploader = this.uploader;
 
 			this.$editor.show();
