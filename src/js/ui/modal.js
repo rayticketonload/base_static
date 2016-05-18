@@ -519,7 +519,7 @@
      * @param {array} buttons 按钮定义
      */
     // 成功弹层
-    var successModalLayer = (function ($) {
+    var successModalLayer = (function () {
         return function (config) {
             var id = config['id'] ? config['id'] : '#j-modal-status';
             // 使用modalLayer api
@@ -542,10 +542,10 @@
                 ]
             });
         }
-    })(jQuery);
+    })();
 
     // 确认询问弹层
-    var confirmModalLayer = (function ($) {
+    var confirmModalLayer = (function () {
         return function (config) {
             var id = config['id'] ? config['id'] : '#confirmModalLayer';
             $(id).modalLayer({
@@ -565,10 +565,10 @@
                 ]
             });
         }
-    })(jQuery);
+    })();
 
     // 警告弹层
-    var alertModalLayer = (function ($) {
+    var alertModalLayer = (function () {
         return function (config) {
             var id = config['id'] ? config['id'] : '#alertModalLayer';
             $(id).modalLayer({
@@ -577,24 +577,24 @@
                 content: (config['content'] || '')
             });
         }
-    })(jQuery);
+    })();
 
     // 关闭弹层不是隐藏
-    var closeModalLayer = (function ($) {
+    var closeModalLayer = (function () {
         return function (id, fn) {
             $(id).modal('hide').on('hide.ui.modal', function () {
                 $(this).remove();
                 typeof fn === 'function' && fn();
             })
         }
-    })(jQuery);
+    })();
 
 
     // 外部
-    $.successModalLayer = successModalLayer;
-    $.confirmModalLayer = confirmModalLayer;
-    $.alertModalLayer = alertModalLayer;
-    $.closeModalLayer = closeModalLayer;
+    jQuery.successModalLayer = successModalLayer;
+    jQuery.confirmModalLayer = confirmModalLayer;
+    jQuery.alertModalLayer = alertModalLayer;
+    jQuery.closeModalLayer = closeModalLayer;
 
 
     // ---------------
@@ -605,7 +605,7 @@
      * 简单指
      * require ui.js(modal.js)
      */
-    ~(function ($) {
+    ~(function () {
 
         var APILIST = {};
 
@@ -812,6 +812,6 @@
                 });
             })
         })
-    })(jQuery);
+    })();
 
 })(jQuery);
