@@ -345,14 +345,14 @@
 
 
     // jQuery 插件扩展
-    $.fn.modal = Plugin;
-    $.fn.modal.Constructor = Modal;
+    jQuery.fn.modal = Plugin;
+    jQuery.fn.modal.Constructor = Modal;
 
     //-------------------------
     //--- 扩展 ----------------
     //-------------------------
     // ajaxLoading
-    $.fn.showLoading = function (title, content) {
+    jQuery.fn.showLoading = function (title, content) {
         var $this, title = title || '处理中...', content = content || '请不要关闭浏览器，系统正在处理';
         if ($(this).length) {
             if (title) $(this).find('.modal-body h3').html(title);
@@ -375,15 +375,15 @@
         }
     };
 
-    $.fn.hideLoading = function () {
+    jQuery.fn.hideLoading = function () {
         return $(this).length && $(this).modal('hide');
     }
 
-    $.showLoading = function (title, content) {
+    jQuery.showLoading = function (title, content) {
         var id = '#ui-loading';
         return $(id).showLoading(title, content);
     }
-    $.hideLoading = function () {
+    jQuery.hideLoading = function () {
         var id = '#ui-loading';
         return $(id).hideLoading();
     }
@@ -394,7 +394,7 @@
     // --------
 
     // alert,error,success
-    $.fn.modalLayer = function (option) {
+    jQuery.fn.modalLayer = function (option) {
         var defaults = {
             icon: 'success',
             title: '成功',
@@ -472,7 +472,7 @@
                     .on('hide.ui.modal', function () {  // 调用隐藏的时候删除dom
                         $(this).remove();
                     });
-                console.log(opt.close)
+
                 // 不显示关闭
                 if (!opt.close) $($that.selector).find('.modal-close').hide();
                 // 关闭回调
@@ -574,7 +574,13 @@
             $(id).modalLayer({
                 icon: (config['icon'] || 'info'),
                 title: (config['title'] || ''),
-                content: (config['content'] || '')
+                content: (config['content'] || ''),
+                buttons: [
+                    {
+                        text: '确定',
+                        ok: config['callback']
+                    }
+                ]
             });
         }
     })();
@@ -605,7 +611,7 @@
      * 简单指
      * require ui.js(modal.js)
      */
-    ~(function () {
+    ~(function ($) {
 
         var APILIST = {};
 
@@ -812,6 +818,6 @@
                 });
             })
         })
-    })();
+    })(jQuery);
 
 })(jQuery);
