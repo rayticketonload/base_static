@@ -113,7 +113,7 @@ function errrHandler( e ){
 /* 路径 */
 var filePaths = {
 	iconfontIE7: 'bower_components/frontui-icon/fonticon/ie7/**/**',
-	iconfont: staticPath+'bower_components/frontui-icon/fonticon/fonts/**/**',
+	iconfont: 'bower_components/frontui-icon/fonticon/fonts/**/**',
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
@@ -220,9 +220,11 @@ gulp.task('less', function(){
                 // 编译less
                 .pipe(less())
                 // 自动添加前缀
-                .pipe(autoprefixer({
-                    browsers: config.browser.split(',')
-                    }))
+                .pipe(autoprefixer(
+                        // 最新版autoprefixer
+                        //{ browsers: config.browser.split(',')}
+                        config.browser
+                    ))
                 // 压缩css
                 //
                 .pipe(minifyCSS({compatibility: 'ie7'}))
