@@ -24,6 +24,7 @@
     "jquery": "1.11.1",
     "animate.css": "~3.4.0",
     "html5shiv": "~3.7.3",
-    "respond": "~1.4.2"
+    "respond": "~1.4.2",
+    "frontui-icon": "^0.1.1"
   }
 }

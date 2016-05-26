@@ -112,8 +112,8 @@ function errrHandler( e ){
 
 /* 路径 */
 var filePaths = {
-	iconfontIE7: staticPath+'/iconfont-ie7/**/**',
-	iconfont: staticPath+'/iconfont/**/**',
+	iconfontIE7: 'bower_components/frontui-icon/fonticon/ie7/**/**',
+	iconfont: staticPath+'bower_components/frontui-icon/fonticon/fonts/**/**',
 	sprite: staticPath +'/images/sprite/**/*.*',
 	images: [staticPath+'/images/**/**', '!'+ staticPath +'/images/sprite/**/**'],
 	less: [staticPath+'/less/**/**.less', '!'+staticPath+'/less/**/_**.less'],
@@ -220,7 +220,9 @@ gulp.task('less', function(){
                 // 编译less
                 .pipe(less())
                 // 自动添加前缀
-                .pipe(autoprefixer(config.browser))
+                .pipe(autoprefixer({
+                    browsers: config.browser.split(',')
+                    }))
                 // 压缩css
                 //
                 .pipe(minifyCSS({compatibility: 'ie7'}))
@@ -289,7 +291,7 @@ gulp.task('replace', function(){
 })
 
 /* 启动服务 */
-gulp.task('server', function () {
+gulp.task('server', ['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'template', 'watch', 'all', 'copyIconDemo',], function () {
     connect.server({
         root: __dirname,
         port: PORT
@@ -312,9 +314,14 @@ gulp.task('watch', function(){
     gulp.watch(filePaths.charts, ['charts'])
 });
 
+gulp.task('copyIconDemo', function() {
+    return gulp.src(['./bower_components/frontui-icon/fonticon/**/**'], { baseClient: true})
+            .pipe(gulp.dest(outPath+'/iconfont'));
+})
+
 // 更新字体任务
 // ==========
-var iconfontPath = './assist/fonticon/';
+var iconfontPath = './bower_components/frontui-icon/fonticon/';
 gulp.task('iconfont-file', function(){
     return gulp.src(iconfontPath+'fonts/**/**')
         .pipe(gulp.dest('./src/iconfont/'))
@@ -475,7 +482,7 @@ var allTask = require('./gulpfile/')();
 gulp.task('default', ['clean'], function(next){
     //return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
     //return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'charts', 'template', 'watch', 'server']);
-    return gulp.start(['sprite','iconfont', 'images', 'less', 'frontui:less',  'js', 'template', 'watch', 'all', 'server']);
+    return gulp.start([ 'server']);
     //return next();
 });
 
