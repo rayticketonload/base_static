@@ -443,7 +443,7 @@ gulp.task('frontui:copyStatic', function() {
 gulp.task('frontui:copyJS', function() {
      //return gulp.src(['./output/src/js/datatables/**/**'])
      //       .pipe(gulp.dest(documentPath+'/src/js/datatables'));
-     return gulp.src(['./output/src/js/**/**.all.js'], { baseClient: true})
+     return gulp.src('./output/src/js/**/**.all.js', { baseClient: true})
                 .pipe(rename(function(file){
                         file.basename = file.basename.replace('.all', '')
                     }))
@@ -452,8 +452,20 @@ gulp.task('frontui:copyJS', function() {
                 .pipe(gulp.dest(frontui_path+'/js/'))
 })
 
+gulp.task('frontui:webuploader', function() {
+  var root = './src/js/',
+      scripts = config.bundlejs;
+  scripts = scripts.map(function(s) {
+    return root+s;
+  })
+  return gulp.src(scripts)
+      .pipe(uglify({mangle: false}))
+      .pipe(bannerHeader(banner, { pkg: pkg}))
+      .pipe(gulp.dest(frontui_path+'/js/webuploader'))
+})
+
 gulp.task('frontui', function(){
-    return gulp.start(['front:ui', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:copyJS', 'frontui:copyStatic']);
+    return gulp.start(['front:ui', 'frontui:images', 'frontui:iconfont', 'frontui:ie7', 'frontui:less', 'frontui:template', 'frontui:datatables', 'frontui:copyJS', 'frontui:copyStatic', 'frontui:webuploader']);
 });
 
 

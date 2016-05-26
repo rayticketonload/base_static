@@ -8,9 +8,9 @@
         "packages": {
             "datatables": ["jquery.dataTables.min.js", "jquery.dataTables.ui.js"],
             "validate": ["jquery.validate.js", "messages_zh.js", "validate.js"],
-            "webuploader": ["webuploader.js", "fileUpload.js"],
             "datetimepicker": ["datetimepicker.js"],
             "charts": ["echarts.js", "chart/line.js", "/theme/paywe.js", "payweChart.js"]
         }
-    }
+    },
+    "bundlejs": ["webuploader/fileUpload.js", "webuploader/webuploader.js"]
 }

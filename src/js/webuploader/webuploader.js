@@ -9,8 +9,8 @@
 (function( root, factory ) {
     var modules = {},
 
-        // 内部require, 简单不完全实现。
-        // https://github.com/amdjs/amdjs-api/wiki/require
+    // 内部require, 简单不完全实现。
+    // https://github.com/amdjs/amdjs-api/wiki/require
         _require = function( deps, callback ) {
             var args, len, i;
 
@@ -27,7 +27,7 @@
             }
         },
 
-        // 内部define，暂时不支持不指定id.
+    // 内部define，暂时不支持不指定id.
         _define = function( id, deps, factory ) {
             if ( arguments.length === 2 ) {
                 factory = deps;
@@ -39,7 +39,7 @@
             });
         },
 
-        // 设置module, 兼容CommonJs写法。
+    // 设置module, 兼容CommonJs写法。
         setModule = function( id, factory, args ) {
             var module = {
                     exports: factory
@@ -55,7 +55,7 @@
             modules[ id ] = module.exports;
         },
 
-        // 根据id获取module
+    // 根据id获取module
         getModule = function( id ) {
             var module = modules[ id ] || root[ id ];
 
@@ -66,7 +66,7 @@
             return module;
         },
 
-        // 将所有modules，将路径ids装换成对象。
+    // 将所有modules，将路径ids装换成对象。
         exportsTo = function( obj ) {
             var key, host, parts, part, last, ucFirst;
 
@@ -301,7 +301,7 @@
             os: (function( ua ) {
                 var ret = {},
 
-                    // osx = !!ua.match( /\(Macintosh\; Intel / ),
+                // osx = !!ua.match( /\(Macintosh\; Intel / ),
                     android = ua.match( /(?:Android);?[\s\/]+([\d.]+)?/ ),
                     ios = ua.match( /(?:iPad|iPod|iPhone).*OS\s([\d_]+)/ );
 
@@ -494,7 +494,7 @@
                 }
 
                 return (unit === 'B' ? size : size.toFixed( pointLength || 2 )) +
-                        unit;
+                    unit;
             }
         };
     });
@@ -514,10 +514,10 @@
         function findHandlers( arr, name, callback, context ) {
             return $.grep( arr, function( handler ) {
                 return handler &&
-                        (!name || handler.e === name) &&
-                        (!callback || handler.cb === callback ||
-                        handler.cb._cb === callback) &&
-                        (!context || handler.ctx === context);
+                    (!name || handler.e === name) &&
+                    (!callback || handler.cb === callback ||
+                    handler.cb._cb === callback) &&
+                    (!context || handler.ctx === context);
             });
         }
 
@@ -628,9 +628,9 @@
 
                 eachEvent( name, callback, function( name, callback ) {
                     var once = function() {
-                            me.off( name, once );
-                            return callback.apply( context || me, arguments );
-                        };
+                        me.off( name, once );
+                        return callback.apply( context || me, arguments );
+                    };
 
                     once._cb = callback;
                     me.on( name, once, context );
@@ -690,7 +690,7 @@
                 allEvents = findHandlers( this._events, 'all' );
 
                 return triggerHanders( events, args ) &&
-                        triggerHanders( allEvents, arguments );
+                    triggerHanders( allEvents, arguments );
             }
         };
 
@@ -813,7 +813,7 @@
                 if ( arguments.length > 1 ) {
 
                     if ( $.isPlainObject( val ) &&
-                            $.isPlainObject( opts[ key ] ) ) {
+                        $.isPlainObject( opts[ key ] ) ) {
                         $.extend( opts[ key ], val );
                     } else {
                         opts[ key ] = val;
@@ -862,20 +862,20 @@
                         type.substring( 1 );
 
                 if (
-                        // 调用通过on方法注册的handler.
-                        Mediator.trigger.apply( this, arguments ) === false ||
+                    // 调用通过on方法注册的handler.
+                Mediator.trigger.apply( this, arguments ) === false ||
 
-                        // 调用opts.onEvent
-                        $.isFunction( opts[ name ] ) &&
-                        opts[ name ].apply( this, args ) === false ||
+                    // 调用opts.onEvent
+                $.isFunction( opts[ name ] ) &&
+                opts[ name ].apply( this, args ) === false ||
 
-                        // 调用this.onEvent
-                        $.isFunction( this[ name ] ) &&
-                        this[ name ].apply( this, args ) === false ||
+                    // 调用this.onEvent
+                $.isFunction( this[ name ] ) &&
+                this[ name ].apply( this, args ) === false ||
 
-                        // 广播所有uploader的事件。
-                        Mediator.trigger.apply( Mediator,
-                        [ this, type ].concat( args ) ) === false ) {
+                    // 广播所有uploader的事件。
+                Mediator.trigger.apply( Mediator,
+                    [ this, type ].concat( args ) ) === false ) {
 
                     return false;
                 }
@@ -924,7 +924,7 @@
         var $ = Base.$,
             factories = {},
 
-            // 获取对象的第一个key
+        // 获取对象的第一个key
             getFirstKey = function( obj ) {
                 for ( var key in obj ) {
                     if ( obj.hasOwnProperty( key ) ) {
@@ -1234,8 +1234,8 @@
             }
 
             return type === 'array' || type !== 'function' && type !== 'string' &&
-                    (length === 0 || typeof length === 'number' && length > 0 &&
-                    (length - 1) in obj);
+                (length === 0 || typeof length === 'number' && length > 0 &&
+                (length - 1) in obj);
         }
 
         function Widget( uploader ) {
@@ -1252,15 +1252,15 @@
             invoke: function( apiName, args ) {
 
                 /*
-                    {
-                        'make-thumb': 'makeThumb'
-                    }
+                 {
+                 'make-thumb': 'makeThumb'
+                 }
                  */
                 var map = this.responseMap;
 
                 // 如果无API响应声明则忽略
                 if ( !map || !(apiName in map) || !(map[ apiName ] in this) ||
-                        !$.isFunction( this[ map[ apiName ] ] ) ) {
+                    !$.isFunction( this[ map[ apiName ] ] ) ) {
 
                     return IGNORE;
                 }
@@ -1299,7 +1299,7 @@
 
                 $.each( widgetClass, function( _, klass ) {
                     (!deactives || !~deactives.indexOf( klass._name )) &&
-                        widgets.push( new klass( me ) );
+                    widgets.push( new klass( me ) );
                 });
 
                 return _init.apply( me, arguments );
@@ -1338,19 +1338,19 @@
                     // 很重要不能删除。删除了会死循环。
                     // 保证执行顺序。让callback总是在下一个 tick 中执行。
                     return promise[ key ](function() {
-                                var deferred = Base.Deferred(),
-                                    args = arguments;
+                        var deferred = Base.Deferred(),
+                            args = arguments;
 
-                                if ( args.length === 1 ) {
-                                    args = args[ 0 ];
-                                }
+                        if ( args.length === 1 ) {
+                            args = args[ 0 ];
+                        }
 
-                                setTimeout(function() {
-                                    deferred.resolve( args );
-                                }, 1 );
+                        setTimeout(function() {
+                            deferred.resolve( args );
+                        }, 1 );
 
-                                return deferred.promise();
-                            })[ callback ? key : 'done' ]( callback || Base.noop );
+                        return deferred.promise();
+                    })[ callback ? key : 'done' ]( callback || Base.noop );
                 } else {
                     return rlts[ 0 ];
                 }
@@ -1483,7 +1483,7 @@
             init: function( opts ) {
 
                 if ( !opts.dnd ||
-                        this.request('predict-runtime-type') !== 'html5' ) {
+                    this.request('predict-runtime-type') !== 'html5' ) {
                     return;
                 }
 
@@ -1575,7 +1575,7 @@
             init: function( opts ) {
 
                 if ( !opts.paste ||
-                        this.request('predict-runtime-type') !== 'html5' ) {
+                    this.request('predict-runtime-type') !== 'html5' ) {
                     return;
                 }
 
@@ -1620,7 +1620,7 @@
 
             // 如果没有指定 mimetype, 但是知道文件后缀。
             if ( !source.type && this.ext &&
-                    ~'jpg,jpeg,png,gif,bmp'.indexOf( this.ext ) ) {
+                ~'jpg,jpeg,png,gif,bmp'.indexOf( this.ext ) ) {
                 this.type = 'image/' + (this.ext === 'jpg' ? 'jpeg' : this.ext);
             } else {
                 this.type = source.type || 'application/octet-stream';
@@ -1671,13 +1671,13 @@
             // 如果有 mimetype, 但是文件名里面没有找出后缀规律
             if ( !ext && file.type ) {
                 ext = /\/(jpg|jpeg|png|gif|bmp)$/i.exec( file.type ) ?
-                        RegExp.$1.toLowerCase() : '';
+                    RegExp.$1.toLowerCase() : '';
                 this.name += '.' + ext;
             }
 
             this.ext = ext;
             this.lastModifiedDate = file.lastModifiedDate ||
-                    (new Date()).toLocaleString();
+                (new Date()).toLocaleString();
 
             Blob.apply( this, arguments );
         }
@@ -1706,7 +1706,7 @@
             }
 
             opts.innerHTML = opts.innerHTML || opts.label ||
-                    opts.container.html() || '';
+                opts.container.html() || '';
 
             opts.button = $( opts.button || document.createElement('div') );
             opts.button.html( opts.innerHTML );
@@ -1779,10 +1779,10 @@
                 var shimContainer = this.getRuntime().getContainer(),
                     button = this.options.button,
                     width = button.outerWidth ?
-                            button.outerWidth() : button.width(),
+                        button.outerWidth() : button.width(),
 
                     height = button.outerHeight ?
-                            button.outerHeight() : button.height(),
+                        button.outerHeight() : button.height(),
 
                     pos = button.offset();
 
@@ -1869,10 +1869,10 @@
              * ```
              */
             accept: null/*{
-                title: 'Images',
-                extensions: 'gif,jpg,jpeg,bmp,png',
-                mimeTypes: 'image/*'
-            }*/
+             title: 'Images',
+             extensions: 'gif,jpg,jpeg,bmp,png',
+             mimeTypes: 'image/*'
+             }*/
         });
 
         return Uploader.register({
@@ -2300,8 +2300,8 @@
                 // gif 可能会丢失针
                 // bmp png 基本上尺寸都不大，且压缩比比较小。
                 if ( !opts || !~'image/jpeg,image/jpg'.indexOf( file.type ) ||
-                        file.size < compressSize ||
-                        file._compressed ) {
+                    file.size < compressSize ||
+                    file._compressed ) {
                     return;
                 }
 
@@ -2494,8 +2494,8 @@
              * 获取文件状态
              * @return {File.Status}
              * @example
-                     文件状态具体包括以下几种类型：
-                     {
+             文件状态具体包括以下几种类型：
+             {
                          // 初始化
                         INITED:     0,
                         // 已入队列
@@ -2893,7 +2893,7 @@
                 var invalid = !file || !file.size || this.accept &&
 
                         // 如果名字中有后缀，才做后缀白名单处理。
-                        rExt.exec( file.name ) && !this.accept.test( file.name );
+                    rExt.exec( file.name ) && !this.accept.test( file.name );
 
                 return !invalid;
             },
@@ -2972,15 +2972,15 @@
                     return me._addFile( file );
                 });
 
-    			if ( files.length ) {
+                if ( files.length ) {
 
                     me.owner.trigger( 'filesQueued', files );
 
-    				if ( me.options.auto ) {
-    					setTimeout(function() {
-    						me.request('start-upload');
-    					}, 20 );
-    				}
+                    if ( me.options.auto ) {
+                        setTimeout(function() {
+                            me.request('start-upload');
+                        }, 20 );
+                    }
                 }
             },
 
@@ -2995,7 +2995,7 @@
              * @for  Uploader
              */
 
-             /**
+            /**
              * @method removeFile
              * @grammar removeFile( file ) => undefined
              * @grammar removeFile( id ) => undefined
@@ -3561,7 +3561,7 @@
                 });
 
                 file || $.each( me.request( 'get-files',
-                        Status.INTERRUPT ), function() {
+                    Status.INTERRUPT ), function() {
                     this.setStatus( Status.PROGRESS );
                 });
 
@@ -3604,7 +3604,7 @@
                     file = file.id ? file : me.request( 'get-file', file );
 
                     if ( file.getStatus() !== Status.PROGRESS &&
-                            file.getStatus() !== Status.QUEUED ) {
+                        file.getStatus() !== Status.QUEUED ) {
                         return;
                     }
 
@@ -3745,7 +3745,7 @@
 
                     me._promise = isPromise( val ) ? val.always( fn ) : fn( val );
 
-                // 没有要上传的了，且没有正在传输的了。
+                    // 没有要上传的了，且没有正在传输的了。
                 } else if ( !me.remaning && !me._getStats().numOfQueue &&
                     !me._getStats().numofInterrupt ) {
                     me.runing = false;
@@ -3776,8 +3776,8 @@
                     if ( act.has() && act.file.getStatus() === Status.PROGRESS ) {
                         return act;
                     } else if (!act.has() ||
-                            act.file.getStatus() !== Status.PROGRESS &&
-                            act.file.getStatus() !== Status.INTERRUPT ) {
+                        act.file.getStatus() !== Status.PROGRESS &&
+                        act.file.getStatus() !== Status.INTERRUPT ) {
 
                         // 把已经处理完了的，或者，状态为非 progress（上传中）、
                         // interupt（暂停中） 的移除。
@@ -3803,7 +3803,7 @@
 
                     return act.shift();
 
-                // 否则，如果正在运行，则准备下一个文件，并等待完成后返回下个分片。
+                    // 否则，如果正在运行，则准备下一个文件，并等待完成后返回下个分片。
                 } else if ( me.runing ) {
 
                     // 如果缓存中有，则直接在缓存中取，没有则去queue中取。
@@ -3916,7 +3916,7 @@
                 // 如果没有分片，则直接使用原始的。
                 // 不会丢失content-type信息。
                 block.blob = block.chunks === 1 ? file.source :
-                        file.source.slice( block.start, block.end );
+                    file.source.slice( block.start, block.end );
 
                 // hook, 每个分片发送之前可能要做些异步的事情。
                 promise = me.request( 'before-send', block, function() {
@@ -4047,7 +4047,7 @@
 
                     // 自动重试
                     if ( block.chunks > 1 && ~'http,abort'.indexOf( type ) &&
-                            block.retried < opts.chunkRetry ) {
+                        block.retried < opts.chunkRetry ) {
 
                         block.retried++;
                         tr.send();
@@ -4113,22 +4113,22 @@
                 var owner = this.owner;
 
                 return owner
-                        .request( 'after-send-file', arguments, function() {
-                            file.setStatus( Status.COMPLETE );
-                            owner.trigger( 'uploadSuccess', file, ret, hds );
-                        })
-                        .fail(function( reason ) {
+                    .request( 'after-send-file', arguments, function() {
+                        file.setStatus( Status.COMPLETE );
+                        owner.trigger( 'uploadSuccess', file, ret, hds );
+                    })
+                    .fail(function( reason ) {
 
-                            // 如果外部已经标记为invalid什么的，不再改状态。
-                            if ( file.getStatus() === Status.PROGRESS ) {
-                                file.setStatus( Status.ERROR, reason );
-                            }
+                        // 如果外部已经标记为invalid什么的，不再改状态。
+                        if ( file.getStatus() === Status.PROGRESS ) {
+                            file.setStatus( Status.ERROR, reason );
+                        }
 
-                            owner.trigger( 'uploadError', file, reason );
-                        })
-                        .always(function() {
-                            owner.trigger( 'uploadComplete', file );
-                        });
+                        owner.trigger( 'uploadError', file, reason );
+                    })
+                    .always(function() {
+                        owner.trigger( 'uploadComplete', file );
+                    });
             },
 
             updateFileProgress: function(file) {
@@ -4176,7 +4176,7 @@
          * @for  Uploader
          */
 
-        // 暴露给外面的api
+            // 暴露给外面的api
         api = {
 
             // 添加验证器
@@ -4544,7 +4544,7 @@
 
                 if ( components[ comp ] ) {
                     instance = pool[ uid ] = pool[ uid ] ||
-                            new components[ comp ]( client, me );
+                        new components[ comp ]( client, me );
 
                     if ( instance[ fn ] ) {
                         return instance[ fn ].apply( instance, args );
@@ -4656,7 +4656,7 @@
 
                     me.elem.addClass( prefix + 'over' );
                     me.elem[ denied ? 'addClass' :
-                            'removeClass' ]( prefix + 'denied' );
+                        'removeClass' ]( prefix + 'denied' );
                 }
 
                 e.dataTransfer.dropEffect = denied ? 'none' : 'copy';
@@ -4746,7 +4746,7 @@
                     if ( canAccessFolder && item.webkitGetAsEntry().isDirectory ) {
 
                         promises.push( this._traverseDirectoryTree(
-                                item.webkitGetAsEntry(), results ) );
+                            item.webkitGetAsEntry(), results ) );
                     } else {
                         results.push( file );
                     }
@@ -4780,7 +4780,7 @@
 
                         for ( i = 0; i < len; i++ ) {
                             promises.push( me._traverseDirectoryTree(
-                                    entries[ i ], arr ) );
+                                entries[ i ], arr ) );
                         }
 
                         Base.when.apply( Base, promises ).then(function() {
@@ -4956,7 +4956,7 @@
 
                     input.off();
                     input = $( clone ).on( 'change', fn )
-                            .on( 'mouseenter mouseleave', mouseHandler );
+                        .on( 'mouseenter mouseleave', mouseHandler );
 
                     owner.trigger('change');
                 });
@@ -5138,7 +5138,7 @@
                         markerBytes = dataview.getUint16( offset );
 
                         if ( markerBytes >= 0xffe0 && markerBytes <= 0xffef ||
-                                markerBytes === 0xfffe ) {
+                            markerBytes === 0xfffe ) {
 
                             markerLength = dataview.getUint16( offset + 2 ) + 2;
 
@@ -5151,7 +5151,7 @@
                             if ( !noParse && parsers ) {
                                 for ( i = 0; i < parsers.length; i += 1 ) {
                                     parsers[ i ].call( api, dataview, offset,
-                                            markerLength, ret );
+                                        markerLength, ret );
                                 }
                             }
 
@@ -5169,7 +5169,7 @@
                             // Workaround for IE10, which does not yet
                             // support ArrayBuffer.slice:
                             ret.imageHead = new Uint8Array( buffer )
-                                    .subarray( 2, headLength );
+                                .subarray( 2, headLength );
                         }
                     }
                 }
@@ -5222,41 +5222,41 @@
      * @fileOverview EXIF解析
      */
 
-    // Sample
-    // ====================================
-    // Make : Apple
-    // Model : iPhone 4S
-    // Orientation : 1
-    // XResolution : 72 [72/1]
-    // YResolution : 72 [72/1]
-    // ResolutionUnit : 2
-    // Software : QuickTime 7.7.1
-    // DateTime : 2013:09:01 22:53:55
-    // ExifIFDPointer : 190
-    // ExposureTime : 0.058823529411764705 [1/17]
-    // FNumber : 2.4 [12/5]
-    // ExposureProgram : Normal program
-    // ISOSpeedRatings : 800
-    // ExifVersion : 0220
-    // DateTimeOriginal : 2013:09:01 22:52:51
-    // DateTimeDigitized : 2013:09:01 22:52:51
-    // ComponentsConfiguration : YCbCr
-    // ShutterSpeedValue : 4.058893515764426
-    // ApertureValue : 2.5260688216892597 [4845/1918]
-    // BrightnessValue : -0.3126686601998395
-    // MeteringMode : Pattern
-    // Flash : Flash did not fire, compulsory flash mode
-    // FocalLength : 4.28 [107/25]
-    // SubjectArea : [4 values]
-    // FlashpixVersion : 0100
-    // ColorSpace : 1
-    // PixelXDimension : 2448
-    // PixelYDimension : 3264
-    // SensingMethod : One-chip color area sensor
-    // ExposureMode : 0
-    // WhiteBalance : Auto white balance
-    // FocalLengthIn35mmFilm : 35
-    // SceneCaptureType : Standard
+        // Sample
+        // ====================================
+        // Make : Apple
+        // Model : iPhone 4S
+        // Orientation : 1
+        // XResolution : 72 [72/1]
+        // YResolution : 72 [72/1]
+        // ResolutionUnit : 2
+        // Software : QuickTime 7.7.1
+        // DateTime : 2013:09:01 22:53:55
+        // ExifIFDPointer : 190
+        // ExposureTime : 0.058823529411764705 [1/17]
+        // FNumber : 2.4 [12/5]
+        // ExposureProgram : Normal program
+        // ISOSpeedRatings : 800
+        // ExifVersion : 0220
+        // DateTimeOriginal : 2013:09:01 22:52:51
+        // DateTimeDigitized : 2013:09:01 22:52:51
+        // ComponentsConfiguration : YCbCr
+        // ShutterSpeedValue : 4.058893515764426
+        // ApertureValue : 2.5260688216892597 [4845/1918]
+        // BrightnessValue : -0.3126686601998395
+        // MeteringMode : Pattern
+        // Flash : Flash did not fire, compulsory flash mode
+        // FocalLength : 4.28 [107/25]
+        // SubjectArea : [4 values]
+        // FlashpixVersion : 0100
+        // ColorSpace : 1
+        // PixelXDimension : 2448
+        // PixelYDimension : 3264
+        // SensingMethod : One-chip color area sensor
+        // ExposureMode : 0
+        // WhiteBalance : Auto white balance
+        // FocalLengthIn35mmFilm : 35
+        // SceneCaptureType : Standard
     define('runtime/html5/imagemeta/exif',[
         'base',
         'runtime/html5/imagemeta'
@@ -5342,7 +5342,7 @@
         EXIF.exifTagTypes[ 7 ] = EXIF.exifTagTypes[ 1 ];
 
         EXIF.getExifValue = function( dataView, tiffOffset, offset, type, length,
-                littleEndian ) {
+                                      littleEndian ) {
 
             var tagType = EXIF.exifTagTypes[ type ],
                 tagSize, dataOffset, values, i, str, c;
@@ -5357,7 +5357,7 @@
             // Determine if the value is contained in the dataOffset bytes,
             // or if the value at the dataOffset is a pointer to the actual data:
             dataOffset = tagSize > 4 ? tiffOffset + dataView.getUint32( offset + 8,
-                    littleEndian ) : (offset + 8);
+                littleEndian ) : (offset + 8);
 
             if ( dataOffset + tagSize > dataView.byteLength ) {
                 Base.log('Invalid Exif data: Invalid data offset.');
@@ -5372,7 +5372,7 @@
 
             for ( i = 0; i < length; i += 1 ) {
                 values[ i ] = tagType.getValue( dataView,
-                        dataOffset + i * tagType.size, littleEndian );
+                    dataOffset + i * tagType.size, littleEndian );
             }
 
             if ( tagType.ascii ) {
@@ -5395,17 +5395,17 @@
         };
 
         EXIF.parseExifTag = function( dataView, tiffOffset, offset, littleEndian,
-                data ) {
+                                      data ) {
 
             var tag = dataView.getUint16( offset, littleEndian );
             data.exif[ tag ] = EXIF.getExifValue( dataView, tiffOffset, offset,
-                    dataView.getUint16( offset + 2, littleEndian ),    // tag type
-                    dataView.getUint32( offset + 4, littleEndian ),    // tag length
-                    littleEndian );
+                dataView.getUint16( offset + 2, littleEndian ),    // tag type
+                dataView.getUint32( offset + 4, littleEndian ),    // tag length
+                littleEndian );
         };
 
         EXIF.parseExifTags = function( dataView, tiffOffset, dirOffset,
-                littleEndian, data ) {
+                                       littleEndian, data ) {
 
             var tagsNumber, dirEndOffset, i;
 
@@ -5424,8 +5424,8 @@
 
             for ( i = 0; i < tagsNumber; i += 1 ) {
                 this.parseExifTag( dataView, tiffOffset,
-                        dirOffset + 2 + 12 * i,    // tag offset
-                        littleEndian, data );
+                    dirOffset + 2 + 12 * i,    // tag offset
+                    littleEndian, data );
             }
 
             // Return the offset to the next directory:
@@ -5497,7 +5497,7 @@
             // Parse the tags of the main image directory and retrieve the
             // offset to the next directory, usually the thumbnail directory:
             dirOffset = EXIF.parseExifTags( dataView, tiffOffset,
-                    tiffOffset + dirOffset, littleEndian, data );
+                tiffOffset + dirOffset, littleEndian, data );
 
             // 尝试读取缩略图
             // if ( dirOffset ) {
@@ -5534,44 +5534,44 @@
     define('runtime/html5/jpegencoder',[], function( require, exports, module ) {
 
         /*
-          Copyright (c) 2008, Adobe Systems Incorporated
-          All rights reserved.
+         Copyright (c) 2008, Adobe Systems Incorporated
+         All rights reserved.
 
-          Redistribution and use in source and binary forms, with or without
-          modification, are permitted provided that the following conditions are
-          met:
+         Redistribution and use in source and binary forms, with or without
+         modification, are permitted provided that the following conditions are
+         met:
 
-          * Redistributions of source code must retain the above copyright notice,
-            this list of conditions and the following disclaimer.
+         * Redistributions of source code must retain the above copyright notice,
+         this list of conditions and the following disclaimer.
 
-          * Redistributions in binary form must reproduce the above copyright
-            notice, this list of conditions and the following disclaimer in the
-            documentation and/or other materials provided with the distribution.
+         * Redistributions in binary form must reproduce the above copyright
+         notice, this list of conditions and the following disclaimer in the
+         documentation and/or other materials provided with the distribution.
 
-          * Neither the name of Adobe Systems Incorporated nor the names of its
-            contributors may be used to endorse or promote products derived from
-            this software without specific prior written permission.
+         * Neither the name of Adobe Systems Incorporated nor the names of its
+         contributors may be used to endorse or promote products derived from
+         this software without specific prior written permission.
 
-          THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
-          IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-          THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-          PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-          CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-          EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-          PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-          PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-          LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-          NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-          SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        */
+         THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+         IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+         THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+         PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+         CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+         EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+         PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+         PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+         LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+         NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+         SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+         */
         /*
-        JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom.eu, 11/2009
+         JPEG encoder ported to JavaScript and optimized by Andreas Ritter, www.bytestrom.eu, 11/2009
 
-        Basic GUI blocking jpeg encoder
-        */
+         Basic GUI blocking jpeg encoder
+         */
 
         function JPEGEncoder(quality) {
-          var self = this;
+            var self = this;
             var fround = Math.round;
             var ffloor = Math.floor;
             var YTable = new Array(64);
@@ -5599,566 +5599,566 @@
             var currentQuality;
 
             var ZigZag = [
-                     0, 1, 5, 6,14,15,27,28,
-                     2, 4, 7,13,16,26,29,42,
-                     3, 8,12,17,25,30,41,43,
-                     9,11,18,24,31,40,44,53,
-                    10,19,23,32,39,45,52,54,
-                    20,22,33,38,46,51,55,60,
-                    21,34,37,47,50,56,59,61,
-                    35,36,48,49,57,58,62,63
-                ];
+                0, 1, 5, 6,14,15,27,28,
+                2, 4, 7,13,16,26,29,42,
+                3, 8,12,17,25,30,41,43,
+                9,11,18,24,31,40,44,53,
+                10,19,23,32,39,45,52,54,
+                20,22,33,38,46,51,55,60,
+                21,34,37,47,50,56,59,61,
+                35,36,48,49,57,58,62,63
+            ];
 
             var std_dc_luminance_nrcodes = [0,0,1,5,1,1,1,1,1,1,0,0,0,0,0,0,0];
             var std_dc_luminance_values = [0,1,2,3,4,5,6,7,8,9,10,11];
             var std_ac_luminance_nrcodes = [0,0,2,1,3,3,2,4,3,5,5,4,4,0,0,1,0x7d];
             var std_ac_luminance_values = [
-                    0x01,0x02,0x03,0x00,0x04,0x11,0x05,0x12,
-                    0x21,0x31,0x41,0x06,0x13,0x51,0x61,0x07,
-                    0x22,0x71,0x14,0x32,0x81,0x91,0xa1,0x08,
-                    0x23,0x42,0xb1,0xc1,0x15,0x52,0xd1,0xf0,
-                    0x24,0x33,0x62,0x72,0x82,0x09,0x0a,0x16,
-                    0x17,0x18,0x19,0x1a,0x25,0x26,0x27,0x28,
-                    0x29,0x2a,0x34,0x35,0x36,0x37,0x38,0x39,
-                    0x3a,0x43,0x44,0x45,0x46,0x47,0x48,0x49,
-                    0x4a,0x53,0x54,0x55,0x56,0x57,0x58,0x59,
-                    0x5a,0x63,0x64,0x65,0x66,0x67,0x68,0x69,
-                    0x6a,0x73,0x74,0x75,0x76,0x77,0x78,0x79,
-                    0x7a,0x83,0x84,0x85,0x86,0x87,0x88,0x89,
-                    0x8a,0x92,0x93,0x94,0x95,0x96,0x97,0x98,
-                    0x99,0x9a,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,
-                    0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,0xb5,0xb6,
-                    0xb7,0xb8,0xb9,0xba,0xc2,0xc3,0xc4,0xc5,
-                    0xc6,0xc7,0xc8,0xc9,0xca,0xd2,0xd3,0xd4,
-                    0xd5,0xd6,0xd7,0xd8,0xd9,0xda,0xe1,0xe2,
-                    0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,0xea,
-                    0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
-                    0xf9,0xfa
-                ];
+                0x01,0x02,0x03,0x00,0x04,0x11,0x05,0x12,
+                0x21,0x31,0x41,0x06,0x13,0x51,0x61,0x07,
+                0x22,0x71,0x14,0x32,0x81,0x91,0xa1,0x08,
+                0x23,0x42,0xb1,0xc1,0x15,0x52,0xd1,0xf0,
+                0x24,0x33,0x62,0x72,0x82,0x09,0x0a,0x16,
+                0x17,0x18,0x19,0x1a,0x25,0x26,0x27,0x28,
+                0x29,0x2a,0x34,0x35,0x36,0x37,0x38,0x39,
+                0x3a,0x43,0x44,0x45,0x46,0x47,0x48,0x49,
+                0x4a,0x53,0x54,0x55,0x56,0x57,0x58,0x59,
+                0x5a,0x63,0x64,0x65,0x66,0x67,0x68,0x69,
+                0x6a,0x73,0x74,0x75,0x76,0x77,0x78,0x79,
+                0x7a,0x83,0x84,0x85,0x86,0x87,0x88,0x89,
+                0x8a,0x92,0x93,0x94,0x95,0x96,0x97,0x98,
+                0x99,0x9a,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,
+                0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,0xb5,0xb6,
+                0xb7,0xb8,0xb9,0xba,0xc2,0xc3,0xc4,0xc5,
+                0xc6,0xc7,0xc8,0xc9,0xca,0xd2,0xd3,0xd4,
+                0xd5,0xd6,0xd7,0xd8,0xd9,0xda,0xe1,0xe2,
+                0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,0xea,
+                0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
+                0xf9,0xfa
+            ];
 
             var std_dc_chrominance_nrcodes = [0,0,3,1,1,1,1,1,1,1,1,1,0,0,0,0,0];
             var std_dc_chrominance_values = [0,1,2,3,4,5,6,7,8,9,10,11];
             var std_ac_chrominance_nrcodes = [0,0,2,1,2,4,4,3,4,7,5,4,4,0,1,2,0x77];
             var std_ac_chrominance_values = [
-                    0x00,0x01,0x02,0x03,0x11,0x04,0x05,0x21,
-                    0x31,0x06,0x12,0x41,0x51,0x07,0x61,0x71,
-                    0x13,0x22,0x32,0x81,0x08,0x14,0x42,0x91,
-                    0xa1,0xb1,0xc1,0x09,0x23,0x33,0x52,0xf0,
-                    0x15,0x62,0x72,0xd1,0x0a,0x16,0x24,0x34,
-                    0xe1,0x25,0xf1,0x17,0x18,0x19,0x1a,0x26,
-                    0x27,0x28,0x29,0x2a,0x35,0x36,0x37,0x38,
-                    0x39,0x3a,0x43,0x44,0x45,0x46,0x47,0x48,
-                    0x49,0x4a,0x53,0x54,0x55,0x56,0x57,0x58,
-                    0x59,0x5a,0x63,0x64,0x65,0x66,0x67,0x68,
-                    0x69,0x6a,0x73,0x74,0x75,0x76,0x77,0x78,
-                    0x79,0x7a,0x82,0x83,0x84,0x85,0x86,0x87,
-                    0x88,0x89,0x8a,0x92,0x93,0x94,0x95,0x96,
-                    0x97,0x98,0x99,0x9a,0xa2,0xa3,0xa4,0xa5,
-                    0xa6,0xa7,0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,
-                    0xb5,0xb6,0xb7,0xb8,0xb9,0xba,0xc2,0xc3,
-                    0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xd2,
-                    0xd3,0xd4,0xd5,0xd6,0xd7,0xd8,0xd9,0xda,
-                    0xe2,0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,
-                    0xea,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
-                    0xf9,0xfa
-                ];
+                0x00,0x01,0x02,0x03,0x11,0x04,0x05,0x21,
+                0x31,0x06,0x12,0x41,0x51,0x07,0x61,0x71,
+                0x13,0x22,0x32,0x81,0x08,0x14,0x42,0x91,
+                0xa1,0xb1,0xc1,0x09,0x23,0x33,0x52,0xf0,
+                0x15,0x62,0x72,0xd1,0x0a,0x16,0x24,0x34,
+                0xe1,0x25,0xf1,0x17,0x18,0x19,0x1a,0x26,
+                0x27,0x28,0x29,0x2a,0x35,0x36,0x37,0x38,
+                0x39,0x3a,0x43,0x44,0x45,0x46,0x47,0x48,
+                0x49,0x4a,0x53,0x54,0x55,0x56,0x57,0x58,
+                0x59,0x5a,0x63,0x64,0x65,0x66,0x67,0x68,
+                0x69,0x6a,0x73,0x74,0x75,0x76,0x77,0x78,
+                0x79,0x7a,0x82,0x83,0x84,0x85,0x86,0x87,
+                0x88,0x89,0x8a,0x92,0x93,0x94,0x95,0x96,
+                0x97,0x98,0x99,0x9a,0xa2,0xa3,0xa4,0xa5,
+                0xa6,0xa7,0xa8,0xa9,0xaa,0xb2,0xb3,0xb4,
+                0xb5,0xb6,0xb7,0xb8,0xb9,0xba,0xc2,0xc3,
+                0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xd2,
+                0xd3,0xd4,0xd5,0xd6,0xd7,0xd8,0xd9,0xda,
+                0xe2,0xe3,0xe4,0xe5,0xe6,0xe7,0xe8,0xe9,
+                0xea,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,
+                0xf9,0xfa
+            ];
 
             function initQuantTables(sf){
-                    var YQT = [
-                        16, 11, 10, 16, 24, 40, 51, 61,
-                        12, 12, 14, 19, 26, 58, 60, 55,
-                        14, 13, 16, 24, 40, 57, 69, 56,
-                        14, 17, 22, 29, 51, 87, 80, 62,
-                        18, 22, 37, 56, 68,109,103, 77,
-                        24, 35, 55, 64, 81,104,113, 92,
-                        49, 64, 78, 87,103,121,120,101,
-                        72, 92, 95, 98,112,100,103, 99
-                    ];
+                var YQT = [
+                    16, 11, 10, 16, 24, 40, 51, 61,
+                    12, 12, 14, 19, 26, 58, 60, 55,
+                    14, 13, 16, 24, 40, 57, 69, 56,
+                    14, 17, 22, 29, 51, 87, 80, 62,
+                    18, 22, 37, 56, 68,109,103, 77,
+                    24, 35, 55, 64, 81,104,113, 92,
+                    49, 64, 78, 87,103,121,120,101,
+                    72, 92, 95, 98,112,100,103, 99
+                ];
 
-                    for (var i = 0; i < 64; i++) {
-                        var t = ffloor((YQT[i]*sf+50)/100);
-                        if (t < 1) {
-                            t = 1;
-                        } else if (t > 255) {
-                            t = 255;
-                        }
-                        YTable[ZigZag[i]] = t;
+                for (var i = 0; i < 64; i++) {
+                    var t = ffloor((YQT[i]*sf+50)/100);
+                    if (t < 1) {
+                        t = 1;
+                    } else if (t > 255) {
+                        t = 255;
                     }
-                    var UVQT = [
-                        17, 18, 24, 47, 99, 99, 99, 99,
-                        18, 21, 26, 66, 99, 99, 99, 99,
-                        24, 26, 56, 99, 99, 99, 99, 99,
-                        47, 66, 99, 99, 99, 99, 99, 99,
-                        99, 99, 99, 99, 99, 99, 99, 99,
-                        99, 99, 99, 99, 99, 99, 99, 99,
-                        99, 99, 99, 99, 99, 99, 99, 99,
-                        99, 99, 99, 99, 99, 99, 99, 99
-                    ];
-                    for (var j = 0; j < 64; j++) {
-                        var u = ffloor((UVQT[j]*sf+50)/100);
-                        if (u < 1) {
-                            u = 1;
-                        } else if (u > 255) {
-                            u = 255;
-                        }
-                        UVTable[ZigZag[j]] = u;
+                    YTable[ZigZag[i]] = t;
+                }
+                var UVQT = [
+                    17, 18, 24, 47, 99, 99, 99, 99,
+                    18, 21, 26, 66, 99, 99, 99, 99,
+                    24, 26, 56, 99, 99, 99, 99, 99,
+                    47, 66, 99, 99, 99, 99, 99, 99,
+                    99, 99, 99, 99, 99, 99, 99, 99,
+                    99, 99, 99, 99, 99, 99, 99, 99,
+                    99, 99, 99, 99, 99, 99, 99, 99,
+                    99, 99, 99, 99, 99, 99, 99, 99
+                ];
+                for (var j = 0; j < 64; j++) {
+                    var u = ffloor((UVQT[j]*sf+50)/100);
+                    if (u < 1) {
+                        u = 1;
+                    } else if (u > 255) {
+                        u = 255;
                     }
-                    var aasf = [
-                        1.0, 1.387039845, 1.306562965, 1.175875602,
-                        1.0, 0.785694958, 0.541196100, 0.275899379
-                    ];
-                    var k = 0;
-                    for (var row = 0; row < 8; row++)
+                    UVTable[ZigZag[j]] = u;
+                }
+                var aasf = [
+                    1.0, 1.387039845, 1.306562965, 1.175875602,
+                    1.0, 0.785694958, 0.541196100, 0.275899379
+                ];
+                var k = 0;
+                for (var row = 0; row < 8; row++)
+                {
+                    for (var col = 0; col < 8; col++)
                     {
-                        for (var col = 0; col < 8; col++)
-                        {
-                            fdtbl_Y[k]  = (1.0 / (YTable [ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
-                            fdtbl_UV[k] = (1.0 / (UVTable[ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
-                            k++;
+                        fdtbl_Y[k]  = (1.0 / (YTable [ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
+                        fdtbl_UV[k] = (1.0 / (UVTable[ZigZag[k]] * aasf[row] * aasf[col] * 8.0));
+                        k++;
+                    }
+                }
+            }
+
+            function computeHuffmanTbl(nrcodes, std_table){
+                var codevalue = 0;
+                var pos_in_table = 0;
+                var HT = new Array();
+                for (var k = 1; k <= 16; k++) {
+                    for (var j = 1; j <= nrcodes[k]; j++) {
+                        HT[std_table[pos_in_table]] = [];
+                        HT[std_table[pos_in_table]][0] = codevalue;
+                        HT[std_table[pos_in_table]][1] = k;
+                        pos_in_table++;
+                        codevalue++;
+                    }
+                    codevalue*=2;
+                }
+                return HT;
+            }
+
+            function initHuffmanTbl()
+            {
+                YDC_HT = computeHuffmanTbl(std_dc_luminance_nrcodes,std_dc_luminance_values);
+                UVDC_HT = computeHuffmanTbl(std_dc_chrominance_nrcodes,std_dc_chrominance_values);
+                YAC_HT = computeHuffmanTbl(std_ac_luminance_nrcodes,std_ac_luminance_values);
+                UVAC_HT = computeHuffmanTbl(std_ac_chrominance_nrcodes,std_ac_chrominance_values);
+            }
+
+            function initCategoryNumber()
+            {
+                var nrlower = 1;
+                var nrupper = 2;
+                for (var cat = 1; cat <= 15; cat++) {
+                    //Positive numbers
+                    for (var nr = nrlower; nr<nrupper; nr++) {
+                        category[32767+nr] = cat;
+                        bitcode[32767+nr] = [];
+                        bitcode[32767+nr][1] = cat;
+                        bitcode[32767+nr][0] = nr;
+                    }
+                    //Negative numbers
+                    for (var nrneg =-(nrupper-1); nrneg<=-nrlower; nrneg++) {
+                        category[32767+nrneg] = cat;
+                        bitcode[32767+nrneg] = [];
+                        bitcode[32767+nrneg][1] = cat;
+                        bitcode[32767+nrneg][0] = nrupper-1+nrneg;
+                    }
+                    nrlower <<= 1;
+                    nrupper <<= 1;
+                }
+            }
+
+            function initRGBYUVTable() {
+                for(var i = 0; i < 256;i++) {
+                    RGB_YUV_TABLE[i]            =  19595 * i;
+                    RGB_YUV_TABLE[(i+ 256)>>0]  =  38470 * i;
+                    RGB_YUV_TABLE[(i+ 512)>>0]  =   7471 * i + 0x8000;
+                    RGB_YUV_TABLE[(i+ 768)>>0]  = -11059 * i;
+                    RGB_YUV_TABLE[(i+1024)>>0]  = -21709 * i;
+                    RGB_YUV_TABLE[(i+1280)>>0]  =  32768 * i + 0x807FFF;
+                    RGB_YUV_TABLE[(i+1536)>>0]  = -27439 * i;
+                    RGB_YUV_TABLE[(i+1792)>>0]  = - 5329 * i;
+                }
+            }
+
+            // IO functions
+            function writeBits(bs)
+            {
+                var value = bs[0];
+                var posval = bs[1]-1;
+                while ( posval >= 0 ) {
+                    if (value & (1 << posval) ) {
+                        bytenew |= (1 << bytepos);
+                    }
+                    posval--;
+                    bytepos--;
+                    if (bytepos < 0) {
+                        if (bytenew == 0xFF) {
+                            writeByte(0xFF);
+                            writeByte(0);
                         }
-                    }
-                }
-
-                function computeHuffmanTbl(nrcodes, std_table){
-                    var codevalue = 0;
-                    var pos_in_table = 0;
-                    var HT = new Array();
-                    for (var k = 1; k <= 16; k++) {
-                        for (var j = 1; j <= nrcodes[k]; j++) {
-                            HT[std_table[pos_in_table]] = [];
-                            HT[std_table[pos_in_table]][0] = codevalue;
-                            HT[std_table[pos_in_table]][1] = k;
-                            pos_in_table++;
-                            codevalue++;
+                        else {
+                            writeByte(bytenew);
                         }
-                        codevalue*=2;
+                        bytepos=7;
+                        bytenew=0;
                     }
-                    return HT;
                 }
+            }
 
-                function initHuffmanTbl()
+            function writeByte(value)
+            {
+                byteout.push(clt[value]); // write char directly instead of converting later
+            }
+
+            function writeWord(value)
+            {
+                writeByte((value>>8)&0xFF);
+                writeByte((value   )&0xFF);
+            }
+
+            // DCT & quantization core
+            function fDCTQuant(data, fdtbl)
+            {
+                var d0, d1, d2, d3, d4, d5, d6, d7;
+                /* Pass 1: process rows. */
+                var dataOff=0;
+                var i;
+                var I8 = 8;
+                var I64 = 64;
+                for (i=0; i<I8; ++i)
                 {
-                    YDC_HT = computeHuffmanTbl(std_dc_luminance_nrcodes,std_dc_luminance_values);
-                    UVDC_HT = computeHuffmanTbl(std_dc_chrominance_nrcodes,std_dc_chrominance_values);
-                    YAC_HT = computeHuffmanTbl(std_ac_luminance_nrcodes,std_ac_luminance_values);
-                    UVAC_HT = computeHuffmanTbl(std_ac_chrominance_nrcodes,std_ac_chrominance_values);
+                    d0 = data[dataOff];
+                    d1 = data[dataOff+1];
+                    d2 = data[dataOff+2];
+                    d3 = data[dataOff+3];
+                    d4 = data[dataOff+4];
+                    d5 = data[dataOff+5];
+                    d6 = data[dataOff+6];
+                    d7 = data[dataOff+7];
+
+                    var tmp0 = d0 + d7;
+                    var tmp7 = d0 - d7;
+                    var tmp1 = d1 + d6;
+                    var tmp6 = d1 - d6;
+                    var tmp2 = d2 + d5;
+                    var tmp5 = d2 - d5;
+                    var tmp3 = d3 + d4;
+                    var tmp4 = d3 - d4;
+
+                    /* Even part */
+                    var tmp10 = tmp0 + tmp3;    /* phase 2 */
+                    var tmp13 = tmp0 - tmp3;
+                    var tmp11 = tmp1 + tmp2;
+                    var tmp12 = tmp1 - tmp2;
+
+                    data[dataOff] = tmp10 + tmp11; /* phase 3 */
+                    data[dataOff+4] = tmp10 - tmp11;
+
+                    var z1 = (tmp12 + tmp13) * 0.707106781; /* c4 */
+                    data[dataOff+2] = tmp13 + z1; /* phase 5 */
+                    data[dataOff+6] = tmp13 - z1;
+
+                    /* Odd part */
+                    tmp10 = tmp4 + tmp5; /* phase 2 */
+                    tmp11 = tmp5 + tmp6;
+                    tmp12 = tmp6 + tmp7;
+
+                    /* The rotator is modified from fig 4-8 to avoid extra negations. */
+                    var z5 = (tmp10 - tmp12) * 0.382683433; /* c6 */
+                    var z2 = 0.541196100 * tmp10 + z5; /* c2-c6 */
+                    var z4 = 1.306562965 * tmp12 + z5; /* c2+c6 */
+                    var z3 = tmp11 * 0.707106781; /* c4 */
+
+                    var z11 = tmp7 + z3;    /* phase 5 */
+                    var z13 = tmp7 - z3;
+
+                    data[dataOff+5] = z13 + z2; /* phase 6 */
+                    data[dataOff+3] = z13 - z2;
+                    data[dataOff+1] = z11 + z4;
+                    data[dataOff+7] = z11 - z4;
+
+                    dataOff += 8; /* advance pointer to next row */
                 }
 
-                function initCategoryNumber()
+                /* Pass 2: process columns. */
+                dataOff = 0;
+                for (i=0; i<I8; ++i)
                 {
-                    var nrlower = 1;
-                    var nrupper = 2;
-                    for (var cat = 1; cat <= 15; cat++) {
-                        //Positive numbers
-                        for (var nr = nrlower; nr<nrupper; nr++) {
-                            category[32767+nr] = cat;
-                            bitcode[32767+nr] = [];
-                            bitcode[32767+nr][1] = cat;
-                            bitcode[32767+nr][0] = nr;
-                        }
-                        //Negative numbers
-                        for (var nrneg =-(nrupper-1); nrneg<=-nrlower; nrneg++) {
-                            category[32767+nrneg] = cat;
-                            bitcode[32767+nrneg] = [];
-                            bitcode[32767+nrneg][1] = cat;
-                            bitcode[32767+nrneg][0] = nrupper-1+nrneg;
-                        }
-                        nrlower <<= 1;
-                        nrupper <<= 1;
-                    }
+                    d0 = data[dataOff];
+                    d1 = data[dataOff + 8];
+                    d2 = data[dataOff + 16];
+                    d3 = data[dataOff + 24];
+                    d4 = data[dataOff + 32];
+                    d5 = data[dataOff + 40];
+                    d6 = data[dataOff + 48];
+                    d7 = data[dataOff + 56];
+
+                    var tmp0p2 = d0 + d7;
+                    var tmp7p2 = d0 - d7;
+                    var tmp1p2 = d1 + d6;
+                    var tmp6p2 = d1 - d6;
+                    var tmp2p2 = d2 + d5;
+                    var tmp5p2 = d2 - d5;
+                    var tmp3p2 = d3 + d4;
+                    var tmp4p2 = d3 - d4;
+
+                    /* Even part */
+                    var tmp10p2 = tmp0p2 + tmp3p2;  /* phase 2 */
+                    var tmp13p2 = tmp0p2 - tmp3p2;
+                    var tmp11p2 = tmp1p2 + tmp2p2;
+                    var tmp12p2 = tmp1p2 - tmp2p2;
+
+                    data[dataOff] = tmp10p2 + tmp11p2; /* phase 3 */
+                    data[dataOff+32] = tmp10p2 - tmp11p2;
+
+                    var z1p2 = (tmp12p2 + tmp13p2) * 0.707106781; /* c4 */
+                    data[dataOff+16] = tmp13p2 + z1p2; /* phase 5 */
+                    data[dataOff+48] = tmp13p2 - z1p2;
+
+                    /* Odd part */
+                    tmp10p2 = tmp4p2 + tmp5p2; /* phase 2 */
+                    tmp11p2 = tmp5p2 + tmp6p2;
+                    tmp12p2 = tmp6p2 + tmp7p2;
+
+                    /* The rotator is modified from fig 4-8 to avoid extra negations. */
+                    var z5p2 = (tmp10p2 - tmp12p2) * 0.382683433; /* c6 */
+                    var z2p2 = 0.541196100 * tmp10p2 + z5p2; /* c2-c6 */
+                    var z4p2 = 1.306562965 * tmp12p2 + z5p2; /* c2+c6 */
+                    var z3p2 = tmp11p2 * 0.707106781; /* c4 */
+
+                    var z11p2 = tmp7p2 + z3p2;  /* phase 5 */
+                    var z13p2 = tmp7p2 - z3p2;
+
+                    data[dataOff+40] = z13p2 + z2p2; /* phase 6 */
+                    data[dataOff+24] = z13p2 - z2p2;
+                    data[dataOff+ 8] = z11p2 + z4p2;
+                    data[dataOff+56] = z11p2 - z4p2;
+
+                    dataOff++; /* advance pointer to next column */
                 }
 
-                function initRGBYUVTable() {
-                    for(var i = 0; i < 256;i++) {
-                        RGB_YUV_TABLE[i]            =  19595 * i;
-                        RGB_YUV_TABLE[(i+ 256)>>0]  =  38470 * i;
-                        RGB_YUV_TABLE[(i+ 512)>>0]  =   7471 * i + 0x8000;
-                        RGB_YUV_TABLE[(i+ 768)>>0]  = -11059 * i;
-                        RGB_YUV_TABLE[(i+1024)>>0]  = -21709 * i;
-                        RGB_YUV_TABLE[(i+1280)>>0]  =  32768 * i + 0x807FFF;
-                        RGB_YUV_TABLE[(i+1536)>>0]  = -27439 * i;
-                        RGB_YUV_TABLE[(i+1792)>>0]  = - 5329 * i;
-                    }
-                }
-
-                // IO functions
-                function writeBits(bs)
+                // Quantize/descale the coefficients
+                var fDCTQuant;
+                for (i=0; i<I64; ++i)
                 {
-                    var value = bs[0];
-                    var posval = bs[1]-1;
-                    while ( posval >= 0 ) {
-                        if (value & (1 << posval) ) {
-                            bytenew |= (1 << bytepos);
-                        }
-                        posval--;
-                        bytepos--;
-                        if (bytepos < 0) {
-                            if (bytenew == 0xFF) {
-                                writeByte(0xFF);
-                                writeByte(0);
-                            }
-                            else {
-                                writeByte(bytenew);
-                            }
-                            bytepos=7;
-                            bytenew=0;
-                        }
-                    }
+                    // Apply the quantization and scaling factor & Round to nearest integer
+                    fDCTQuant = data[i]*fdtbl[i];
+                    outputfDCTQuant[i] = (fDCTQuant > 0.0) ? ((fDCTQuant + 0.5)|0) : ((fDCTQuant - 0.5)|0);
+                    //outputfDCTQuant[i] = fround(fDCTQuant);
+
+                }
+                return outputfDCTQuant;
+            }
+
+            function writeAPP0()
+            {
+                writeWord(0xFFE0); // marker
+                writeWord(16); // length
+                writeByte(0x4A); // J
+                writeByte(0x46); // F
+                writeByte(0x49); // I
+                writeByte(0x46); // F
+                writeByte(0); // = "JFIF",'\0'
+                writeByte(1); // versionhi
+                writeByte(1); // versionlo
+                writeByte(0); // xyunits
+                writeWord(1); // xdensity
+                writeWord(1); // ydensity
+                writeByte(0); // thumbnwidth
+                writeByte(0); // thumbnheight
+            }
+
+            function writeSOF0(width, height)
+            {
+                writeWord(0xFFC0); // marker
+                writeWord(17);   // length, truecolor YUV JPG
+                writeByte(8);    // precision
+                writeWord(height);
+                writeWord(width);
+                writeByte(3);    // nrofcomponents
+                writeByte(1);    // IdY
+                writeByte(0x11); // HVY
+                writeByte(0);    // QTY
+                writeByte(2);    // IdU
+                writeByte(0x11); // HVU
+                writeByte(1);    // QTU
+                writeByte(3);    // IdV
+                writeByte(0x11); // HVV
+                writeByte(1);    // QTV
+            }
+
+            function writeDQT()
+            {
+                writeWord(0xFFDB); // marker
+                writeWord(132);    // length
+                writeByte(0);
+                for (var i=0; i<64; i++) {
+                    writeByte(YTable[i]);
+                }
+                writeByte(1);
+                for (var j=0; j<64; j++) {
+                    writeByte(UVTable[j]);
+                }
+            }
+
+            function writeDHT()
+            {
+                writeWord(0xFFC4); // marker
+                writeWord(0x01A2); // length
+
+                writeByte(0); // HTYDCinfo
+                for (var i=0; i<16; i++) {
+                    writeByte(std_dc_luminance_nrcodes[i+1]);
+                }
+                for (var j=0; j<=11; j++) {
+                    writeByte(std_dc_luminance_values[j]);
                 }
 
-                function writeByte(value)
-                {
-                    byteout.push(clt[value]); // write char directly instead of converting later
+                writeByte(0x10); // HTYACinfo
+                for (var k=0; k<16; k++) {
+                    writeByte(std_ac_luminance_nrcodes[k+1]);
+                }
+                for (var l=0; l<=161; l++) {
+                    writeByte(std_ac_luminance_values[l]);
                 }
 
-                function writeWord(value)
-                {
-                    writeByte((value>>8)&0xFF);
-                    writeByte((value   )&0xFF);
+                writeByte(1); // HTUDCinfo
+                for (var m=0; m<16; m++) {
+                    writeByte(std_dc_chrominance_nrcodes[m+1]);
+                }
+                for (var n=0; n<=11; n++) {
+                    writeByte(std_dc_chrominance_values[n]);
                 }
 
-                // DCT & quantization core
-                function fDCTQuant(data, fdtbl)
-                {
-                    var d0, d1, d2, d3, d4, d5, d6, d7;
-                    /* Pass 1: process rows. */
-                    var dataOff=0;
-                    var i;
-                    var I8 = 8;
-                    var I64 = 64;
-                    for (i=0; i<I8; ++i)
-                    {
-                        d0 = data[dataOff];
-                        d1 = data[dataOff+1];
-                        d2 = data[dataOff+2];
-                        d3 = data[dataOff+3];
-                        d4 = data[dataOff+4];
-                        d5 = data[dataOff+5];
-                        d6 = data[dataOff+6];
-                        d7 = data[dataOff+7];
-
-                        var tmp0 = d0 + d7;
-                        var tmp7 = d0 - d7;
-                        var tmp1 = d1 + d6;
-                        var tmp6 = d1 - d6;
-                        var tmp2 = d2 + d5;
-                        var tmp5 = d2 - d5;
-                        var tmp3 = d3 + d4;
-                        var tmp4 = d3 - d4;
-
-                        /* Even part */
-                        var tmp10 = tmp0 + tmp3;    /* phase 2 */
-                        var tmp13 = tmp0 - tmp3;
-                        var tmp11 = tmp1 + tmp2;
-                        var tmp12 = tmp1 - tmp2;
-
-                        data[dataOff] = tmp10 + tmp11; /* phase 3 */
-                        data[dataOff+4] = tmp10 - tmp11;
-
-                        var z1 = (tmp12 + tmp13) * 0.707106781; /* c4 */
-                        data[dataOff+2] = tmp13 + z1; /* phase 5 */
-                        data[dataOff+6] = tmp13 - z1;
-
-                        /* Odd part */
-                        tmp10 = tmp4 + tmp5; /* phase 2 */
-                        tmp11 = tmp5 + tmp6;
-                        tmp12 = tmp6 + tmp7;
-
-                        /* The rotator is modified from fig 4-8 to avoid extra negations. */
-                        var z5 = (tmp10 - tmp12) * 0.382683433; /* c6 */
-                        var z2 = 0.541196100 * tmp10 + z5; /* c2-c6 */
-                        var z4 = 1.306562965 * tmp12 + z5; /* c2+c6 */
-                        var z3 = tmp11 * 0.707106781; /* c4 */
-
-                        var z11 = tmp7 + z3;    /* phase 5 */
-                        var z13 = tmp7 - z3;
-
-                        data[dataOff+5] = z13 + z2; /* phase 6 */
-                        data[dataOff+3] = z13 - z2;
-                        data[dataOff+1] = z11 + z4;
-                        data[dataOff+7] = z11 - z4;
-
-                        dataOff += 8; /* advance pointer to next row */
-                    }
-
-                    /* Pass 2: process columns. */
-                    dataOff = 0;
-                    for (i=0; i<I8; ++i)
-                    {
-                        d0 = data[dataOff];
-                        d1 = data[dataOff + 8];
-                        d2 = data[dataOff + 16];
-                        d3 = data[dataOff + 24];
-                        d4 = data[dataOff + 32];
-                        d5 = data[dataOff + 40];
-                        d6 = data[dataOff + 48];
-                        d7 = data[dataOff + 56];
-
-                        var tmp0p2 = d0 + d7;
-                        var tmp7p2 = d0 - d7;
-                        var tmp1p2 = d1 + d6;
-                        var tmp6p2 = d1 - d6;
-                        var tmp2p2 = d2 + d5;
-                        var tmp5p2 = d2 - d5;
-                        var tmp3p2 = d3 + d4;
-                        var tmp4p2 = d3 - d4;
-
-                        /* Even part */
-                        var tmp10p2 = tmp0p2 + tmp3p2;  /* phase 2 */
-                        var tmp13p2 = tmp0p2 - tmp3p2;
-                        var tmp11p2 = tmp1p2 + tmp2p2;
-                        var tmp12p2 = tmp1p2 - tmp2p2;
-
-                        data[dataOff] = tmp10p2 + tmp11p2; /* phase 3 */
-                        data[dataOff+32] = tmp10p2 - tmp11p2;
-
-                        var z1p2 = (tmp12p2 + tmp13p2) * 0.707106781; /* c4 */
-                        data[dataOff+16] = tmp13p2 + z1p2; /* phase 5 */
-                        data[dataOff+48] = tmp13p2 - z1p2;
-
-                        /* Odd part */
-                        tmp10p2 = tmp4p2 + tmp5p2; /* phase 2 */
-                        tmp11p2 = tmp5p2 + tmp6p2;
-                        tmp12p2 = tmp6p2 + tmp7p2;
-
-                        /* The rotator is modified from fig 4-8 to avoid extra negations. */
-                        var z5p2 = (tmp10p2 - tmp12p2) * 0.382683433; /* c6 */
-                        var z2p2 = 0.541196100 * tmp10p2 + z5p2; /* c2-c6 */
-                        var z4p2 = 1.306562965 * tmp12p2 + z5p2; /* c2+c6 */
-                        var z3p2 = tmp11p2 * 0.707106781; /* c4 */
-
-                        var z11p2 = tmp7p2 + z3p2;  /* phase 5 */
-                        var z13p2 = tmp7p2 - z3p2;
-
-                        data[dataOff+40] = z13p2 + z2p2; /* phase 6 */
-                        data[dataOff+24] = z13p2 - z2p2;
-                        data[dataOff+ 8] = z11p2 + z4p2;
-                        data[dataOff+56] = z11p2 - z4p2;
-
-                        dataOff++; /* advance pointer to next column */
-                    }
-
-                    // Quantize/descale the coefficients
-                    var fDCTQuant;
-                    for (i=0; i<I64; ++i)
-                    {
-                        // Apply the quantization and scaling factor & Round to nearest integer
-                        fDCTQuant = data[i]*fdtbl[i];
-                        outputfDCTQuant[i] = (fDCTQuant > 0.0) ? ((fDCTQuant + 0.5)|0) : ((fDCTQuant - 0.5)|0);
-                        //outputfDCTQuant[i] = fround(fDCTQuant);
-
-                    }
-                    return outputfDCTQuant;
+                writeByte(0x11); // HTUACinfo
+                for (var o=0; o<16; o++) {
+                    writeByte(std_ac_chrominance_nrcodes[o+1]);
                 }
-
-                function writeAPP0()
-                {
-                    writeWord(0xFFE0); // marker
-                    writeWord(16); // length
-                    writeByte(0x4A); // J
-                    writeByte(0x46); // F
-                    writeByte(0x49); // I
-                    writeByte(0x46); // F
-                    writeByte(0); // = "JFIF",'\0'
-                    writeByte(1); // versionhi
-                    writeByte(1); // versionlo
-                    writeByte(0); // xyunits
-                    writeWord(1); // xdensity
-                    writeWord(1); // ydensity
-                    writeByte(0); // thumbnwidth
-                    writeByte(0); // thumbnheight
+                for (var p=0; p<=161; p++) {
+                    writeByte(std_ac_chrominance_values[p]);
                 }
+            }
 
-                function writeSOF0(width, height)
-                {
-                    writeWord(0xFFC0); // marker
-                    writeWord(17);   // length, truecolor YUV JPG
-                    writeByte(8);    // precision
-                    writeWord(height);
-                    writeWord(width);
-                    writeByte(3);    // nrofcomponents
-                    writeByte(1);    // IdY
-                    writeByte(0x11); // HVY
-                    writeByte(0);    // QTY
-                    writeByte(2);    // IdU
-                    writeByte(0x11); // HVU
-                    writeByte(1);    // QTU
-                    writeByte(3);    // IdV
-                    writeByte(0x11); // HVV
-                    writeByte(1);    // QTV
+            function writeSOS()
+            {
+                writeWord(0xFFDA); // marker
+                writeWord(12); // length
+                writeByte(3); // nrofcomponents
+                writeByte(1); // IdY
+                writeByte(0); // HTY
+                writeByte(2); // IdU
+                writeByte(0x11); // HTU
+                writeByte(3); // IdV
+                writeByte(0x11); // HTV
+                writeByte(0); // Ss
+                writeByte(0x3f); // Se
+                writeByte(0); // Bf
+            }
+
+            function processDU(CDU, fdtbl, DC, HTDC, HTAC){
+                var EOB = HTAC[0x00];
+                var M16zeroes = HTAC[0xF0];
+                var pos;
+                var I16 = 16;
+                var I63 = 63;
+                var I64 = 64;
+                var DU_DCT = fDCTQuant(CDU, fdtbl);
+                //ZigZag reorder
+                for (var j=0;j<I64;++j) {
+                    DU[ZigZag[j]]=DU_DCT[j];
                 }
-
-                function writeDQT()
-                {
-                    writeWord(0xFFDB); // marker
-                    writeWord(132);    // length
-                    writeByte(0);
-                    for (var i=0; i<64; i++) {
-                        writeByte(YTable[i]);
-                    }
-                    writeByte(1);
-                    for (var j=0; j<64; j++) {
-                        writeByte(UVTable[j]);
-                    }
+                var Diff = DU[0] - DC; DC = DU[0];
+                //Encode DC
+                if (Diff==0) {
+                    writeBits(HTDC[0]); // Diff might be 0
+                } else {
+                    pos = 32767+Diff;
+                    writeBits(HTDC[category[pos]]);
+                    writeBits(bitcode[pos]);
                 }
-
-                function writeDHT()
-                {
-                    writeWord(0xFFC4); // marker
-                    writeWord(0x01A2); // length
-
-                    writeByte(0); // HTYDCinfo
-                    for (var i=0; i<16; i++) {
-                        writeByte(std_dc_luminance_nrcodes[i+1]);
-                    }
-                    for (var j=0; j<=11; j++) {
-                        writeByte(std_dc_luminance_values[j]);
-                    }
-
-                    writeByte(0x10); // HTYACinfo
-                    for (var k=0; k<16; k++) {
-                        writeByte(std_ac_luminance_nrcodes[k+1]);
-                    }
-                    for (var l=0; l<=161; l++) {
-                        writeByte(std_ac_luminance_values[l]);
-                    }
-
-                    writeByte(1); // HTUDCinfo
-                    for (var m=0; m<16; m++) {
-                        writeByte(std_dc_chrominance_nrcodes[m+1]);
-                    }
-                    for (var n=0; n<=11; n++) {
-                        writeByte(std_dc_chrominance_values[n]);
-                    }
-
-                    writeByte(0x11); // HTUACinfo
-                    for (var o=0; o<16; o++) {
-                        writeByte(std_ac_chrominance_nrcodes[o+1]);
-                    }
-                    for (var p=0; p<=161; p++) {
-                        writeByte(std_ac_chrominance_values[p]);
-                    }
-                }
-
-                function writeSOS()
-                {
-                    writeWord(0xFFDA); // marker
-                    writeWord(12); // length
-                    writeByte(3); // nrofcomponents
-                    writeByte(1); // IdY
-                    writeByte(0); // HTY
-                    writeByte(2); // IdU
-                    writeByte(0x11); // HTU
-                    writeByte(3); // IdV
-                    writeByte(0x11); // HTV
-                    writeByte(0); // Ss
-                    writeByte(0x3f); // Se
-                    writeByte(0); // Bf
-                }
-
-                function processDU(CDU, fdtbl, DC, HTDC, HTAC){
-                    var EOB = HTAC[0x00];
-                    var M16zeroes = HTAC[0xF0];
-                    var pos;
-                    var I16 = 16;
-                    var I63 = 63;
-                    var I64 = 64;
-                    var DU_DCT = fDCTQuant(CDU, fdtbl);
-                    //ZigZag reorder
-                    for (var j=0;j<I64;++j) {
-                        DU[ZigZag[j]]=DU_DCT[j];
-                    }
-                    var Diff = DU[0] - DC; DC = DU[0];
-                    //Encode DC
-                    if (Diff==0) {
-                        writeBits(HTDC[0]); // Diff might be 0
-                    } else {
-                        pos = 32767+Diff;
-                        writeBits(HTDC[category[pos]]);
-                        writeBits(bitcode[pos]);
-                    }
-                    //Encode ACs
-                    var end0pos = 63; // was const... which is crazy
-                    for (; (end0pos>0)&&(DU[end0pos]==0); end0pos--) {};
-                    //end0pos = first element in reverse order !=0
-                    if ( end0pos == 0) {
-                        writeBits(EOB);
-                        return DC;
-                    }
-                    var i = 1;
-                    var lng;
-                    while ( i <= end0pos ) {
-                        var startpos = i;
-                        for (; (DU[i]==0) && (i<=end0pos); ++i) {}
-                        var nrzeroes = i-startpos;
-                        if ( nrzeroes >= I16 ) {
-                            lng = nrzeroes>>4;
-                            for (var nrmarker=1; nrmarker <= lng; ++nrmarker)
-                                writeBits(M16zeroes);
-                            nrzeroes = nrzeroes&0xF;
-                        }
-                        pos = 32767+DU[i];
-                        writeBits(HTAC[(nrzeroes<<4)+category[pos]]);
-                        writeBits(bitcode[pos]);
-                        i++;
-                    }
-                    if ( end0pos != I63 ) {
-                        writeBits(EOB);
-                    }
+                //Encode ACs
+                var end0pos = 63; // was const... which is crazy
+                for (; (end0pos>0)&&(DU[end0pos]==0); end0pos--) {};
+                //end0pos = first element in reverse order !=0
+                if ( end0pos == 0) {
+                    writeBits(EOB);
                     return DC;
                 }
-
-                function initCharLookupTable(){
-                    var sfcc = String.fromCharCode;
-                    for(var i=0; i < 256; i++){ ///// ACHTUNG // 255
-                        clt[i] = sfcc(i);
+                var i = 1;
+                var lng;
+                while ( i <= end0pos ) {
+                    var startpos = i;
+                    for (; (DU[i]==0) && (i<=end0pos); ++i) {}
+                    var nrzeroes = i-startpos;
+                    if ( nrzeroes >= I16 ) {
+                        lng = nrzeroes>>4;
+                        for (var nrmarker=1; nrmarker <= lng; ++nrmarker)
+                            writeBits(M16zeroes);
+                        nrzeroes = nrzeroes&0xF;
                     }
+                    pos = 32767+DU[i];
+                    writeBits(HTAC[(nrzeroes<<4)+category[pos]]);
+                    writeBits(bitcode[pos]);
+                    i++;
                 }
+                if ( end0pos != I63 ) {
+                    writeBits(EOB);
+                }
+                return DC;
+            }
 
-                this.encode = function(image,quality) // image data object
-                {
-                    // var time_start = new Date().getTime();
+            function initCharLookupTable(){
+                var sfcc = String.fromCharCode;
+                for(var i=0; i < 256; i++){ ///// ACHTUNG // 255
+                    clt[i] = sfcc(i);
+                }
+            }
 
-                    if(quality) setQuality(quality);
+            this.encode = function(image,quality) // image data object
+            {
+                // var time_start = new Date().getTime();
 
-                    // Initialize bit writer
-                    byteout = new Array();
-                    bytenew=0;
-                    bytepos=7;
+                if(quality) setQuality(quality);
 
-                    // Add JPEG headers
-                    writeWord(0xFFD8); // SOI
-                    writeAPP0();
-                    writeDQT();
-                    writeSOF0(image.width,image.height);
-                    writeDHT();
-                    writeSOS();
+                // Initialize bit writer
+                byteout = new Array();
+                bytenew=0;
+                bytepos=7;
 
-
-                    // Encode 8x8 macroblocks
-                    var DCY=0;
-                    var DCU=0;
-                    var DCV=0;
-
-                    bytenew=0;
-                    bytepos=7;
+                // Add JPEG headers
+                writeWord(0xFFD8); // SOI
+                writeAPP0();
+                writeDQT();
+                writeSOF0(image.width,image.height);
+                writeDHT();
+                writeSOS();
 
 
-                    this.encode.displayName = "_encode_";
+                // Encode 8x8 macroblocks
+                var DCY=0;
+                var DCU=0;
+                var DCV=0;
 
-                    var imageData = image.data;
-                    var width = image.width;
-                    var height = image.height;
+                bytenew=0;
+                bytepos=7;
 
-                    var quadWidth = width*4;
-                    var tripleWidth = width*3;
 
-                    var x, y = 0;
-                    var r, g, b;
-                    var start,p, col,row,pos;
-                    while(y < height){
-                        x = 0;
-                        while(x < quadWidth){
+                this.encode.displayName = "_encode_";
+
+                var imageData = image.data;
+                var width = image.width;
+                var height = image.height;
+
+                var quadWidth = width*4;
+                var tripleWidth = width*3;
+
+                var x, y = 0;
+                var r, g, b;
+                var start,p, col,row,pos;
+                while(y < height){
+                    x = 0;
+                    while(x < quadWidth){
                         start = quadWidth * y + x;
                         p = start;
                         col = -1;
@@ -6183,10 +6183,10 @@
 
 
                             /* // calculate YUV values dynamically
-                            YDU[pos]=((( 0.29900)*r+( 0.58700)*g+( 0.11400)*b))-128; //-0x80
-                            UDU[pos]=(((-0.16874)*r+(-0.33126)*g+( 0.50000)*b));
-                            VDU[pos]=((( 0.50000)*r+(-0.41869)*g+(-0.08131)*b));
-                            */
+                             YDU[pos]=((( 0.29900)*r+( 0.58700)*g+( 0.11400)*b))-128; //-0x80
+                             UDU[pos]=(((-0.16874)*r+(-0.33126)*g+( 0.50000)*b));
+                             VDU[pos]=((( 0.50000)*r+(-0.41869)*g+(-0.08131)*b));
+                             */
 
                             // use lookup table (slightly faster)
                             YDU[pos] = ((RGB_YUV_TABLE[r]             + RGB_YUV_TABLE[(g +  256)>>0] + RGB_YUV_TABLE[(b +  512)>>0]) >> 16)-128;
@@ -6199,33 +6199,33 @@
                         DCU = processDU(UDU, fdtbl_UV, DCU, UVDC_HT, UVAC_HT);
                         DCV = processDU(VDU, fdtbl_UV, DCV, UVDC_HT, UVAC_HT);
                         x+=32;
-                        }
-                        y+=8;
                     }
+                    y+=8;
+                }
 
 
-                    ////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////////////////////////
 
-                    // Do the bit alignment of the EOI marker
-                    if ( bytepos >= 0 ) {
-                        var fillbits = [];
-                        fillbits[1] = bytepos+1;
-                        fillbits[0] = (1<<(bytepos+1))-1;
-                        writeBits(fillbits);
-                    }
+                // Do the bit alignment of the EOI marker
+                if ( bytepos >= 0 ) {
+                    var fillbits = [];
+                    fillbits[1] = bytepos+1;
+                    fillbits[0] = (1<<(bytepos+1))-1;
+                    writeBits(fillbits);
+                }
 
-                    writeWord(0xFFD9); //EOI
+                writeWord(0xFFD9); //EOI
 
-                    var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
+                var jpegDataUri = 'data:image/jpeg;base64,' + btoa(byteout.join(''));
 
-                    byteout = [];
+                byteout = [];
 
-                    // benchmarking
-                    // var duration = new Date().getTime() - time_start;
-                    // console.log('Encoding time: '+ currentQuality + 'ms');
-                    //
+                // benchmarking
+                // var duration = new Date().getTime() - time_start;
+                // console.log('Encoding time: '+ currentQuality + 'ms');
+                //
 
-                    return jpegDataUri
+                return jpegDataUri
             }
 
             function setQuality(quality){
@@ -6311,7 +6311,7 @@
                 fragement = fragement.substring( 0, 2 );
 
                 supportJpeg = fragement.charCodeAt( 0 ) === 255 &&
-                        fragement.charCodeAt( 1 ) === 216;
+                    fragement.charCodeAt( 1 ) === 216;
             }
 
             // 只有在android环境下才修复
@@ -6388,7 +6388,7 @@
 
             resize: function( width, height ) {
                 var canvas = this._canvas ||
-                        (this._canvas = document.createElement('canvas'));
+                    (this._canvas = document.createElement('canvas'));
 
                 this._resize( this._img, canvas, width, height );
                 this._blob = null;    // 没用了，可以删掉了。
@@ -6450,11 +6450,11 @@
                         blob = Util.canvasToDataUrl( canvas, type, opts.quality );
 
                         if ( opts.preserveHeaders && this._metas &&
-                                this._metas.imageHead ) {
+                            this._metas.imageHead ) {
 
                             blob = Util.dataURL2ArrayBuffer( blob );
                             blob = Util.updateImageHead( blob,
-                                    this._metas.imageHead );
+                                this._metas.imageHead );
                             blob = Util.arrayBufferToBlob( blob, type );
                             return blob;
                         }
@@ -6482,7 +6482,7 @@
 
             getOrientation: function() {
                 return this._metas && this._metas.exif &&
-                        this._metas.exif.get('Orientation') || 1;
+                    this._metas.exif.get('Orientation') || 1;
             },
 
             info: function( val ) {
@@ -6515,7 +6515,7 @@
 
                 if ( canvas ) {
                     canvas.getContext('2d')
-                            .clearRect( 0, 0, canvas.width, canvas.height );
+                        .clearRect( 0, 0, canvas.width, canvas.height );
                     canvas.width = canvas.height = 0;
                     this._canvas = null;
                 }
@@ -6542,7 +6542,7 @@
                 }
 
                 scale = Math[ opts.crop ? 'max' : 'min' ]( width / naturalWidth,
-                        height / naturalHeight );
+                    height / naturalHeight );
 
                 // 不允许放大。
                 opts.allowMagnify || (scale = Math.min( 1, scale ));
@@ -6681,8 +6681,8 @@
                             vertSquashRatio = detectVerticalSquash( img, iw, ih );
 
                         return canvas.getContext('2d').drawImage( img, 0, 0,
-                                iw * vertSquashRatio, ih * vertSquashRatio,
-                                x, y, w, h );
+                            iw * vertSquashRatio, ih * vertSquashRatio,
+                            x, y, w, h );
                     };
                 }
 
@@ -6736,7 +6736,7 @@
 
                     tmpCtx = tmpCanvas.getContext('2d');
                     vertSquashRatio = doSquash ?
-                            detectVerticalSquash( img, iw, ih ) : 1;
+                        detectVerticalSquash( img, iw, ih ) : 1;
 
                     dw = Math.ceil( d * width / iw );
                     dh = Math.ceil( d * height / ih / vertSquashRatio );
@@ -6748,7 +6748,7 @@
                             tmpCtx.clearRect( 0, 0, d, d );
                             tmpCtx.drawImage( img, -sx, -sy );
                             ctx.drawImage( tmpCanvas, 0, 0, d, d,
-                                    x + dx, y + dy, dw, dh );
+                                x + dx, y + dy, dw, dh );
                             sx += d;
                             dx += dw;
                         }
@@ -6792,7 +6792,7 @@
 
                 if ( opts.sendAsBinary ) {
                     server += (/\?/.test( server ) ? '&' : '?') +
-                            $.param( owner._formData );
+                        $.param( owner._formData );
 
                     binary = blob.getSource();
                 } else {
@@ -6802,7 +6802,7 @@
                     });
 
                     formData.append( opts.fileVal, blob.getSource(),
-                            opts.filename || owner._formData.name || '' );
+                        opts.filename || owner._formData.name || '' );
                 }
 
                 if ( opts.withCredentials && 'withCredentials' in xhr ) {
@@ -6817,7 +6817,7 @@
                 if ( binary ) {
                     // 强制设置成 content-type 为文件流。
                     xhr.overrideMimeType &&
-                            xhr.overrideMimeType('application/octet-stream');
+                    xhr.overrideMimeType('application/octet-stream');
 
                     // android直接发送blob会导致服务端接收到的是空文件。
                     // bug详情。
@@ -6874,7 +6874,7 @@
                     opts = this.options;
 
                 if ( opts.withCredentials && !('withCredentials' in xhr) &&
-                        typeof XDomainRequest !== 'undefined' ) {
+                    typeof XDomainRequest !== 'undefined' ) {
                     xhr = new XDomainRequest();
                 }
 
@@ -6950,275 +6950,275 @@
          */
 
         /* this function is much faster,
-          so if possible we use it. Some IEs
-          are the only ones I know of that
-          need the idiotic second function,
-          generated by an if clause.  */
+         so if possible we use it. Some IEs
+         are the only ones I know of that
+         need the idiotic second function,
+         generated by an if clause.  */
         var add32 = function (a, b) {
-            return (a + b) & 0xFFFFFFFF;
-        },
+                return (a + b) & 0xFFFFFFFF;
+            },
 
-        cmn = function (q, a, b, x, s, t) {
-            a = add32(add32(a, q), add32(x, t));
-            return add32((a << s) | (a >>> (32 - s)), b);
-        },
+            cmn = function (q, a, b, x, s, t) {
+                a = add32(add32(a, q), add32(x, t));
+                return add32((a << s) | (a >>> (32 - s)), b);
+            },
 
-        ff = function (a, b, c, d, x, s, t) {
-            return cmn((b & c) | ((~b) & d), a, b, x, s, t);
-        },
+            ff = function (a, b, c, d, x, s, t) {
+                return cmn((b & c) | ((~b) & d), a, b, x, s, t);
+            },
 
-        gg = function (a, b, c, d, x, s, t) {
-            return cmn((b & d) | (c & (~d)), a, b, x, s, t);
-        },
+            gg = function (a, b, c, d, x, s, t) {
+                return cmn((b & d) | (c & (~d)), a, b, x, s, t);
+            },
 
-        hh = function (a, b, c, d, x, s, t) {
-            return cmn(b ^ c ^ d, a, b, x, s, t);
-        },
+            hh = function (a, b, c, d, x, s, t) {
+                return cmn(b ^ c ^ d, a, b, x, s, t);
+            },
 
-        ii = function (a, b, c, d, x, s, t) {
-            return cmn(c ^ (b | (~d)), a, b, x, s, t);
-        },
+            ii = function (a, b, c, d, x, s, t) {
+                return cmn(c ^ (b | (~d)), a, b, x, s, t);
+            },
 
-        md5cycle = function (x, k) {
-            var a = x[0],
-                b = x[1],
-                c = x[2],
-                d = x[3];
+            md5cycle = function (x, k) {
+                var a = x[0],
+                    b = x[1],
+                    c = x[2],
+                    d = x[3];
 
-            a = ff(a, b, c, d, k[0], 7, -680876936);
-            d = ff(d, a, b, c, k[1], 12, -389564586);
-            c = ff(c, d, a, b, k[2], 17, 606105819);
-            b = ff(b, c, d, a, k[3], 22, -1044525330);
-            a = ff(a, b, c, d, k[4], 7, -176418897);
-            d = ff(d, a, b, c, k[5], 12, 1200080426);
-            c = ff(c, d, a, b, k[6], 17, -1473231341);
-            b = ff(b, c, d, a, k[7], 22, -45705983);
-            a = ff(a, b, c, d, k[8], 7, 1770035416);
-            d = ff(d, a, b, c, k[9], 12, -1958414417);
-            c = ff(c, d, a, b, k[10], 17, -42063);
-            b = ff(b, c, d, a, k[11], 22, -1990404162);
-            a = ff(a, b, c, d, k[12], 7, 1804603682);
-            d = ff(d, a, b, c, k[13], 12, -40341101);
-            c = ff(c, d, a, b, k[14], 17, -1502002290);
-            b = ff(b, c, d, a, k[15], 22, 1236535329);
+                a = ff(a, b, c, d, k[0], 7, -680876936);
+                d = ff(d, a, b, c, k[1], 12, -389564586);
+                c = ff(c, d, a, b, k[2], 17, 606105819);
+                b = ff(b, c, d, a, k[3], 22, -1044525330);
+                a = ff(a, b, c, d, k[4], 7, -176418897);
+                d = ff(d, a, b, c, k[5], 12, 1200080426);
+                c = ff(c, d, a, b, k[6], 17, -1473231341);
+                b = ff(b, c, d, a, k[7], 22, -45705983);
+                a = ff(a, b, c, d, k[8], 7, 1770035416);
+                d = ff(d, a, b, c, k[9], 12, -1958414417);
+                c = ff(c, d, a, b, k[10], 17, -42063);
+                b = ff(b, c, d, a, k[11], 22, -1990404162);
+                a = ff(a, b, c, d, k[12], 7, 1804603682);
+                d = ff(d, a, b, c, k[13], 12, -40341101);
+                c = ff(c, d, a, b, k[14], 17, -1502002290);
+                b = ff(b, c, d, a, k[15], 22, 1236535329);
 
-            a = gg(a, b, c, d, k[1], 5, -165796510);
-            d = gg(d, a, b, c, k[6], 9, -1069501632);
-            c = gg(c, d, a, b, k[11], 14, 643717713);
-            b = gg(b, c, d, a, k[0], 20, -373897302);
-            a = gg(a, b, c, d, k[5], 5, -701558691);
-            d = gg(d, a, b, c, k[10], 9, 38016083);
-            c = gg(c, d, a, b, k[15], 14, -660478335);
-            b = gg(b, c, d, a, k[4], 20, -405537848);
-            a = gg(a, b, c, d, k[9], 5, 568446438);
-            d = gg(d, a, b, c, k[14], 9, -1019803690);
-            c = gg(c, d, a, b, k[3], 14, -187363961);
-            b = gg(b, c, d, a, k[8], 20, 1163531501);
-            a = gg(a, b, c, d, k[13], 5, -1444681467);
-            d = gg(d, a, b, c, k[2], 9, -51403784);
-            c = gg(c, d, a, b, k[7], 14, 1735328473);
-            b = gg(b, c, d, a, k[12], 20, -1926607734);
+                a = gg(a, b, c, d, k[1], 5, -165796510);
+                d = gg(d, a, b, c, k[6], 9, -1069501632);
+                c = gg(c, d, a, b, k[11], 14, 643717713);
+                b = gg(b, c, d, a, k[0], 20, -373897302);
+                a = gg(a, b, c, d, k[5], 5, -701558691);
+                d = gg(d, a, b, c, k[10], 9, 38016083);
+                c = gg(c, d, a, b, k[15], 14, -660478335);
+                b = gg(b, c, d, a, k[4], 20, -405537848);
+                a = gg(a, b, c, d, k[9], 5, 568446438);
+                d = gg(d, a, b, c, k[14], 9, -1019803690);
+                c = gg(c, d, a, b, k[3], 14, -187363961);
+                b = gg(b, c, d, a, k[8], 20, 1163531501);
+                a = gg(a, b, c, d, k[13], 5, -1444681467);
+                d = gg(d, a, b, c, k[2], 9, -51403784);
+                c = gg(c, d, a, b, k[7], 14, 1735328473);
+                b = gg(b, c, d, a, k[12], 20, -1926607734);
 
-            a = hh(a, b, c, d, k[5], 4, -378558);
-            d = hh(d, a, b, c, k[8], 11, -2022574463);
-            c = hh(c, d, a, b, k[11], 16, 1839030562);
-            b = hh(b, c, d, a, k[14], 23, -35309556);
-            a = hh(a, b, c, d, k[1], 4, -1530992060);
-            d = hh(d, a, b, c, k[4], 11, 1272893353);
-            c = hh(c, d, a, b, k[7], 16, -155497632);
-            b = hh(b, c, d, a, k[10], 23, -1094730640);
-            a = hh(a, b, c, d, k[13], 4, 681279174);
-            d = hh(d, a, b, c, k[0], 11, -358537222);
-            c = hh(c, d, a, b, k[3], 16, -722521979);
-            b = hh(b, c, d, a, k[6], 23, 76029189);
-            a = hh(a, b, c, d, k[9], 4, -640364487);
-            d = hh(d, a, b, c, k[12], 11, -421815835);
-            c = hh(c, d, a, b, k[15], 16, 530742520);
-            b = hh(b, c, d, a, k[2], 23, -995338651);
+                a = hh(a, b, c, d, k[5], 4, -378558);
+                d = hh(d, a, b, c, k[8], 11, -2022574463);
+                c = hh(c, d, a, b, k[11], 16, 1839030562);
+                b = hh(b, c, d, a, k[14], 23, -35309556);
+                a = hh(a, b, c, d, k[1], 4, -1530992060);
+                d = hh(d, a, b, c, k[4], 11, 1272893353);
+                c = hh(c, d, a, b, k[7], 16, -155497632);
+                b = hh(b, c, d, a, k[10], 23, -1094730640);
+                a = hh(a, b, c, d, k[13], 4, 681279174);
+                d = hh(d, a, b, c, k[0], 11, -358537222);
+                c = hh(c, d, a, b, k[3], 16, -722521979);
+                b = hh(b, c, d, a, k[6], 23, 76029189);
+                a = hh(a, b, c, d, k[9], 4, -640364487);
+                d = hh(d, a, b, c, k[12], 11, -421815835);
+                c = hh(c, d, a, b, k[15], 16, 530742520);
+                b = hh(b, c, d, a, k[2], 23, -995338651);
 
-            a = ii(a, b, c, d, k[0], 6, -198630844);
-            d = ii(d, a, b, c, k[7], 10, 1126891415);
-            c = ii(c, d, a, b, k[14], 15, -1416354905);
-            b = ii(b, c, d, a, k[5], 21, -57434055);
-            a = ii(a, b, c, d, k[12], 6, 1700485571);
-            d = ii(d, a, b, c, k[3], 10, -1894986606);
-            c = ii(c, d, a, b, k[10], 15, -1051523);
-            b = ii(b, c, d, a, k[1], 21, -2054922799);
-            a = ii(a, b, c, d, k[8], 6, 1873313359);
-            d = ii(d, a, b, c, k[15], 10, -30611744);
-            c = ii(c, d, a, b, k[6], 15, -1560198380);
-            b = ii(b, c, d, a, k[13], 21, 1309151649);
-            a = ii(a, b, c, d, k[4], 6, -145523070);
-            d = ii(d, a, b, c, k[11], 10, -1120210379);
-            c = ii(c, d, a, b, k[2], 15, 718787259);
-            b = ii(b, c, d, a, k[9], 21, -343485551);
+                a = ii(a, b, c, d, k[0], 6, -198630844);
+                d = ii(d, a, b, c, k[7], 10, 1126891415);
+                c = ii(c, d, a, b, k[14], 15, -1416354905);
+                b = ii(b, c, d, a, k[5], 21, -57434055);
+                a = ii(a, b, c, d, k[12], 6, 1700485571);
+                d = ii(d, a, b, c, k[3], 10, -1894986606);
+                c = ii(c, d, a, b, k[10], 15, -1051523);
+                b = ii(b, c, d, a, k[1], 21, -2054922799);
+                a = ii(a, b, c, d, k[8], 6, 1873313359);
+                d = ii(d, a, b, c, k[15], 10, -30611744);
+                c = ii(c, d, a, b, k[6], 15, -1560198380);
+                b = ii(b, c, d, a, k[13], 21, 1309151649);
+                a = ii(a, b, c, d, k[4], 6, -145523070);
+                d = ii(d, a, b, c, k[11], 10, -1120210379);
+                c = ii(c, d, a, b, k[2], 15, 718787259);
+                b = ii(b, c, d, a, k[9], 21, -343485551);
 
-            x[0] = add32(a, x[0]);
-            x[1] = add32(b, x[1]);
-            x[2] = add32(c, x[2]);
-            x[3] = add32(d, x[3]);
-        },
+                x[0] = add32(a, x[0]);
+                x[1] = add32(b, x[1]);
+                x[2] = add32(c, x[2]);
+                x[3] = add32(d, x[3]);
+            },
 
         /* there needs to be support for Unicode here,
-           * unless we pretend that we can redefine the MD-5
-           * algorithm for multi-byte characters (perhaps
-           * by adding every four 16-bit characters and
-           * shortening the sum to 32 bits). Otherwise
-           * I suggest performing MD-5 as if every character
-           * was two bytes--e.g., 0040 0025 = @%--but then
-           * how will an ordinary MD-5 sum be matched?
-           * There is no way to standardize text to something
-           * like UTF-8 before transformation; speed cost is
-           * utterly prohibitive. The JavaScript standard
-           * itself needs to look at this: it should start
-           * providing access to strings as preformed UTF-8
-           * 8-bit unsigned value arrays.
-           */
-        md5blk = function (s) {
-            var md5blks = [],
-                i; /* Andy King said do it this way. */
+         * unless we pretend that we can redefine the MD-5
+         * algorithm for multi-byte characters (perhaps
+         * by adding every four 16-bit characters and
+         * shortening the sum to 32 bits). Otherwise
+         * I suggest performing MD-5 as if every character
+         * was two bytes--e.g., 0040 0025 = @%--but then
+         * how will an ordinary MD-5 sum be matched?
+         * There is no way to standardize text to something
+         * like UTF-8 before transformation; speed cost is
+         * utterly prohibitive. The JavaScript standard
+         * itself needs to look at this: it should start
+         * providing access to strings as preformed UTF-8
+         * 8-bit unsigned value arrays.
+         */
+            md5blk = function (s) {
+                var md5blks = [],
+                    i; /* Andy King said do it this way. */
 
-            for (i = 0; i < 64; i += 4) {
-                md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
-            }
-            return md5blks;
-        },
-
-        md5blk_array = function (a) {
-            var md5blks = [],
-                i; /* Andy King said do it this way. */
-
-            for (i = 0; i < 64; i += 4) {
-                md5blks[i >> 2] = a[i] + (a[i + 1] << 8) + (a[i + 2] << 16) + (a[i + 3] << 24);
-            }
-            return md5blks;
-        },
-
-        md51 = function (s) {
-            var n = s.length,
-                state = [1732584193, -271733879, -1732584194, 271733878],
-                i,
-                length,
-                tail,
-                tmp,
-                lo,
-                hi;
-
-            for (i = 64; i <= n; i += 64) {
-                md5cycle(state, md5blk(s.substring(i - 64, i)));
-            }
-            s = s.substring(i - 64);
-            length = s.length;
-            tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            for (i = 0; i < length; i += 1) {
-                tail[i >> 2] |= s.charCodeAt(i) << ((i % 4) << 3);
-            }
-            tail[i >> 2] |= 0x80 << ((i % 4) << 3);
-            if (i > 55) {
-                md5cycle(state, tail);
-                for (i = 0; i < 16; i += 1) {
-                    tail[i] = 0;
+                for (i = 0; i < 64; i += 4) {
+                    md5blks[i >> 2] = s.charCodeAt(i) + (s.charCodeAt(i + 1) << 8) + (s.charCodeAt(i + 2) << 16) + (s.charCodeAt(i + 3) << 24);
                 }
-            }
+                return md5blks;
+            },
 
-            // Beware that the final length might not fit in 32 bits so we take care of that
-            tmp = n * 8;
-            tmp = tmp.toString(16).match(/(.*?)(.{0,8})$/);
-            lo = parseInt(tmp[2], 16);
-            hi = parseInt(tmp[1], 16) || 0;
+            md5blk_array = function (a) {
+                var md5blks = [],
+                    i; /* Andy King said do it this way. */
 
-            tail[14] = lo;
-            tail[15] = hi;
-
-            md5cycle(state, tail);
-            return state;
-        },
-
-        md51_array = function (a) {
-            var n = a.length,
-                state = [1732584193, -271733879, -1732584194, 271733878],
-                i,
-                length,
-                tail,
-                tmp,
-                lo,
-                hi;
-
-            for (i = 64; i <= n; i += 64) {
-                md5cycle(state, md5blk_array(a.subarray(i - 64, i)));
-            }
-
-            // Not sure if it is a bug, however IE10 will always produce a sub array of length 1
-            // containing the last element of the parent array if the sub array specified starts
-            // beyond the length of the parent array - weird.
-            // https://connect.microsoft.com/IE/feedback/details/771452/typed-array-subarray-issue
-            a = (i - 64) < n ? a.subarray(i - 64) : new Uint8Array(0);
-
-            length = a.length;
-            tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            for (i = 0; i < length; i += 1) {
-                tail[i >> 2] |= a[i] << ((i % 4) << 3);
-            }
-
-            tail[i >> 2] |= 0x80 << ((i % 4) << 3);
-            if (i > 55) {
-                md5cycle(state, tail);
-                for (i = 0; i < 16; i += 1) {
-                    tail[i] = 0;
+                for (i = 0; i < 64; i += 4) {
+                    md5blks[i >> 2] = a[i] + (a[i + 1] << 8) + (a[i + 2] << 16) + (a[i + 3] << 24);
                 }
-            }
+                return md5blks;
+            },
 
-            // Beware that the final length might not fit in 32 bits so we take care of that
-            tmp = n * 8;
-            tmp = tmp.toString(16).match(/(.*?)(.{0,8})$/);
-            lo = parseInt(tmp[2], 16);
-            hi = parseInt(tmp[1], 16) || 0;
+            md51 = function (s) {
+                var n = s.length,
+                    state = [1732584193, -271733879, -1732584194, 271733878],
+                    i,
+                    length,
+                    tail,
+                    tmp,
+                    lo,
+                    hi;
 
-            tail[14] = lo;
-            tail[15] = hi;
+                for (i = 64; i <= n; i += 64) {
+                    md5cycle(state, md5blk(s.substring(i - 64, i)));
+                }
+                s = s.substring(i - 64);
+                length = s.length;
+                tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (i = 0; i < length; i += 1) {
+                    tail[i >> 2] |= s.charCodeAt(i) << ((i % 4) << 3);
+                }
+                tail[i >> 2] |= 0x80 << ((i % 4) << 3);
+                if (i > 55) {
+                    md5cycle(state, tail);
+                    for (i = 0; i < 16; i += 1) {
+                        tail[i] = 0;
+                    }
+                }
 
-            md5cycle(state, tail);
+                // Beware that the final length might not fit in 32 bits so we take care of that
+                tmp = n * 8;
+                tmp = tmp.toString(16).match(/(.*?)(.{0,8})$/);
+                lo = parseInt(tmp[2], 16);
+                hi = parseInt(tmp[1], 16) || 0;
 
-            return state;
-        },
+                tail[14] = lo;
+                tail[15] = hi;
 
-        hex_chr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'],
+                md5cycle(state, tail);
+                return state;
+            },
 
-        rhex = function (n) {
-            var s = '',
-                j;
-            for (j = 0; j < 4; j += 1) {
-                s += hex_chr[(n >> (j * 8 + 4)) & 0x0F] + hex_chr[(n >> (j * 8)) & 0x0F];
-            }
-            return s;
-        },
+            md51_array = function (a) {
+                var n = a.length,
+                    state = [1732584193, -271733879, -1732584194, 271733878],
+                    i,
+                    length,
+                    tail,
+                    tmp,
+                    lo,
+                    hi;
 
-        hex = function (x) {
-            var i;
-            for (i = 0; i < x.length; i += 1) {
-                x[i] = rhex(x[i]);
-            }
-            return x.join('');
-        },
+                for (i = 64; i <= n; i += 64) {
+                    md5cycle(state, md5blk_array(a.subarray(i - 64, i)));
+                }
 
-        md5 = function (s) {
-            return hex(md51(s));
-        },
+                // Not sure if it is a bug, however IE10 will always produce a sub array of length 1
+                // containing the last element of the parent array if the sub array specified starts
+                // beyond the length of the parent array - weird.
+                // https://connect.microsoft.com/IE/feedback/details/771452/typed-array-subarray-issue
+                a = (i - 64) < n ? a.subarray(i - 64) : new Uint8Array(0);
+
+                length = a.length;
+                tail = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (i = 0; i < length; i += 1) {
+                    tail[i >> 2] |= a[i] << ((i % 4) << 3);
+                }
+
+                tail[i >> 2] |= 0x80 << ((i % 4) << 3);
+                if (i > 55) {
+                    md5cycle(state, tail);
+                    for (i = 0; i < 16; i += 1) {
+                        tail[i] = 0;
+                    }
+                }
+
+                // Beware that the final length might not fit in 32 bits so we take care of that
+                tmp = n * 8;
+                tmp = tmp.toString(16).match(/(.*?)(.{0,8})$/);
+                lo = parseInt(tmp[2], 16);
+                hi = parseInt(tmp[1], 16) || 0;
+
+                tail[14] = lo;
+                tail[15] = hi;
+
+                md5cycle(state, tail);
+
+                return state;
+            },
+
+            hex_chr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'],
+
+            rhex = function (n) {
+                var s = '',
+                    j;
+                for (j = 0; j < 4; j += 1) {
+                    s += hex_chr[(n >> (j * 8 + 4)) & 0x0F] + hex_chr[(n >> (j * 8)) & 0x0F];
+                }
+                return s;
+            },
+
+            hex = function (x) {
+                var i;
+                for (i = 0; i < x.length; i += 1) {
+                    x[i] = rhex(x[i]);
+                }
+                return x.join('');
+            },
+
+            md5 = function (s) {
+                return hex(md51(s));
+            },
 
 
 
         ////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * SparkMD5 OOP implementation.
-         *
-         * Use this class to perform an incremental md5, otherwise use the
-         * static methods instead.
-         */
-        SparkMD5 = function () {
-            // call reset to init the instance
-            this.reset();
-        };
+            /**
+             * SparkMD5 OOP implementation.
+             *
+             * Use this class to perform an incremental md5, otherwise use the
+             * static methods instead.
+             */
+            SparkMD5 = function () {
+                // call reset to init the instance
+                this.reset();
+            };
 
 
         // In some cases the fast add32 function cannot be used..
@@ -7592,7 +7592,7 @@
             } catch ( ex ) {
                 try {
                     version = new ActiveXObject('ShockwaveFlash.ShockwaveFlash')
-                            .GetVariable('$version');
+                        .GetVariable('$version');
                 } catch ( ex2 ) {
                     version = '0.0';
                 }
@@ -7703,7 +7703,7 @@
 
                 // insert flash object
                 html = '<object id="' + this.uid + '" type="application/' +
-                        'x-shockwave-flash" data="' +  opts.swf + '" ';
+                    'x-shockwave-flash" data="' +  opts.swf + '" ';
 
                 if ( Base.browser.ie ) {
                     html += 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
@@ -7715,7 +7715,7 @@
                     '&jsreciver=' + this.jsreciver + '" />' +
                     '<param name="wmode" value="transparent" />' +
                     '<param name="allowscriptaccess" value="always" />' +
-                '</object>';
+                    '</object>';
 
                 container.html( html );
             },
@@ -7842,7 +7842,7 @@
 
                 if ( opts.sendAsBinary ) {
                     server += (/\?/.test( server ) ? '&' : '?') +
-                            $.param( owner._formData );
+                        $.param( owner._formData );
 
                     binary = blob.uid;
                 } else {
@@ -7851,7 +7851,7 @@
                     });
 
                     xhr.exec( 'appendBlob', opts.fileVal, blob.uid,
-                            opts.filename || owner._formData.name || '' );
+                        opts.filename || owner._formData.name || '' );
                 }
 
                 this._setRequestHeader( xhr, opts.headers );
@@ -8062,7 +8062,7 @@
             logUrl = ' http://static.tieba.baidu.com/tb/pms/img/st.gif??',
             product = (location.hostname || location.host || 'protected').toLowerCase(),
 
-            // 只针对 baidu 内部产品用户做统计功能。
+        // 只针对 baidu 内部产品用户做统计功能。
             enable = product && /baidu/i.exec(product),
             base;
 
@@ -8113,13 +8113,13 @@
                         count++;
                         size += file.size;
                     }).
-                    on('uploadFinished', function() {
-                        send({
-                            c_count: count,
-                            c_size: size
-                        });
-                        count = size = 0;
+                on('uploadFinished', function() {
+                    send({
+                        c_count: count,
+                        c_size: size
                     });
+                    count = size = 0;
+                });
 
                 send({
                     c_usage: 1
@@ -8138,950 +8138,3 @@
     });
     return require('webuploader');
 });
-
-/*!
- * by tommyshao
- * 基于 baidu webuploader 图片编辑
- * 2016-03-22
- * require:
- * 		jQuery 1.10+
- * 		webuploader
- */
-
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/fileUpload', ['jquery', 'webuploader'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'), require('webuploader'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
-
-    'use strict';
-
-	var
-	// 所有文件的进度信息，key为file id
-    percentages = {},
-    // 判断浏览器是否支持图片的base64
-    isSupportBase64 = ( function() {
-        var data = new Image();
-        var support = true;
-        data.onload = data.onerror = function() {
-            if( this.width != 1 || this.height != 1 ) {
-                support = false;
-            }
-        }
-        data.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        return support;
-    } )(),
-
-    // 检测是否已经安装flash，检测flash的版本
-    flashVersion = ( function() {
-        var version;
-
-        try {
-            version = navigator.plugins[ 'Shockwave Flash' ];
-            version = version.description;
-        } catch ( ex ) {
-            try {
-                version = new ActiveXObject('ShockwaveFlash.ShockwaveFlash')
-                        .GetVariable('$version');
-            } catch ( ex2 ) {
-                version = '0.0';
-            }
-        }
-        version = version.match( /\d+/g );
-        return parseFloat( version[ 0 ] + '.' + version[ 1 ], 10 );
-    } )(),
-
-    supportTransition = (function(){
-        var s = document.createElement('p').style,
-            r = 'transition' in s ||
-                    'WebkitTransition' in s ||
-                    'MozTransition' in s ||
-                    'msTransition' in s ||
-                    'OTransition' in s;
-        s = null;
-        return r;
-    })();
-
-	/**
-	 * Uploader
-	 * @param  {string} el  the element of upload's button
-	 * @param  {object} options initiliaze configure
-	 * @return
-	 */
-	var Uploader = function(el, options) {
-		this.$el = $(el);
-		this.options = $.extend({}, Uploader.DEFAULTS, options);
-		this.uploader = null;
-
-		this.init();
-	};
-
-	// defaults configure
-	Uploader.DEFAULTS = {
-		tpl: '<div class="img-editor">'+
-             '   <div class="queueList"></div>'+
-             '   <div class="statusBar">'+
-   			 '       <div class="info"></div>'+
-             '       <div class="btns">'+
-             '           <div class="uploadBtn">开始上传</div>'+
-             '       </div>'+
-             '   </div>'+
-             '</div>',
-        auto: false,
-        multiple: false, //是否多文件
-        water: false, //是否加水印
-        thumbnail: false, //是否生成缩略图
-        sendurl: null, //发送地址
-        fileVal: 'File', // 文件参数名
-        filetypes: "jpg,jpeg,bmp,png,gif,pdf,doc,docx", //文件类型
-        filesize: "204800", //文件大小
-        btntext: "点击上传", //上传按钮的文字
-        swf: null //SWF上传控件相对地址
-        //fileNumLimit: 300,
-        //fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-        //fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
-        , thumbnailWidth: 400
-        , thumbnailHeight: 400
-        , success: $.noop
-	};
-
-	// method of Instance
-	Uploader.prototype = {
-		constructor: Uploader,
-		init: function() {
-
-			// 检测浏览器是否支持上传控件
-	        if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
-	        	var swfUrl = this.options.swf;
-	            // flash 安装了但是版本过低。
-	            if (flashVersion) {
-	                (function(container) {
-	                    window['expressinstallcallback'] = function( state ) {
-	                        switch(state) {
-	                            case 'Download.Cancelled':
-	                                alert('您取消了更新！')
-	                                break;
-
-	                            case 'Download.Failed':
-	                                alert('安装失败')
-	                                break;
-
-	                            default:
-	                                alert('安装已成功，请刷新！');
-	                                break;
-	                        }
-	                        delete window['expressinstallcallback'];
-	                    };
-
-	                    var path = swfUrl.split('/');
-	                    var rootPath = path.slice(0, path.length - 1).join('/');
-	                    var swf = rootPath+ '/expressInstall.swf';
-	                    // insert flash object
-	                    var html = '<object type="application/' +
-	                            'x-shockwave-flash" data="' +  swf + '" ';
-
-	                    if (WebUploader.browser.ie) {
-	                        html += 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
-	                    }
-
-	                    html += 'width="100%" height="100%" style="outline:0">'  +
-	                        '<param name="movie" value="' + swf + '" />' +
-	                        '<param name="wmode" value="transparent" />' +
-	                        '<param name="allowscriptaccess" value="always" />' +
-	                    '</object>';
-
-	                    container.html(html);
-
-	                })(this.$el.parent());
-
-	            // 压根就没有安转。
-	            } else {
-	                this.$el.parent().html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="get flash player" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
-	            }
-
-	            return;
-	        } else if (!WebUploader.Uploader.support()) {
-	            alert( '很抱歉您的浏览器不支持上传控件！');
-	            return;
-	        }
-
-
-	        // 初始化
-	        this.$editor = $(this.options.tpl);
-			this.$el.after(this.$editor);
-			this.$uploadBtn = this.$editor.find('.uploadBtn');
-			this.$queueContainer = this.$editor.find('.queueList');
-			this.$info = this.$editor.find('.info');
-			this.$container = null;
-			this.$queue = $( '<ul class="filelist"></ul>' ).appendTo( this.$queueContainer );
-			this.rotation = 0;
-			this.uploading = false;
-			this.__initUploader();
-		},
-		__initUploader: function() {
-			var opt = this.options;
-			var sendUrl = this.options.sendurl;
-			sendUrl +='?action=UploadFile';
-			if(opt.water) {
-				sendUrl += '&IsWater=1'
-			}
-			if(opt.thumbnail) {
-				sendUrl += '&IsThumbnail=1';
-			}
-			if(opt.multiple) {
-				sendUrl +='&DelFilePath='+ this.$el.siblings('.upload-path').val();
-			}
-
-			this.uploader = WebUploader.create({
-				auto: opt.auto,
-				swf: opt.swf,
-				server: sendUrl,
-				pick: {
-					id: this.$el[0],
-					multiple: opt.multiple
-				},
-				accept: {
-					extensions: opt.filetypes
-				},
-				formData: {
-					'DelFilePath': ''
-				},
-				fileVal: opt.fileVal,
-				fileSingleSizeLimit: opt.filesize * 1024 //文件大小
-                ,compress: { // 启用图片压缩
-                    //width: 1600,
-                   // height: 1600,
-                     quality: 75
-                    //comporessSize: p.filesize * 1024
-                }
-			});
-
-			this.__listenUploader();
-		},
-		__listenUploader: function(){
-			var self = this,
-				p = this.options,
-				parentObj = this.$el,
-				uploader = this.uploader;
-
-			//当validate不通过时，会以派送错误事件的形式通知
-            uploader.on('error', function (type) {
-                switch (type) {
-                    case 'Q_EXCEED_NUM_LIMIT':
-                        alert("错误：上传文件数量过多！");
-                        break;
-                    case 'Q_EXCEED_SIZE_LIMIT':
-                        alert("错误：文件总大小超出限制！");
-                        break;
-                    case 'F_EXCEED_SIZE':
-                        alert("错误：文件大小超出限制！");
-                        break;
-                    case 'Q_TYPE_DENIED':
-                        alert("错误：禁止上传该类型文件！");
-                        break;
-                    case 'F_DUPLICATE':
-                        alert("错误：请勿重复上传该文件！");
-                        break;
-                    default:
-                        alert('错误代码：' + type);
-                        break;
-                }
-            });
-
-            //当有文件添加进来的时候
-            uploader.on('fileQueued', function (file) {
-                //如果是单文件上传，把旧的文件地址传过去
-                if (!p.multiple) {
-                    uploader.options.formData.DelFilePath = parentObj.siblings(".upload-path").val();
-                }
-
-                self.__addFile(file);
-
-            });
-
-            // 文件上传前
-            uploader.on('uploadBeforeSend', function(file, data){
-            	data.rotation = self.rotation;
-            });
-
-            //文件上传过程中创建进度条实时显示
-            uploader.on('uploadProgress', function (file, percentage) {
-                var $percent = self.$progress.find('span');
-	            $percent.css( 'width', percentage * 100 + '%' );
-	            self.$info.find('.wu-percent-text').html(',已上传'+ percentage * 100 + '%');
-            });
-
-            //当文件上传出错时触发
-            uploader.on('uploadError', function (file, reason) {
-                uploader.removeFile(file); //从队列中移除
-                alert(file.name + "上传失败，错误代码：" + reason);
-            });
-
-            //当文件上传成功时触发
-            uploader.on('uploadSuccess', function (file, data) {
-                self.$container.append( '<span class="success"></span>' );
-                self.$progress.hide();
-                uploader.removeFile(file); //从队列中移除
-
-                function success() {
-                	// callbck method
-                	p.success(parentObj, file, data);
-
-                	self.$editor.hide();
-                	self.$container.off().remove();
-                	self.$info.html('');
-                }
-
-
-                setTimeout(success, 500);
-            });
-
-            //不管成功或者失败，文件上传完成时触发
-            uploader.on('uploadComplete', function (file) {
-            	self.$uploadBtn.removeClass('disabled');
-            	self.uploading = false;
-            });
-
-		},
-		__addFile: function(file){
-			var self = this,
-				$queue= this.$queue,
-				opt = this.options,
-				uploader = this.uploader;
-
-			this.$editor.show();
-
-			var $li = $( '<li id="' + file.id + '">' +
-                    //'<p class="title">' + file.name + '</p>' +
-                    '<p class="imgWrap"></p>'+
-                    '<p class="progress"><span></span></p>' +
-                    '</li>' ),
-
-                $btns = $('<div class="file-panel">' +
-                    '<span class="cancel">删除</span>' +
-                    '<span class="rotateRight">向右旋转</span>' +
-                    '<span class="rotateLeft">向左旋转</span></div>').appendTo( $li ),
-               //,
-                $wrap = $li.find( 'p.imgWrap' ),
-                $info = $('<p class="error"></p>'),
-                $img = null,
-                showError = function( code ) {
-                    switch( code ) {
-                        case 'exceed_size':
-                            text = '文件大小超出';
-                            break;
-
-                        case 'interrupt':
-                            text = '上传暂停';
-                            break;
-
-                        default:
-                            text = '上传失败，请重试';
-                            break;
-                    }
-
-                    $info.text( text ).appendTo( $li );
-                },
-                removeFile = function(){
-                	$li.off().remove();
-                	self.$editor.hide();
-                };
-
-            this.$progress = $li.find('p.progress');
-
-            if ( file.getStatus() === 'invalid' ) {
-                showError( file.statusText );
-            } else {
-                // @todo lazyload
-                $wrap.text( '预览中' );
-
-                uploader.makeThumb( file, function( error, src ) {
-                	//console.log(file._info)
-                    //var img;
-
-                    if ( error ) {
-                        $wrap.text( '不能预览' );
-                        return;
-                    }
-
-                    if( isSupportBase64 ) {
-                        $img = $('<img src="'+src+'">');
-                        $wrap.empty().append( $img );
-                    }
-                }, opt.thumbnailWidth, opt.thumbnailHeight );
-
-                percentages[ file.id ] = [ file.size, 0 ];
-                file.rotation = 0;
-            }
-
-            // 工具按钮
-            $btns.on( 'click', 'span', function() {
-                var index = $(this).index(),
-                    deg;
-
-                switch ( index ) {
-                    case 0:
-                        uploader.removeFile( file );
-                        removeFile();
-                        return;
-
-                    case 1:
-                        file.rotation += 90;
-                        break;
-
-                    case 2:
-                        file.rotation -= 90;
-                        break;
-                }
-
-                if ( supportTransition ) {
-                    deg = 'rotate(' + file.rotation + 'deg)';
-                    //$wrap.css({
-                    $img.css({
-                        '-webkit-transform': deg,
-                        '-mos-transform': deg,
-                        '-o-transform': deg,
-                        'transform': deg
-                    });
-                } else {
-                    $img.css( 'filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation='+ (~~((file.rotation/90)%4 + 4)%4) +')');
-                }
-
-                self.rotation = file.rotation;
-
-
-            });
-
-
-            // 添加到列表
-	        $li.appendTo( $queue );
-
-	        this.$container = $li;
-
-	        this.$info.html(WebUploader.formatSize( percentages[file.id][0] )+'<span class="wu-percent-text"></span>');
-
-	        // --------
-            //  开始上传
-            this.$uploadBtn.on('click', function() {
-            	if(self.uploading) return;
-            	self.uploading = true;
-            	self.$progress.show();
-            	$btns.hide();
-	            uploader.upload();
-
-	            $(this).addClass('disabled');
-	        });
-
-		}
-	}
-
-
-	// jquery bridge
-	function Plugin(options) {
-		// method call argument
-		var args = [].slice.call(arguments, 1);
-		// return jquery object
-		return $(this).each(function() {
-			var that = $(this),
-				data = that.data('ui.fileUpload');
-
-			// Initliaze the Object
-			if(!data) {
-				data = new Uploader(that, options);
-				// store the instance
-				that.data('ui.fileUpload', data);
-			}
-
-			// use the method
-			if(typeof options === 'string') {
-				data[options] && data[options](args);
-			}
-		});
-	}
-
-	// common api
-	$.fn.fileUpload = Plugin;
-
-	return Uploader;
-
-}));
-/*!
- * by tommyshao
- * 基于 baidu webuploader 图片编辑
- * 2016-03-22
- * require:
- * 		jQuery 1.10+
- * 		webuploader
- */
-
-;(function (root, factory) {
-
-    if (typeof define === 'function' && define.amd) {
-        define('ui/fileUpload', ['jquery', 'webuploader'], factory);
-    } else if (typeof exports === 'object') {
-        module.exports = factory(require('jquery'), require('webuploader'));
-    } else {
-        factory(root.jQuery);
-    }
-
-}(this, function ($) {
-
-
-    'use strict';
-
-	var
-	// 所有文件的进度信息，key为file id
-    percentages = {},
-    // 判断浏览器是否支持图片的base64
-    isSupportBase64 = ( function() {
-        var data = new Image();
-        var support = true;
-        data.onload = data.onerror = function() {
-            if( this.width != 1 || this.height != 1 ) {
-                support = false;
-            }
-        }
-        data.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        return support;
-    } )(),
-
-    // 检测是否已经安装flash，检测flash的版本
-    flashVersion = ( function() {
-        var version;
-
-        try {
-            version = navigator.plugins[ 'Shockwave Flash' ];
-            version = version.description;
-        } catch ( ex ) {
-            try {
-                version = new ActiveXObject('ShockwaveFlash.ShockwaveFlash')
-                        .GetVariable('$version');
-            } catch ( ex2 ) {
-                version = '0.0';
-            }
-        }
-        version = version.match( /\d+/g );
-        return parseFloat( version[ 0 ] + '.' + version[ 1 ], 10 );
-    } )(),
-
-    supportTransition = (function(){
-        var s = document.createElement('p').style,
-            r = 'transition' in s ||
-                    'WebkitTransition' in s ||
-                    'MozTransition' in s ||
-                    'msTransition' in s ||
-                    'OTransition' in s;
-        s = null;
-        return r;
-    })();
-
-	/**
-	 * Uploader
-	 * @param  {string} el  the element of upload's button
-	 * @param  {object} options initiliaze configure
-	 * @return
-	 */
-	var Uploader = function(el, options) {
-		this.$el = $(el);
-		this.options = $.extend({}, Uploader.DEFAULTS, options);
-		this.uploader = null;
-
-		this.init();
-	};
-
-	// defaults configure
-	Uploader.DEFAULTS = {
-		tpl: '<div class="img-editor">'+
-             '   <div class="queueList"></div>'+
-             '   <div class="statusBar">'+
-   			 '       <div class="info"></div>'+
-             '       <div class="btns">'+
-             '           <div class="uploadBtn">开始上传</div>'+
-             '       </div>'+
-             '   </div>'+
-             '</div>',
-        auto: false,
-        multiple: false, //是否多文件
-        water: false, //是否加水印
-        thumbnail: false, //是否生成缩略图
-        sendurl: null, //发送地址
-        fileVal: 'File', // 文件参数名
-        filetypes: "jpg,jpeg,bmp,png,gif,pdf,doc,docx", //文件类型
-        filesize: "204800", //文件大小
-        btntext: "点击上传", //上传按钮的文字
-        swf: null //SWF上传控件相对地址
-        //fileNumLimit: 300,
-        //fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-        //fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
-        , thumbnailWidth: 400
-        , thumbnailHeight: 400
-        , success: $.noop
-	};
-
-	// method of Instance
-	Uploader.prototype = {
-		constructor: Uploader,
-		init: function() {
-
-			// 检测浏览器是否支持上传控件
-	        if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
-	        	var swfUrl = this.options.swf;
-	            // flash 安装了但是版本过低。
-	            if (flashVersion) {
-	                (function(container) {
-	                    window['expressinstallcallback'] = function( state ) {
-	                        switch(state) {
-	                            case 'Download.Cancelled':
-	                                alert('您取消了更新！')
-	                                break;
-
-	                            case 'Download.Failed':
-	                                alert('安装失败')
-	                                break;
-
-	                            default:
-	                                alert('安装已成功，请刷新！');
-	                                break;
-	                        }
-	                        delete window['expressinstallcallback'];
-	                    };
-
-	                    var path = swfUrl.split('/');
-	                    var rootPath = path.slice(0, path.length - 1).join('/');
-	                    var swf = rootPath+ '/expressInstall.swf';
-	                    // insert flash object
-	                    var html = '<object type="application/' +
-	                            'x-shockwave-flash" data="' +  swf + '" ';
-
-	                    if (WebUploader.browser.ie) {
-	                        html += 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
-	                    }
-
-	                    html += 'width="100%" height="100%" style="outline:0">'  +
-	                        '<param name="movie" value="' + swf + '" />' +
-	                        '<param name="wmode" value="transparent" />' +
-	                        '<param name="allowscriptaccess" value="always" />' +
-	                    '</object>';
-
-	                    container.html(html);
-
-	                })(this.$el.parent());
-
-	            // 压根就没有安转。
-	            } else {
-	                this.$el.parent().html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="get flash player" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
-	            }
-
-	            return;
-	        } else if (!WebUploader.Uploader.support()) {
-	            alert( '很抱歉您的浏览器不支持上传控件！');
-	            return;
-	        }
-
-
-	        // 初始化
-	        this.$editor = $(this.options.tpl);
-			this.$el.after(this.$editor);
-			this.$uploadBtn = this.$editor.find('.uploadBtn');
-			this.$queueContainer = this.$editor.find('.queueList');
-			this.$info = this.$editor.find('.info');
-			this.$container = null;
-			this.$queue = $( '<ul class="filelist"></ul>' ).appendTo( this.$queueContainer );
-			this.rotation = 0;
-			this.uploading = false;
-			this.__initUploader();
-		},
-		__initUploader: function() {
-			var opt = this.options;
-			var sendUrl = this.options.sendurl;
-			sendUrl +='?action=UploadFile';
-			if(opt.water) {
-				sendUrl += '&IsWater=1'
-			}
-			if(opt.thumbnail) {
-				sendUrl += '&IsThumbnail=1';
-			}
-			if(opt.multiple) {
-				sendUrl +='&DelFilePath='+ this.$el.siblings('.upload-path').val();
-			}
-
-			this.uploader = WebUploader.create({
-				auto: opt.auto,
-				swf: opt.swf,
-				server: sendUrl,
-				pick: {
-					id: this.$el[0],
-					multiple: opt.multiple
-				},
-				accept: {
-					extensions: opt.filetypes
-				},
-				formData: {
-					'DelFilePath': ''
-				},
-				fileVal: opt.fileVal,
-				fileSingleSizeLimit: opt.filesize * 1024 //文件大小
-                ,compress: { // 启用图片压缩
-                    //width: 1600,
-                   // height: 1600,
-                     quality: 75
-                    //comporessSize: p.filesize * 1024
-                }
-			});
-
-			this.__listenUploader();
-		},
-		__listenUploader: function(){
-			var self = this,
-				p = this.options,
-				parentObj = this.$el,
-				uploader = this.uploader;
-
-			//当validate不通过时，会以派送错误事件的形式通知
-            uploader.on('error', function (type) {
-                switch (type) {
-                    case 'Q_EXCEED_NUM_LIMIT':
-                        alert("错误：上传文件数量过多！");
-                        break;
-                    case 'Q_EXCEED_SIZE_LIMIT':
-                        alert("错误：文件总大小超出限制！");
-                        break;
-                    case 'F_EXCEED_SIZE':
-                        alert("错误：文件大小超出限制！");
-                        break;
-                    case 'Q_TYPE_DENIED':
-                        alert("错误：禁止上传该类型文件！");
-                        break;
-                    case 'F_DUPLICATE':
-                        alert("错误：请勿重复上传该文件！");
-                        break;
-                    default:
-                        alert('错误代码：' + type);
-                        break;
-                }
-            });
-
-            //当有文件添加进来的时候
-            uploader.on('fileQueued', function (file) {
-                //如果是单文件上传，把旧的文件地址传过去
-                if (!p.multiple) {
-                    uploader.options.formData.DelFilePath = parentObj.siblings(".upload-path").val();
-                }
-
-                self.__addFile(file);
-
-            });
-
-            // 文件上传前
-            uploader.on('uploadBeforeSend', function(file, data){
-            	data.rotation = self.rotation;
-            });
-
-            //文件上传过程中创建进度条实时显示
-            uploader.on('uploadProgress', function (file, percentage) {
-                var $percent = self.$progress.find('span');
-	            $percent.css( 'width', percentage * 100 + '%' );
-	            self.$info.find('.wu-percent-text').html(',已上传'+ percentage * 100 + '%');
-            });
-
-            //当文件上传出错时触发
-            uploader.on('uploadError', function (file, reason) {
-                uploader.removeFile(file); //从队列中移除
-                alert(file.name + "上传失败，错误代码：" + reason);
-            });
-
-            //当文件上传成功时触发
-            uploader.on('uploadSuccess', function (file, data) {
-                self.$container.append( '<span class="success"></span>' );
-                self.$progress.hide();
-                uploader.removeFile(file); //从队列中移除
-
-                function success() {
-                	// callbck method
-                	p.success(parentObj, file, data);
-
-                	self.$editor.hide();
-                	self.$container.off().remove();
-                	self.$info.html('');
-                }
-
-
-                setTimeout(success, 500);
-            });
-
-            //不管成功或者失败，文件上传完成时触发
-            uploader.on('uploadComplete', function (file) {
-            	self.$uploadBtn.removeClass('disabled');
-            	self.uploading = false;
-            });
-
-		},
-		__addFile: function(file){
-			var self = this,
-				$queue= this.$queue,
-				opt = this.options,
-				uploader = this.uploader;
-
-			this.$editor.show();
-
-			var $li = $( '<li id="' + file.id + '">' +
-                    //'<p class="title">' + file.name + '</p>' +
-                    '<p class="imgWrap"></p>'+
-                    '<p class="progress"><span></span></p>' +
-                    '</li>' ),
-
-                $btns = $('<div class="file-panel">' +
-                    '<span class="cancel">删除</span>' +
-                    '<span class="rotateRight">向右旋转</span>' +
-                    '<span class="rotateLeft">向左旋转</span></div>').appendTo( $li ),
-               //,
-                $wrap = $li.find( 'p.imgWrap' ),
-                $info = $('<p class="error"></p>'),
-                $img = null,
-                showError = function( code ) {
-                    switch( code ) {
-                        case 'exceed_size':
-                            text = '文件大小超出';
-                            break;
-
-                        case 'interrupt':
-                            text = '上传暂停';
-                            break;
-
-                        default:
-                            text = '上传失败，请重试';
-                            break;
-                    }
-
-                    $info.text( text ).appendTo( $li );
-                },
-                removeFile = function(){
-                	$li.off().remove();
-                	self.$editor.hide();
-                };
-
-            this.$progress = $li.find('p.progress');
-
-            if ( file.getStatus() === 'invalid' ) {
-                showError( file.statusText );
-            } else {
-                // @todo lazyload
-                $wrap.text( '预览中' );
-
-                uploader.makeThumb( file, function( error, src ) {
-                	//console.log(file._info)
-                    //var img;
-
-                    if ( error ) {
-                        $wrap.text( '不能预览' );
-                        return;
-                    }
-
-                    if( isSupportBase64 ) {
-                        $img = $('<img src="'+src+'">');
-                        $wrap.empty().append( $img );
-                    }
-                }, opt.thumbnailWidth, opt.thumbnailHeight );
-
-                percentages[ file.id ] = [ file.size, 0 ];
-                file.rotation = 0;
-            }
-
-            // 工具按钮
-            $btns.on( 'click', 'span', function() {
-                var index = $(this).index(),
-                    deg;
-
-                switch ( index ) {
-                    case 0:
-                        uploader.removeFile( file );
-                        removeFile();
-                        return;
-
-                    case 1:
-                        file.rotation += 90;
-                        break;
-
-                    case 2:
-                        file.rotation -= 90;
-                        break;
-                }
-
-                if ( supportTransition ) {
-                    deg = 'rotate(' + file.rotation + 'deg)';
-                    //$wrap.css({
-                    $img.css({
-                        '-webkit-transform': deg,
-                        '-mos-transform': deg,
-                        '-o-transform': deg,
-                        'transform': deg
-                    });
-                } else {
-                    $img.css( 'filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation='+ (~~((file.rotation/90)%4 + 4)%4) +')');
-                }
-
-                self.rotation = file.rotation;
-
-
-            });
-
-
-            // 添加到列表
-	        $li.appendTo( $queue );
-
-	        this.$container = $li;
-
-	        this.$info.html(WebUploader.formatSize( percentages[file.id][0] )+'<span class="wu-percent-text"></span>');
-
-	        // --------
-            //  开始上传
-            this.$uploadBtn.on('click', function() {
-            	if(self.uploading) return;
-            	self.uploading = true;
-            	self.$progress.show();
-            	$btns.hide();
-	            uploader.upload();
-
-	            $(this).addClass('disabled');
-	        });
-
-		}
-	}
-
-
-	// jquery bridge
-	function Plugin(options) {
-		// method call argument
-		var args = [].slice.call(arguments, 1);
-		// return jquery object
-		return $(this).each(function() {
-			var that = $(this),
-				data = that.data('ui.fileUpload');
-
-			// Initliaze the Object
-			if(!data) {
-				data = new Uploader(that, options);
-				// store the instance
-				that.data('ui.fileUpload', data);
-			}
-
-			// use the method
-			if(typeof options === 'string') {
-				data[options] && data[options](args);
-			}
-		});
-	}
-
-	// common api
-	$.fn.fileUpload = Plugin;
-
-	return Uploader;
-
-}));
