@@ -36,25 +36,27 @@
 
                 {{ Alert.render('alert-danger', '充值失败') }}
             </div>
+            {% raw %}
             <div class="ui-code">
 <pre>
     <code>
-{_% import "_components/alert.html" as Alert %_}
+{% import "_components/alert.html" as Alert %}
 
-{_{ Alert.render('alert-warning', '&lgt;span class="warning-FontColor">rayalienkiss&lt;/span&gt;，您尚未进行账户验证，&lt;a href="###" class="link-standard text-nowrap"&gt;请先验证&lt;/a&gt;') }_}
-
-
-{_{ Alert.render('alert-warning with-close', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }_}
-
-{_{ Alert.render('alert-warning with-close fade in', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }_}
+{{ Alert.render('alert-warning', '&lgt;span class="warning-FontColor">rayalienkiss&lt;/span&gt;，您尚未进行账户验证，&lt;a href="###" class="link-standard text-nowrap"&gt;请先验证&lt;/a&gt;') }}
 
 
-{_{ Alert.render('alert-success', '充值成功') }_}
+{{ Alert.render('alert-warning with-close', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }}
 
-{_{ Alert.render('alert-danger', '充值失败') }_}
+{{ Alert.render('alert-warning with-close fade in', '警告框组件通过提供一些灵活的预定义消息，为常见的用户动作提供反馈消息') }}
+
+
+{{ Alert.render('alert-success', '充值成功') }}
+
+{{ Alert.render('alert-danger', '充值失败') }}
     </code>
 </pre>
             </div>
+            {% endraw %}
         </div>
 
 

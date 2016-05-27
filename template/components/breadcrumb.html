@@ -29,23 +29,25 @@
                 {{ breadcrumb.render(bcList) }}
 
             </div>
+            {% raw %}
             <div class="ui-code">
 <pre>
     <code>
 # 定义面包屑数组 #
-{_%
+{%
     set bcList = [
         {text: '首页', link: '/'}, 
         {text: '二级页面位置', link: '###'},
         {text: '三级页面位置', link: '###'},
         {text: '当前位置 '}
     ]
-%_}
-{_% import "_components/breadcrumb.html" as breadcrumb %_}
-{_{ breadcrumb.render(bcList) }_}
+%}
+{% import "_components/breadcrumb.html" as breadcrumb %}
+{{ breadcrumb.render(bcList) }}
     </code>
 </pre>
             </div>
+            {% endraw %}
         </div>
 
     </section>

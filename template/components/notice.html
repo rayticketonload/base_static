@@ -28,23 +28,25 @@
                 {{ Notice.render('info', title='验证中...！', desc='<b>账户正在验证中，预计24小时内完成验证，请耐心等待。</b><br/>审核记过将通过短信发送到您的手机号码。 <br/>验证成功后验证金额可用于交易或提现。',links='<a href="###" class="link-standard">进入账户管理</a>') }}
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_% import "_components/notice.html" as Notice %_}
+{% import "_components/notice.html" as Notice %}
 
-{_# 成功 #_}
-{_{ Notice.render('success', title='...成功！', desc='预计资金2个工作日到您的银行卡&lt;br/&gt;交易结果以交易记录显示为准',links='&lt;a href="###" class="link-standard"&gt;查看提现明细&lt;/a&gt;') }_}
+{# 成功 #}
+{{ Notice.render('success', title='...成功！', desc='预计资金2个工作日到您的银行卡&lt;br/&gt;交易结果以交易记录显示为准',links='&lt;a href="###" class="link-standard"&gt;查看提现明细&lt;/a&gt;') }}
 
-{_# 等待 #_}
-{_{ Notice.render('waiting', title='正在...', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }_}
+{# 等待 #}
+{{ Notice.render('waiting', title='正在...', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }}
 
-{_# 出错 #_}
-{_{ Notice.render('error', title='...失败！', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }_}
+{# 出错 #}
+{{ Notice.render('error', title='...失败！', desc='账户余额不足或超出发卡单笔支付限额',links='&lt;a href="###" class="link-standard"&gt;重新支付&lt;/a&gt;&lt;a href="###" class="link-standard link-border"&gt;返回我的资产&lt;/a&gt;') }}
 
-{_# 信息 #_}
-{_{ Notice.render('info', title='验证中...！', desc='&lt;b&gt;账户正在验证中，预计24小时内完成验证，请耐心等待。&lt;/b&gt;&lt;br/&gt;审核记过将通过短信发送到您的手机号码。 &lt;br/&gt;验证成功后验证金额可用于交易或提现。',links='&lt;a href="###" class="link-standard"&gt;进入账户管理&lt;/a&gt;') }_}
+{# 信息 #}
+{{ Notice.render('info', title='验证中...！', desc='&lt;b&gt;账户正在验证中，预计24小时内完成验证，请耐心等待。&lt;/b&gt;&lt;br/&gt;审核记过将通过短信发送到您的手机号码。 &lt;br/&gt;验证成功后验证金额可用于交易或提现。',links='&lt;a href="###" class="link-standard"&gt;进入账户管理&lt;/a&gt;') }}
     </code>
 </pre>
+{% endraw %}
             </div>
         </div>
 
@@ -71,19 +73,21 @@
 
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_# 模态窗 #_}
+{# 模态窗 #}
 
-{_{ Notice.modal(expand='success', title='...成功！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+{{ Notice.modal(expand='success', title='...成功！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
 
-{_{ Notice.modal(expand='info', title='...信息！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+{{ Notice.modal(expand='info', title='...信息！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
 
-{_{ Notice.modal(expand='error', title='...错误！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+{{ Notice.modal(expand='error', title='...错误！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
 
-{_{ Notice.modal(expand='waiting', title='...等待！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }_}
+{{ Notice.modal(expand='waiting', title='...等待！', desc='账户正在验证中，预计24小时内完成验证，请耐心等待。') }}
     </code>
 </pre>
+{% endraw %}
             </div>
         </div>
 

@@ -334,7 +334,7 @@ gulp.task('iconfont-ie7', function(){
         .pipe(gulp.dest('./src/iconfont-ie7/'))
 })
 
-gulp.task('iconfont-style', function(){
+gulp.task('iconfont-style', ['iconfont-file', 'iconfont-ie7'], function(){
     return gulp.src(iconfontPath+'style.css')
         .pipe(rename('_fonticon.less'))
         // 替换iconfont路径

@@ -30,20 +30,22 @@
 
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_% import "_components/navigator.html" as Nav %_}
-{_%
+{% import "_components/navigator.html" as Nav %}
+{%
     set items = [
         {text: '账户总览', url: 'index.html'},
         {text: '交易明细', url: 'index.html'},
         {text: '提现明细', url: 'index.html'},
         {text: '账户管理', url: 'index.html'}
     ]
-%_}
-{_{ Nav.render(items, 2) }_}
+%}
+{{ Nav.render(items, 2) }}
     </code>
 </pre>
+{% endraw %}
             </div>
         </div>
 

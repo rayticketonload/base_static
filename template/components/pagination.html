@@ -24,13 +24,15 @@
                 {{ pagination.render('text-align-center') }}
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
 # 输出分页 #
-{_% import "_components/pagination.html" as pagination %_}
-{_{ pagination.render('text-align-center') }_}
+{% import "_components/pagination.html" as pagination %}
+{{ pagination.render('text-align-center') }}
     </code>
 </pre>
+    {% endraw %}
             </div>
         </div>
 
@@ -50,11 +52,13 @@
 
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_{ pagination.ajax() }_}
+{{ pagination.ajax() }}
     </code>
 </pre>
+{% endraw %}
             </div>
         </div>
 

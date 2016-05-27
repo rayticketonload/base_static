@@ -32,20 +32,22 @@
                 <a href="#j-modal-2" class="btn primary" data-toggle="modal">打开有按钮弹层</a>
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_% import "_components/modal.html" as Modal %_}
-{_%
+{% import "_components/modal.html" as Modal %}
+{%
     set btns = [
         {text: 'primary', expand: 'primary', id: 'j-modal-2-ok'},
         {text: 'secondary', expand: 'secondary'},
         {text: 'btn-vicelink', type: 1, url: '###', dismiss: true}
     ]
-%_}
-{_{ Modal.render('j-modal','title', 'aaaa') }_}
-{_{ Modal.render('j-modal-2','弹层', 'bbb', btns) }_}
+%}
+{{ Modal.render('j-modal','title', 'aaaa') }}
+{{ Modal.render('j-modal-2','弹层', 'bbb', btns) }}
     </code>
 </pre>
+        {% endraw %}
             </div>
         </div>
 

@@ -22,13 +22,15 @@
 
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
 # 定义面包屑数组 #
-{_% import "_components/chart.html" as chart %_}
-{_{ chart.render() }_}
+{% import "_components/chart.html" as chart %}
+{{ chart.render() }}
     </code>
 </pre>
+{% endraw %}
             </div>
         </div>
 
@@ -48,13 +50,16 @@
 
             </div>
             <div class="ui-code">
+            {% raw %}
 <pre>
     <code>
-{_% import "_components/chart.html" as chart %_}
-{_{ chart.title(title='交易数据统计', small='( 2015.05.01-2015.05.29 )' , btns='&lt;a href="###" class="btn default small-btn"&gt;今日&lt;/a&gt;&lt;a href="###" class="btn default small-btn current"&gt;最近30天&lt;/a&gt; ') }_}
+{% import "_components/chart.html" as chart %}
+{{ chart.title(title='交易数据统计', small='( 2015.05.01-2015.05.29 )' , btns='&lt;a href="###" class="btn default small-btn"&gt;今日&lt;/a&gt;&lt;a href="###" class="btn default small-btn current"&gt;最近30天&lt;/a&gt; ') }}
     </code>
 </pre>
+        {% endraw %}
             </div>
+        }
         </div>
 
     </section>
