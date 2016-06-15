@@ -14,7 +14,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory(require('jquery'), require('webuploader/webuploader'));
     } else {
-        factory(root.jQuery);
+        factory(root.jQuery, WebUploader);
     }
 
 }(this, function ($, WebUploader) {

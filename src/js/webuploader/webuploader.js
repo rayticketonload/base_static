@@ -8130,11 +8130,11 @@
     /**
      * @fileOverview Uploader上传类
      */
-    define('webuploader',[
+    define('webuploader/webuploader',[
         'preset/all',
         'widgets/log'
     ], function( preset ) {
         return preset;
     });
-    return require('webuploader');
+    return require('webuploader/webuploader');
 });

@@ -362,7 +362,7 @@ gulp.task('front:ui', function(){
                 }]
             }
         }))
-        .pipe(uglify({ mangle: false}))
+        //.pipe(uglify({ mangle: false}))
         .pipe(n2a({reverse: false}))
         .pipe(bannerHeader(banner, { pkg: pkg}))
         //.pipe(sourcemaps.write(path.join(__dirname, frontui_path+'/js')))
